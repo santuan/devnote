@@ -35,7 +35,7 @@ function clear() {
     if (settings.init_db_with_example_doc) {
       toast.success('Base de datos eliminada y se creó un documento de ejemplo.')
     } else {
-      toast.success('Base de datos eliminada.')
+      toast('Base de datos eliminada.')
     }
     showDeleteModal.value = false
     showSettings.value = false
