@@ -65,6 +65,7 @@ function new_document() {
         <ComboboxRoot :open="true">
           <ComboboxInput
             placeholder="Buscar..."
+            
             class="sticky top-0 right-0 font-mono bg-background border-b border-secondary w-full px-4 py-3 text-foreground outline-none placeholder-muted-foreground !select-all"
             @keydown.enter.prevent
           />
@@ -101,7 +102,20 @@ function new_document() {
                 class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
                 <span>Crear documento</span>
-                <!-- <SearchItem :data="item" /> -->
+              </ComboboxItem>
+              <ComboboxItem
+                value="importar db"
+                @select="counter.showImportModal = true"
+                class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
+              >
+                <span>Importar DB</span>
+              </ComboboxItem>
+              <ComboboxItem
+                value="exportar db"
+                @select="counter.showShareModal = true"
+                class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
+              >
+                <span>Exportar DB</span>
               </ComboboxItem>
             </ComboboxGroup>
           </ComboboxContent>

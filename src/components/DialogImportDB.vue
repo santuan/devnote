@@ -79,11 +79,11 @@ function onDrop(files) {
     </Tooltip>
     <AlertDialogPortal>
       <AlertDialogOverlay
-        class="bg-secondary/90 data-[state=open]:animate-overlayShow fixed inset-0 z-[70]"
+        class="bg-secondary/90 data-[state=open]:animate-overlayShow fixed inset-0 z-[200]"
       />
       <AlertDialogContent>
         <div
-          class="dropZone fixed flex-col font-mono inset-0 text-foreground z-[90] justify-center flex items-center"
+          class="dropZone fixed flex-col font-mono inset-0 text-foreground z-[200] justify-center flex items-center"
         >
           <div
             class="flex flex-col items-center justify-center w-full"
