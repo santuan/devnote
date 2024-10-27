@@ -39,7 +39,7 @@ onClickOutside(target, () => {
     <Tooltip
       v-if="!editing"
       name="Editar nombre de la base de datos local"
-      side="bottom"
+      side="top"
       :align="'center'"
     >
       <button

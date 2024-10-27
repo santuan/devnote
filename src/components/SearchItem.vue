@@ -7,7 +7,6 @@ import { breakpointsTailwind, useBreakpoints } from "@vueuse/core";
 import { ref } from "vue";
 import {
   AlertDialogRoot,
-  AlertDialogTrigger,
   AlertDialogPortal,
   AlertDialogOverlay,
   AlertDialogContent,
@@ -95,7 +94,7 @@ function toggleFixed(item, isFixed) {
       </div>
     </Tooltip>
     <button
-      class="flex interactive hover:!text-primary px-2 py-0.5 rounded w-full items-center group-hover:text-foreground outline-none justify-start gap-2 text-sm text-left focus-within:ring-1 ring-primary"
+      class="flex interactive hover:!text-primary px-2 py-0.5 rounded w-full items-center outline-none justify-start gap-2 text-sm text-left focus-within:ring-1 ring-primary"
       :class="loaded_id === props.data.id ? 'text-primary' : ''"
       @click="confirmSetDocument(props.data.id)"
     >

@@ -60,19 +60,19 @@ onMounted(() => {
         class="bg-secondary/90 data-[state=open]:animate-overlayShow fixed inset-0 z-[200]"
       />
       <DialogContent
-        class="data-[state=open]:animate-contentShow font-mono fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-background p-3 md:p-[25px] shadow focus:outline-none z-[9000]"
+        class="data-[state=open]:animate-contentShow font-mono fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-background p-3 md:p-6 md:pt-4 shadow focus:outline-none z-[9000]"
       >
         <DialogTitle class="text-foreground flex items-center justify-start gap-3 m-0 text-[17px] font-semibold">
           <Upload class="size-5" />
           ExportarDB
         </DialogTitle>
-        <DialogDescription class="mt-3 text-sm text-foreground">
+        <DialogDescription class="mt-6 mb-2 text-sm text-foreground">
           Nombre del archivo
         </DialogDescription>
         <div class="flex gap-2 mb-2">
           <input
             type="text"
-            class="w-full h-8 px-2 border bg-background text-foreground border-border"
+            class="w-full h-8 px-2 border bg-background text-foreground border-border outline-none focus:ring-1 focus:ring-primary"
             v-model="input"
           >
           <button

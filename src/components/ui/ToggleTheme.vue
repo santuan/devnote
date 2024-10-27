@@ -67,19 +67,19 @@ onMounted(() => {
       <DropdownMenuGroup>
         <DropdownMenuItem
           @click="mode = 'light'"
-          class="p-2 hover:bg-secondary-foreground/10"
+          class="p-2 hover:bg-secondary-foreground/10 outline-none focus:ring-1 focus:ring-primary focus:bg-primary/20 focus:ring-inset"
         >
           Claro
         </DropdownMenuItem>
         <DropdownMenuItem
           @click="mode = 'dark'"
-          class="p-2 hover:bg-secondary-foreground/10"
+          class="p-2 hover:bg-secondary-foreground/10 outline-none focus:ring-1 focus:ring-primary focus:bg-primary/20 focus:ring-inset"
         >
           Oscuro
         </DropdownMenuItem>
         <DropdownMenuItem
           @click="mode = 'auto'"
-          class="p-2 hover:bg-secondary-foreground/10"
+          class="p-2 hover:bg-secondary-foreground/10 outline-none focus:ring-1 focus:ring-primary focus:bg-primary/20 focus:ring-inset"
         >
           Sistema
         </DropdownMenuItem>

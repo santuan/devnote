@@ -157,7 +157,7 @@ export const useCounterStore = defineStore("counter", () => {
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-      toast.success('Base de datos exportada');
+      // toast.success('Base de datos exportada');
       return blob;
     } catch (error) {
       toast.error('Error al exportar la base de datos');

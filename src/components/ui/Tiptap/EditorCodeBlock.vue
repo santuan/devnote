@@ -39,7 +39,7 @@
         :items="languages"
       />
       <button
-        class="flex items-center justify-center duration-100 size-6 bg-secondary shrink-0"
+        class="flex items-center justify-center size-6 bg-secondary shrink-0"
         :class="copyText === 'Copied' ? '!bg-primary' : ''"
         @click="copyToClipboard()"
       >
