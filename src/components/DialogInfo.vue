@@ -59,7 +59,7 @@ whenever(magicAbout, (n) => {
         >
           <ScrollAreaViewport class="w-full h-full">
             <article
-              class="max-w-full p-3 mx-auto prose dark:prose-invert"
+              class="max-w-full p-3 mx-auto prose prose-ul:list-none prose-ul:pl-0 dark:prose-invert"
             >
               <DialogDescription class="inline-block p-3 mt-3 mb-3 text-sm leading-normal rounded text-foreground bg-primary/20">
                 Esto es una alpha, no utilizar más que para realizar pruebas.
@@ -78,44 +78,8 @@ whenever(magicAbout, (n) => {
                 Puede exportar e importar la
                 IndexedDB en formato JSON y asi mantener la base de datos localmente.
               </p>
-              <p class="mt-2 mb-5 text-sm leading-normal text-foreground !select-text ">
-                Tambien se utiliza localStorage para persistir:
-              </p>
-              <ul class="mt-2 mb-5 text-sm leading-normal text-foreground !select-text  ">
-                <li>El modo de color seleccionado.</li>
-                <li>Visibilidad de las opciones para formatear el texto.</li>
-                <li>Ancho del editor</li>
-              </ul>
-              <h4>Funcionalidades</h4>
-              <ul class="mt-2 mb-5 text-sm leading-normal text-foreground !select-text  ">
-                <li>Se puede asignar un nombre a la base de datos.</li>
-                <li>Crear elementos con texto enriquecido.</li>
-                <li>Agrega bloques de código con resaltado de sintaxis.</li>
-                <li>Pegar directamente videos de youtube.</li>
-                <li>Imágenes</li>
-                <ul class="pl-0 mb-5 ml-5 text-sm leading-normal text-foreground !select-text ">
-                  <li>via URL</li>
-                  <li>guardadas en la DB como Base64</li>
-                </ul>
-              </ul>
-              <h4>Tecnologías utilizadas</h4>
-              <ul class="mt-2 mb-5 text-sm leading-normal text-foreground !select-text  ">
-                <li>Dexie - Wrapper de IndexedDB</li>
-                <li>
-                  Vue.js
-                </li>
-                <li> Tailwindcss</li>
-                <li> @radix-vue<br>Componentes accesibles para construir sistemas de diseño y aplicaciones web.</li>
-                <li>
-                  TipTap<br>The headless
-                  rich text editor
-                </li>
-                <li>
-                  RxJS (Reactive Extensions for modern JavaScript)<br>Programación reactiva utilizando Observables. 
-                </li>
-                <li> @VueUse/rxjs<br>Este es un complemento de VueUse, que permite utilizar RxJS de una manera natural.</li>
-                <li> MediumZoom</li>
-              </ul>
+              <h3>Atajos de teclado</h3>
+              <ul><li><p><code>Ctrl+Alt+P</code> Alternar entre modo editar o previsualizar.</p></li><li><p><code>Ctrl+Alt+O</code> Barra de comandos para navegar documentos.</p></li><li><p><code>Ctrl+M</code> Colapsar el menu.</p></li><li><p><code>Ctrl+Alt+I</code> Importar DB</p></li><li><p><code>Ctrl+Alt+E</code> Exportar DB</p></li><li><p><code>Ctrl+Alt+FlechaDerecha</code> expande el area de edición.</p></li><li><p><code>Ctrl+Alt+FlechaIzquierda</code> colapsa el area de edición.</p></li><li><p><code>Shift+Delete</code> Eliminar documento en curso</p></li></ul>
             </article>
           </ScrollAreaViewport>
           <ScrollAreaScrollbar
@@ -152,3 +116,17 @@ whenever(magicAbout, (n) => {
     </DialogPortal>
   </DialogRoot>
 </template>
+
+
+
+<style scoped>
+
+code {
+  @apply bg-primary/20 break-all px-1 mx-0.5 rounded py-0.5 text-foreground ring-1 ring-primary/30 font-light text-sm;
+}
+
+code::after,
+code::before {
+  display: none;
+}
+</style>
