@@ -2,12 +2,14 @@
 import { useRegisterSW } from "virtual:pwa-register/vue";
 import { toast } from 'vue-sonner'
 import { watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
 
 watch(offlineReady, (value) => {
   if (value) {
-    toast.success('Aplicación lista para trabajar sin conexión', {
+    toast.success(t('message.offlineReady'), {
       duration: 4000,
     });
     offlineReady.value = false;
@@ -16,11 +18,11 @@ watch(offlineReady, (value) => {
 
 watch(needRefresh, (value) => {
   if (value) {
-    toast.info('Nueva versión disponible', {
-      description: 'Click en actualizar',
+    toast.info(t('message.newVersionAvailable'), {
+      description: t('message.clickToUpdate'),
       duration: Infinity,
       action: {
-        label: 'Actualizar',
+        label:  t('message.updateButton'), 
         onClick: () => updateServiceWorker(),
       },
     });

@@ -99,7 +99,11 @@
     "databaseClearedWithExample": "Database deleted and a sample document was created",
     "databaseCleared": "Database deleted",
     "completed": "completed",
-    "unmarked": "unmarked"
+    "unmarked": "unmarked",
+    "offlineReady": "Application is ready for offline use",
+    "newVersionAvailable": "New version available",
+    "updateButton": "Update",
+    "clickToUpdate": "Click to update"
   },
   "verb": {
     "open": "open",

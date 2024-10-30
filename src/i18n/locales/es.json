@@ -99,7 +99,11 @@
     "databaseClearedWithExample": "Base de datos eliminada y se creó un documento de ejemplo",
     "databaseCleared": "Base de datos eliminada",
     "completed": "completado",
-    "unmarked": "desmarcado"
+    "unmarked": "desmarcado",
+    "offlineReady": "Aplicación lista para trabajar sin conexión",
+    "newVersionAvailable": "Nueva versión disponible",
+    "updateButton": "Actualizar",
+    "clickToUpdate": "Click para actualizar"
   },
   "verb": {
     "open": "abrir",
