@@ -141,7 +141,7 @@ const results = computed(() => {
             class=" w-full h-[calc(100vh-20rem)] text-center flex items-center justify-center"
           >
             <p class="w-40 text-xs text-muted-foreground text-pretty">
-              Aqui se mostrarán tus documentos
+              {{ t('sidebar.noResultsDescription') }}
             </p>
           </div>
         </ScrollAreaViewport>

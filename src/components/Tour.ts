@@ -12,24 +12,24 @@ function DriverJsInit() {
     animate: false,
     stagePadding: 1,
     stageRadius: 2,
-    nextBtnText: 'Siguiente',
-    prevBtnText: 'Anterior',
-    doneBtnText: 'Comenzar',
+    nextBtnText: 'Next',
+    prevBtnText: 'Previous',
+    doneBtnText: 'Start',
     popoverClass: 'driverjs-theme',
-    progressText: '{{current}} de {{total}}',
+    progressText: '{{current}} of {{total}}',
     showProgress: true,
     steps: [
       {
         popover: {
-          title: 'Tutorial 👋',
-          description: 'Esta app está en desarrollo. Navegá el tutorial utilizando las flechas del teclado. Puede repetirlo desde la configuración.',
+          title: 'Welcome 👋',
+          description: 'This app is under development. Navigate the tutorial using the arrow keys. You can replay it from the settings.',
         }
       },
       // {
       //   element: '.DataBaseTitle',
       //   popover: {
-      //     title: 'Nombre del proyecto',
-      //     description: 'Aquí podrás editar el nombre de la base de datos (DB) local.',
+      //     title: 'Project Name',
+      //     description: 'Here you can edit the name of the local database (DB).',
       //     side: 'bottom',
       //     align: 'center'
       //   }
@@ -38,8 +38,8 @@ function DriverJsInit() {
       {
         element: '.create_project',
         popover: {
-          title: 'Título del documento',
-          description: 'Podes editar este campo de texto a gusto con el nombre que prefieras para luego identificarlo.',
+          title: 'Document Title',
+          description: 'You can edit this text field to your liking with the name you prefer for later identification.',
           side: 'bottom',
           align: 'center'
         },
@@ -47,8 +47,8 @@ function DriverJsInit() {
       {
         element: '.EditorCK',
         popover: {
-          title: 'Editor de texto',
-          description: 'Aquí podrás añadir texto enriquecido, imágenes y videos desde una url así como también videos de YouTube.',
+          title: 'Text Editor',
+          description: 'Here you can add rich text, images, and videos from a URL, as well as YouTube videos.',
           side: 'left',
           align: 'center'
         }
@@ -56,8 +56,8 @@ function DriverJsInit() {
       {
         element: '.prose div.code-block.group:nth-of-type(1)',
         popover: {
-          title: 'Shiki para resaltar el código',
-          description: 'Gracias a esto se pueden agregar bloques de código bonitos para 295 lenguajes.',
+          title: 'Shiki for Code Highlighting',
+          description: 'Thanks to this, you can add beautiful code blocks for 295 languages.',
           side: 'top',
           align: 'start'
         }
@@ -66,8 +66,8 @@ function DriverJsInit() {
       // {
       //   element: '.GuardarDocumento',
       //   popover: {
-      //     title: 'Agregar documento',
-      //     description: 'Para crear un documento se requiere minimamente un titulo. Hace click en Guardar para agregar el documento en la DB. Una vez creado el documento los cambios se guardarán automaticamente.',
+      //     title: 'Add Document',
+      //     description: 'To create a document, a title is minimally required. Click Save to add the document to the DB. Once the document is created, changes will be saved automatically.',
       //     side: 'top',
       //     align: 'center'
       //   }
@@ -75,8 +75,8 @@ function DriverJsInit() {
       {
         element: '.SidebarProjects',
         popover: {
-          title: 'Documento creados',
-          description: 'Aquí se irán guardando los documentos en tu indexdedDB. Podes fijarlos o marcarlos como completados',
+          title: 'Created Documents',
+          description: 'Here, documents will be saved in your indexedDB. You can pin or mark them as completed.',
           side: 'bottom',
           align: 'center'
         }
@@ -84,8 +84,8 @@ function DriverJsInit() {
       {
         element: '.ToggleEditable',
         popover: {
-          title: 'Vista previa',
-          description: 'Alterna entre la vista de edición y la vista previa del documento. Las imágenes pueden agrandarse en el modo vista previa. Los videos desde url solo se pueden reproducir en este modo (por ahora)',
+          title: 'Preview Mode',
+          description: 'Toggle between edit and preview mode for the document. Images can be enlarged in preview mode. Videos from URLs can only be played in this mode (for now).',
           side: 'bottom',
           align: 'center'
         }
@@ -93,8 +93,8 @@ function DriverJsInit() {
       {
         element: '.SidebarBottom',
         popover: {
-          title: 'Importar y exportar',
-          description: 'Guarda la base de datos en formato JSON para importarla en otro navegador.',
+          title: 'Import and Export',
+          description: 'Save the database in JSON format to import it in another browser.',
           side: 'top',
           align: 'center'
         }
@@ -102,16 +102,16 @@ function DriverJsInit() {
       {
         element: '.ButtonDeleteDocument',
         popover: {
-          title: 'Eliminar documento',
-          description: 'Si así lo deseas también puedes eliminar el documento directamente.',
+          title: 'Delete Document',
+          description: 'If you wish, you can also delete the document directly.',
           side: 'top',
           align: 'center'
         }
       },
       {
         popover: {
-          title: '¡Listo!',
-          description: '¡Disfruta de la experiencia!',
+          title: 'All Set!',
+          description: 'Enjoy the experience!',
         }
       }
     ],
@@ -124,5 +124,4 @@ function DriverJsInit() {
   driverObj.drive();
 }
 
-
-export default DriverJsInit
+export default DriverJsInit;

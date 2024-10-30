@@ -43,7 +43,6 @@ function new_document() {
         v-show="loaded_id === ''"
         class="flex items-center gap-1 text-primary animate-pulse"
       >
-        <!-- * Creando documento -->
         * {{ t('sidebar.newDocument') }}
         <span
           v-show="counter.project_name"
@@ -56,7 +55,9 @@ function new_document() {
       <span
         class="font-bold text-primary-foreground"
         v-show="loaded_id !== ''"
-      >{{ t('sidebar.newDocument') }}</span>
+      >
+        {{ t('sidebar.newDocument') }}
+      </span>
     </button>
   </div>
 </template>
