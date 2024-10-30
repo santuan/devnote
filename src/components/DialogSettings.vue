@@ -199,7 +199,7 @@ function setLocale(lang) {
                       class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8"
                       :class="
                         locale === 'es'
-                          ? 'bg-primary text-primary-foreground'
+                          ? 'bg-primary hover:text-primary-foreground text-primary-foreground'
                           : ''
                       "
                     >
@@ -210,7 +210,7 @@ function setLocale(lang) {
                       class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8"
                       :class="
                         locale === 'en'
-                          ? 'bg-primary text-primary-foreground'
+                          ? 'bg-primary hover:text-primary-foreground text-primary-foreground'
                           : ''
                       "
                     >
