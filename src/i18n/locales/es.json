@@ -74,7 +74,7 @@
     "tourDescription": "Iniciar un recorrido por las principales funciones de la app.",
     "export": "Exportar DB",
     "import": "Importar DB",
-    "editDBname": "Editar nombre de la base de datos local",
+    "editDBname": "Editar nombre DB",
     "exportOnLoad": "Exportar al iniciar",
     "exportOnLoadDescription": "Cuando la opción está activada opción aparecerá la posibilidad de exportar la DB al iniciar la aplicación.",
     "initWithData": "Iniciar DB con info",

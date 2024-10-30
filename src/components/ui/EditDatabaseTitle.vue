@@ -41,6 +41,7 @@ onClickOutside(target, () => {
     :class="editing ? ' !border !border-primary' : ' '"
   >
     <button
+      v-if="!editing"
       @click="editDatabaseTitle()"
       class="flex items-center justify-between w-full h-8 gap-1 pl-2 hover:outline-none hover:!ring-1 hover:ring-primary text-primary"
     >
