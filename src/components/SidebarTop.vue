@@ -5,13 +5,17 @@ import DialogInfo from "@/components/DialogInfo.vue";
 import ToggleEditable from "./ui/ToggleEditable.vue";
 import DriverJsInit from "./Tour.ts";
 
-import { TentTree, ArrowRightToLine, ArrowLeftToLine, MousePointer, Pointer } from "lucide-vue-next";
+import { ArrowRightToLine, ArrowLeftToLine, MousePointer, Pointer } from "lucide-vue-next";
 import { useCounterStore } from "@/stores/counter";
 import { useMagicKeys, whenever, breakpointsTailwind, useBreakpoints, useStorage } from "@vueuse/core";
 import { onMounted } from "vue";
 import DialogSettings from "./DialogSettings.vue";
 import DialogCommandMenu from "./ui/DialogCommandMenu.vue";
 import ButtonCreateDocumentCollapse from "./ui/ButtonCreateDocumentCollapse.vue";
+import LanguageSelector from "./ui/LanguageSelector.vue";
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const counter = useCounterStore();
 const breakpoints = useBreakpoints(breakpointsTailwind);
@@ -61,9 +65,10 @@ whenever(magicPreview, () => {
     </button>
     <div
       class="grid "
-      :class="counter.showProjects ? 'grid-cols-6 gap-0.5' : ' grid-cols-1 gap-1 mt-1'"
+      :class="counter.showProjects ? 'grid-cols-7 gap-0.5' : ' grid-cols-1 gap-1 mt-1'"
     >
       <ButtonCreateDocumentCollapse v-if="!counter.showProjects" />
+      <LanguageSelector />
       <DialogSettings />
       <ToggleTheme />
       <DialogCommandMenu />
@@ -71,7 +76,7 @@ whenever(magicPreview, () => {
       <DialogInfo />
       <Tooltip
         shortcut="Ctrl M"
-        :name="counter.showProjects ? 'Cerrar panel' : ' Abrir panel'"
+        :name="`${t('verb.close')} panel`"
         :align="counter.showProjects ? 'end' : 'center'"
         :side="counter.showProjects ? 'bottom' : 'right'"
       >
@@ -89,7 +94,7 @@ whenever(magicPreview, () => {
     <button
       @click="counter.showProjects = !counter.showProjects"
       v-show="!counter.showProjects"
-      class="absolute flex flex-col justify-end items-center z-10 inset-1 py-2 md:py-5 bottom-2 hover:!border-1 top-[260px]"
+      class="absolute flex flex-col justify-end items-center z-10 inset-1 py-2 md:py-5 bottom-2 hover:!border-1 top-[290px]"
     >
       <ArrowRightToLine class="mx-auto duration-100 opacity-25 size-4 group-hover:opacity-90" />
     </button>

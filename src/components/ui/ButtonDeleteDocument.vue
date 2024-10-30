@@ -1,4 +1,8 @@
 <script setup>
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import {
   AlertDialogRoot,
   AlertDialogTrigger,
@@ -32,7 +36,7 @@ whenever(magicDeleteDocument, (n) => {
 <template>
   <AlertDialogRoot v-model:open="showAlertDialog">
     <Tooltip
-      name="Eliminar documento"
+      :name="t('editor.delete')"
       side="top"
       :align="'end'"
       shortcut="shift + delete"
@@ -48,15 +52,15 @@ whenever(magicDeleteDocument, (n) => {
       <AlertDialogOverlay class="fixed inset-0 z-[80] bg-black/50" />
       <AlertDialogContent class="md:data-[state=open]:animate-contentShow fixed z-[80] w-[95vw] max-w-xs rounded-lg p-4 md:w-full top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-background text-foreground border border-secondary font-mono">
         <AlertDialogTitle class="text-sm font-medium">
-          Eliminar documento
+          {{ t('editor.delete') }}
         </AlertDialogTitle>
         <AlertDialogDescription class="mt-2 mb-5 text-xs">
-          Esta acción no tiene vuelta atrás.
+          {{ t('editor.deleteConfirm') }}
         </AlertDialogDescription>
         <div class="flex justify-between gap-x-2">
           <AlertDialogCancel as-child>
             <button class="bg-secondary ring-1 !ring-secondary text-foreground hover:bg-background hover:ring-2 hover:ring-foreground inline-flex h-[35px] items-center justify-center rounded-[4px] px-3 text-xs font-semibold leading-none focus-visible:ring-2 focus:outline-foreground">
-              Cancelar
+              {{ t('verb.cancel') }}
             </button>
           </AlertDialogCancel>
           <AlertDialogAction as-child>
@@ -64,7 +68,7 @@ whenever(magicDeleteDocument, (n) => {
               @click="counter.delete_project()"
               class="bg-red-600  text-white hover:bg-red-800  outline-none inline-flex ring-0  hover:ring-2 ring-red-600 h-[35px] items-center justify-center rounded-[4px] px-3 text-xs font-semibold leading-none focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
-              Eliminar
+              {{ t('verb.delete') }}
             </button>
           </AlertDialogAction>
         </div>

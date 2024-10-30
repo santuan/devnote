@@ -1,4 +1,8 @@
 <script setup>
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import {
   DialogClose,
   DialogContent,
@@ -52,7 +56,7 @@ onMounted(() => {
         aria-label="Update dimensions"
       >
         <Upload class="size-4" />
-        <span class="">ExportarDB</span>
+        <span class="">{{ t('settings.export') }}</span>
       </DialogTrigger>
     </Tooltip>
     <DialogPortal>
@@ -64,10 +68,10 @@ onMounted(() => {
       >
         <DialogTitle class="text-foreground flex items-center justify-start gap-3 m-0 text-[17px] font-semibold">
           <Upload class="size-5" />
-          ExportarDB
+          {{ t('settings.export') }}
         </DialogTitle>
         <DialogDescription class="mt-6 mb-2 text-sm text-foreground">
-          Nombre del archivo
+          {{ t('exportDB.description') }}
         </DialogDescription>
         <div class="flex gap-2 mb-2">
           <input
@@ -79,20 +83,9 @@ onMounted(() => {
             class="ml-auto text-xs font-medium border bg-primary h-8 border-secondary shrink-0 text-primary-foreground hover:bg-primary/80 focus:outline-none px-[15px] focus-visible:ring-2 focus-visible:ring-white"
             @click="counter.export_database(input.value)"
           >
-            Exportar DB
+            {{ t('settings.export') }}
           </button>
         </div>
-        <!-- <div
-          class="flex items-center justify-end mt-6"
-        >
-          <DialogClose as-child>
-            <button
-              class="bg-secondary text-foreground hover:bg-backgorund/80 text-xs inline-flex h-[35px] items-center justify-center rounded px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
-            >
-              Cerrar ventana
-            </button>
-          </DialogClose>
-        </div> -->
         <DialogClose class="absolute top-0 size-6 flex justify-center items-center m-3 right-0 z-[999] text-foreground">
           <X class="size-4" />
         </DialogClose>

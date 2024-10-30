@@ -1,4 +1,8 @@
 <script setup>
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import {
   Check,
   ChevronDown,
@@ -22,6 +26,7 @@ import {
 } from "radix-vue";
 const sortOption = useStorage("sortItemsBy", "name");
 
+
 </script>
 
 <template>
@@ -42,7 +47,7 @@ const sortOption = useStorage("sortItemsBy", "name");
       >
         <SelectViewport class="">
           <SelectLabel class="p-2 text-xs font-medium text-primary">
-            Ordenar
+            {{ t('sidebar.sort.sort') }}
           </SelectLabel>
           <SelectGroup class="p-1">
             <SelectItem
@@ -52,7 +57,7 @@ const sortOption = useStorage("sortItemsBy", "name");
               <SelectItemIndicator class="absolute text-primary right-0 w-[25px] inline-flex items-center justify-center">
                 <Check class="size-4" />
               </SelectItemIndicator>
-              <SelectItemText>Nombre</SelectItemText>
+              <SelectItemText>{{ t('sidebar.sort.name') }}</SelectItemText>
             </SelectItem>
             <SelectItem
               class="text-xs leading-none text-foreground flex items-center h-8 px-1 py-2 pr-12 relative select-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-secondary/50 data-[highlighted]:text-foreground"
@@ -61,7 +66,7 @@ const sortOption = useStorage("sortItemsBy", "name");
               <SelectItemIndicator class="absolute text-primary right-0 w-[25px] inline-flex items-center justify-center">
                 <Check class="size-4" />
               </SelectItemIndicator>
-              <SelectItemText>Fecha</SelectItemText>
+              <SelectItemText>{{ t('sidebar.sort.date') }}</SelectItemText>
             </SelectItem>
           </SelectGroup>
         </SelectViewport>

@@ -1,0 +1,114 @@
+{
+  "app": {
+    "title": "DevNote",
+    "description": "Rich text editor app"
+  },
+  "editor": {
+    "placeholder": "Write something...",
+    "untitled": "Untitled item",
+    "save": "Save document",
+    "delete": "Delete document",
+    "deleteConfirm": "This action cannot be undone"
+  },
+  "toolbar": {
+    "undo": "Undo",
+    "redo": "Redo",
+    "bold": "Bold",
+    "italic": "Italic",
+    "strike": "Strike",
+    "heading1": "Heading level 1",
+    "heading2": "Heading level 2",
+    "heading3": "Heading level 3",
+    "heading4": "Heading level 4",
+    "heading5": "Heading level 5",
+    "heading6": "Heading level 6",
+    "paragraph": "Paragraph",
+    "textAlign": "Text alignment",
+    "alignLeft": "Left",
+    "alignCenter": "Center",
+    "alignRight": "Right",
+    "alignJustify": "Justify",
+    "noAlignment": "No alignment",
+    "code": "Code",
+    "codeBlock": "Code block",
+    "quote": "Quote",
+    "bulletList": "Bullet list",
+    "orderedList": "Ordered list",
+    "image": "Image",
+    "separator": "Separator",
+    "link": "Add link",
+    "unlink": "Unlink",
+    "clearNodes": "Clear format",
+    "unsetAllMarks": "Clear all marks"
+  },
+  "sidebar": {
+    "newDocument": "New document",
+    "search": "Search by title",
+    "noResults": "No results",
+    "sort": {
+      "sort": "Sort",
+      "name": "Name",
+      "date": "Date"
+    },
+    "theme": "Theme color",
+    "about": "About this app",
+    "contentEditable": "Editable mode",
+    "contentPreview": "Preview mode",
+    "markAsDone": "Mark as done",
+    "markAsUndone": "Mark as undone"
+  },
+  "settings": {
+    "title": "Settings",
+    "titleDescription": "Manage your preferences for",
+    "mouseKeyboard": "mouse and keyboard",
+    "theme": "Theme",
+    "themeDescription": "Toggle between dark, light, or system mode; you can also choose a primary color.",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "language": "Language",
+    "languageDescription": "Select the language of the aplication",
+    "cursor": "Mouse cursor",
+    "cursorDescription": "Change the mouse cursor to pointer or arrow",
+    "tour": "Tutorial",
+    "tourDescription": "Start a tour through the app to learn how to create a new note.",
+    "export": "Export DB",
+    "import": "Import DB",
+    "editDBname": "Edit database name",
+    "exportOnLoad": "Export on startup",
+    "exportOnLoadDescription": "When this option is enabled, the ability to export the database will appear when the application starts.",
+    "initWithData": "Initialize DB with data",
+    "initWithDataDescription": "When this option is enabled, the database starts with a sample document.",
+    "attention": "Atention!",
+    "deleteDB": "Delete database from indexdedDB"
+  },
+  "importDB": {
+    "description": "Select or drag and drop a json exported from this app",
+    "action": "Select JSON file"
+  },
+  "exportDB": {
+    "description": "Filename"
+  },
+  "commandBar": {
+    "title": "Command bar",
+    "description": "Search for command",
+    "documents": "Documents",
+    "actions": "Actions"
+  },
+  "message": {
+    "databaseClearedWithExample": "Database deleted and a sample document was created",
+    "databaseCleared": "Database deleted",
+    "completed": "completed",
+    "unmarked": "unmarked"
+  },
+  "verb": {
+    "open": "open",
+    "close": "close",
+    "cancel": "Cancel",
+    "search": "Search",
+    "delete": "Delete",
+    "add": "Add",
+    "fixed": "Fixed",
+    "unfixed": "Unfixed"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "app": {
+    "title": "DevNote",
+    "description": "App para el manejo de texto enriquecido"
+  },
+  "editor": {
+    "placeholder": "Escribir algo...",
+    "untitled": "Item sin título",
+    "save": "Guardar documento",
+    "delete": "Eliminar documento",
+    "deleteConfirm": "Esta acción no tiene vuelta atrás"
+  },
+  "toolbar": {
+    "undo": "Deshacer",
+    "redo": "Rehacer",
+    "bold": "Negrita",
+    "italic": "Cursiva",
+    "strike": "Tachado",
+    "heading1": "Título nivel 1",
+    "heading2": "Título nivel 2",
+    "heading3": "Título nivel 3",
+    "heading4": "Título nivel 4",
+    "heading5": "Título nivel 5",
+    "heading6": "Título nivel 6",
+    "paragraph": "Párrafo",
+    "textAlign": "Alineación de texto",
+    "alignLeft": "Izquierda",
+    "alignCenter": "Centrado",
+    "alignRight": "Derecha",
+    "alignJustify": "Justificado",
+    "noAlignment": "Sin alineación",
+    "code": "Código",
+    "codeBlock": "Bloque de código",
+    "quote": "Cita",
+    "bulletList": "Lista desordenada",
+    "orderedList": "Lista ordenada",
+    "image": "Imagen",
+    "separator": "Separador",
+    "link": "Agregar enlace",
+    "unlink": "Quitar enlace",
+    "clearNodes": "Limpiar formato",
+    "unsetAllMarks": "Quitar estilos de linea"
+  },
+  "sidebar": {
+    "newDocument": "Crear nuevo documento",
+    "search": "Filtrar por título",
+    "noResults": "Sin resultados",
+    "sort": {
+      "sort": "Ordenar",
+      "name": "Nombre",
+      "date": "Fecha"
+    },
+    "theme": "Modo de color",
+    "about": "Acerca de esta app",
+    "contentEditable": "Cambiar a modo editable",
+    "contentPreview": "Cambiar a previsualizar",
+    "markAsDone": "Marcar como completo",
+    "markAsUndone": "Descarmar"
+  },
+  "settings": {
+    "title": "Configuraciones",
+    "titleDescription": "Administre sus preferencias para",
+    "mouseKeyboard": "mouse y teclado",
+    "theme": "Tema",
+    "themeDescription": "Alterná entre modo oscuro/claro/sistema, tambien podes elegir un color primario.",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema",
+    "language": "Lenguaje",
+    "languageDescription": "Selecciona el lenguaje de la aplicación",
+    "cursor": "Cursor del mouse",
+    "cursorDescription": "Activa o desactiva la manito en el cursor del mouse.",
+    "tour": "Tutorial",
+    "tourDescription": "Iniciar un recorrido por las principales funciones de la app.",
+    "export": "Exportar DB",
+    "import": "Importar DB",
+    "editDBname": "Editar nombre de la base de datos local",
+    "exportOnLoad": "Exportar al iniciar",
+    "exportOnLoadDescription": "Cuando la opción está activada opción aparecerá la posibilidad de exportar la DB al iniciar la aplicación.",
+    "initWithData": "Iniciar DB con info",
+    "initWithDataDescription": " Cuando la opción está activada la base se inicia con un documento de ejemplo.",
+    "attention": "Atention!",
+    "deleteDB": "Eliminar base de datos de indexdedDB"
+  },
+  "importDB": {
+    "description": "Selecciona o arrastrar un archivo JSON exportado desde esta app.",
+    "action": "Seleccionar archivo JSON"
+  },
+  "exportDB": {
+    "description": "Nombre del archivo"
+  },
+  "commandBar": {
+    "title": "Barra de comandos bar",
+    "description": "Buscar un comando",
+    "documents": "Documentos",
+    "actions": "Acciones"
+  },
+  "message": {
+    "databaseClearedWithExample": "Base de datos eliminada y se creó un documento de ejemplo",
+    "databaseCleared": "Base de datos eliminada",
+    "completed": "completado",
+    "unmarked": "desmarcado"
+  },
+  "verb": {
+    "open": "abrir",
+    "close": "cerrar",
+    "cancel": "Cancelar",
+    "search": "Buscar",
+    "delete": "Eliminar",
+    "add": "Agregar",
+    "fixed": "Fijar",
+    "unfixed": "Desfijar"
+  }
+}

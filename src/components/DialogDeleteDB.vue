@@ -1,4 +1,8 @@
 <script setup>
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import {
   DialogClose,
   DialogContent,
@@ -33,9 +37,9 @@ function clear() {
   counter.clearDatabase();
   setTimeout(() => {
     if (settings.init_db_with_example_doc) {
-      toast.success('Base de datos eliminada y se creó un documento de ejemplo.')
+      toast.success(t('message.databaseClearedWithExample'))
     } else {
-      toast('Base de datos eliminada.')
+      toast(t('message.databaseCleared'))
     }
     showDeleteModal.value = false
     showSettings.value = false
@@ -54,7 +58,7 @@ onMounted(() => {
       class="bg-destructive  text-white hover:bg-red-800  outline-none inline-flex ring-0  hover:ring-2 ring-destructive h-8 items-center justify-center rounded-[4px] px-3 text-xs font-semibold leading-none focus:outline-none gap-2 focus-visible:ring-2 focus-visible:ring-white"
       aria-label="Delete DB"
     >
-      Eliminar DB
+      {{ t('verb.delete') }} DB
     </DialogTrigger>
     <DialogPortal>
       <DialogOverlay class="bg-secondary/90 data-[state=open]:animate-overlayShow fixed inset-0 z-[100]" />
@@ -68,24 +72,24 @@ onMounted(() => {
           <X class="size-4 text-foreground" />
         </DialogClose>
         <DialogTitle class="text-foreground m-0 text-[17px] font-semibold">
-          Eliminar base de datos local
+          {{ t('settings.deleteDB') }}
         </DialogTitle>
         <DialogDescription class="mt-3 text-sm text-foreground">
-          Una vez que realices esta acción, no podrás recuperar los datos.
+          {{ t('editor.deleteConfirm') }}
         </DialogDescription>
         <div class="flex items-center justify-end gap-3 mt-6">
           <DialogClose as-child>
             <button
               class="bg-background border-secondary border text-foreground hover:bg-backgorund/80 text-xs inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
             >
-              Cancelar
+              {{ t('verb.cancel') }}
             </button>
           </DialogClose>
           <button
             @click="clear()"
             class="bg-red-600 text-white hover:bg-red-600/80 text-xs inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none hover:outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
-            Eliminar
+            {{ t('verb.delete') }}
           </button>
         </div>
       </DialogContent>

@@ -1,4 +1,8 @@
 <script setup>
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import {
   CircleOff,
 } from "lucide-vue-next";
@@ -42,7 +46,11 @@ function toggleCheck(item, isChecked) {
       required=""
       @change="toggleCheck(props.data, $event.target.checked)"
     >
-    <Tooltip name="Desmarcar">
+    <Tooltip
+      :name="t('sidebar.markAsUndone')"
+      side="right"
+      :align="'end'"
+    >
       <label
         :for="'todook-' + props.data?.id"
         class="flex items-center justify-center rounded-full relative z-[50] mr-0.5 peer-focus:ring-1 peer-focus:ring-primary size-7 md:size-6 shrink-0 peer-checked:border-blue-600 hover:text-primary peer-checked:text-primary hover:bg-secondary/20"

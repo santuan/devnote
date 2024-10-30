@@ -8,6 +8,9 @@ import { toast } from 'vue-sonner'
 import { useSettingsStore } from "@/stores/settings";
 import { initialProjectData } from "@/stores/initialProjectData";
 
+import { useI18n } from 'vue-i18n';
+
+
 export const useCounterStore = defineStore("counter", () => {
   const status = shallowRef("LOADING");
   const loaded_id = shallowRef("");
@@ -24,7 +27,7 @@ export const useCounterStore = defineStore("counter", () => {
   const content_editable = shallowRef(true);
   const editor = shallowRef(null);
   const showSettings = shallowRef(false);
-
+  const { t } = useI18n();
   function toggleEditable() {
     content_editable.value = !content_editable.value;
   }
@@ -82,7 +85,7 @@ export const useCounterStore = defineStore("counter", () => {
           fixed: false
         },
       });
-      toast(isChecked ? `Proyecto "${item.project_data.name}" marcado como completado` : `Proyecto "${item.project_data.name}" desmarcado`);
+      toast(isChecked ? `"${item.project_data.name}" ${t('message.completed')}` : `"${item.project_data.name}" ${t('message.unmarked')}`);
     } catch (error) {
       handleError("Error al marcar el proyecto", error);
     }

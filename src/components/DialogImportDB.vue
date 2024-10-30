@@ -1,4 +1,8 @@
 <script setup>
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import { Download, X, DatabaseZap } from "lucide-vue-next";
 import {
   AlertDialogCancel,
@@ -74,7 +78,7 @@ function onDrop(files) {
         class="flex items-center justify-center h-12 gap-2 px-2 text-xs border outline-none border-secondary bg-background hover:bg-background/50 focus-visible:border-primary focus-visible:bg-primary/10"
       >
         <Download class="size-4" />
-        <span class="">ImportarDB</span>
+        <span>{{ t('settings.import') }}</span>
       </AlertDialogTrigger>
     </Tooltip>
     <AlertDialogPortal>
@@ -96,24 +100,24 @@ function onDrop(files) {
             >
               <DatabaseZap class="size-12" />
               <AlertDialogTitle class="text-mauve12 m-0 text-[17px] font-semibold">
-                ImportarDB
+                {{ t('settings.import') }}
               </AlertDialogTitle>
               <AlertDialogDescription
                 class="text-foreground mt-4 text-pretty max-w-96 text-center mb-3 text-[15px] leading-normal"
               >
-                Selecciona o arrastrar un archivo JSON exportado desde esta app.
+                {{ t('importDB.description') }}
               </AlertDialogDescription>
               <button
                 type="button"
                 @click="open()"
                 class="mb-4 text-sm font-semibold underline text-primary underline-offset-2"
               >
-                Seleccionar archivo JSON
+                {{ t('importDB.action') }}
               </button>
               <AlertDialogCancel
                 class="bg-secondary text-foreground hover:bg-backgorund/80 text-xs inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
               >
-                Cancelar
+                {{ t('verb.cancel') }}
               </AlertDialogCancel>
               <AlertDialogCancel class="absolute top-0 size-6 flex justify-center items-center m-3 right-0 z-[999] text-foreground">
                 <X class="size-4" />

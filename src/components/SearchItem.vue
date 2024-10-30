@@ -1,4 +1,8 @@
 <script setup>
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import { ArrowRight, Circle, Pin, X } from "lucide-vue-next";
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
@@ -74,7 +78,7 @@ function toggleFixed(item, isFixed) {
   <div class="relative flex items-center justify-between w-full pr-3 h-7 md:pr-2 group">
     <Tooltip
       side="top"
-      :name="props.data.project_data?.fixed ? 'Desfijar' : 'Fijar'"
+      :name="`${props.data.project_data?.fixed ? t('verb.unfixed') : t('verb.fixed')}`"
     >
       <div class="flex items-center w-7 h-7">
         <ArrowRight
@@ -143,9 +147,9 @@ function toggleFixed(item, isFixed) {
       @change="toggleCheck(props.data, $event.target.checked)"
     >
     <Tooltip
-      side="top"
-      align="end"
-      name="Marcar como completo"
+      side="right"
+      :align="'end'"
+      :name="t('sidebar.markAsDone')"
     >
       <label
         :for="'todo-' + props.data.id"

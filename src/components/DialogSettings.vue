@@ -1,4 +1,8 @@
 <script setup>
+
+import { useI18n } from 'vue-i18n';
+const { t, locale } = useI18n();
+
 import {
   DialogClose,
   DialogContent,
@@ -12,33 +16,49 @@ import {
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaViewport,
-} from "radix-vue";
-import { X, MousePointer, DatabaseZap, Pointer, Plane, Settings2, BookOpenCheck, BookOpen } from "lucide-vue-next";
-import Tooltip from "./ui/Tooltip.vue";
-import { useCounterStore } from "@/stores/counter";
-import { useStorage, useMagicKeys, whenever, useMousePressed } from '@vueuse/core'
+} from 'radix-vue';
+import {
+  X,
+  MousePointer,
+  DatabaseZap,
+  Pointer,
+  Plane,
+  Settings2,
+  BookOpenCheck,
+  BookOpen,
+  Languages,
+} from 'lucide-vue-next';
+import Tooltip from './ui/Tooltip.vue';
+import { useCounterStore } from '@/stores/counter';
+import {
+  useStorage,
+  useMagicKeys,
+  whenever,
+  useMousePressed,
+} from '@vueuse/core';
 
-import ToggleTheme from "./ui/ToggleTheme.vue";
-import { useSettingsStore } from "@/stores/settings";
-import DialogDeleteDB from "./DialogDeleteDB.vue";
-import DriverJsInit from "./Tour.ts";
-import { storeToRefs } from "pinia";
-import { ref } from "vue";
+import ToggleTheme from './ui/ToggleTheme.vue';
+import { useSettingsStore } from '@/stores/settings';
+import DialogDeleteDB from './DialogDeleteDB.vue';
+import DriverJsInit from './Tour.ts';
+import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
 const settings = useSettingsStore();
 
 const counter = useCounterStore();
-const cursorPointer = useStorage("cursor", true);
+const cursorPointer = useStorage('cursor', true);
 const keys = useMagicKeys();
-const magicSettings = keys["ctrl+alt+w"];
+const magicSettings = keys['ctrl+alt+w'];
 const { showSettings, content_editable } = storeToRefs(counter);
+
+
 const toggleCursor = () => {
   cursorPointer.value = !cursorPointer.value;
 };
 
 whenever(magicSettings, (n) => {
-  if (n)
-  showSettings.value = true
-})
+  if (n) showSettings.value = true;
+});
 
 const toggleTour = () => {
   localStorage.setItem('product_tour_seen', 'false');
@@ -49,20 +69,24 @@ const toggleTour = () => {
   }, 300);
 };
 
-const isMobile = ref(false)
+const isMobile = ref(false);
 
-if(window.matchMedia("(any-hover: none)").matches) {
-  isMobile.value = true
+if (window.matchMedia('(any-hover: none)').matches) {
+  isMobile.value = true;
 } else {
-  isMobile.value = false
+  isMobile.value = false;
 }
 
+function setLocale(lang) {
+  locale.value = lang;
+  localStorage.setItem('locale', locale.value);
+}
 </script>
 
 <template>
   <DialogRoot v-model:open="showSettings">
     <Tooltip
-      name="Configuraciones"
+      :name="t('settings.title')"
       :side="counter.showProjects ? 'bottom' : 'right'"
     >
       <DialogTrigger
@@ -76,13 +100,18 @@ if(window.matchMedia("(any-hover: none)").matches) {
         class="bg-background/95 backdrop-blur-sm data-[state=open]:animate-overlayShow fixed inset-0 z-[60]"
       />
       <DialogContent
-        class="md:data-[state=open]:animate-contentShow font-mono fixed top-6 md:top-[50%] left-[50%] max-h-[85vh] w-[98vw] max-w-[750px] translate-x-[-50%] md:translate-y-[-50%] bg-background rounded py-4 md:p-4 focus:outline-none z-[100] "
+        class="md:data-[state=open]:animate-contentShow font-mono fixed top-6 md:top-[50%] left-[50%] max-h-[85vh] w-[98vw] max-w-[750px] translate-x-[-50%] md:translate-y-[-50%] bg-background rounded py-4 md:p-4 focus:outline-none z-[100]"
       >
-        <DialogTitle class="text-foreground px-3 md:px-0 m-0 text-[17px] font-semibold">
-          Configuraciones
+        <DialogTitle
+          class="text-foreground px-3 md:px-0 m-0 text-[17px] font-semibold"
+        >
+          {{ t('settings.title') }}
         </DialogTitle>
-        <DialogDescription class="mt-1 text-sm px-3 md:px-0 text-muted-foreground">
-          Administre sus preferencias para <span>{{ isMobile ? 'touch' : 'mouse y teclado' }}.</span> 
+        <DialogDescription
+          class="mt-1 text-sm px-3 md:px-0 text-muted-foreground"
+        >
+          {{ t('settings.titleDescription') }}
+          <span>{{ isMobile ? 'touch' : t('settings.mouseKeyboard') }}.</span>
         </DialogDescription>
         <ScrollAreaRoot
           class="w-full border h-[78vh] mt-6 md:h-[70vh] border-secondary"
@@ -103,7 +132,7 @@ if(window.matchMedia("(any-hover: none)").matches) {
                       Tour
                     </h3>
                     <p class="text-xs text-muted-foreground text-balance">
-                      Iniciar un recorrido por las principales funciones de la app.
+                      {{ t('settings.tourDescription') }}
                     </p>
                   </div>
                   <button
@@ -119,10 +148,10 @@ if(window.matchMedia("(any-hover: none)").matches) {
                 >
                   <div class="space-y-0.5">
                     <h3 class="text-sm font-medium text-pretty mt-0">
-                      Puntero del mouse
+                      {{ t('settings.cursor') }}
                     </h3>
                     <p class="text-xs text-muted-foreground text-balance">
-                      Activa o desactiva la manito en el cursor del mouse.
+                      {{ t('settings.cursorDescription') }}
                     </p>
                   </div>
                   <button
@@ -139,50 +168,100 @@ if(window.matchMedia("(any-hover: none)").matches) {
                     />
                   </button>
                 </div>
-                <div class="relative flex flex-row items-start justify-between p-3 border border-secondary">
+                <div
+                  class="relative flex flex-row items-start justify-between p-3 border border-secondary"
+                >
                   <div class="space-y-0.5">
                     <h3 class="text-sm font-medium text-pretty mt-0">
-                      Modo
-                      de color
+                      {{ t('settings.theme') }}
                     </h3>
                     <p class="text-xs text-muted-foreground text-balance">
-                      Alterná entre modo oscuro/claro/sistema, tambien podes elegir un color primario.
+                      {{ t('settings.themeDescription') }}
                     </p>
                   </div>
                   <ToggleTheme />
                 </div>
 
-                <div class="flex flex-row items-start justify-between gap-3 pt-2 p-3 border border-secondary">
+                <div
+                  class="flex flex-row items-start justify-between p-3 border border-secondary"
+                >
                   <div class="space-y-0.5">
                     <h3 class="text-sm font-medium text-pretty mt-0">
-                      Exportar al iniciar
+                      {{ t('settings.language') }}
                     </h3>
                     <p class="text-xs text-muted-foreground text-balance">
-                      Cuando la opción está activada opción aparecerá la posibilidad de exportar la DB al iniciar la aplicación.
+                      {{ t('settings.languageDescription') }}
+                    </p>
+                  </div>
+                  <div class="flex gap-2">
+                    <button
+                      @click="setLocale('es')"
+                      class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8"
+                      :class="
+                        locale === 'es'
+                          ? 'bg-primary text-primary-foreground'
+                          : ''
+                      "
+                    >
+                      ES
+                    </button>
+                    <button
+                      @click="setLocale('en')"
+                      class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8"
+                      :class="
+                        locale === 'en'
+                          ? 'bg-primary text-primary-foreground'
+                          : ''
+                      "
+                    >
+                      EN
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-row items-start justify-between gap-3 pt-2 p-3 border border-secondary"
+                >
+                  <div class="space-y-0.5">
+                    <h3 class="text-sm font-medium text-pretty mt-0">
+                      {{ t('settings.exportOnLoad') }}
+                    </h3>
+                    <p class="text-xs text-muted-foreground text-balance">
+                      {{ t('settings.exportOnLoadDescription') }}
                     </p>
                   </div>
                   <button
                     @click="settings.toggle_save_on_load()"
                     class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8"
-                    :class="settings.save_on_load ? 'hover:!bg-primary bg-primary hover:text-primary-foreground text-primary-foreground' : 'text-muted-foreground'"
+                    :class="
+                      settings.save_on_load
+                        ? 'hover:!bg-primary bg-primary hover:text-primary-foreground text-primary-foreground'
+                        : 'text-muted-foreground'
+                    "
                   >
                     <DatabaseZap class="size-5" />
                   </button>
                 </div>
 
-                <div class="flex flex-row items-start justify-between gap-3 pt-2 p-3 border border-secondary">
+                <div
+                  class="flex flex-row items-start justify-between gap-3 pt-2 p-3 border border-secondary"
+                >
                   <div class="space-y-0.5">
                     <h3 class="text-sm font-medium text-pretty mt-0">
-                      Iniciar DB con info
+                      {{ t('settings.initWithData') }} 
                     </h3>
                     <p class="text-xs text-muted-foreground text-balance">
-                      Cuando la opción está activada la base se inicia con un documento de ejemplo
+                      {{ t('settings.initWithDataDescription') }} 
                     </p>
                   </div>
                   <button
                     @click="settings.toggle_init_db_with_example_doc()"
                     class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8"
-                    :class="settings.init_db_with_example_doc ? 'hover:!bg-primary bg-primary hover:text-primary-foreground text-primary-foreground' : 'text-muted-foreground'"
+                    :class="
+                      settings.init_db_with_example_doc
+                        ? 'hover:!bg-primary bg-primary hover:text-primary-foreground text-primary-foreground'
+                        : 'text-muted-foreground'
+                    "
                   >
                     <BookOpenCheck
                       v-if="settings.init_db_with_example_doc"
@@ -195,15 +274,16 @@ if(window.matchMedia("(any-hover: none)").matches) {
                   </button>
                 </div>
 
-              
                 <h4 class="mt-2 mb-0 text-xs text-red-600">
-                  Atención!
+                  {{ t('settings.attention') }} 
                 </h4>
-                <div class="grid grid-cols-2 sm:flex flex-row items-center justify-between jus gap-3 p-3 border border-destructive">
+                <div
+                  class="grid grid-cols-2 sm:flex flex-row items-center justify-between jus gap-3 p-3 border border-destructive"
+                >
                   <h3
                     class="text-sm m-0 font-medium text-muted-foreground text-balance"
                   >
-                    Eliminar base de datos
+                    {{ t('settings.deleteDB') }} 
                   </h3>
                   <div class="flex justify-end items-center">
                     <DialogDeleteDB />

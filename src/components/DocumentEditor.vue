@@ -1,7 +1,9 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import { useCounterStore } from "@/stores/counter";
 import Editor from "@/components/ui/Tiptap/EditorTipTap.vue";
-
 const counter = useCounterStore();
 </script>
 
@@ -18,7 +20,7 @@ const counter = useCounterStore();
     >
       <div class="flex flex-col items-start justify-between w-full gap-1 my-0.5">
         <textarea
-          placeholder="Item sin título"
+          :placeholder="t('editor.untitled')"
           autocomplete="off"
           spellcheck="false"
           v-model="counter.project_name"
@@ -63,7 +65,7 @@ const counter = useCounterStore();
       "
       class="absolute bottom-0 right-0 z-20 h-8 px-3 text-xs md:-translate-y-4 -left-8 md:left-6 md:right-6 GuardarDocumento disabled:text-foreground/50"
     >
-      Guardar documento
+      {{ t('editor.save') }}
     </button>
   </div>
 </template>

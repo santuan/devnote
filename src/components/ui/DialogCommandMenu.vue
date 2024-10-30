@@ -1,4 +1,8 @@
 <script setup lang="ts">
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import { ref } from 'vue'
 import {
   ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxLabel, ComboboxRoot, DialogContent, DialogDescription, DialogOverlay, DialogPortal, DialogRoot, DialogTitle, DialogTrigger, VisuallyHidden } from 'radix-vue'
@@ -41,7 +45,7 @@ function new_document() {
 <template>
   <DialogRoot v-model:open="open">
     <Tooltip
-      name="Barra comandos"
+      :name="t('commandBar.title')"
       :side="counter.showProjects ? 'bottom' : 'right'"
       shortcut="ctrl + alt + o"
       :align="counter.showProjects ? 'end' : 'center'"
@@ -58,14 +62,13 @@ function new_document() {
         class="fixed top-[15%] left-[50%] max-h-[85vh] w-[90vw] max-w-[40rem] translate-x-[-50%] text-sm overflow-hidden border bg-background border-muted-foreground/30 focus:outline-none z-[100]"
       >
         <VisuallyHidden>
-          <DialogTitle>Command Menu</DialogTitle>
-          <DialogDescription>Search for command</DialogDescription>
+          <DialogTitle>{{ t('commandBar.title') }}</DialogTitle>
+          <DialogDescription>{{ t('commandBar.description') }}</DialogDescription>
         </VisuallyHidden>
 
         <ComboboxRoot :open="true">
           <ComboboxInput
-            placeholder="Buscar..."
-            
+            :placeholder="`${t('verb.search')}&hellip;`"
             class="sticky top-0 right-0 font-mono bg-background border-b border-secondary w-full px-4 py-3 text-foreground outline-none placeholder-muted-foreground !select-all"
             @keydown.enter.prevent
           />
@@ -74,12 +77,12 @@ function new_document() {
             @escape-key-down="open = false"
           >
             <ComboboxEmpty class="text-center text-muted-foreground p-4">
-              Sin resultados
+              {{ t('sidebar.noResults') }}
             </ComboboxEmpty>
 
             <ComboboxGroup>
               <ComboboxLabel class="px-4 text-muted-foreground font-semibold mt-3 mb-3 font-mono">
-                Documentos
+                {{ t('commandBar.documents') }}
               </ComboboxLabel>
               <ComboboxItem
                 v-for="item in allItemsTodo"
@@ -89,33 +92,32 @@ function new_document() {
                 class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
                 <span>{{ item.project_data.name }}</span>
-                <!-- <SearchItem :data="item" /> -->
               </ComboboxItem>
             </ComboboxGroup>
             <ComboboxGroup>
               <ComboboxLabel class="px-4 text-muted-foreground font-semibold mt-3 mb-3 font-mono">
-                Acciones
+                {{ t('commandBar.actions') }}
               </ComboboxLabel>
               <ComboboxItem
-                value="crear documento"
+                :value="t('sidebar.newDocument')"
                 @select="new_document()"
                 class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
-                <span>Crear documento</span>
+                <span>{{ t('sidebar.newDocument') }}</span>
               </ComboboxItem>
               <ComboboxItem
                 value="importar db"
                 @select="counter.showImportModal = true"
                 class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
-                <span>Importar DB</span>
+                <span>{{ t('settings.import') }}</span>
               </ComboboxItem>
               <ComboboxItem
                 value="exportar db"
                 @select="counter.showShareModal = true"
                 class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
-                <span>Exportar DB</span>
+                <span>{{ t('settings.export') }}</span>
               </ComboboxItem>
             </ComboboxGroup>
           </ComboboxContent>

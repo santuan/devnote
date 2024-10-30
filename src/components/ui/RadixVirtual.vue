@@ -1,4 +1,8 @@
 <script setup>
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import {
   PopoverClose,
   PopoverContent,
@@ -118,7 +122,7 @@ const filteredOptions = computed(() =>
                 </svg>
                 <ListboxFilter
                   v-model="searchTerm"
-                  placeholder="Buscar..."
+                  :placeholder="t('verb.search')"
                   class="w-full h-8 p-1 pl-10 font-mono text-xs border outline-none selection:bg-primary selection:text-primary-foreground text-foreground bg-background border-secondary placeholder:text-foreground/20"
                 />
               </div>

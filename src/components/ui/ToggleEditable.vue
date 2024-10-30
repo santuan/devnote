@@ -1,4 +1,7 @@
 <script setup>
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 import { useCounterStore } from "@/stores/counter";
 import Tooltip from "@/components/ui/Tooltip.vue";
 import { BookText, PencilLine } from "lucide-vue-next";
@@ -7,11 +10,7 @@ const counter = useCounterStore();
 
 <template>
   <Tooltip
-    :name="
-      counter.content_editable
-        ? 'Cambiar a previsualizar'
-        : 'Cambiar a modo editable'
-    "
+    :name="`${counter.content_editable ? t('sidebar.contentPreview') : t('sidebar.contentEditable')}`"
     shortcut="ctrl + alt + p"
     :side="counter.showProjects ? 'bottom' : 'right'"
     :align="counter.showProjects ? 'end' : 'center'"

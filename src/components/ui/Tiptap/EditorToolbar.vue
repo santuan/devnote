@@ -1,8 +1,11 @@
 <script setup>
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import {
   Italic,
   ImagePlus,
-  SquarePilcrow,
   Bold,
   Strikethrough,
   Code,
@@ -23,8 +26,8 @@ import {
   Video,
   ChevronDown,
   ImageDown,
-  Globe,
   Youtube,
+  SquareMinus,
 } from "lucide-vue-next";
 import {
   DropdownMenuArrow,
@@ -119,7 +122,7 @@ function setVideo() {
 <template>
   <div class="flex justify-start select-none mt-0.5 mb-2 button-group md:w-auto">
     <Tooltip
-      name="Deshacer"
+      :name="t('toolbar.undo')"
       side="bottom"
     >
       <button
@@ -131,7 +134,7 @@ function setVideo() {
       </button>
     </Tooltip>
     <Tooltip
-      name="rehacer"
+      :name="t('toolbar.redo')"
       side="bottom"
     >
       <button
@@ -143,12 +146,10 @@ function setVideo() {
       </button>
     </Tooltip>
    
-   
-
     <DropdownMenuRoot>
       <DropdownMenuTrigger class="data-[state=open]:!bg-primary data-[state=open]:text-primary-foreground relative">
         <Tooltip
-          name="Agregar imagen"
+          :name="`${t('verb.add')} ${t('toolbar.image')}`"
           :side="'bottom'"
         >
           <span
@@ -194,7 +195,7 @@ function setVideo() {
       </DropdownMenuContent>
     </DropdownMenuRoot>
     <Tooltip
-      name="Agregar video Youtube"
+      :name="`${t('verb.add')} Youtube video`"
       side="bottom"
     >
       <button
@@ -220,30 +221,30 @@ function setVideo() {
       <DropdownMenuRoot>
         <DropdownMenuTrigger class="headingSelector">
           <template v-if="editor.isActive('heading', { level: 1 })">
-            Título nivel 1
+            {{ t('toolbar.heading1') }}
           </template>
           <template v-else-if="editor.isActive('heading', { level: 2 })">
-            Título nivel 2
+            {{ t('toolbar.heading2') }}
           </template>
           <template v-else-if="editor.isActive('heading', { level: 3 })">
-            Título nivel 3
+            {{ t('toolbar.heading3') }}
           </template>
           <template v-else-if="editor.isActive('heading', { level: 4 })">
-            Título nivel 4
+            {{ t('toolbar.heading4') }}
           </template>
           <template v-else-if="editor.isActive('heading', { level: 5 })">
-            Título nivel 5
+            {{ t('toolbar.heading5') }}
           </template>
           <template v-else-if="editor.isActive('heading', { level: 6 })">
-            Título nivel 6
+            {{ t('toolbar.heading6') }}
           </template>
           <template v-else>
-            Párrafo
+            {{ t('toolbar.paragraph') }}
           </template>
           <ChevronDown class="size-4 shrink-0" />
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          align="start"
+          :align="'start'"
           side="bottom"
           class="z-10 grid text-xs border w-44 bg-background border-secondary"
         >
@@ -252,68 +253,54 @@ function setVideo() {
             :class="{ 'is-active': editor.isActive('paragraph') }"
             class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
           >
-            Párrafo
+            {{ t('toolbar.paragraph') }}
           </DropdownMenuItem>
           <DropdownMenuItem
             @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
             :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }"
             class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
           >
-            Titulo 1
+            {{ t('toolbar.heading1') }}
           </DropdownMenuItem>
           <DropdownMenuItem
             @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
             :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }"
             class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
           >
-            Titulo 2
+            {{ t('toolbar.heading2') }}
           </DropdownMenuItem>
           <DropdownMenuItem
             @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
             :class="{ 'is-active': editor.isActive('heading', { level: 3 }) }"
             class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
           >
-            Titulo 3
+            {{ t('toolbar.heading3') }}
           </DropdownMenuItem>
           <DropdownMenuItem
             @click="editor.chain().focus().toggleHeading({ level: 4 }).run()"
             :class="{ 'is-active': editor.isActive('heading', { level: 4 }) }"
             class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
           >
-            Titulo 4
+            {{ t('toolbar.heading4') }}
           </DropdownMenuItem>
           <DropdownMenuItem
             @click="editor.chain().focus().toggleHeading({ level: 5 }).run()"
             :class="{ 'is-active': editor.isActive('heading', { level: 5 }) }"
             class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
           >
-            Titulo 5
+            {{ t('toolbar.heading5') }}
           </DropdownMenuItem>
           <DropdownMenuItem
             @click="editor.chain().focus().toggleHeading({ level: 6 }).run()"
             :class="{ 'is-active': editor.isActive('heading', { level: 6 }) }"
             class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
           >
-            Titulo 6
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            @click="editor.chain().focus().toggleBulletList().run()"
-            :class="{ 'is-active': editor.isActive('bulletList') }"
-            class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
-          >
-            Lista desordenada
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            @click="editor.chain().focus().toggleOrderedList().run()"
-            :class="{ 'is-active': editor.isActive('orderedList') }"
-            class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
-          >
-            Lista ordenada
+            {{ t('toolbar.heading6') }}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenuRoot>
       <Tooltip
-        name="Negrita"
+        :name="t('toolbar.bold')"
         shortcut="Ctrl B"
         side="bottom"
       >
@@ -327,7 +314,7 @@ function setVideo() {
         </button>
       </Tooltip>
       <Tooltip
-        name="Cursiva"
+        :name="t('toolbar.italic')"
         shortcut="Ctrl I"
         side="bottom"
       >
@@ -341,7 +328,7 @@ function setVideo() {
         </button>
       </Tooltip>
       <Tooltip
-        name="Linea de tachado"
+        :name="t('toolbar.strike')"
         side="bottom"
         shortcut="Ctrl Shift S"
       >
@@ -355,7 +342,7 @@ function setVideo() {
         </button>
       </Tooltip>
       <Tooltip
-        name="Codigo en linea"
+        :name="t('toolbar.code')"
         side="bottom"
         shortcut="Ctrl E"
       >
@@ -371,7 +358,7 @@ function setVideo() {
         </button>
       </Tooltip>
       <Tooltip
-        name="Bloque de Código"
+        :name="t('toolbar.codeBlock')"
         side="bottom"
         shortcut="Ctrl Alt C"
       >
@@ -387,7 +374,7 @@ function setVideo() {
       <DropdownMenuRoot>
         <DropdownMenuTrigger>
           <Tooltip
-            name="Alineación de texto"
+            :name="t('toolbar.textAlign')"
             side="bottom"
           >
             <button class="flex items-center justify-center w-full bg-secondary interactive">
@@ -403,7 +390,7 @@ function setVideo() {
               <template v-else>
                 <AlignLeft class="size-6" />
               </template>
-              <span class="sr-only">Alineación de texto</span>
+              <span class="sr-only">{{ t('toolbar.textAlign') }}</span>
             </button>
           </Tooltip>
         </DropdownMenuTrigger>
@@ -419,11 +406,9 @@ function setVideo() {
           >
             <div class="flex items-center justify-start gap-3 p-1">
               <AlignLeft class="size-4" />
-              <span>Izquierda</span>
+              <span>{{ t('toolbar.alignLeft') }}</span>
             </div>
-            <kbd
-              class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium text-muted-foreground opacity-100"
-            >
+            <kbd class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium text-muted-foreground opacity-100">
               Ctrl Shift L
             </kbd>
           </DropdownMenuItem>
@@ -434,11 +419,9 @@ function setVideo() {
           >
             <div class="flex items-center justify-start gap-3 p-1">
               <AlignCenter class="size-4" />
-              <span>Centro</span>
+              <span>{{ t('toolbar.alignCenter') }}</span>
             </div>
-            <kbd
-              class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium text-muted-foreground opacity-100"
-            >
+            <kbd class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium text-muted-foreground opacity-100">
               Ctrl Shift E
             </kbd>
           </DropdownMenuItem>
@@ -449,28 +432,22 @@ function setVideo() {
           >
             <div class="flex items-center justify-start gap-3 p-1">
               <AlignRight class="size-4" />
-              <span>Derecha</span>
+              <span>{{ t('toolbar.alignRight') }}</span>
             </div>
-            <kbd
-              class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium text-muted-foreground opacity-100"
-            >
+            <kbd class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium text-muted-foreground opacity-100">
               Ctrl Shift R
             </kbd>
           </DropdownMenuItem>
           <DropdownMenuItem
             @click="editor.chain().focus().setTextAlign('justify').run()"
             class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
-            :class="{
-              'is-active': editor.isActive({ textAlign: 'justify' }),
-            }"
+            :class="{ 'is-active': editor.isActive({ textAlign: 'justify' }) }"
           >
             <div class="flex items-center justify-start gap-3 p-1">
               <AlignJustify class="size-4" />
-              <span>Justificado</span>
+              <span>{{ t('toolbar.alignJustify') }}</span>
             </div>
-            <kbd
-              class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium text-muted-foreground opacity-100"
-            >
+            <kbd class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium text-muted-foreground opacity-100">
               Ctrl Shift J
             </kbd>
           </DropdownMenuItem>
@@ -478,17 +455,19 @@ function setVideo() {
             @click="editor.chain().focus().unsetTextAlign().run()"
             class="flex items-center justify-between p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
           >
-            <span>Sin alineación</span>
-            <kbd
-              class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium ml-auto text-muted-foreground opacity-100"
-            >
+            <div class="flex items-center justify-start gap-3 p-1">
+              <SquareMinus class="size-4" />
+              <span>{{ t('toolbar.noAlignment') }}</span>
+            </div>
+            <kbd class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium ml-auto text-muted-foreground opacity-100">
               Ctrl Shift L
             </kbd>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenuRoot>
+
       <Tooltip
-        name="Lista desordenada"
+        :name="t('toolbar.bulletList')"
         side="bottom"
         shortcut="Ctrl Shift 8"
       >
@@ -501,7 +480,7 @@ function setVideo() {
         </button>
       </Tooltip>
       <Tooltip
-        name="Lista ordenada"
+        :name="t('toolbar.orderedList')"
         side="bottom"
         shortcut="Ctrl Shift 7"
       >
@@ -515,7 +494,7 @@ function setVideo() {
       </Tooltip>
 
       <Tooltip
-        name="Cita"
+        :name="t('toolbar.quote')"
         side="bottom"
         shortcut="Ctrl Shift B"
       >
@@ -528,7 +507,7 @@ function setVideo() {
         </button>
       </Tooltip>
       <Tooltip
-        name="Separador"
+        :name="t('toolbar.separator')"
         side="bottom"
       >
         <button
@@ -539,7 +518,7 @@ function setVideo() {
         </button>
       </Tooltip>
       <Tooltip
-        name="Añadir link"
+        :name="t('toolbar.link')"
         side="bottom"
       >
         <button
@@ -551,7 +530,7 @@ function setVideo() {
         </button>
       </Tooltip>
       <Tooltip
-        name="Eliminar link"
+        :name="t('toolbar.unlink')"
         side="bottom"
       >
         <button
@@ -563,9 +542,8 @@ function setVideo() {
         </button>
       </Tooltip>
       <Tooltip
-        name="Quitar estilos de linea"
+        :name="t('toolbar.unsetAllMarks')"
         side="bottom"
-        shortcut="Negrita - Italica - Link"
       >
         <button
           @click="editor.chain().focus().unsetAllMarks().run()"
@@ -575,9 +553,8 @@ function setVideo() {
         </button>
       </Tooltip>
       <Tooltip
-        name="Quitar estilos de bloque"
+        :name="t('toolbar.clearNodes')"
         side="bottom"
-        shortcut="Títulos - Listas - Código en bloque - Cita"
       >
         <button
           @click="editor.chain().focus().clearNodes().run()"

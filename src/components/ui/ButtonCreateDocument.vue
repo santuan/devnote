@@ -3,10 +3,14 @@ import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
 import { Plus } from "lucide-vue-next";
 import {  breakpointsTailwind, useBreakpoints, } from "@vueuse/core";
+import { useI18n } from 'vue-i18n';
+
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const largerThanLg = breakpoints.greater("lg");
 const counter = useCounterStore();
 const { loaded_id } = storeToRefs(counter);
+
+const { t } = useI18n();
 
 function new_document() {
   if (largerThanLg.value === true) {
@@ -39,7 +43,8 @@ function new_document() {
         v-show="loaded_id === ''"
         class="flex items-center gap-1 text-primary animate-pulse"
       >
-        * Creando documento
+        <!-- * Creando documento -->
+        * {{ t('sidebar.newDocument') }}
         <span
           v-show="counter.project_name"
           class="inline-block font-bold truncate opacity-80 max-w-24"
@@ -51,7 +56,7 @@ function new_document() {
       <span
         class="font-bold text-primary-foreground"
         v-show="loaded_id !== ''"
-      >Crear nuevo documento</span>
+      >{{ t('sidebar.newDocument') }}</span>
     </button>
   </div>
 </template>

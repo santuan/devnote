@@ -18,6 +18,9 @@ import {
   ScrollAreaViewport,
 } from "radix-vue";
 
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import SearchItem from "./SearchItem.vue";
 import SearchItemChecked from "./SearchItemChecked.vue";
 import SelectSort from "./ui/SelectSort.vue";
@@ -90,7 +93,7 @@ const results = computed(() => {
         <input
           ref="focusSearch"
           v-model="searchTerm"
-          placeholder="Filtrar por título"
+          :placeholder="`${t('sidebar.search')}`"
           class="px-1 text-xs outline-none pl-7 h-7 bg-transparent  placeholder:text-xs placeholder:text-foreground/40"
         >
         <span

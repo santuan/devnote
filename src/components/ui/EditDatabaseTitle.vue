@@ -1,4 +1,8 @@
 <script setup>
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import { useCounterStore } from "@/stores/counter";
 import {
   Check,
@@ -36,30 +40,28 @@ onClickOutside(target, () => {
     class="DataBaseTitle flex items-center justify-center mx-1.5 mb-2 mt-1 text-sm border group bg-secondary/40 hover:bg-secondary/90 border-secondary"
     :class="editing ? ' !border !border-primary' : ' '"
   >
-    <Tooltip
-      v-if="!editing"
-      name="Editar nombre de la base de datos local"
-      side="top"
-      :align="'center'"
+    <button
+      @click="editDatabaseTitle()"
+      class="flex items-center justify-between w-full h-8 gap-1 pl-2 hover:outline-none hover:!ring-1 hover:ring-primary text-primary"
     >
-      <button
-        @click="editDatabaseTitle()"
-        class="flex items-center justify-between w-full h-8 gap-1 pl-2 hover:outline-none hover:!ring-1 hover:ring-primary text-primary"
+      <span
+        v-if="!file_name"
+      > Escriba un título </span>
+      <span v-else>
+        {{ file_name }}
+      </span>
+      <Tooltip
+        :name="t('settings.editDBname')"
+        side="top"
+        :align="'end'"
       >
-        <span
-          v-if="!file_name"
-        > Escriba un título </span>
-        <span v-else>
-          {{ file_name }}
-        </span>
-      
         <span
           class="flex items-center justify-center duration-100 border border-transparent size-8 shrink-0 bg-background "
         >
           <DatabaseZap class="size-4 text-primary" />
         </span>
-      </button>
-    </Tooltip>
+      </Tooltip>
+    </button>
     <div
       ref="target"
       v-if="editing"
