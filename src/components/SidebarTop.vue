@@ -68,12 +68,12 @@ whenever(magicPreview, () => {
       :class="counter.showProjects ? 'grid-cols-7 gap-0.5' : ' grid-cols-1 gap-1 mt-1'"
     >
       <ButtonCreateDocumentCollapse v-if="!counter.showProjects" />
-      <LanguageSelector />
+      <LanguageSelector v-if="counter.showProjects" />
       <DialogSettings />
       <ToggleTheme />
       <DialogCommandMenu />
       <ToggleEditable />
-      <DialogInfo />
+      <DialogInfo v-if="counter.showProjects" />
       <Tooltip
         shortcut="Ctrl M"
         :name="`${t('verb.close')} panel`"
@@ -94,7 +94,7 @@ whenever(magicPreview, () => {
     <button
       @click="counter.showProjects = !counter.showProjects"
       v-show="!counter.showProjects"
-      class="absolute flex flex-col justify-end items-center z-10 inset-1 py-2 md:py-5 bottom-2 hover:!border-1 top-[290px]"
+      class="absolute flex flex-col justify-end items-center z-10 inset-1 py-2 md:py-5 bottom-2 hover:!border-1 top-[220px]"
     >
       <ArrowRightToLine class="mx-auto duration-100 opacity-25 size-4 group-hover:opacity-90" />
     </button>
