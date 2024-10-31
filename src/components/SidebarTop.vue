@@ -65,15 +65,15 @@ whenever(magicPreview, () => {
     </button>
     <div
       class="grid "
-      :class="counter.showProjects ? 'grid-cols-7 gap-0.5' : ' grid-cols-1 gap-1 mt-1'"
+      :class="counter.showProjects ? 'grid-cols-6 gap-0.5' : ' grid-cols-1 gap-1 mt-1'"
     >
+      <DialogInfo v-if="counter.showProjects" />
       <ButtonCreateDocumentCollapse v-if="!counter.showProjects" />
-      <LanguageSelector v-if="counter.showProjects" />
+      <!-- <LanguageSelector v-if="counter.showProjects" /> -->
       <DialogSettings />
       <ToggleTheme />
       <DialogCommandMenu />
       <ToggleEditable />
-      <DialogInfo v-if="counter.showProjects" />
       <Tooltip
         shortcut="Ctrl M"
         :name="`${t('verb.close')} panel`"

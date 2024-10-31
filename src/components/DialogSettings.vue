@@ -26,7 +26,6 @@ import {
   Settings2,
   BookOpenCheck,
   BookOpen,
-  Languages,
 } from 'lucide-vue-next';
 import Tooltip from './ui/Tooltip.vue';
 import { useCounterStore } from '@/stores/counter';
@@ -43,6 +42,7 @@ import DialogDeleteDB from './DialogDeleteDB.vue';
 import DriverJsInit from './Tour.ts';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
+import LanguageSelector from './ui/LanguageSelector.vue';
 const settings = useSettingsStore();
 
 const counter = useCounterStore();
@@ -122,7 +122,7 @@ function setLocale(lang) {
               <div class="grid gap-2">
                 <div
                   v-if="!isMobile"
-                  class="flex-row items-start justify-between flex gap-3 pt-2 p-3 border border-secondary"
+                  class="flex-row items-start justify-between flex gap-3 pt-2 py-3 pr-3 "
                 >
                   <div
                     class="space-y-0.5"
@@ -144,7 +144,7 @@ function setLocale(lang) {
                 </div>
                 <div
                   v-if="!isMobile"
-                  class="flex-row items-start justify-between flex p-3 border border-secondary"
+                  class="flex-row items-start justify-between flex py-3 pr-3 border-t border-secondary"
                 >
                   <div class="space-y-0.5">
                     <h3 class="text-sm font-medium text-pretty mt-0">
@@ -169,7 +169,7 @@ function setLocale(lang) {
                   </button>
                 </div>
                 <div
-                  class="relative flex flex-row items-start justify-between p-3 border border-secondary"
+                  class="relative flex flex-row items-start justify-between py-3 pr-3 border-t border-secondary "
                 >
                   <div class="space-y-0.5">
                     <h3 class="text-sm font-medium text-pretty mt-0">
@@ -183,7 +183,7 @@ function setLocale(lang) {
                 </div>
 
                 <div
-                  class="flex flex-row items-start justify-between p-3 border border-secondary"
+                  class="flex flex-row items-start justify-between py-3 pr-3 border-t border-secondary "
                 >
                   <div class="space-y-0.5">
                     <h3 class="text-sm font-medium text-pretty mt-0">
@@ -194,33 +194,12 @@ function setLocale(lang) {
                     </p>
                   </div>
                   <div class="flex gap-2">
-                    <button
-                      @click="setLocale('es')"
-                      class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8"
-                      :class="
-                        locale === 'es'
-                          ? 'bg-primary hover:text-primary-foreground text-primary-foreground'
-                          : ''
-                      "
-                    >
-                      ES
-                    </button>
-                    <button
-                      @click="setLocale('en')"
-                      class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8"
-                      :class="
-                        locale === 'en'
-                          ? 'bg-primary hover:text-primary-foreground text-primary-foreground'
-                          : ''
-                      "
-                    >
-                      EN
-                    </button>
+                    <LanguageSelector />
                   </div>
                 </div>
 
                 <div
-                  class="flex flex-row items-start justify-between gap-3 pt-2 p-3 border border-secondary"
+                  class="flex flex-row items-start justify-between gap-3 pt-2 py-3 pr-3 border-t border-secondary"
                 >
                   <div class="space-y-0.5">
                     <h3 class="text-sm font-medium text-pretty mt-0">
@@ -244,7 +223,7 @@ function setLocale(lang) {
                 </div>
 
                 <div
-                  class="flex flex-row items-start justify-between gap-3 pt-2 p-3 border border-secondary"
+                  class="flex flex-row items-start justify-between gap-3 pt-2 py-3 pr-3 border-t border-secondary"
                 >
                   <div class="space-y-0.5">
                     <h3 class="text-sm font-medium text-pretty mt-0">
@@ -273,12 +252,11 @@ function setLocale(lang) {
                     />
                   </button>
                 </div>
-
                 <h4 class="mt-2 mb-0 text-xs text-red-600">
                   {{ t('settings.attention') }} 
                 </h4>
                 <div
-                  class="grid grid-cols-2 sm:flex flex-row items-center justify-between jus gap-3 p-3 border border-destructive"
+                  class="grid grid-cols-2 sm:flex flex-row items-center justify-between jus gap-3 mr-3 p-3 border border-destructive"
                 >
                   <h3
                     class="text-sm m-0 font-medium text-muted-foreground text-balance"

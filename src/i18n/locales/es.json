@@ -99,6 +99,7 @@
   "message": {
     "databaseClearedWithExample": "Base de datos eliminada y se creó un documento de ejemplo",
     "databaseCleared": "Base de datos eliminada",
+    "databaseImported": "Base de datos importada",
     "completed": "completado",
     "unmarked": "desmarcado",
     "offlineReady": "Aplicación lista para trabajar sin conexión",

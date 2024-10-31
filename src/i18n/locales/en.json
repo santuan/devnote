@@ -4,7 +4,7 @@
     "description": "Rich text editor app"
   },
   "editor": {
-    "placeholder": "Write something...",
+    "placeholder": "Start writing...",
     "untitled": "Untitled item",
     "save": "Save document",
     "delete": "Delete document",
@@ -43,12 +43,12 @@
   },
   "sidebar": {
     "newDocument": "New document",
-    "search": "Search by title",
+    "search": "Filter by title",
     "noResults": "No results",
     "noResultsDescription": "No results for this search",
     "sort": {
       "sort": "Sort",
-      "name": "Name",
+      "name": "Title",
       "date": "Date"
     },
     "theme": "Theme color",
@@ -68,9 +68,9 @@
     "dark": "Dark",
     "system": "System",
     "language": "Language",
-    "languageDescription": "Select the language of the aplication",
+    "languageDescription": "Select the language of the aplication.",
     "cursor": "Mouse cursor",
-    "cursorDescription": "Change the mouse cursor to pointer or arrow",
+    "cursorDescription": "Change the mouse cursor to pointer or arrow.",
     "tour": "Tutorial",
     "tourDescription": "Start a tour through the app to learn how to create a new note.",
     "export": "Export DB",
@@ -78,13 +78,13 @@
     "editDBname": "Edit database name",
     "exportOnLoad": "Export on startup",
     "exportOnLoadDescription": "When this option is enabled, the ability to export the database will appear when the application starts.",
-    "initWithData": "Initialize DB with data",
+    "initWithData": "Initialize DB with data.",
     "initWithDataDescription": "When this option is enabled, the database starts with a sample document.",
     "attention": "Atention!",
-    "deleteDB": "Delete database from indexdedDB"
+    "deleteDB": "Delete database from indexdedDB."
   },
   "importDB": {
-    "description": "Select or drag and drop a json exported from this app",
+    "description": "Select or drag and drop a json exported from this app.",
     "action": "Select JSON file"
   },
   "exportDB": {
@@ -97,8 +97,9 @@
     "actions": "Actions"
   },
   "message": {
-    "databaseClearedWithExample": "Database deleted and a sample document was created",
+    "databaseClearedWithExample": "Database deleted and a sample document was created.",
     "databaseCleared": "Database deleted",
+    "databaseImported": "Database imported",
     "completed": "completed",
     "unmarked": "unmarked",
     "offlineReady": "Application is ready for offline use",

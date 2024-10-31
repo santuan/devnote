@@ -193,7 +193,7 @@ export const useCounterStore = defineStore("counter", () => {
       showImportModal.value = false
       clear_editor();
       searchTerm.value = "";
-      toast.success('Base de datos importada')
+      toast.success(t('message.databaseImported'))
     } catch (error) {
       toast.error('Error al importar la base de datos')
       handleError("Error al importar la base de datos", error);

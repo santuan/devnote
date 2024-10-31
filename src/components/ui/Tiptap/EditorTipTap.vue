@@ -1,5 +1,8 @@
 <script setup>
 
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import {
   ScrollAreaRoot,
   ScrollAreaScrollbar,
@@ -97,7 +100,7 @@ onMounted(() => {
         types: ["heading", "paragraph"],
       }),
       Placeholder.configure({
-        placeholder: "Escribir algo …",
+        placeholder: t('editor.placeholder'),
       }),
       Youtube.configure({
         controls: true,
@@ -163,7 +166,7 @@ onBeforeUnmount(() => {
     </div>
     
     <ScrollAreaRoot
-      class="w-full border  border-secondary "
+      class="w-full border  border-secondary   "
       :class="[
         showEditorToolbar ? 'h-[calc(100vh-5.375rem)]' : 'h-[calc(100vh-2.75rem)]',
         !toolbar ? 'border-transparent !h-screen' : '',
@@ -171,7 +174,7 @@ onBeforeUnmount(() => {
       ]"
       style="--scrollbar-size: 10px"
     >
-      <ScrollAreaViewport class="w-full h-full">
+      <ScrollAreaViewport class="w-full h-full focus:ring-primary focus:ring-1 outline-none">
         <div
           class="max-w-full mx-auto prose  dark:prose-invert"
           spellcheck="false"

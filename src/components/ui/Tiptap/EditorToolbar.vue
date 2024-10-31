@@ -352,7 +352,7 @@ function setVideo() {
           :class="{ 'is-active': editor.isActive('code') }"
           class="font-mono interactive !text-base"
         >
-          <span class="flex items-center justify-center text-xs rounded size-5 bg-secondary-foreground/10 text-foreground">
+          <span class="flex items-center justify-center text-xs rounded size-5 bg-secondary/30 text-inherit">
             A
           </span>
         </button>
@@ -377,7 +377,7 @@ function setVideo() {
             :name="t('toolbar.textAlign')"
             side="bottom"
           >
-            <button class="flex items-center justify-center w-full bg-secondary interactive">
+            <span class="flex items-center justify-center w-full bg-secondary interactive h-full">
               <template v-if="editor.isActive({ textAlign: 'center' })">
                 <AlignCenter class="size-6" />
               </template>
@@ -391,7 +391,7 @@ function setVideo() {
                 <AlignLeft class="size-6" />
               </template>
               <span class="sr-only">{{ t('toolbar.textAlign') }}</span>
-            </button>
+            </span>
           </Tooltip>
         </DropdownMenuTrigger>
         <DropdownMenuContent
@@ -581,8 +581,8 @@ function setVideo() {
 }
 
 .button-group button {
-  @apply border border-secondary focus-within:border-primary outline-none h-8 min-w-8 max-w-8 xl:max-w-14 text-sm focus-visible:border-primary hover:!border-primary flex justify-center items-center duration-100;
-  flex: 1;
+  @apply border border-secondary focus-within:border-primary outline-none h-8 min-w-8 max-w-8 xl:max-w-20 2xl:flex-1 text-sm focus-visible:border-primary hover:!border-primary flex justify-center items-center duration-100;
+  /* flex: 1; */
 }
 
 .control-group button {

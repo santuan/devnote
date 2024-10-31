@@ -480,9 +480,6 @@
 [data-sonner-toast][data-styled=true] {
   @apply !bg-secondary
 }
-[data-sonner-toast] [data-icon] {
-  @apply mt-1
-}
 
 [data-sonner-toast] [data-icon] svg {
   @apply !w-6 !h-6
