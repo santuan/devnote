@@ -19,6 +19,7 @@ const counter = useCounterStore();
       editable
     >
       <div class="flex flex-col items-start justify-between w-full gap-1 my-0.5">
+        <span class="sr-only">{{ t('editor.untitled') }}</span>
         <textarea
           :placeholder="t('editor.untitled')"
           autocomplete="off"
@@ -49,9 +50,9 @@ const counter = useCounterStore();
             class="fill-primary"
           /></svg>
         </div>
-        <h1 class="pt-6 mb-0 font-serif text-5xl text-foreground font-black opacity-25 text-balance">
+        <h2 class="pt-6 mb-0 font-serif text-5xl text-foreground font-black opacity-25 text-balance !mt-0">
           {{ counter.project_name }}
-        </h1>
+        </h2>
       </div>
     </Editor>
     <button

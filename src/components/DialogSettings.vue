@@ -1,7 +1,7 @@
 <script setup>
 
 import { useI18n } from 'vue-i18n';
-const { t, locale } = useI18n();
+const { t } = useI18n();
 
 import {
   DialogClose,
@@ -77,10 +77,6 @@ if (window.matchMedia('(any-hover: none)').matches) {
   isMobile.value = false;
 }
 
-function setLocale(lang) {
-  locale.value = lang;
-  localStorage.setItem('locale', locale.value);
-}
 </script>
 
 <template>
@@ -93,6 +89,7 @@ function setLocale(lang) {
         class="flex items-center justify-center border interactive border-secondary hover:bg-secondary/80 bg-background size-8"
       >
         <Settings2 class="size-4" />
+        <span class="sr-only">{{ t('settings.title') }}</span>
       </DialogTrigger>
     </Tooltip>
     <DialogPortal>

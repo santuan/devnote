@@ -46,6 +46,7 @@ whenever(magicDeleteDocument, (n) => {
         :class="counter.loaded_id ? 'text-primary' : 'hidden'"
       >
         <Trash2 class="size-4" />
+        <span class="sr-only">{{ t('editor.delete') }}</span>
       </AlertDialogTrigger>
     </Tooltip>
     <AlertDialogPortal>

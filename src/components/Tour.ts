@@ -25,16 +25,6 @@ function DriverJsInit() {
           description: 'This app is under development. Navigate the tutorial using the arrow keys. You can replay it from the settings.',
         }
       },
-      // {
-      //   element: '.DataBaseTitle',
-      //   popover: {
-      //     title: 'Project Name',
-      //     description: 'Here you can edit the name of the local database (DB).',
-      //     side: 'bottom',
-      //     align: 'center'
-      //   }
-      // },
-
       {
         element: '.create_project',
         popover: {

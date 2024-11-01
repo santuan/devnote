@@ -1,4 +1,7 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
 import { Plus } from "lucide-vue-next";
@@ -30,5 +33,6 @@ function new_document() {
     <Plus
       class="size-4"
     />
+    <span class="sr-only">{{ t('sidebar.newDocument') }}</span>
   </button>
 </template>

@@ -57,7 +57,7 @@ onMounted(() => {
           <SunMedium
             class="absolute transition-all duration-300 scale-0 rotate-90 size-4 dark:rotate-0 dark:scale-100"
           />
-          <span class="sr-only">Modo de color</span>
+          <span class="sr-only">{{ t('settings.theme') }}</span>
         </span>
       </Tooltip>
     </DropdownMenuTrigger>

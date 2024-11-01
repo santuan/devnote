@@ -94,6 +94,7 @@ function toggleFixed(item, isFixed) {
             class="-rotate-45 size-4" 
             :class="props.data.project_data?.fixed ? 'fill-current text-primary' : ''"
           />
+          <span class="sr-only">{{ props.data.project_data?.fixed ? t('verb.unfixed') : t('verb.fixed') }}</span>
         </button>
       </div>
     </Tooltip>
@@ -138,14 +139,7 @@ function toggleFixed(item, isFixed) {
         </AlertDialogContent>
       </AlertDialogPortal>
     </AlertDialogRoot>
-    <input
-      type="checkbox"
-      :id="'todo-' + props.data.id"
-      :checked="props.data.project_data?.checked"
-      class="w-0 opacity-0 peer"
-      required=""
-      @change="toggleCheck(props.data, $event.target.checked)"
-    >
+   
     <Tooltip
       side="right"
       :align="'end'"
@@ -156,6 +150,16 @@ function toggleFixed(item, isFixed) {
         class="flex items-center justify-center rounded-full relative z-[50] mr-0.5 peer-focus:ring-1 peer-focus:ring-primary size-7 md:size-6 shrink-0 peer-checked:border-blue-600 hover:text-primary peer-checked:text-primary hover:bg-secondary/20"
       >
         <Circle class="size-5 md:size-4" />
+        <input
+          type="checkbox"
+          :id="'todo-' + props.data.id"
+          :checked="props.data.project_data?.checked"
+          class="w-0 opacity-0 peer"
+          required
+          :aria-label="t('sidebar.markAsDone')"
+          @change="toggleCheck(props.data, $event.target.checked)"
+        >
+        <span class="sr-only">{{ t('sidebar.markAsDone') }}</span>
       </label>
     </Tooltip>
   </div>

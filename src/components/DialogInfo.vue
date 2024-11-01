@@ -44,6 +44,7 @@ whenever(magicAbout, (n) => {
         class="flex items-center justify-center border interactive border-secondary hover:bg-secondary/80 bg-background size-8"
       >
         <CircleHelp class="size-4" />
+        <span class="sr-only">{{ t('sidebar.about') }}</span>
       </DialogTrigger>
     </Tooltip>
     <DialogPortal>

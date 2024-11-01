@@ -8,7 +8,8 @@
     "untitled": "Item sin título",
     "save": "Guardar documento",
     "delete": "Eliminar documento",
-    "deleteConfirm": "Esta acción no tiene vuelta atrás"
+    "deleteConfirm": "Esta acción no tiene vuelta atrás",
+    "copyToClipboard": "Copiar código"
   },
   "toolbar": {
     "undo": "Deshacer",

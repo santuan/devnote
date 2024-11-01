@@ -51,6 +51,7 @@
           v-show="copyText !== 'Copied'"
           class="size-4"
         />
+        <span class="sr-only">Copy to clipboard</span>
       </button>
       <button
         class="flex items-center justify-center duration-100 size-6 bg-secondary shrink-0"

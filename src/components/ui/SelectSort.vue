@@ -37,6 +37,7 @@ const sortOption = useStorage("sortItemsBy", "name");
     >
       <SelectValue placeholder="Seleccionar" />
       <ChevronDown class="h-3.5 w-3.5" />
+      <span class="sr-only">{{ t('sidebar.sort.sort') }}</span>
     </SelectTrigger>
     <SelectPortal>
       <SelectContent

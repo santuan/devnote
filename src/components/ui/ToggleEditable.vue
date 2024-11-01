@@ -27,6 +27,7 @@ const counter = useCounterStore();
         class="size-4"
         v-show="!counter.content_editable"
       />
+      <span class="sr-only">{{ counter.content_editable ? t('sidebar.contentPreview') : t('sidebar.contentEditable') }}</span>
     </button>
   </Tooltip>
 </template>

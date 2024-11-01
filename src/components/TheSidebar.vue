@@ -1,10 +1,11 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 import SidebarTop from "@/components/SidebarTop.vue";
 import SidebarProjects from "@/components/SidebarProjects.vue";
 import SidebarBottom from "./SidebarBottom.vue";
 import { useCounterStore } from "@/stores/counter";
 const counter = useCounterStore();
-
 import { useDropZone } from "@vueuse/core";
 import { shallowRef, watch } from "vue";
 const dropZoneRef = shallowRef();
@@ -31,6 +32,8 @@ watch(isOverDropZone, (v) => {
       v-show="counter.showProjects"
       @click="counter.showProjects = !counter.showProjects"
       class="fixed inset-0 !z-50 bg-background/90 !border-0 !ring-0 !outline-none lg:hidden"
-    />
+    >
+      <span class="sr-only">{{ t('verb.close') }} panel</span>
+    </button>
   </div>
 </template>

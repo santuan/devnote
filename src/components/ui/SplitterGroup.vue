@@ -75,6 +75,7 @@ function collapseAllScreen() {
           :class="panelRef?.isCollapsed ? 'rotate-180' : ''"
         >
           <ArrowRightToLine class="delay-75 size-4 opacity-90" />
+          <span class="sr-only">{{ panelRef?.isCollapsed ? 'Collapse' : 'Expand' }} - Holding ctrl and click also toggle menu</span>
         </button>
       </Tooltip>
     </SplitterResizeHandle>

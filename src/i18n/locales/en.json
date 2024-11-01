@@ -8,7 +8,8 @@
     "untitled": "Untitled item",
     "save": "Save document",
     "delete": "Delete document",
-    "deleteConfirm": "This action cannot be undone"
+    "deleteConfirm": "This action cannot be undone",
+    "copyToClipboard": "Copy code to clipboard"
   },
   "toolbar": {
     "undo": "Undo",

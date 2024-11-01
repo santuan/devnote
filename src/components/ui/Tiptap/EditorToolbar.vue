@@ -131,6 +131,7 @@ function setVideo() {
         :disabled="!editor.can().chain().focus().undo().run()"
       >
         <Undo2 class="size-4" />
+        <span class="sr-only">{{ t('toolbar.undo') }}</span>
       </button>
     </Tooltip>
     <Tooltip
@@ -143,6 +144,7 @@ function setVideo() {
         :disabled="!editor.can().chain().focus().redo().run()"
       >
         <Redo2 class="size-4" />
+        <span class="sr-only">{{ t('toolbar.redo') }}</span>
       </button>
     </Tooltip>
    
@@ -157,6 +159,7 @@ function setVideo() {
           >
             <ImagePlus class="size-4" />
           </span>
+          <span class="sr-only">{{ t('toolbar.add') }} {{ t('toolbar.image') }}</span>
         </Tooltip>
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -180,6 +183,7 @@ function setVideo() {
               type="file"
               accept="image/jpeg"
               class="absolute inset-0 opacity-0"
+              :aria-label="`${t('verb.add')} Base64 ${t('toolbar.image')}`"
               @change="addImageBase64"
             >
           </label>
@@ -190,6 +194,7 @@ function setVideo() {
         >
           <ImageDown class="size-4" />
           Url
+          <span class="sr-only">{{ t('toolbar.add') }} {{ t('toolbar.image') }} url</span>
         </DropdownMenuItem>
         <DropdownMenuArrow />
       </DropdownMenuContent>
@@ -203,6 +208,7 @@ function setVideo() {
         class="flex items-center justify-center outline-none interactive size-8 focus-visible:border-primary border-secondary"
       >
         <Youtube class="size-4" />
+        <span class="sr-only">{{ t('verb.add') }} Youtube video</span>
       </button>
     </Tooltip>
     <Tooltip
@@ -214,6 +220,7 @@ function setVideo() {
         @click="setVideo()"
       >
         <Video class="size-4" />
+        <span class="sr-only">{{ t('verb.add') }} video URL</span>
       </button>
     </Tooltip>
 
@@ -311,6 +318,7 @@ function setVideo() {
           class="interactive"
         >
           <Bold />
+          <span class="sr-only">{{ t('toolbar.bold') }}</span>
         </button>
       </Tooltip>
       <Tooltip
@@ -325,6 +333,7 @@ function setVideo() {
           class="interactive"
         >
           <Italic />
+          <span class="sr-only">{{ t('toolbar.italic') }}</span>
         </button>
       </Tooltip>
       <Tooltip
@@ -339,6 +348,7 @@ function setVideo() {
           class="interactive"
         >
           <Strikethrough />
+          <span class="sr-only">{{ t('toolbar.strike') }}</span>
         </button>
       </Tooltip>
       <Tooltip
@@ -355,6 +365,7 @@ function setVideo() {
           <span class="flex items-center justify-center text-xs rounded size-5 bg-secondary/30 text-inherit">
             A
           </span>
+          <span class="sr-only">{{ t('toolbar.code') }}</span>
         </button>
       </Tooltip>
       <Tooltip
@@ -368,6 +379,7 @@ function setVideo() {
           class="interactive"
         >
           <Code />
+          <span class="sr-only">{{ t('toolbar.codeBlock') }}</span>
         </button>
       </Tooltip>
 
@@ -406,7 +418,7 @@ function setVideo() {
           >
             <div class="flex items-center justify-start gap-3 p-1">
               <AlignLeft class="size-4" />
-              <span>{{ t('toolbar.alignLeft') }}</span>
+              <span class="sr-only">{{ t('toolbar.alignLeft') }}</span>
             </div>
             <kbd class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium text-muted-foreground opacity-100">
               Ctrl Shift L
@@ -419,7 +431,7 @@ function setVideo() {
           >
             <div class="flex items-center justify-start gap-3 p-1">
               <AlignCenter class="size-4" />
-              <span>{{ t('toolbar.alignCenter') }}</span>
+              <span class="sr-only">{{ t('toolbar.alignCenter') }}</span>
             </div>
             <kbd class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium text-muted-foreground opacity-100">
               Ctrl Shift E
@@ -432,7 +444,7 @@ function setVideo() {
           >
             <div class="flex items-center justify-start gap-3 p-1">
               <AlignRight class="size-4" />
-              <span>{{ t('toolbar.alignRight') }}</span>
+              <span class="sr-only">{{ t('toolbar.alignRight') }}</span>
             </div>
             <kbd class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium text-muted-foreground opacity-100">
               Ctrl Shift R
@@ -445,7 +457,7 @@ function setVideo() {
           >
             <div class="flex items-center justify-start gap-3 p-1">
               <AlignJustify class="size-4" />
-              <span>{{ t('toolbar.alignJustify') }}</span>
+              <span class="sr-only">{{ t('toolbar.alignJustify') }}</span>
             </div>
             <kbd class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium text-muted-foreground opacity-100">
               Ctrl Shift J
@@ -457,7 +469,7 @@ function setVideo() {
           >
             <div class="flex items-center justify-start gap-3 p-1">
               <SquareMinus class="size-4" />
-              <span>{{ t('toolbar.noAlignment') }}</span>
+              <span class="sr-only">{{ t('toolbar.noAlignment') }}</span>
             </div>
             <kbd class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-muted px-1.5 font-mono text-[8px] font-medium ml-auto text-muted-foreground opacity-100">
               Ctrl Shift L
@@ -477,6 +489,7 @@ function setVideo() {
           class="interactive"
         >
           <List />
+          <span class="sr-only">{{ t('toolbar.bulletList') }}</span>
         </button>
       </Tooltip>
       <Tooltip
@@ -490,6 +503,7 @@ function setVideo() {
           class="interactive"
         >
           <ListOrdered />
+          <span class="sr-only">{{ t('toolbar.orderedList') }}</span>
         </button>
       </Tooltip>
 
@@ -504,6 +518,7 @@ function setVideo() {
           class="interactive"
         >
           <Quote />
+          <span class="sr-only">{{ t('toolbar.quote') }}</span>
         </button>
       </Tooltip>
       <Tooltip
@@ -515,6 +530,7 @@ function setVideo() {
           class="interactive"
         >
           <Minus />
+          <span class="sr-only">{{ t('toolbar.separator') }}</span>
         </button>
       </Tooltip>
       <Tooltip
@@ -527,6 +543,7 @@ function setVideo() {
           class="interactive"
         >
           <Link2 class="-rotate-45" />
+          <span class="sr-only">{{ t('toolbar.link') }}</span>
         </button>
       </Tooltip>
       <Tooltip
@@ -539,6 +556,7 @@ function setVideo() {
           class="interactive"
         >
           <Unlink2 class="-rotate-45" />
+          <span class="sr-only">{{ t('toolbar.unlink') }}</span>
         </button>
       </Tooltip>
       <Tooltip
@@ -550,6 +568,7 @@ function setVideo() {
           class="interactive"
         >
           <RemoveFormatting />
+          <span class="sr-only">{{ t('toolbar.unsetAllMarks') }}</span>
         </button>
       </Tooltip>
       <Tooltip
@@ -561,6 +580,7 @@ function setVideo() {
           class="interactive"
         >
           <Eraser />
+          <span class="sr-only">{{ t('toolbar.clearNodes') }}</span>
         </button>
       </Tooltip>
     </template>

@@ -90,12 +90,16 @@ const results = computed(() => {
         class="relative flex items-center justify-between w-full bg-secondary/30 h-8 col-span-2 border hover:border-primary focus-within:border-primary border-secondary overflow-hidden"
       >
         <Search class="absolute top-0 left-0 ml-2 h-7 size-3 text-foreground/40" />
-        <input
-          ref="focusSearch"
-          v-model="searchTerm"
-          :placeholder="`${t('sidebar.search')}`"
-          class="px-1 text-xs outline-none pl-7 h-7 bg-transparent  placeholder:text-xs placeholder:text-foreground/40"
-        >
+        <label>
+
+          <input
+            ref="focusSearch"
+            v-model="searchTerm"
+            :placeholder="`${t('sidebar.search')}`"
+            class="px-1 text-xs outline-none pl-7 h-7 bg-transparent  placeholder:text-xs placeholder:text-foreground/40"
+          >
+          <span class="sr-only">{{ t('sidebar.search') }}</span>
+        </label>
         <span
           v-if="!searchTerm"
           class="absolute top-[2.875px] right-[1.25px] flex items-center justify-center h-[25px] scale-90 mr-0.5 text-xs w-7"
