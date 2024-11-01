@@ -14,7 +14,7 @@ import { useI18n } from 'vue-i18n';
 export const useCounterStore = defineStore("counter", () => {
   const status = shallowRef("LOADING");
   const loaded_id = shallowRef("");
-  const file_name = shallowRef("MyLocalDB");
+  const file_name = shallowRef("My IndexedDB");
   const project_name = shallowRef("");
   const project_body = shallowRef("");
   const project_checked = shallowRef(null);
