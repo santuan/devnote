@@ -181,7 +181,7 @@ onBeforeUnmount(() => {
         >
           <div
             v-if="!toolbar"
-            class="flex items-center justify-start px-4 pt-3"
+            class="flex items-center justify-start px-4 pt-[1.1135rem]"
           >
             <slot />
           </div>

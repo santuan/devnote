@@ -36,7 +36,7 @@ npm run preview
 
 ## Disclaimer: This is way beyond my understanding :)
 
-### Developer mode on StackBlitz
+### Developer mode on StackBlitz (Experimental)
 
 <a href="https://stackblitz.com/~/github.com/santuan/devnote?startScript=devnote">
   <img
@@ -45,16 +45,17 @@ npm run preview
   />
 </a>
 
+<br/>
 
 ### Production mode on StackBlitz
 
-This add to the StackBlitz url  `?startScript=devnote` 
-
+Add `?startScript=devnote` to the StackBlitz url  
 
 
 `https://stackblitz.com/~/github.com/santuan/devnote?startScript=devnote`
 
 
+<br/>
 
 <a href="https://stackblitz.com/~/github.com/santuan/devnote?startScript=devnote">
   <img
@@ -63,18 +64,15 @@ This add to the StackBlitz url  `?startScript=devnote`
   />
 </a>
 
+<br/>
 
-Open in new tab and `connect to project`,  then i suppose an indexdedDb is created on your personal Stackblitz own container in your browser.
+Search for the `Open in a new tab` button and then click `connect to project` on the new created tab.
 
+After that I suppose an indexdedDb is created on your Stackblitz session with it's own container in your own browser.
 
-> And as far as i now that url is generated something like this
+Something like this:
 
-
-`https://devnote-????--4173--????????.[this i don't now].webcontainer.io/`
-
-
-
-
+`https://devnote-????--4173--????????.[this i don't now how is generated].webcontainer.io/`
 
 ## ** Frontend && Backend **
 

@@ -26,7 +26,7 @@ const counter = useCounterStore();
           spellcheck="false"
           v-model="counter.project_name"
           style="field-sizing: content"
-          class="w-full px-2 py-0.5 overflow-visible border outline-none resize-none min-h-8 create_project bg-secondary/30 text-foreground border-secondary focus-within:border-primary placeholder:text-foreground/50 hover:border-primary"
+          class="w-full px-2 py-0.5 overflow-visible border outline-none resize-none leading-8 min-h-8 create_project bg-secondary/30 text-foreground border-secondary focus-within:border-primary placeholder:text-foreground/50 hover:border-primary"
         />
       </div>
     </Editor>
