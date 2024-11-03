@@ -1,5 +1,6 @@
 <script setup>
 import ToggleTheme from "@/components/ui/ToggleTheme.vue";
+import ToggleFontSize from "./ui/ToggleFontSize.vue";
 import Tooltip from "@/components/ui/Tooltip.vue";
 import DialogInfo from "@/components/DialogInfo.vue";
 import ToggleEditable from "./ui/ToggleEditable.vue";
@@ -67,12 +68,13 @@ whenever(magicPreview, () => {
     </button>
     <div
       class="grid "
-      :class="counter.showProjects ? 'grid-cols-6 gap-0.5' : ' grid-cols-1 gap-1 mt-1'"
+      :class="counter.showProjects ? 'grid-cols-7 gap-0.5' : ' grid-cols-1 gap-1 mt-1'"
     >
       <DialogInfo v-if="counter.showProjects" />
       <ButtonCreateDocumentCollapse v-if="!counter.showProjects" />
       <DialogSettings />
       <ToggleTheme />
+      <ToggleFontSize />
       <DialogCommandMenu />
       <ToggleEditable />
       <Tooltip
@@ -93,13 +95,20 @@ whenever(magicPreview, () => {
         </button>
       </Tooltip>
     </div>
-    <button
-      @click="counter.showProjects = !counter.showProjects"
-      v-show="!counter.showProjects"
-      class="absolute flex flex-col justify-end items-center z-10 inset-1 py-2 md:py-5 bottom-2 hover:!border-1 top-[220px]"
+    <Tooltip
+      v-if="!counter.showProjects"
+      name="Abrir menú"
+      :align="'start'"
+      side="top"
     >
-      <ArrowRightToLine class="mx-auto duration-100 opacity-25 size-4 group-hover:opacity-90" />
-      <span class="sr-only">{{ t('verb.close') }} panel</span>
-    </button>
+      <button
+        @click="counter.showProjects = !counter.showProjects"
+       
+        class="absolute flex flex-col justify-end items-center z-10 inset-1 py-2 md:py-5 bottom-2 hover:!border-1 top-[18.5rem]"
+      >
+        <ArrowRightToLine class="mx-auto duration-100 opacity-25 size-4 group-hover:opacity-90" />
+        <span class="sr-only">{{ t('verb.close') }} panel</span>
+      </button>
+    </Tooltip>
   </div>
 </template>

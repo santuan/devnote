@@ -70,6 +70,8 @@
     "system": "System",
     "language": "Language",
     "languageDescription": "Select the language of the aplication.",
+    "fontsize": "Font size",
+    "fontsizeDescription": "Toggle the size of the application",
     "cursor": "Mouse cursor",
     "cursorDescription": "Change the mouse cursor to pointer or arrow.",
     "tour": "Tutorial",
@@ -82,6 +84,8 @@
     "initWithData": "Initialize DB with data.",
     "initWithDataDescription": "When this option is enabled, the database starts with a sample document.",
     "attention": "Atention!",
+    "database": "Database!",
+    "perspective": "Perspective!",
     "deleteDB": "Delete database from indexdedDB."
   },
   "importDB": {

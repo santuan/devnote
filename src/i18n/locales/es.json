@@ -70,6 +70,8 @@
     "system": "Sistema",
     "language": "Lenguaje",
     "languageDescription": "Selecciona el lenguaje de la aplicación",
+    "fontsize": "Tamaño de tipografía",
+    "fontsizeDescription": "Alterna el tamaño de la tipografía",
     "cursor": "Cursor del mouse",
     "cursorDescription": "Activa o desactiva la manito en el cursor del mouse.",
     "tour": "Tutorial",
@@ -82,6 +84,8 @@
     "initWithData": "Iniciar DB con info",
     "initWithDataDescription": " Cuando la opción está activada la base se inicia con un documento de ejemplo.",
     "attention": "Atention!",
+    "database": "Base de datos!",
+    "perspective": "Perspectiva!",
     "deleteDB": "Eliminar base de datos de indexdedDB"
   },
   "importDB": {

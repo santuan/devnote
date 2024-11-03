@@ -159,7 +159,7 @@ function setVideo() {
           >
             <ImagePlus class="size-4" />
           </span>
-          <span class="sr-only">{{ t('toolbar.add') }} {{ t('toolbar.image') }}</span>
+          <span class="sr-only">{{ t('verb.add') }} {{ t('toolbar.image') }}</span>
         </Tooltip>
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -194,7 +194,7 @@ function setVideo() {
         >
           <ImageDown class="size-4" />
           Url
-          <span class="sr-only">{{ t('toolbar.add') }} {{ t('toolbar.image') }} url</span>
+          <span class="sr-only">{{ t('verb.add') }} {{ t('toolbar.image') }} url</span>
         </DropdownMenuItem>
         <DropdownMenuArrow />
       </DropdownMenuContent>

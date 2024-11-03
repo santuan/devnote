@@ -33,16 +33,17 @@ import {
   useStorage,
   useMagicKeys,
   whenever,
-  useMousePressed,
 } from '@vueuse/core';
 
 import ToggleTheme from './ui/ToggleTheme.vue';
+import ToggleFontSize from './ui/ToggleFontSize.vue';
 import { useSettingsStore } from '@/stores/settings';
 import DialogDeleteDB from './DialogDeleteDB.vue';
 import DriverJsInit from './Tour.ts';
+import LanguageSelector from './ui/LanguageSelector.vue';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
-import LanguageSelector from './ui/LanguageSelector.vue';
+
 const settings = useSettingsStore();
 
 const counter = useCounterStore();
@@ -97,13 +98,14 @@ if (window.matchMedia('(any-hover: none)').matches) {
         class="bg-background/95 backdrop-blur-sm data-[state=open]:animate-overlayShow fixed inset-0 z-[60]"
       />
       <DialogContent
-        class="md:data-[state=open]:animate-contentShow font-mono fixed top-6 md:top-[50%] left-[50%] max-h-[85vh] w-[98vw] max-w-[750px] translate-x-[-50%] md:translate-y-[-50%] bg-background rounded py-4 md:p-4 focus:outline-none z-[100]"
+        class="md:data-[state=open]:animate-contentShow font-mono fixed top-6 md:top-[50%] left-[50%] max-h-[85vh] w-[98vw] max-w-4xl translate-x-[-50%] md:translate-y-[-50%] bg-background rounded py-4 md:p-4 focus:outline-none z-[100]"
       >
         <DialogTitle
           class="text-foreground px-3 md:px-0 m-0 text-[17px] font-semibold"
         >
           {{ t('settings.title') }}
         </DialogTitle>
+        
         <DialogDescription
           class="mt-1 text-sm px-3 md:px-0 text-muted-foreground"
         >
@@ -117,6 +119,9 @@ if (window.matchMedia('(any-hover: none)').matches) {
           <ScrollAreaViewport class="w-full h-full">
             <article class="max-w-full p-3 mx-auto prose dark:prose-invert">
               <div class="grid gap-2">
+                <h4 class="mt-2 mb-0 text-xs text-primary">
+                  {{ t('settings.perspective') }} 
+                </h4>
                 <div
                   v-if="!isMobile"
                   class="flex-row items-start justify-between flex gap-3 pt-2 py-3 pr-3 "
@@ -178,6 +183,22 @@ if (window.matchMedia('(any-hover: none)').matches) {
                   </div>
                   <ToggleTheme />
                 </div>
+                <div
+                  class="flex flex-row items-start justify-between py-3 pr-3 border-t border-secondary "
+                >
+                  <div class="space-y-0.5">
+                    <h3 class="text-sm font-medium text-pretty mt-0">
+                      {{ t('settings.fontsize') }}
+                    </h3>
+                    <p class="text-xs text-muted-foreground text-balance">
+                      {{ t('settings.fontsizeDescription') }}
+                    </p>
+                  </div>
+                  <div class="flex gap-2">
+                    <ToggleFontSize />
+                  </div>
+                </div>
+                
 
                 <div
                   class="flex flex-row items-start justify-between py-3 pr-3 border-t border-secondary "
@@ -194,7 +215,9 @@ if (window.matchMedia('(any-hover: none)').matches) {
                     <LanguageSelector />
                   </div>
                 </div>
-
+                <h4 class="mt-2 mb-0 text-xs text-primary">
+                  {{ t('settings.database') }} 
+                </h4>
                 <div
                   class="flex flex-row items-start justify-between gap-3 pt-2 py-3 pr-3 border-t border-secondary"
                 >
