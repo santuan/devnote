@@ -207,3 +207,11 @@ Accessible components using Radix Vue.
 
 *   Have fun 🤓
 
+
+
+### Fix Eslint and tailwind warning on vscode.
+
+When using @apply (kind of its own language) eslint gives a warning.
+
+.vscode > settings.json
+.vscode > tailwind.json
