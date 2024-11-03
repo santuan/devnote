@@ -1,4 +1,5 @@
-`Status playground - Use only for testing or learning purposes`
+`Status playground - Disclaimer: I'm learning Vue 😊.
+That said - Feel free to use it for testing and learning purposes`
 
 ## Intro
 
@@ -11,34 +12,6 @@ git clone https://github.com/santuan/devnote
 npm install
 ```
 
-#### Developer mode
-```bash\"
-npm run dev
-```
-
-<a href="https://stackblitz.com/~/github.com/santuan/devnote?startScript=devnote">
-  <img
-    alt="Open in StackBlitz in developer mode"
-    src="https://developer.stackblitz.com/img/open_in_stackblitz.svg"
-  />
-</a>
-
-#### Production mode
-
-```bash\"
-npm run build
-npm run preview
-```
-
-Add to the StackBlitz url  `?startScript=devnote` 
-
-<a href="https://stackblitz.com/~/github.com/santuan/devnote?startScript=devnote">
-  <img
-    alt="Open in StackBlitz in production mode"
-    src="https://developer.stackblitz.com/img/open_in_stackblitz_small.svg"
-  />
-</a>
-
 ```bash\"
 "scripts": {
     "dev": "vite",
@@ -49,8 +22,61 @@ Add to the StackBlitz url  `?startScript=devnote`
   },
 ```
 
+### Developer mode
+```bash\"
+npm run dev
+```
 
-## **Libraries**
+### Production mode
+
+```bash\"
+npm run build
+npm run preview
+```
+
+## Disclaimer: This is way beyond my understanding :)
+
+### Developer mode on StackBlitz
+
+<a href="https://stackblitz.com/~/github.com/santuan/devnote?startScript=devnote">
+  <img
+    alt="Open in StackBlitz in developer mode"
+    src="https://developer.stackblitz.com/img/open_in_stackblitz.svg"
+  />
+</a>
+
+
+### Production mode on StackBlitz
+
+This add to the StackBlitz url  `?startScript=devnote` 
+
+
+
+`https://stackblitz.com/~/github.com/santuan/devnote?startScript=devnote`
+
+
+
+<a href="https://stackblitz.com/~/github.com/santuan/devnote?startScript=devnote">
+  <img
+    alt="Open in StackBlitz in production mode"
+    src="https://developer.stackblitz.com/img/open_in_stackblitz_small.svg"
+  />
+</a>
+
+
+Open in new tab and `connect to project`,  then i suppose an indexdedDb is created on your personal Stackblitz own container in your browser.
+
+
+> And as far as i now that url is generated something like this
+
+
+`https://devnote-????--4173--????????.[this i don't now].webcontainer.io/`
+
+
+
+
+
+## ** Frontend && Backend **
 
 ### **Backend**
 
@@ -165,7 +191,7 @@ Accessible components using Radix Vue.
 *   `Arrow keys` Move with arrow keys in menus and dropdowns (e.g., theme selector)
     
 
-## Little big details 🤓
+## Little big details 
 
 *   Favicon changes with color theme.
     
@@ -179,5 +205,5 @@ Accessible components using Radix Vue.
     
 *   And more things that i can remember right now...
 
-*   Have fun
+*   Have fun 🤓
 
