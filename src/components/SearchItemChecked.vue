@@ -44,22 +44,27 @@ function toggleCheck(item, isChecked) {
       side="right"
       :align="'end'"
     >
-      <label
-        :for="'todook-' + props.data?.id"
-        class="flex items-center justify-center rounded-full relative z-[50] mr-0.5 peer-focus:ring-1 peer-focus:ring-primary size-7 md:size-6 shrink-0 peer-checked:border-blue-600 hover:text-primary peer-checked:text-primary hover:bg-secondary/20"
-      >
-        <CircleOff class="size-5 md:size-4" />
-        <input
-          type="checkbox"
-          :id="'todook-' + props.data?.id"
-          :checked="props.data?.project_data.checked"
-          class="w-0 opacity-0 peer"
-          required
-          :aria-label="t('sidebar.markAsUndone')"
-          @change="toggleCheck(props.data, $event.target.checked)"
+      <span>
+        <label
+          :for="'todook-' + props.data?.id"
+          class=""
         >
-        <span class="sr-only">{{ t('sidebar.markAsUndone') }}</span>
-      </label>
+          <input
+            type="checkbox"
+            :id="'todook-' + props.data?.id"
+            :checked="props.data?.project_data.checked"
+            class="sr-only peer"
+            required
+            :aria-label="t('sidebar.markAsUndone')"
+            @change="toggleCheck(props.data, $event.target.checked)"
+          >
+          <div class="peer-focus:outline-none items-center size-7 md:size-6 flex justify-center rounded-full relative z-[50] mr-0.5 peer-focus:ring-1 peer-focus:ring-blue-300 dark:peer-focus:ring-primary">
+            <CircleOff class="size-5 md:size-4" />
+          </div>
+       
+          <span class="sr-only">{{ t('sidebar.markAsUndone') }}</span>
+        </label>
+      </span>
     </Tooltip>
   </div>
 </template>

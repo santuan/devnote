@@ -91,7 +91,7 @@ function toggleFixed(item, isFixed) {
           :class="props.data.project_data?.fixed ? '!block' : ''"
         >
           <Pin
-            class="-rotate-45 size-4" 
+            class="-rotate-45 size-4"
             :class="props.data.project_data?.fixed ? 'fill-current text-primary' : ''"
           />
           <span class="sr-only">{{ props.data.project_data?.fixed ? t('verb.unfixed') : t('verb.fixed') }}</span>
@@ -111,7 +111,9 @@ function toggleFixed(item, isFixed) {
     <AlertDialogRoot v-model:open="showAlertDialog">
       <AlertDialogPortal>
         <AlertDialogOverlay class="fixed inset-0 z-[999] bg-black/50" />
-        <AlertDialogContent class="md:data-[state=open]:animate-contentShow fixed z-[999] w-[95vw] max-w-md rounded-lg p-4 md:w-full top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-background text-foreground border border-secondary font-mono">
+        <AlertDialogContent
+          class="md:data-[state=open]:animate-contentShow fixed z-[999] w-[95vw] max-w-md rounded-lg p-4 md:w-full top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-background text-foreground border border-secondary font-mono"
+        >
           <AlertDialogTitle class="text-sm font-medium">
             Cambios sin guardar
           </AlertDialogTitle>
@@ -128,39 +130,67 @@ function toggleFixed(item, isFixed) {
               </button>
             </AlertDialogAction>
             <AlertDialogCancel as-child>
-              <button class="bg-secondary ring-1 !ring-secondary text-foreground hover:bg-background hover:ring-2 hover:ring-foreground inline-flex h-[35px] items-center justify-center rounded-[4px] px-3 text-xs font-semibold leading-none focus-visible:ring-2 focus:outline-foreground">
+              <button
+                class="bg-secondary ring-1 !ring-secondary text-foreground hover:bg-background hover:ring-2 hover:ring-foreground inline-flex h-[35px] items-center justify-center rounded-[4px] px-3 text-xs font-semibold leading-none focus-visible:ring-2 focus:outline-foreground"
+              >
                 Continuar editando
               </button>
             </AlertDialogCancel>
           </div>
-          <AlertDialogCancel class="absolute top-0 size-6 flex justify-center items-center m-3 right-0 z-[999] text-foreground">
+          <AlertDialogCancel
+            class="absolute top-0 size-6 flex justify-center items-center m-3 right-0 z-[999] text-foreground"
+          >
             <X class="size-4" />
           </AlertDialogCancel>
         </AlertDialogContent>
       </AlertDialogPortal>
     </AlertDialogRoot>
-   
+
     <Tooltip
       side="right"
       :align="'end'"
       :name="t('sidebar.markAsDone')"
     >
-      <label
-        :for="'todo-' + props.data.id"
-        class="flex items-center justify-center rounded-full relative z-[50] mr-0.5 peer-focus:ring-1 peer-focus:ring-primary size-7 md:size-6 shrink-0 peer-checked:border-blue-600 hover:text-primary peer-checked:text-primary hover:bg-secondary/20"
-      >
-        <Circle class="size-5 md:size-4" />
-        <input
-          type="checkbox"
-          :id="'todo-' + props.data.id"
-          :checked="props.data.project_data?.checked"
-          class="w-0 opacity-0 peer"
-          required
-          :aria-label="t('sidebar.markAsDone')"
-          @change="toggleCheck(props.data, $event.target.checked)"
+      <span>
+        <label
+          :for="'todo-' + props.data.id"
+          class=""
         >
-        <span class="sr-only">{{ t('sidebar.markAsDone') }}</span>
-      </label>
+          <input
+            type="checkbox"
+            :id="'todo-' + props.data.id"
+            :checked="props.data.project_data?.checked"
+            required
+            class="sr-only peer"
+            :aria-label="t('sidebar.markAsDone')"
+            @change="toggleCheck(props.data, $event.target.checked)"
+          >
+          <!-- <div class="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600" /> -->
+          <div class="peer-focus:outline-none items-center size-7 md:size-6 flex justify-center rounded-full relative z-[50] mr-0.5 peer-focus:ring-1 peer-focus:ring-blue-300 dark:peer-focus:ring-primary">
+
+            <Circle
+              class="size-5 md:size-4 "
+            />
+          </div>
+          <span class="sr-only">{{ t('sidebar.markAsDone') }}</span>
+        </label>
+        <!-- <label
+          :for="'todo-' + props.data.id"
+          class="flex items-center justify-center rounded-full relative z-[50] mr-0.5 peer-focus:ring-1 peer-focus:ring-primary size-7 md:size-6 shrink-0 peer-checked:border-blue-600 hover:text-primary peer-checked:text-primary hover:bg-secondary/20"
+          
+        >
+          <Circle class="size-5 md:size-4" />
+          <input
+            type="checkbox"
+            :id="'todo-' + props.data.id"
+            :checked="props.data.project_data?.checked"
+            required
+            :aria-label="t('sidebar.markAsDone')"
+            @change="toggleCheck(props.data, $event.target.checked)"
+          >
+          <span class="sr-only">{{ t('sidebar.markAsDone') }}</span>
+        </label> -->
+      </span>
     </Tooltip>
   </div>
 </template>
