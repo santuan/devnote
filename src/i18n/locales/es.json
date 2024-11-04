@@ -143,8 +143,8 @@
     "done": "Comenzar"
   },
   "verb": {
-    "open": "abrir",
-    "close": "cerrar",
+    "open": "Abrir",
+    "close": "Cerrar",
     "cancel": "Cancelar",
     "search": "Buscar",
     "delete": "Eliminar",

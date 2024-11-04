@@ -55,8 +55,14 @@ const focusEditor = () => {
   nextTick(() => {
     editor.value.commands.focus()
   });
-
 };
+
+function showSettings() {
+  close()
+  setTimeout(() => {
+    counter.showSettings = true
+  }, 100);
+}
 
 </script>
 
@@ -145,6 +151,13 @@ const focusEditor = () => {
                 class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
                 <span>{{ t('settings.export') }}</span>
+              </ComboboxItem>
+              <ComboboxItem
+                :value="`${t('verb.open')} ${t('settings.title')}`"
+                @select="showSettings()"
+                class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
+              >
+                <span> {{ t('verb.open') }} {{ t('settings.title') }}</span>
               </ComboboxItem>
             </ComboboxGroup>
           </ComboboxContent>
