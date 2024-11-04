@@ -111,7 +111,11 @@
     "offlineReady": "Aplicación lista para trabajar sin conexión",
     "newVersionAvailable": "Nueva versión disponible",
     "updateButton": "Actualizar",
-    "clickToUpdate": "Click para actualizar"
+    "clickToUpdate": "Click para actualizar",
+    "unsavedChanges": "Cambios sin guardar",
+    "unsavedChangesDescription": " El documento actual tiene cambios sin guardar. ¿Quieres continuar y descartar los cambios?",
+    "discardChanges": " Descartar cambios",
+    "continueEditing": "Continuar editando"
   },
   "tour": {
     "tutorialTitle": "Tutorial 👋",

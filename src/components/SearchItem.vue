@@ -21,7 +21,7 @@ import {
 } from "radix-vue";
 
 const counter = useCounterStore();
-const { loaded_id } = storeToRefs(counter);
+const { loaded_id, editor } = storeToRefs(counter);
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const largerThanLg = breakpoints.greater("lg");
 
@@ -72,6 +72,11 @@ function toggleFixed(item, isFixed) {
   counter.change_project_fixed(item, isFixed);
 }
 
+function focusEditor() {
+  showAlertDialog.value = false
+  editor?.value.commands.focus()
+}
+
 </script>
 
 <template>
@@ -115,10 +120,10 @@ function toggleFixed(item, isFixed) {
           class="md:data-[state=open]:animate-contentShow fixed z-[999] w-[95vw] max-w-md rounded-lg p-4 md:w-full top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-background text-foreground border border-secondary font-mono"
         >
           <AlertDialogTitle class="text-sm font-medium">
-            Cambios sin guardar
+            {{ t('message.unsavedChanges') }}
           </AlertDialogTitle>
           <AlertDialogDescription class="mt-2 mb-5 text-xs">
-            El documento actual tiene cambios sin guardar. ¿Quieres continuar y descartar los cambios?
+            {{ t('message.unsavedChangesDescription') }}
           </AlertDialogDescription>
           <div class="flex justify-between gap-x-2">
             <AlertDialogAction as-child>
@@ -126,16 +131,15 @@ function toggleFixed(item, isFixed) {
                 @click="set_document(selectedId)"
                 class="bg-red-600  text-white hover:bg-red-800  outline-none inline-flex ring-0  hover:ring-2 ring-red-600 h-[35px] items-center justify-center rounded-[4px] px-3 text-xs font-semibold leading-none focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
-                Descartar cambios
+                {{ t('message.discardChanges') }}
               </button>
             </AlertDialogAction>
-            <AlertDialogCancel as-child>
-              <button
-                class="bg-secondary ring-1 !ring-secondary text-foreground hover:bg-background hover:ring-2 hover:ring-foreground inline-flex h-[35px] items-center justify-center rounded-[4px] px-3 text-xs font-semibold leading-none focus-visible:ring-2 focus:outline-foreground"
-              >
-                Continuar editando
-              </button>
-            </AlertDialogCancel>
+            <button
+              @click="focusEditor()"
+              class="bg-secondary ring-1 !ring-secondary text-foreground hover:bg-background hover:ring-2 hover:ring-foreground inline-flex h-[35px] items-center justify-center rounded-[4px] px-3 text-xs font-semibold leading-none focus-visible:ring-2 focus:outline-foreground"
+            >
+              {{ t('message.continueEditing') }}
+            </button>
           </div>
           <AlertDialogCancel
             class="absolute top-0 size-6 flex justify-center items-center m-3 right-0 z-[999] text-foreground"
