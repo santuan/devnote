@@ -3,18 +3,24 @@
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
-import { ref } from 'vue'
+import { ref, nextTick, } from 'vue'
 import {
-  ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxLabel, ComboboxRoot, DialogContent, DialogDescription, DialogOverlay, DialogPortal, DialogRoot, DialogTitle, DialogTrigger, VisuallyHidden } from 'radix-vue'
-import { useMagicKeys, whenever } from '@vueuse/core'
+  ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxLabel, ComboboxRoot, DialogContent, DialogDescription, DialogOverlay, DialogPortal, DialogRoot, DialogTitle, DialogTrigger, VisuallyHidden
+} from 'radix-vue'
+import { useMagicKeys, whenever, breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import Tooltip from "./Tooltip.vue";
 
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
 import { Search, X } from 'lucide-vue-next';
+const breakpoints = useBreakpoints(breakpointsTailwind);
+const largerThanLg = breakpoints.greater("lg");
+
+import { useIsMobile } from '@/composables/useIsMobile';
+const { isMobile } = useIsMobile();
 
 const counter = useCounterStore();
-const { allItemsTodo } = storeToRefs(counter);
+const { allItemsTodo, editor } = storeToRefs(counter);
 const open = ref(false)
 
 const keys = useMagicKeys();
@@ -40,6 +46,18 @@ function new_document() {
   open.value = false
 }
 
+const focusEditor = () => {
+  counter.content_editable = true;
+  close()
+  if (largerThanLg.value === false) {
+    counter.showProjects = false
+  }
+  nextTick(() => {
+    editor.value.commands.focus()
+  });
+
+};
+
 </script>
 
 <template>
@@ -60,7 +78,7 @@ function new_document() {
     <DialogPortal>
       <DialogOverlay class="bg-background/80 fixed inset-0 z-[90]" />
       <DialogContent
-        class="fixed top-[15%] left-[50%] max-h-[85vh] w-[90vw] max-w-[40rem] translate-x-[-50%] text-sm overflow-hidden border bg-background border-muted-foreground/30 focus:outline-none z-[100]"
+        class="fixed top-[1%] md:top-[15%] left-[50%] max-h-96 w-[90vw] max-w-4xl translate-x-[-50%] text-sm overflow-hidden border bg-background border-muted-foreground/30 focus:outline-none z-[100]"
       >
         <VisuallyHidden>
           <DialogTitle>{{ t('commandBar.title') }}</DialogTitle>
@@ -99,6 +117,14 @@ function new_document() {
               <ComboboxLabel class="px-4 text-muted-foreground font-semibold mt-3 mb-3 font-mono">
                 {{ t('commandBar.actions') }}
               </ComboboxLabel>
+              <ComboboxItem
+                :value="t('commandBar.focusEditor')"
+                v-if="!isMobile"
+                @select="focusEditor()"
+                class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
+              >
+                <span>{{ t('commandBar.focusEditor') }}</span>
+              </ComboboxItem>
               <ComboboxItem
                 :value="t('sidebar.newDocument')"
                 @select="new_document()"

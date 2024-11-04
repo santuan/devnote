@@ -99,7 +99,8 @@
     "title": "Barra de comandos bar",
     "description": "Buscar un comando",
     "documents": "Documentos",
-    "actions": "Acciones"
+    "actions": "Acciones",
+    "focusEditor": "Saltar al editor"
   },
   "message": {
     "databaseClearedWithExample": "Base de datos eliminada y se creó un documento de ejemplo",

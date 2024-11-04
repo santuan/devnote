@@ -99,7 +99,8 @@
     "title": "Command bar",
     "description": "Search for command",
     "documents": "Documents",
-    "actions": "Actions"
+    "actions": "Actions",
+    "focusEditor": "Jump to editor"
   },
   "message": {
     "databaseClearedWithExample": "Database deleted and a sample document was created.",

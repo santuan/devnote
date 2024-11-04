@@ -70,13 +70,9 @@ const toggleTour = () => {
   }, 300);
 };
 
-const isMobile = ref(false);
+import { useIsMobile } from '@/composables/useIsMobile';
 
-if (window.matchMedia('(any-hover: none)').matches) {
-  isMobile.value = true;
-} else {
-  isMobile.value = false;
-}
+const { isMobile } = useIsMobile();
 
 </script>
 
@@ -100,15 +96,11 @@ if (window.matchMedia('(any-hover: none)').matches) {
       <DialogContent
         class="md:data-[state=open]:animate-contentShow font-mono fixed top-6 md:top-[50%] left-[50%] max-h-[85vh] w-[98vw] max-w-4xl translate-x-[-50%] md:translate-y-[-50%] bg-background rounded py-4 md:p-4 focus:outline-none z-[100]"
       >
-        <DialogTitle
-          class="text-foreground px-3 md:px-0 m-0 text-[17px] font-semibold"
-        >
+        <DialogTitle class="text-foreground px-3 md:px-0 m-0 text-[17px] font-semibold">
           {{ t('settings.title') }}
         </DialogTitle>
-        
-        <DialogDescription
-          class="mt-1 text-sm px-3 md:px-0 text-muted-foreground"
-        >
+
+        <DialogDescription class="mt-1 text-sm px-3 md:px-0 text-muted-foreground">
           {{ t('settings.titleDescription') }}
           <span>{{ isMobile ? 'touch' : t('settings.mouseKeyboard') }}.</span>
         </DialogDescription>
@@ -120,7 +112,7 @@ if (window.matchMedia('(any-hover: none)').matches) {
             <article class="max-w-full p-3 mx-auto prose dark:prose-invert">
               <div class="grid gap-2">
                 <h4 class="mt-2 mb-0 text-xs text-primary">
-                  {{ t('settings.perspective') }} 
+                  {{ t('settings.perspective') }}
                 </h4>
                 <div
                   v-if="!isMobile"
@@ -170,9 +162,7 @@ if (window.matchMedia('(any-hover: none)').matches) {
                     />
                   </button>
                 </div>
-                <div
-                  class="relative flex flex-row items-start justify-between py-3 pr-3 border-t border-secondary "
-                >
+                <div class="relative flex flex-row items-start justify-between py-3 pr-3 border-t border-secondary ">
                   <div class="space-y-0.5">
                     <h3 class="text-sm font-medium text-pretty mt-0">
                       {{ t('settings.theme') }}
@@ -183,9 +173,7 @@ if (window.matchMedia('(any-hover: none)').matches) {
                   </div>
                   <ToggleTheme />
                 </div>
-                <div
-                  class="flex flex-row items-start justify-between py-3 pr-3 border-t border-secondary "
-                >
+                <div class="flex flex-row items-start justify-between py-3 pr-3 border-t border-secondary ">
                   <div class="space-y-0.5">
                     <h3 class="text-sm font-medium text-pretty mt-0">
                       {{ t('settings.fontsize') }}
@@ -198,11 +186,9 @@ if (window.matchMedia('(any-hover: none)').matches) {
                     <ToggleFontSize />
                   </div>
                 </div>
-                
 
-                <div
-                  class="flex flex-row items-start justify-between py-3 pr-3 border-t border-secondary "
-                >
+
+                <div class="flex flex-row items-start justify-between py-3 pr-3 border-t border-secondary ">
                   <div class="space-y-0.5">
                     <h3 class="text-sm font-medium text-pretty mt-0">
                       {{ t('settings.language') }}
@@ -216,11 +202,9 @@ if (window.matchMedia('(any-hover: none)').matches) {
                   </div>
                 </div>
                 <h4 class="mt-2 mb-0 text-xs text-primary">
-                  {{ t('settings.database') }} 
+                  {{ t('settings.database') }}
                 </h4>
-                <div
-                  class="flex flex-row items-start justify-between gap-3 pt-2 py-3 pr-3 border-t border-secondary"
-                >
+                <div class="flex flex-row items-start justify-between gap-3 pt-2 py-3 pr-3 border-t border-secondary">
                   <div class="space-y-0.5">
                     <h3 class="text-sm font-medium text-pretty mt-0">
                       {{ t('settings.exportOnLoad') }}
@@ -232,34 +216,30 @@ if (window.matchMedia('(any-hover: none)').matches) {
                   <button
                     @click="settings.toggle_save_on_load()"
                     class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8"
-                    :class="
-                      settings.save_on_load
-                        ? 'hover:!bg-primary bg-primary hover:text-primary-foreground text-primary-foreground'
-                        : 'text-muted-foreground'
+                    :class="settings.save_on_load
+                      ? 'hover:!bg-primary bg-primary hover:text-primary-foreground text-primary-foreground'
+                      : 'text-muted-foreground'
                     "
                   >
                     <DatabaseZap class="size-5" />
                   </button>
                 </div>
 
-                <div
-                  class="flex flex-row items-start justify-between gap-3 pt-2 py-3 pr-3 border-t border-secondary"
-                >
+                <div class="flex flex-row items-start justify-between gap-3 pt-2 py-3 pr-3 border-t border-secondary">
                   <div class="space-y-0.5">
                     <h3 class="text-sm font-medium text-pretty mt-0">
-                      {{ t('settings.initWithData') }} 
+                      {{ t('settings.initWithData') }}
                     </h3>
                     <p class="text-xs text-muted-foreground text-balance">
-                      {{ t('settings.initWithDataDescription') }} 
+                      {{ t('settings.initWithDataDescription') }}
                     </p>
                   </div>
                   <button
                     @click="settings.toggle_init_db_with_example_doc()"
                     class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8"
-                    :class="
-                      settings.init_db_with_example_doc
-                        ? 'hover:!bg-primary bg-primary hover:text-primary-foreground text-primary-foreground'
-                        : 'text-muted-foreground'
+                    :class="settings.init_db_with_example_doc
+                      ? 'hover:!bg-primary bg-primary hover:text-primary-foreground text-primary-foreground'
+                      : 'text-muted-foreground'
                     "
                   >
                     <BookOpenCheck
@@ -273,15 +253,13 @@ if (window.matchMedia('(any-hover: none)').matches) {
                   </button>
                 </div>
                 <h4 class="mt-2 mb-0 text-xs text-red-600">
-                  {{ t('settings.attention') }} 
+                  {{ t('settings.attention') }}
                 </h4>
                 <div
                   class="grid grid-cols-2 sm:flex flex-row items-center justify-between jus gap-3 mr-3 p-3 border border-destructive"
                 >
-                  <h3
-                    class="text-sm m-0 font-medium text-muted-foreground text-balance"
-                  >
-                    {{ t('settings.deleteDB') }} 
+                  <h3 class="text-sm m-0 font-medium text-muted-foreground text-balance">
+                    {{ t('settings.deleteDB') }}
                   </h3>
                   <div class="flex justify-end items-center">
                     <DialogDeleteDB />
