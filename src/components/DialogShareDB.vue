@@ -1,8 +1,4 @@
 <script setup>
-
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
 import {
   DialogClose,
   DialogContent,
@@ -13,22 +9,24 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "radix-vue";
-import { Upload, X } from "lucide-vue-next";
-import { onMounted, shallowRef, watch } from "vue";
-import { useCounterStore } from "@/stores/counter";
-import { storeToRefs } from "pinia";
-import {  refDebounced, useMagicKeys, whenever } from "@vueuse/core";
 import Tooltip from "./ui/Tooltip.vue";
 
-const keys = useMagicKeys();
-const magicShareDB = keys["ctrl+alt+e"];
+import { onMounted, shallowRef, watch } from "vue";
+import { storeToRefs } from "pinia";
+import { useCounterStore } from "@/stores/counter";
 
-
+import { refDebounced, useMagicKeys, whenever } from "@vueuse/core";
+import { Upload, X } from "lucide-vue-next";
+import { useI18n } from 'vue-i18n';
 
 const counter = useCounterStore();
 const { file_name, showShareModal } = storeToRefs(counter);
 const input = shallowRef(file_name);
+
 const debounced = refDebounced(input, 100);
+const keys = useMagicKeys();
+const magicShareDB = keys["ctrl+alt+e"];
+const { t } = useI18n();
 
 watch(debounced, (v) => {
   if (v) counter.share_database();
@@ -64,7 +62,7 @@ onMounted(() => {
         class="bg-secondary/90 data-[state=open]:animate-overlayShow fixed inset-0 z-[200]"
       />
       <DialogContent
-        class="data-[state=open]:animate-contentShow font-mono fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-background p-3 md:p-6 md:pt-4 shadow focus:outline-none z-[9000]"
+        class="data-[state=open]:animate-contentShow font-mono fixed top-24 md:top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-background p-3 md:p-6 md:pt-4 shadow focus:outline-none z-[9000]"
       >
         <DialogTitle class="text-foreground flex items-center justify-start gap-3 m-0 text-[17px] font-semibold">
           <Upload class="size-5" />

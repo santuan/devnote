@@ -1,30 +1,43 @@
 <script setup lang="ts">
-
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
-import { ref, nextTick, } from 'vue'
 import {
-  ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxLabel, ComboboxRoot, DialogContent, DialogDescription, DialogOverlay, DialogPortal, DialogRoot, DialogTitle, DialogTrigger, VisuallyHidden
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxGroup,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxLabel,
+  ComboboxRoot,
+  DialogContent,
+  DialogDescription,
+  DialogOverlay,
+  DialogPortal,
+  DialogRoot,
+  DialogTitle,
+  DialogTrigger,
+  VisuallyHidden
 } from 'radix-vue'
-import { useMagicKeys, whenever, breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import Tooltip from "./Tooltip.vue";
 
+import { ref, nextTick, } from 'vue'
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
+
+import { useMagicKeys, whenever, breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+import { useIsMobile } from '@/composables/useIsMobile';
 import { Search, X } from 'lucide-vue-next';
+import { useI18n } from 'vue-i18n';
+
+const counter = useCounterStore();
+const open = ref(false)
+const keys = useMagicKeys();
+const magicCommandMenu = keys["ctrl+alt+o"];
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const largerThanLg = breakpoints.greater("lg");
 
-import { useIsMobile } from '@/composables/useIsMobile';
-const { isMobile } = useIsMobile();
-
-const counter = useCounterStore();
 const { allItemsTodo, editor } = storeToRefs(counter);
-const open = ref(false)
+const { isMobile } = useIsMobile();
+const { t } = useI18n();
 
-const keys = useMagicKeys();
-const magicCommandMenu = keys["ctrl+alt+o"];
 
 whenever(magicCommandMenu, (n) => {
   if (n)
@@ -64,6 +77,22 @@ function showSettings() {
   }, 100);
 }
 
+function focusOnTitle() {
+  counter.content_editable = true;
+  close()
+  setTimeout(() => {
+    counter.SetFocusTitle()
+  }, 100);
+}
+
+function focusOnSidebar() {
+  if (!counter.focusSidebar) return
+  close()
+  setTimeout(() => {
+    counter.setFocusSidebar()
+  }, 100);
+}
+
 </script>
 
 <template>
@@ -84,7 +113,7 @@ function showSettings() {
     <DialogPortal>
       <DialogOverlay class="bg-background/80 fixed inset-0 z-[90]" />
       <DialogContent
-        class="fixed top-[1%] md:top-[15%] left-[50%] max-h-96 w-[90vw] max-w-4xl translate-x-[-50%] text-sm overflow-hidden border bg-background border-muted-foreground/30 focus:outline-none z-[100]"
+        class="fixed top-[1%] md:top-[15%] left-[50%] max-h-[24rem] w-[90vw] max-w-4xl translate-x-[-50%] text-sm overflow-hidden border bg-background border-muted-foreground/30 focus:outline-none z-[100]"
       >
         <VisuallyHidden>
           <DialogTitle>{{ t('commandBar.title') }}</DialogTitle>
@@ -98,39 +127,18 @@ function showSettings() {
             @keydown.enter.prevent
           />
           <ComboboxContent
-            class="border-t border-muted-foreground/30 p-2 overflow-y-auto h-[20rem]"
+            class="border-t border-muted-foreground/30 p-2 overflow-y-auto h-64"
             @escape-key-down="open = false"
           >
             <ComboboxEmpty class="text-center text-muted-foreground p-4">
               {{ t('sidebar.noResults') }}
             </ComboboxEmpty>
-
-            <ComboboxGroup>
-              <ComboboxLabel class="px-4 text-muted-foreground font-semibold mt-3 mb-3 font-mono">
-                {{ t('commandBar.documents') }}
-              </ComboboxLabel>
-              <ComboboxItem
-                v-for="item in allItemsTodo"
-                :key="item.id"
-                @select="handleSelect(item.id)"
-                :value="item.project_data.name"
-                class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
-              >
-                <span>{{ item.project_data.name }}</span>
-              </ComboboxItem>
-            </ComboboxGroup>
+            
+           
             <ComboboxGroup>
               <ComboboxLabel class="px-4 text-muted-foreground font-semibold mt-3 mb-3 font-mono">
                 {{ t('commandBar.actions') }}
               </ComboboxLabel>
-              <ComboboxItem
-                :value="t('commandBar.focusEditor')"
-                v-if="!isMobile"
-                @select="focusEditor()"
-                class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
-              >
-                <span>{{ t('commandBar.focusEditor') }}</span>
-              </ComboboxItem>
               <ComboboxItem
                 :value="t('sidebar.newDocument')"
                 @select="new_document()"
@@ -158,6 +166,49 @@ function showSettings() {
                 class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
                 <span> {{ t('verb.open') }} {{ t('settings.title') }}</span>
+              </ComboboxItem>
+            </ComboboxGroup>
+            <ComboboxGroup>
+              <ComboboxLabel class="px-4 text-muted-foreground font-semibold mt-3 mb-3 font-mono">
+                {{ t('commandBar.documents') }}
+              </ComboboxLabel>
+              <ComboboxItem
+                v-for="item in allItemsTodo"
+                :key="item.id"
+                @select="handleSelect(item.id)"
+                :value="item.project_data.name"
+                class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
+              >
+                <span>{{ item.project_data.name }}</span>
+              </ComboboxItem>
+            </ComboboxGroup>
+            <ComboboxGroup>
+              <ComboboxLabel class="px-4 text-muted-foreground font-semibold mt-3 mb-3 font-mono">
+                Focus
+              </ComboboxLabel>
+              <ComboboxItem
+                value="Jump to sidebar"
+                v-if="!isMobile"
+                @select="focusOnSidebar()"
+                class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
+              >
+                <span>Jump to sidebar</span>
+              </ComboboxItem>
+              <ComboboxItem
+                value="Jump to title"
+                v-if="!isMobile"
+                @select="focusOnTitle()"
+                class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
+              >
+                <span>Jump to title</span>
+              </ComboboxItem>
+              <ComboboxItem
+                :value="t('commandBar.focusEditor')"
+                v-if="!isMobile"
+                @select="focusEditor()"
+                class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
+              >
+                <span>{{ t('commandBar.focusEditor') }}</span>
               </ComboboxItem>
             </ComboboxGroup>
           </ComboboxContent>

@@ -1,7 +1,10 @@
 <script setup>
 
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
+
+
+import EditorToolbar from "@/components/ui/Tiptap/EditorToolbar.vue";
+import EditorCodeBlock from "@/components/ui/Tiptap/EditorCodeBlock.vue";
+import Video from "./addVideo";
 
 import {
   ScrollAreaRoot,
@@ -10,15 +13,7 @@ import {
   ScrollAreaViewport,
 } from "radix-vue";
 
-import { onMounted, onBeforeUnmount, ref } from "vue";
-import { useStorage } from "@vueuse/core";
-import { Editor, EditorContent, VueNodeViewRenderer } from "@tiptap/vue-3";
-import { storeToRefs } from "pinia";
-import { useCounterStore } from "@/stores/counter";
 
-import EditorToolbar from "@/components/ui/Tiptap/EditorToolbar.vue";
-import EditorCodeBlock from "@/components/ui/Tiptap/EditorCodeBlock.vue";
-import mediumZoom from "medium-zoom/dist/pure";
 
 import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
@@ -34,14 +29,23 @@ import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
 import Youtube from "@tiptap/extension-youtube";
-import Video from "./addVideo";
 import CodeBlockShiki from "tiptap-extension-code-block-shiki";
 
+import mediumZoom from "medium-zoom/dist/pure";
 import "medium-zoom/dist/style.css";
 
-const showEditorToolbar = useStorage("editorToolbar", true);
+import { onMounted, onBeforeUnmount, ref } from "vue";
+import { useCounterStore } from "@/stores/counter";
+import { storeToRefs } from "pinia";
+
+import { useStorage } from "@vueuse/core";
+import { Editor, EditorContent, VueNodeViewRenderer } from "@tiptap/vue-3";
+import { useI18n } from 'vue-i18n';
+
 const counter = useCounterStore();
+const showEditorToolbar = useStorage("editorToolbar", true);
 const { editor } = storeToRefs(counter);
+const { t } = useI18n();
 
 const props = defineProps({
   modelValue: {
@@ -166,15 +170,15 @@ onBeforeUnmount(() => {
     </div>
     
     <ScrollAreaRoot
-      class="w-full border  border-secondary   "
+      class="w-full border-0  mt-0.5 group "
       :class="[
-        showEditorToolbar ? 'h-[calc(100vh-5.375rem)]' : 'h-[calc(100vh-2.75rem)]',
+        showEditorToolbar ? 'h-[calc(100vh-6.25rem)]' : 'h-[calc(100vh-2.75rem)]',
         !toolbar ? 'border-transparent !h-screen' : '',
         editable ? 'bg-secondary/30' : 'bg-background',
       ]"
       style="--scrollbar-size: 10px"
     >
-      <ScrollAreaViewport class="w-full h-full focus:ring-primary focus:ring-1 outline-none">
+      <ScrollAreaViewport class="w-full h-full group-focus-within:ring-primary/70 group-focus-within:ring-1 focus:!ring-primary focus:!ring-2 outline-none">
         <div
           class="max-w-full mx-auto prose  dark:prose-invert"
           spellcheck="false"

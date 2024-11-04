@@ -1,5 +1,5 @@
 <script setup>
-import { useStorage } from "@vueuse/core";
+
 import {
   DropdownMenuRoot,
   DropdownMenuContent,
@@ -7,10 +7,14 @@ import {
   DropdownMenuTrigger,
   DropdownMenuGroup,
 } from "radix-vue";
-import { AArrowUp, AArrowDown } from "lucide-vue-next";
 import Tooltip from "@/components/ui/Tooltip.vue";
+
 import { onMounted } from "vue";
 import { useCounterStore } from "@/stores/counter";
+
+import { useStorage } from "@vueuse/core";
+import { AArrowUp, AArrowDown } from "lucide-vue-next";
+
 const counter = useCounterStore();
 const appFontSize = useStorage("appFontSize", "app-font-size-md");
 

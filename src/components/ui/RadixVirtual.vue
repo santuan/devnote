@@ -1,17 +1,10 @@
 <script setup>
-
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
 import {
   PopoverClose,
   PopoverContent,
   PopoverPortal,
   PopoverRoot,
   PopoverTrigger,
-} from "radix-vue";
-
-import {
   ListboxContent,
   ListboxFilter,
   ListboxItem,
@@ -21,13 +14,11 @@ import {
 } from "radix-vue";
 
 import { computed, shallowRef } from "vue";
-import {
-  Check,
-  ChevronDown,
-  RotateCcw,
-  X,
-} from "lucide-vue-next";
+import { Check, ChevronDown, RotateCcw, X } from "lucide-vue-next";
+import { useI18n } from 'vue-i18n';
 
+const emit = defineEmits(["update:modelValue"]);
+const { t } = useI18n();
 
 const props = defineProps({
   modelValue: {
@@ -41,10 +32,7 @@ const props = defineProps({
       return {};
     },
   },
-
 });
-
-const emit = defineEmits(["update:modelValue"]);
 
 const selected = computed({
   get() {
@@ -55,7 +43,6 @@ const selected = computed({
   },
 });
 
-// const selectedPeople = ref();
 const searchTerm = shallowRef("");
 
 const filteredOptions = computed(() =>
@@ -66,6 +53,8 @@ const filteredOptions = computed(() =>
     }),
 );
 </script>
+
+
 <template>
   <fieldset
     v-if="!props.loading"

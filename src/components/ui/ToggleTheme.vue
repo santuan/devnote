@@ -1,9 +1,5 @@
 <script setup>
 
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
-import { useColorMode, useStorage, useFavicon, useDark } from "@vueuse/core";
 import {
   DropdownMenuRoot,
   DropdownMenuContent,
@@ -11,16 +7,20 @@ import {
   DropdownMenuTrigger,
   DropdownMenuGroup,
 } from "radix-vue";
-import { SunMedium, Moon } from "lucide-vue-next";
 import Tooltip from "@/components/ui/Tooltip.vue";
+
 import { computed, onMounted } from "vue";
 import { useCounterStore } from "@/stores/counter";
+
+import { useColorMode, useStorage, useFavicon, useDark } from "@vueuse/core";
+import { SunMedium, Moon } from "lucide-vue-next";
+import { useI18n } from 'vue-i18n';
+
 const counter = useCounterStore();
-
 const mode = useColorMode();
-
-const colorTheme = useStorage("theme", "theme-blue");
 const isDark = useDark()
+const colorTheme = useStorage("theme", "theme-blue");
+const { t } = useI18n();
 
 const favicon = computed(() => {
   const theme = colorTheme.value.replace("theme-", "");

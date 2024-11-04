@@ -46,12 +46,12 @@ function toggleCheck(item, isChecked) {
     >
       <span>
         <label
-          :for="'todook-' + props.data?.id"
+          :for="'itemcompleted-' + props.data?.id"
           class=""
         >
           <input
             type="checkbox"
-            :id="'todook-' + props.data?.id"
+            :id="'itemcompleted-' + props.data?.id"
             :checked="props.data?.project_data.checked"
             class="sr-only peer"
             required

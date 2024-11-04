@@ -157,12 +157,12 @@ function focusEditor() {
     >
       <span>
         <label
-          :for="'todo-' + props.data.id"
+          :for="'item-' + props.data.id"
           class=""
         >
           <input
             type="checkbox"
-            :id="'todo-' + props.data.id"
+            :id="'item-' + props.data.id"
             :checked="props.data.project_data?.checked"
             required
             class="sr-only peer"
@@ -179,14 +179,14 @@ function focusEditor() {
           <span class="sr-only">{{ t('sidebar.markAsDone') }}</span>
         </label>
         <!-- <label
-          :for="'todo-' + props.data.id"
+          :for="'item-' + props.data.id"
           class="flex items-center justify-center rounded-full relative z-[50] mr-0.5 peer-focus:ring-1 peer-focus:ring-primary size-7 md:size-6 shrink-0 peer-checked:border-blue-600 hover:text-primary peer-checked:text-primary hover:bg-secondary/20"
           
         >
           <Circle class="size-5 md:size-4" />
           <input
             type="checkbox"
-            :id="'todo-' + props.data.id"
+            :id="'item-' + props.data.id"
             :checked="props.data.project_data?.checked"
             required
             :aria-label="t('sidebar.markAsDone')"

@@ -1,25 +1,32 @@
 <script setup>
+
 import ToggleTheme from "@/components/ui/ToggleTheme.vue";
 import ToggleFontSize from "./ui/ToggleFontSize.vue";
 import Tooltip from "@/components/ui/Tooltip.vue";
 import DialogInfo from "@/components/DialogInfo.vue";
 import ToggleEditable from "./ui/ToggleEditable.vue";
 import DriverJsInit from "./Tour.ts";
-
-import { ArrowRightToLine, ArrowLeftToLine, MousePointer, Pointer } from "lucide-vue-next";
-import { useCounterStore } from "@/stores/counter";
-import { useMagicKeys, whenever, breakpointsTailwind, useBreakpoints, useStorage } from "@vueuse/core";
-import { onMounted } from "vue";
 import DialogSettings from "./DialogSettings.vue";
 import DialogCommandMenu from "./ui/DialogCommandMenu.vue";
 import ButtonCreateDocumentCollapse from "./ui/ButtonCreateDocumentCollapse.vue";
 
+import { onMounted } from "vue";
+import { useCounterStore } from "@/stores/counter";
+import { storeToRefs } from "pinia";
+
+import { useMagicKeys, whenever, breakpointsTailwind, useBreakpoints } from "@vueuse/core";
+import { ArrowRightToLine, ArrowLeftToLine } from "lucide-vue-next";
 import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
 
 const counter = useCounterStore();
+const { focusSidebar } = storeToRefs(counter);
+
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const largerThanLg = breakpoints.greater("lg");
+const keys = useMagicKeys();
+const CtrlM = keys["ctrl+m"];
+const magicPreview = keys["ctrl+alt+p"];
+const { t } = useI18n();
 
 
 onMounted(() => {
@@ -27,10 +34,6 @@ onMounted(() => {
     DriverJsInit();
   }
 });
-
-const keys = useMagicKeys();
-const CtrlM = keys["ctrl+m"];
-const magicPreview = keys["ctrl+alt+p"];
 
 whenever(CtrlM, () => {
   counter.showProjects = !counter.showProjects;
@@ -50,6 +53,7 @@ whenever(magicPreview, () => {
     <button
       @click="counter.showProjects = !counter.showProjects"
       class="flex items-center justify-start gap-2 p-1"
+      ref="focusSidebar"
     >
       <!-- Logo -->
       <svg

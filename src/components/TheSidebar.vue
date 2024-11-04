@@ -1,15 +1,40 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
 import SidebarTop from "@/components/SidebarTop.vue";
 import SidebarProjects from "@/components/SidebarProjects.vue";
 import SidebarBottom from "./SidebarBottom.vue";
-import { useCounterStore } from "@/stores/counter";
-const counter = useCounterStore();
-import { useDropZone } from "@vueuse/core";
+
 import { shallowRef, watch } from "vue";
+import { useCounterStore } from "@/stores/counter";
+import { storeToRefs } from "pinia";
+
+import { useDropZone, useMagicKeys, whenever, } from "@vueuse/core";
+import { useI18n } from 'vue-i18n';
+
+const counter = useCounterStore();
+const { editor } = storeToRefs(counter);
 const dropZoneRef = shallowRef();
 const { isOverDropZone } = useDropZone(dropZoneRef);
+const keys = useMagicKeys();
+const magicFocusSidebar = keys["ctrl+shift+alt+ArrowLeft"];
+const magicFocusTitle = keys["ctrl+shift+alt+ArrowRight"];
+const magicFocusEditor = keys["ctrl+shift+alt+ArrowDown"];
+const { t } = useI18n();
+
+
+whenever(magicFocusSidebar, (n) => {
+  if (n)
+    counter.setFocusSidebar()
+})
+
+whenever(magicFocusTitle, (n) => {
+  if (n)  
+    counter.SetFocusTitle()
+})
+
+whenever(magicFocusEditor, (n) => {
+  if (n)  
+    editor.value.commands.focus()
+})
 
 watch(isOverDropZone, (v) => {
   if (v) counter.showImportModal = !counter.showImportModal;

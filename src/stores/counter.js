@@ -27,6 +27,9 @@ export const useCounterStore = defineStore("counter", () => {
   const content_editable = shallowRef(true);
   const editor = shallowRef(null);
   const showSettings = shallowRef(false);
+  const focusTitleTextarea = shallowRef(null)
+  const focusSidebar = shallowRef(null)
+
   const { t } = useI18n();
   function toggleEditable() {
     content_editable.value = !content_editable.value;
@@ -295,6 +298,17 @@ export const useCounterStore = defineStore("counter", () => {
     )
   );
 
+  function SetFocusTitle() {
+    content_editable.value = true
+    if (focusTitleTextarea.value) {
+      focusTitleTextarea?.value.focus()
+    }
+  }
+
+  function setFocusSidebar() {
+    focusSidebar?.value.focus()
+  }
+
   return {
     loaded_id,
     file_name,
@@ -327,6 +341,10 @@ export const useCounterStore = defineStore("counter", () => {
     content_editable,
     toggleEditable,
     showSettings,
-    clearDatabase
+    clearDatabase,
+    focusTitleTextarea,
+    focusSidebar,
+    SetFocusTitle,
+    setFocusSidebar,
   };
 });

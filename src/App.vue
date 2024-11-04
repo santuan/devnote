@@ -1,10 +1,13 @@
 <script setup>
+import ToastOffline from "@/components/ui/ToastOffline.vue";
+
 import { RouterView } from "vue-router";
 import { useColorMode, useStorage } from "@vueuse/core";
 import { Toaster } from 'vue-sonner'
-import ToastOffline from "@/components/ui/ToastOffline.vue";
+
 const mode = useColorMode();
 const cursorPointer = useStorage("cursor", true);
+
 </script>
 
 <template>

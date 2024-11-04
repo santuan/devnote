@@ -1,16 +1,5 @@
 <script setup>
 
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
-import {
-  Check,
-  ChevronDown,
-} from "lucide-vue-next";
-
-import {
-  useStorage,
-} from "@vueuse/core";
 import {
   SelectContent,
   SelectGroup,
@@ -24,8 +13,13 @@ import {
   SelectValue,
   SelectViewport,
 } from "radix-vue";
-const sortOption = useStorage("sortItemsBy", "name");
 
+import { useStorage } from "@vueuse/core";
+import { Check, ChevronDown } from "lucide-vue-next";
+import { useI18n } from 'vue-i18n';
+
+const sortOption = useStorage("sortItemsBy", "name");
+const { t } = useI18n();
 
 </script>
 

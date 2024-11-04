@@ -1,29 +1,22 @@
 <script setup>
 
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
-import { useCounterStore } from "@/stores/counter";
-import {
-  Check,
-  DatabaseZap,
-} from "lucide-vue-next";
-import { storeToRefs } from "pinia";
-import { shallowRef } from "vue";
-import {
-  onClickOutside,
-} from "@vueuse/core";
-
 import Tooltip from "@/components/ui/Tooltip.vue";
 
+import { shallowRef } from "vue";
+import { useCounterStore } from "@/stores/counter";
+import { storeToRefs } from "pinia";
+
+import { onClickOutside } from "@vueuse/core";
+import { Check, DatabaseZap } from "lucide-vue-next";
+import { useI18n } from 'vue-i18n';
+
+const counter = useCounterStore();
+const { file_name } = storeToRefs(counter);
 
 const target = shallowRef(null);
 const editing = shallowRef(false);
-const counter = useCounterStore();
-const { file_name } =
-storeToRefs(counter);
-
 const input = shallowRef(file_name);
+const { t } = useI18n();
 
 function editDatabaseTitle() {
   editing.value = !editing.value;
@@ -45,9 +38,7 @@ onClickOutside(target, () => {
       @click="editDatabaseTitle()"
       class="flex items-center justify-between w-full h-8 gap-1 pl-2 hover:outline-none hover:!ring-1 hover:ring-primary text-primary"
     >
-      <span
-        v-if="!file_name"
-      > Escriba un título </span>
+      <span v-if="!file_name"> Escriba un título </span>
       <span v-else>
         {{ file_name }}
       </span>

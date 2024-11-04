@@ -1,8 +1,4 @@
 <script setup>
-
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
 import {
   DialogClose,
   DialogContent,
@@ -13,14 +9,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "radix-vue";
-import { X } from "lucide-vue-next";
-import { onMounted, shallowRef, watch, getCurrentInstance } from "vue";
+
+import { onMounted, shallowRef, watch } from "vue";
 import { useCounterStore } from "@/stores/counter";
 import { useSettingsStore } from "@/stores/settings";
 import { storeToRefs } from "pinia";
+
 import { refDebounced } from "@vueuse/core";
 import { toast } from 'vue-sonner'
+import { X } from "lucide-vue-next";
+import { useI18n } from 'vue-i18n';
 
+// TODO move showSettings to Settings Store
 const counter = useCounterStore();
 const settings = useSettingsStore();
 const { file_name, showSettings } = storeToRefs(counter);
@@ -28,6 +28,11 @@ const { file_name, showSettings } = storeToRefs(counter);
 const input = shallowRef(file_name);
 const showDeleteModal = shallowRef(false);
 const debounced = refDebounced(input, 100);
+const { t } = useI18n();
+
+onMounted(() => {
+  counter.share_database();
+});
 
 watch(debounced, (v) => {
   if (v) counter.share_database();
@@ -47,9 +52,7 @@ function clear() {
   }, 300);
 }
 
-onMounted(() => {
-  counter.share_database();
-});
+
 </script>
 
 <template>

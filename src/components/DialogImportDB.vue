@@ -1,9 +1,4 @@
 <script setup>
-
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
-import { Download, X, DatabaseZap } from "lucide-vue-next";
 import {
   AlertDialogCancel,
   AlertDialogContent,
@@ -14,15 +9,18 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "radix-vue";
+import Tooltip from "./ui/Tooltip.vue";
 
 import { shallowRef } from "vue";
-
 import { useCounterStore } from "@/stores/counter";
+
 import { useFileDialog, useTimeoutFn, useDropZone, useMagicKeys, whenever } from "@vueuse/core";
-import Tooltip from "./ui/Tooltip.vue";
+import { Download, X, DatabaseZap } from "lucide-vue-next";
+import { useI18n } from 'vue-i18n';
 
 const keys = useMagicKeys();
 const magicImportDB = keys["ctrl+alt+i"];
+const { t } = useI18n();
 
 whenever(magicImportDB, (n) => {
   if (n)

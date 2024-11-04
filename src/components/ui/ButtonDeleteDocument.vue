@@ -1,8 +1,4 @@
 <script setup>
-
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
 import {
   AlertDialogRoot,
   AlertDialogTrigger,
@@ -14,18 +10,20 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "radix-vue";
-import { Trash2, X } from "lucide-vue-next";
-import { useCounterStore } from "@/stores/counter";
-import { ref } from "vue";
-import {
-  useMagicKeys,
-  whenever,
-} from "@vueuse/core";
 import Tooltip from "./Tooltip.vue";
+
+import { ref } from "vue";
+import { useCounterStore } from "@/stores/counter";
+
+import { useMagicKeys, whenever } from "@vueuse/core";
+import { Trash2, X } from "lucide-vue-next";
+import { useI18n } from 'vue-i18n';
+
 const counter = useCounterStore();
 const keys = useMagicKeys();
 const magicDeleteDocument = keys["shift+delete"];
 const showAlertDialog = ref(false);
+const { t } = useI18n();
 
 whenever(magicDeleteDocument, (n) => {
   if (n)

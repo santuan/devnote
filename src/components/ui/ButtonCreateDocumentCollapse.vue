@@ -1,15 +1,17 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
+
+import { breakpointsTailwind, useBreakpoints, } from "@vueuse/core";
 import { Plus } from "lucide-vue-next";
-import {  breakpointsTailwind, useBreakpoints, } from "@vueuse/core";
-const breakpoints = useBreakpoints(breakpointsTailwind);
-const largerThanLg = breakpoints.greater("lg");
+import { useI18n } from 'vue-i18n';
+
 const counter = useCounterStore();
 const { loaded_id } = storeToRefs(counter);
+
+const breakpoints = useBreakpoints(breakpointsTailwind);
+const largerThanLg = breakpoints.greater("lg");
+const { t } = useI18n();
 
 function new_document() {
   counter.clear_editor();

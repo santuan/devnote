@@ -1,6 +1,4 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
-const { t, locale } = useI18n();
 
 import {
   DialogClose,
@@ -16,17 +14,20 @@ import {
   ScrollAreaThumb,
   ScrollAreaViewport,
 } from "radix-vue";
-import { CircleHelp, TentTree, X } from "lucide-vue-next";
-import { useMagicKeys, whenever } from '@vueuse/core'
-
 import Tooltip from "./ui/Tooltip.vue";
-import DialogChangelog from "./DialogChangelog.vue";
-import { useCounterStore } from "@/stores/counter";
+
 import { ref } from "vue";
+import { useCounterStore } from "@/stores/counter";
+
+import { useMagicKeys, whenever } from '@vueuse/core'
+import { CircleHelp, X } from "lucide-vue-next";
+import { useI18n } from 'vue-i18n';
+
 const counter = useCounterStore();
+const open = ref(false)
 const keys = useMagicKeys();
 const magicAbout = keys["ctrl+alt+q"];
-const open = ref(false)
+const { t, locale } = useI18n();
 
 whenever(magicAbout, (n) => {
   if (n)

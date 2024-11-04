@@ -1,14 +1,13 @@
 <script setup>
-import { onMounted, watch } from "vue";
-import { useCounterStore } from "@/stores/counter";
-import { storeToRefs } from "pinia";
-
 import Sidebar from "@/components/TheSidebar.vue";
 import Document from "@/components/Document.vue";
 
-const counter = useCounterStore();
+import { onMounted, watch } from "vue";
+import { storeToRefs } from "pinia";
+import { useCounterStore } from "@/stores/counter";
 import { useSettingsStore } from "@/stores/settings";
 
+const counter = useCounterStore();
 const settings = useSettingsStore();
 const { project_name, project_body } = storeToRefs(counter);
 
@@ -29,6 +28,7 @@ watch(project_body, (v) => {
 });
 
 </script>
+
 <template>
   <div class="flex w-full h-screen overflow-y-hidden">
     <Sidebar />

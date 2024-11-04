@@ -32,5 +32,5 @@ watch(needRefresh, (value) => {
 
 <template>
   <div />
-  <!-- Empty template since we're using programmatic toasts -->
+  <!-- TODO, fix this convert to proper file-->
 </template>

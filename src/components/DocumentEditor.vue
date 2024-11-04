@@ -1,10 +1,14 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
+import Editor from "@/components/ui/Tiptap/EditorTipTap.vue";
 
 import { useCounterStore } from "@/stores/counter";
-import Editor from "@/components/ui/Tiptap/EditorTipTap.vue";
+import { useI18n } from 'vue-i18n';
+import { storeToRefs } from "pinia";
+
 const counter = useCounterStore();
+const { focusTitleTextarea } = storeToRefs(counter);
+const { t } = useI18n();
+
 </script>
 
 <template>
@@ -24,6 +28,7 @@ const counter = useCounterStore();
           :placeholder="t('editor.untitled')"
           autocomplete="off"
           spellcheck="false"
+          ref="focusTitleTextarea"
           v-model="counter.project_name"
           style="field-sizing: content"
           class="w-full px-2 py-0.5 overflow-visible border outline-none resize-none leading-8 min-h-8 create_project bg-secondary/30 text-foreground border-secondary focus-within:border-primary placeholder:text-foreground/50 hover:border-primary"
@@ -64,7 +69,7 @@ const counter = useCounterStore();
         ? 'bg-primary text-primary-foreground hover:bg-primary/80'
         : 'disabled bg-secondary  pointer-events-none'
       "
-      class="absolute bottom-0 right-0 z-20 h-8 px-3 text-xs md:-translate-y-4 -left-8 md:left-6 md:right-6 GuardarDocumento disabled:text-foreground/50"
+      class="absolute bottom-0 right-0 z-20 h-8 px-3 text-xs md:-translate-y-4 -left-8 md:left-6 md:right-6 GuardarDocumento disabled:text-foreground/50 focus:bg-primary/50"
     >
       {{ t('editor.save') }}
     </button>

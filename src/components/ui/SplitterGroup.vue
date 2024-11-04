@@ -1,40 +1,26 @@
 <script setup>
+import Tooltip from "@/components/ui/Tooltip.vue";
+
 import { shallowRef } from "vue";
+import { useCounterStore } from "@/stores/counter";
+
+import { useKeyModifier, useMagicKeys, whenever } from '@vueuse/core'
 import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from "radix-vue";
 import { ArrowRightToLine } from "lucide-vue-next";
-import Tooltip from "@/components/ui/Tooltip.vue";
-import { useKeyModifier, useMagicKeys, whenever } from '@vueuse/core'
-import { useCounterStore } from "@/stores/counter";
+
+const counter = useCounterStore();
 const panelRef = shallowRef()
 const layout = shallowRef(0)
 const keys = useMagicKeys();
-
 const ExpandAll = useKeyModifier('Control', { events: ['mouseup', 'mousedown'] })
-const counter = useCounterStore();
-const magicExpandDocument = keys["ctrl+alt-ArrowRight"];
-const magicCollapseDocument = keys["ctrl+alt-ArrowLeft"];
-
+const magicExpandDocument = keys["ctrl+alt+ArrowUp"];
 
 whenever(magicExpandDocument, (n) => {
   if (n) expandAllScreen()
 })
 
-whenever(magicCollapseDocument, (n) => {
-  if (n) collapseAllScreen()
-})
 
 function expandAllScreen() {
-  if (panelRef.value.isCollapsed) {
-    panelRef.value.expand()
-  } else {
-    panelRef.value.collapse()
-  }
-  if (ExpandAll.value === true) {
-    counter.showProjects = !counter.showProjects
-  }
-}
-
-function collapseAllScreen() {
   if (panelRef.value.isCollapsed) {
     panelRef.value.expand()
   } else {

@@ -1,7 +1,10 @@
 <script setup>
 
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
+import ToggleTheme from './ui/ToggleTheme.vue';
+import ToggleFontSize from './ui/ToggleFontSize.vue';
+import LanguageSelector from './ui/LanguageSelector.vue';
+import DialogDeleteDB from './DialogDeleteDB.vue';
+import DriverJsInit from './Tour.ts';
 
 import {
   DialogClose,
@@ -17,45 +20,26 @@ import {
   ScrollAreaThumb,
   ScrollAreaViewport,
 } from 'radix-vue';
-import {
-  X,
-  MousePointer,
-  DatabaseZap,
-  Pointer,
-  Plane,
-  Settings2,
-  BookOpenCheck,
-  BookOpen,
-} from 'lucide-vue-next';
-import Tooltip from './ui/Tooltip.vue';
-import { useCounterStore } from '@/stores/counter';
-import {
-  useStorage,
-  useMagicKeys,
-  whenever,
-} from '@vueuse/core';
 
-import ToggleTheme from './ui/ToggleTheme.vue';
-import ToggleFontSize from './ui/ToggleFontSize.vue';
-import { useSettingsStore } from '@/stores/settings';
-import DialogDeleteDB from './DialogDeleteDB.vue';
-import DriverJsInit from './Tour.ts';
-import LanguageSelector from './ui/LanguageSelector.vue';
+import Tooltip from './ui/Tooltip.vue';
+
+import { useCounterStore } from '@/stores/counter';
 import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
+
+import { useStorage, useMagicKeys, whenever } from '@vueuse/core';
+import { X, MousePointer, DatabaseZap, Pointer, Plane, Settings2, BookOpenCheck, BookOpen } from 'lucide-vue-next';
+import { useSettingsStore } from '@/stores/settings';
+import { useIsMobile } from '@/composables/useIsMobile';
+import { useI18n } from 'vue-i18n';
 
 const settings = useSettingsStore();
-
 const counter = useCounterStore();
 const cursorPointer = useStorage('cursor', true);
 const keys = useMagicKeys();
 const magicSettings = keys['ctrl+alt+w'];
 const { showSettings, content_editable } = storeToRefs(counter);
-
-
-const toggleCursor = () => {
-  cursorPointer.value = !cursorPointer.value;
-};
+const { isMobile } = useIsMobile();
+const { t } = useI18n();
 
 whenever(magicSettings, (n) => {
   if (n) showSettings.value = true;
@@ -70,10 +54,13 @@ const toggleTour = () => {
   }, 300);
 };
 
-import { useIsMobile } from '@/composables/useIsMobile';
+// Understand difference between
+// const toggleCursor = () => {
+// function toggleCursor() { 
 
-const { isMobile } = useIsMobile();
-
+const toggleCursor = () => {
+  cursorPointer.value = !cursorPointer.value;
+};
 </script>
 
 <template>

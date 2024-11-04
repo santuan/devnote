@@ -1,11 +1,12 @@
 <script setup>
-
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-import { useCounterStore } from "@/stores/counter";
 import Tooltip from "@/components/ui/Tooltip.vue";
+
+import { useCounterStore } from "@/stores/counter";
 import { BookText, PencilLine } from "lucide-vue-next";
+import { useI18n } from 'vue-i18n';
+
 const counter = useCounterStore();
+const { t } = useI18n();
 </script>
 
 <template>

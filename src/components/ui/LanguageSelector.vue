@@ -1,22 +1,13 @@
 <script setup>
-
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
-import {
-  DropdownMenuRoot,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from 'radix-vue';
-import { Languages } from 'lucide-vue-next';
-import { useStorage } from '@vueuse/core';
+import { DropdownMenuRoot, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from 'radix-vue';
 import Tooltip from './Tooltip.vue';
-import { useCounterStore } from '@/stores/counter';
 
-const counter = useCounterStore();
-const { locale } = useI18n();
+import { useStorage } from '@vueuse/core';
+import { Languages } from 'lucide-vue-next';
+import { useI18n } from 'vue-i18n';
+
 const storedLocale = useStorage('locale', 'es');
+const { t, locale } = useI18n();
 
 function setLocale(lang) {
   locale.value = lang;
