@@ -127,7 +127,8 @@ const results = computed(() => {
       >
         <ScrollAreaViewport class="w-full h-full rounded">
           <div
-            class="py-1 px-0.5 flex flex-col justify-start items-start relative gap-1"
+            class="py-1 px-0.5 flex flex-col justify-start items-start relative gap-1 w-full min-h-96"
+            v-auto-animate
           >
             <SearchItem
               v-for="item in results"
