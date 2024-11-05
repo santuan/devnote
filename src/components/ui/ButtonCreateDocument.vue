@@ -22,6 +22,13 @@ function new_document() {
     counter.showProjects = false;
     counter.content_editable = true;
   }
+  focusOnTitle()
+}
+
+function focusOnTitle() {
+  setTimeout(() => {
+    counter.SetFocusTitle()
+  }, 100);
 }
 
 </script>
