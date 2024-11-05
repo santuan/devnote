@@ -92,10 +92,10 @@ const toggleCursor = () => {
           <span>{{ isMobile ? 'touch' : t('settings.mouseKeyboard') }}.</span>
         </DialogDescription>
         <ScrollAreaRoot
-          class="w-full border h-[78vh] mt-6 md:h-[70vh] border-secondary"
+          class="w-full border h-[78vh] mt-6 md:h-[70vh] group border-secondary"
           style="--scrollbar-size: 10px"
         >
-          <ScrollAreaViewport class="w-full h-full">
+          <ScrollAreaViewport class="w-full h-full  group-focus-within:ring-primary/70 group-focus-within:ring-1 focus:!ring-primary focus:!ring-2 outline-none">
             <article class="max-w-full p-3 mx-auto prose dark:prose-invert">
               <div class="grid gap-2">
                 <h4 class="mt-2 mb-0 text-xs text-primary">
