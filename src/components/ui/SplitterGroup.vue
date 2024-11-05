@@ -13,7 +13,7 @@ const panelRef = shallowRef()
 const layout = shallowRef(0)
 const keys = useMagicKeys();
 const ExpandAll = useKeyModifier('Control', { events: ['mouseup', 'mousedown'] })
-const magicExpandDocument = keys["ctrl+alt+ArrowUp"];
+const magicExpandDocument = keys["ctrl+shift+alt+period"];
 
 whenever(magicExpandDocument, (n) => {
   if (n) expandAllScreen()

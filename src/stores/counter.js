@@ -27,10 +27,12 @@ export const useCounterStore = defineStore("counter", () => {
   const content_editable = shallowRef(true);
   const editor = shallowRef(null);
   const showSettings = shallowRef(false);
+  const showEditorToolbar = shallowRef(false);
   const focusTitleTextarea = shallowRef(null)
   const focusSidebar = shallowRef(null)
 
   const { t } = useI18n();
+  
   function toggleEditable() {
     content_editable.value = !content_editable.value;
   }
@@ -346,5 +348,6 @@ export const useCounterStore = defineStore("counter", () => {
     focusSidebar,
     SetFocusTitle,
     setFocusSidebar,
+    showEditorToolbar
   };
 });

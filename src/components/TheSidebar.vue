@@ -18,6 +18,7 @@ const keys = useMagicKeys();
 const magicFocusSidebar = keys["ctrl+shift+alt+ArrowLeft"];
 const magicFocusTitle = keys["ctrl+shift+alt+ArrowRight"];
 const magicFocusEditor = keys["ctrl+shift+alt+ArrowDown"];
+const magicEditorToolbar = keys["ctrl+shift+alt+ArrowUp"];
 const { t } = useI18n();
 
 
@@ -34,6 +35,12 @@ whenever(magicFocusTitle, (n) => {
 whenever(magicFocusEditor, (n) => {
   if (n)  
     editor.value.commands.focus()
+})
+
+whenever(magicEditorToolbar, (n) => {
+  if (n)  
+    console.log("working")
+    counter.showEditorToolbar = !counter.showEditorToolbar
 })
 
 watch(isOverDropZone, (v) => {

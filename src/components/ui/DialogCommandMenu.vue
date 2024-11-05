@@ -57,6 +57,7 @@ function new_document() {
   counter.clear_editor();
   counter.content_editable = true;
   open.value = false
+  focusOnTitle()
 }
 
 const focusEditor = () => {

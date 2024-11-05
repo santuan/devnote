@@ -13,8 +13,6 @@ import {
   ScrollAreaViewport,
 } from "radix-vue";
 
-
-
 import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
@@ -38,13 +36,11 @@ import { onMounted, onBeforeUnmount, ref } from "vue";
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
 
-import { useStorage } from "@vueuse/core";
 import { Editor, EditorContent, VueNodeViewRenderer } from "@tiptap/vue-3";
 import { useI18n } from 'vue-i18n';
 
 const counter = useCounterStore();
-const showEditorToolbar = useStorage("editorToolbar", true);
-const { editor } = storeToRefs(counter);
+const { editor, showEditorToolbar } = storeToRefs(counter);
 const { t } = useI18n();
 
 const props = defineProps({
@@ -162,23 +158,26 @@ onBeforeUnmount(() => {
       class="sticky top-0 z-30 pt-0.5 bg-background"
     >
       <div class="relative grid w-full max-w-full gap-1 mx-auto control-group">
-        <!-- Inicio Slot: Muestra o el titulo o un input -->
         <slot />
-        <!-- fin slot -->
         <EditorToolbar />
       </div>
     </div>
-    
+
     <ScrollAreaRoot
-      class="w-full border-0  mt-0.5 group "
+      class="w-full border-0 pt-0.5 group "
       :class="[
-        showEditorToolbar ? 'h-[calc(100vh-6.25rem)]' : 'h-[calc(100vh-2.75rem)]',
-        !toolbar ? 'border-transparent !h-screen' : '',
+        showEditorToolbar ? 'h-[calc(100vh-5rem)]' : 'h-[calc(100vh)]',
+        !toolbar ? 'border-transparent ' : '',
         editable ? 'bg-secondary/30' : 'bg-background',
       ]"
       style="--scrollbar-size: 10px"
     >
-      <ScrollAreaViewport class="w-full h-full group-focus-within:ring-primary/70 group-focus-within:ring-1 focus:!ring-primary focus:!ring-2 outline-none">
+      <ScrollAreaViewport
+        class="w-full h-full group-focus-within:ring-primary/70 group-focus-within:ring-1 focus:!ring-primary focus:!ring-2 outline-none"
+        :class="[
+          showEditorToolbar ? 'h-[calc(100vh-6rem)]' : 'h-[calc(100vh)]',
+        ]"
+      >
         <div
           class="max-w-full mx-auto prose  dark:prose-invert"
           spellcheck="false"

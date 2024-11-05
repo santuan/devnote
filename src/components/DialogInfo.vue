@@ -135,28 +135,37 @@ whenever(magicAbout, (n) => {
                 <h3>Keyboard Shortcuts</h3>
                 <ul>
                   <li>
-                    <p><code>Ctrl+Alt+P</code> Toggle between edit or preview mode.</p>
+                    <p><kbd>Ctrl Alt P</kbd> Toggle between edit or preview mode.</p>
                   </li>
                   <li>
-                    <p><code>Ctrl+Alt+O</code> Command bar to navigate documents.</p>
+                    <p><kbd>Ctrl Alt O</kbd> Command bar to navigate documents.</p>
                   </li>
                   <li>
-                    <p><code>Ctrl+M</code> Collapse the menu.</p>
+                    <p><kbd>Ctrl M</kbd> Collapse the menu.</p>
                   </li>
                   <li>
-                    <p><code>Ctrl+Alt+I</code> Import DB</p>
+                    <p><kbd>Ctrl Alt I</kbd> Import DB</p>
                   </li>
                   <li>
-                    <p><code>Ctrl+Alt+E</code> Export DB</p>
+                    <p><kbd>Ctrl Alt E</kbd> Export DB</p>
                   </li>
                   <li>
-                    <p><code>Ctrl+Alt+RightArrow</code> Expand the editing area.</p>
+                    <p><kbd>Ctrl Alt .</kbd> Expand/Collapse the editing area.</p>
                   </li>
                   <li>
-                    <p><code>Ctrl+Alt+LeftArrow</code> Collapse the editing area.</p>
+                    <p><kbd>Shift Delete</kbd> Delete current document</p>
                   </li>
                   <li>
-                    <p><code>Shift+Delete</code> Delete current document</p>
+                    <p><kbd>ctrl shift alt  &uarr;</kbd> Toogle editor typography options</p>
+                  </li>
+                  <li>
+                    <p><kbd>ctrl shift alt  &larr;</kbd> Focus on sidebar</p>
+                  </li>
+                  <li>
+                    <p><kbd>ctrl shift alt  &rarr;</kbd> Focus on title</p>
+                  </li>
+                  <li>
+                    <p><kbd>ctrl shift alt  &darr;</kbd> Focus on editor</p>
                   </li>
                 </ul>
               </article>

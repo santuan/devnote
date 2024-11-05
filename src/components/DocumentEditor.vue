@@ -4,9 +4,11 @@ import Editor from "@/components/ui/Tiptap/EditorTipTap.vue";
 import { useCounterStore } from "@/stores/counter";
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from "pinia";
+import { Type } from "lucide-vue-next";
+import Tooltip from "./ui/Tooltip.vue";
 
 const counter = useCounterStore();
-const { focusTitleTextarea } = storeToRefs(counter);
+const { focusTitleTextarea, showEditorToolbar } = storeToRefs(counter);
 const { t } = useI18n();
 
 </script>
@@ -14,15 +16,17 @@ const { t } = useI18n();
 <template>
   <div
     :key="counter.loaded_id"
-    class="relative h-full mx-auto ring-1 lg:w-full ring-secondary"
+    class="relative h-full mx-auto ring-1 lg:w-full ring-secondary duration-1000"
   >
     <Editor
       v-if="counter.content_editable"
       v-model="counter.project_body"
-      toolbar
+      :toolbar="showEditorToolbar"
       editable
     >
-      <div class="flex flex-col items-start justify-between w-full gap-1 my-0.5">
+      <div
+        class="flex  items-start justify-between w-full gap-1 my-0.5"
+      >
         <span class="sr-only">{{ t('editor.untitled') }}</span>
         <textarea
           :placeholder="t('editor.untitled')"
@@ -31,8 +35,24 @@ const { t } = useI18n();
           ref="focusTitleTextarea"
           v-model="counter.project_name"
           style="field-sizing: content"
-          class="w-full px-2 py-0.5 overflow-visible border outline-none resize-none leading-8 min-h-8 create_project bg-secondary/30 text-foreground border-secondary focus-within:border-primary placeholder:text-foreground/50 hover:border-primary"
+          class="w-full px-2 pr-12 py-0.5 overflow-visible border outline-none resize-none leading-8 min-h-8 create_project bg-secondary/30 text-foreground border-secondary focus-within:border-primary placeholder:text-foreground/50 hover:border-primary"
         />
+        <Tooltip
+          name="Typography options" 
+          :side="'left'"
+          :align="'center'"
+          shortcut="ctrl shift alt &uarr; "
+        >
+          <button
+            class="size-9 mt-[0.05rem] flex justify-center items-center bg-secondary/30 shrink-0 ring-1 ring-priamry"
+            :class="showEditorToolbar === true ? '!bg-primary text-primary-foreground' : ''"
+            @click="showEditorToolbar = !showEditorToolbar"
+          >
+            <Type
+              class="size-4"
+            />
+          </button>
+        </Tooltip>
       </div>
     </Editor>
     <Editor
