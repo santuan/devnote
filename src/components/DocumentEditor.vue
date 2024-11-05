@@ -44,7 +44,7 @@ const { t } = useI18n();
           shortcut="ctrl shift alt &uarr; "
         >
           <button
-            class="size-9 mt-[0.05rem] flex justify-center items-center bg-secondary/30 shrink-0 ring-1 ring-priamry"
+            class="size-9 mt-[0.05rem] flex justify-center items-center bg-secondary/30 shrink-0 ring-1 ring-primary"
             :class="showEditorToolbar === true ? '!bg-primary text-primary-foreground' : ''"
             @click="showEditorToolbar = !showEditorToolbar"
           >
