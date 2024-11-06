@@ -47,12 +47,12 @@ whenever(magicPreview, () => {
 
 <template>
   <div
-    class="flex items-center justify-between my-0.5  group"
-    :class="counter.showProjects ? ' ml-1 mr-1.5 ' : ' flex-col px-[4px] '"
+    class="flex items-center justify-between my-0.5 group"
+    :class="counter.showProjects ? 'ml-1 mr-1.5' : ' flex-col px-1'"
   >
     <button
       @click="counter.showProjects = !counter.showProjects"
-      class="flex items-center justify-start gap-2 p-1"
+      class="flex items-center justify-start gap-2 p-1 focus-visible:ring-1 focus-visible:ring-primary"
       ref="focusSidebar"
     >
       <!-- Logo -->

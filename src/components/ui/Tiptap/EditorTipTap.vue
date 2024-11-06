@@ -40,7 +40,7 @@ import { Editor, EditorContent, VueNodeViewRenderer } from "@tiptap/vue-3";
 import { useI18n } from 'vue-i18n';
 
 const counter = useCounterStore();
-const { editor, showEditorToolbar } = storeToRefs(counter);
+const { editor } = storeToRefs(counter);
 const { t } = useI18n();
 
 const props = defineProps({
@@ -166,8 +166,7 @@ onBeforeUnmount(() => {
     <ScrollAreaRoot
       class="w-full border-0 pt-0.5 group "
       :class="[
-        showEditorToolbar ? 'h-[calc(100vh-5rem)]' : 'h-[calc(100vh)]',
-        !toolbar ? 'border-transparent ' : '',
+        toolbar ? ' h-[calc(100vh-13rem)] md:h-[calc(100vh-5rem)]' : 'h-[calc(100vh)] border-transparent',
         editable ? 'bg-secondary/30' : 'bg-background',
       ]"
       style="--scrollbar-size: 10px"
@@ -175,7 +174,7 @@ onBeforeUnmount(() => {
       <ScrollAreaViewport
         class="w-full h-full group-focus-within:ring-primary/70 group-focus-within:ring-1 focus:!ring-primary focus:!ring-2 outline-none"
         :class="[
-          showEditorToolbar ? 'h-[calc(100vh-6rem)]' : 'h-[calc(100vh)]',
+          toolbar ? 'h-[calc(100vh-13rem)] md:h-[calc(100vh-6rem)]' : 'h-[calc(100vh)]',
         ]"
       >
         <div

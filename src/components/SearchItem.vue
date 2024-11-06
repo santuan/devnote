@@ -80,23 +80,18 @@ function focusEditor() {
 </script>
 
 <template>
-  <div class="relative flex items-center justify-between w-full pr-3 h-7 md:pr-2 group">
+  <div class="relative flex items-center justify-between w-full pr-3 h-7 md:pr-2 ">
     <Tooltip
       side="top"
       :name="`${props.data.project_data?.fixed ? t('verb.unfixed') : t('verb.fixed')}`"
     >
-      <div class="flex items-center w-7 h-7">
-        <ArrowRight
-          class="mx-1 size-4 shrink-0 group-hover:hidden group-focus-visible:hidden group-focus-within:hidden"
-          :class="props.data.project_data?.fixed ? '!hidden' : ''"
-        />
+      <div class="flex items-center ">
         <button
           @click="toggleFixed(props.data, props.data.project_data?.fixed)"
-          class="hidden py-1 mx-1 outline-none group-hover:inline-flex md:py-0 hover:text-primary group-focus-visible:!block focus-visible:ring-1 group-focus-within:!block"
-          :class="props.data.project_data?.fixed ? '!block' : ''"
+          class="py-1 mx-0 outline-none md:py-0 w-6 h-6 ring-primary hover:text-primary focus-visible:ring-1 flex justify-center items-center"
         >
           <Pin
-            class="-rotate-45 size-4"
+            class="origin-center -rotate-45 size-4"
             :class="props.data.project_data?.fixed ? 'fill-current text-primary' : ''"
           />
           <span class="sr-only">{{ props.data.project_data?.fixed ? t('verb.unfixed') : t('verb.fixed') }}</span>
@@ -104,7 +99,7 @@ function focusEditor() {
       </div>
     </Tooltip>
     <button
-      class="flex interactive hover:!text-primary px-2 py-0.5 rounded w-full items-center outline-none justify-start gap-2 text-sm text-left focus-within:ring-1 ring-primary"
+      class="flex interactive hover:!text-primary px-2 py-0.5 w-full items-center outline-none justify-start gap-2 text-sm text-left focus-within:ring-1 ring-primary"
       :class="loaded_id === props.data.id ? 'text-primary' : ''"
       @click="confirmSetDocument(props.data.id)"
     >

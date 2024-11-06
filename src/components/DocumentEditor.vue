@@ -16,7 +16,7 @@ const { t } = useI18n();
 <template>
   <div
     :key="counter.loaded_id"
-    class="relative h-full mx-auto ring-1 lg:w-full ring-secondary duration-1000"
+    class="relative h-full mx-auto ring-1 lg:w-full ring-secondary"
   >
     <Editor
       v-if="counter.content_editable"
@@ -35,10 +35,10 @@ const { t } = useI18n();
           ref="focusTitleTextarea"
           v-model="counter.project_name"
           style="field-sizing: content"
-          class="w-full px-2 pr-12 py-0.5 overflow-visible border outline-none resize-none leading-8 min-h-8 create_project bg-secondary/30 text-foreground border-secondary focus-within:border-primary placeholder:text-foreground/50 hover:border-primary"
+          class="w-full px-2 md:pr-12 py-0.5 overflow-visible border outline-none resize-none leading-8 min-h-8 create_project bg-secondary/30 text-foreground border-secondary focus-within:border-primary placeholder:text-foreground/50 hover:border-primary"
         />
         <Tooltip
-          name="Typography options" 
+          name="HTML options" 
           :side="'left'"
           :align="'center'"
           shortcut="ctrl shift alt &uarr; "
