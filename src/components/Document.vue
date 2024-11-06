@@ -16,6 +16,6 @@ import SplitterGroup from "./ui/SplitterGroup.vue";
 
 <style scoped>
 .Document {
-  @apply w-full min-h-screen pl-9 lg:pl-0 bg-background 
+  @apply w-full min-h-screen pl-12 md:pl-10 lg:pl-0 bg-background 
 }
 </style>

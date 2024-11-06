@@ -22,6 +22,11 @@ const props = defineProps({
     default: "center",
     required: false,
   },
+  alignOffset: {
+    type: Number,
+    default: 0,
+    required: false,
+  },
 });
 </script>
 
@@ -41,6 +46,7 @@ const props = defineProps({
           :class="props.shortcut ? 'flex-col' : ' '"
           :side-offset="6"
           :align="props.align"
+          :align-offset="props.alignOffset"
           style="-webkit-font-smoothing: subpixel-antialiased;"
         >
           <span

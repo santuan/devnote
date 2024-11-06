@@ -14,9 +14,11 @@ import { useCounterStore } from "@/stores/counter";
 
 import { useStorage } from "@vueuse/core";
 import { AArrowUp, AArrowDown } from "lucide-vue-next";
+import { useI18n } from 'vue-i18n';
 
 const counter = useCounterStore();
 const appFontSize = useStorage("appFontSize", "app-font-size-md");
+const { t } = useI18n();
 
 const toggleFontSize = (size) => {
   document.body.classList.remove(appFontSize.value);
@@ -33,8 +35,9 @@ onMounted(() => {
   <DropdownMenuRoot>
     <DropdownMenuTrigger class="interactive">
       <Tooltip
-        name="Font size"
+        :name="t('settings.fontsize')"
         :side="counter.showProjects ? 'bottom' : 'right'"
+        :align="'end'"
       >
         <span
           class="flex items-center justify-center border hover:bg-secondary/80 border-secondary bg-background size-8"
@@ -47,8 +50,8 @@ onMounted(() => {
     </DropdownMenuTrigger>
     <DropdownMenuContent
       :side="counter.showProjects ? 'bottom' : 'right'"
-      :align="counter.showProjects ? 'center' : 'start'"
-      class="z-10 grid w-64 text-xs bg-secondary"
+      :align="counter.showProjects ? 'end' : 'start'"
+      class="z-10 grid w-44 text-xs bg-secondary"
     >
       <DropdownMenuGroup>
         <DropdownMenuItem
@@ -58,7 +61,7 @@ onMounted(() => {
         >
           <span>Extra pequeño</span>
           <span
-            class="opacity-50"
+            class="opacity-50 scale-90"
           >.75rem</span>
         </DropdownMenuItem>
         <DropdownMenuItem
@@ -68,7 +71,7 @@ onMounted(() => {
         >
           <span>Pequeño</span>
           <span
-            class="opacity-50"
+            class="opacity-50 scale-90"
           >.875rem</span>
         </DropdownMenuItem>
         <DropdownMenuItem
@@ -78,7 +81,7 @@ onMounted(() => {
         >
           <span>Normal</span>
           <span
-            class="opacity-50"
+            class="opacity-50 scale-90"
           > 1rem</span>
         </DropdownMenuItem>
         <DropdownMenuItem
@@ -88,7 +91,7 @@ onMounted(() => {
         >
           <span>Grande</span>
           <span
-            class="opacity-50"
+            class="opacity-50 scale-90"
           >1.125rem</span>
         </DropdownMenuItem>
         <DropdownMenuItem
@@ -98,7 +101,7 @@ onMounted(() => {
         >
           <span>Extra grande</span>
           <span
-            class="opacity-50"
+            class="opacity-50 scale-90"
           >1.25rem</span>
         </DropdownMenuItem>
       </DropdownMenuGroup>

@@ -49,6 +49,7 @@ onMounted(() => {
       <Tooltip
         :name="t('settings.theme')"
         :side="counter.showProjects ? 'bottom' : 'right'"
+        :align="'end'"
       >
         <span
           class="flex items-center justify-center border hover:bg-secondary/80 border-secondary bg-background size-8"

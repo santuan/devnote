@@ -52,7 +52,7 @@ function expandAllScreen() {
       <Tooltip
         :name="panelRef?.isCollapsed ? 'Collapse' : 'Expand'"
         :side="panelRef?.isCollapsed ? 'left' : 'right'"
-        shortcut="Holding ctrl and click also toggle menu"
+        shortcut="ctrl shift alt ."
       >
         <button
           class="z-20 flex items-center justify-center bg-background size-6 "
@@ -61,7 +61,7 @@ function expandAllScreen() {
           :class="panelRef?.isCollapsed ? 'rotate-180' : ''"
         >
           <ArrowRightToLine class="delay-75 size-4 opacity-90" />
-          <span class="sr-only">{{ panelRef?.isCollapsed ? 'Collapse' : 'Expand' }} - Holding ctrl and click also toggle menu</span>
+          <span class="sr-only">{{ panelRef?.isCollapsed ? 'Collapse' : 'Expand' }}</span>
         </button>
       </Tooltip>
     </SplitterResizeHandle>

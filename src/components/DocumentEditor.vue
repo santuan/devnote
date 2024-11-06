@@ -16,7 +16,7 @@ const { t } = useI18n();
 <template>
   <div
     :key="counter.loaded_id"
-    class="relative h-full mx-auto ring-1 lg:w-full ring-secondary"
+    class="relative h-full mx-auto ring-1 lg:w-full ring-secondary grid grid-rows-[1fr,auto]"
   >
     <Editor
       v-if="counter.content_editable"
@@ -25,8 +25,24 @@ const { t } = useI18n();
       editable
     >
       <div
-        class="flex  items-start justify-between w-full gap-1 my-0.5"
+        class="flex items-start justify-between w-full  gap-1 my-0.5"
       >
+        <Tooltip
+          name="HTML options" 
+          :side="'left'"
+          :align="'center'"
+          shortcut="ctrl shift alt &uarr; "
+        >
+          <button
+            class="fixed md:relative left-12 md:left-0 bottom-0 text-primary-foreground size-8 md:size-9 mt-[0.05rem] flex justify-center items-center bg-primary z-[999] shrink-0 ring-1 ring-primary"
+            :class="counter.loaded_id ? '' : 'hidden md:flex'"
+            @click="showEditorToolbar = !showEditorToolbar"
+          >
+            <Type
+              class="size-4"
+            />
+          </button>
+        </Tooltip>
         <span class="sr-only">{{ t('editor.untitled') }}</span>
         <textarea
           :placeholder="t('editor.untitled')"
@@ -35,35 +51,24 @@ const { t } = useI18n();
           ref="focusTitleTextarea"
           v-model="counter.project_name"
           style="field-sizing: content"
-          class="w-full px-2 md:pr-12 py-0.5 overflow-visible border outline-none resize-none leading-8 min-h-8 create_project bg-secondary/30 text-foreground border-secondary focus-within:border-primary placeholder:text-foreground/50 hover:border-primary"
+          class="w-full px-2 py-0.5 overflow-visible border outline-none resize-none leading-8 min-h-8 create_project bg-secondary/30 text-foreground border-secondary focus-within:border-primary placeholder:text-foreground/50 hover:border-primary"
         />
-        <Tooltip
-          name="HTML options" 
-          :side="'left'"
-          :align="'center'"
-          shortcut="ctrl shift alt &uarr; "
-        >
-          <button
-            class="size-9 mt-[0.05rem] flex justify-center items-center bg-secondary/30 shrink-0 ring-1 ring-primary"
-            :class="showEditorToolbar === true ? '!bg-primary text-primary-foreground' : ''"
-            @click="showEditorToolbar = !showEditorToolbar"
-          >
-            <Type
-              class="size-4"
-            />
-          </button>
-        </Tooltip>
       </div>
     </Editor>
     <Editor
-      class="preview-editor"
       v-else
+      class="preview-editor"
       v-model="counter.project_body"
     >
+      <h2
+        class="py-3 px-1 md:px-3 mb-0 font-serif text-3xl md:text-5xl text-foreground font-black text-balance"
+      >
+        {{ counter.project_name }}
+      </h2>
       <div class="grid w-full">
         <div
           v-if="counter.loaded_id === ''"
-          class="absolute inset-0 overflow-hidden flex justify-center items-center w-full"
+          class="absolute inset-0 overflow-hidden flex justify-center items-center z-20 w-full"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -75,9 +80,6 @@ const { t } = useI18n();
             class="fill-primary"
           /></svg>
         </div>
-        <h2 class="pt-6 mb-0 font-serif text-5xl text-foreground font-black opacity-25 text-balance !mt-0">
-          {{ counter.project_name }}
-        </h2>
       </div>
     </Editor>
     <button

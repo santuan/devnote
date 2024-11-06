@@ -102,12 +102,13 @@ whenever(magicPreview, () => {
     <Tooltip
       v-if="!counter.showProjects"
       name="Abrir menú"
-      :align="'start'"
-      side="top"
+      :align="'end'"
+      side="right"
+      :align-offset="12"
     >
       <button
         @click="counter.showProjects = !counter.showProjects"
-        class="absolute flex flex-col justify-end items-center z-10 inset-1 py-2 md:py-5 bottom-2 hover:!border-1 top-[18.5rem]"
+        class="absolute flex flex-col justify-end items-center z-10 inset-1 py-2 md:py-5 bottom-2 hover:!border-1 top-[16.5rem]"
       >
         <ArrowRightToLine class="mx-auto duration-100 opacity-25 size-4 group-hover:opacity-90" />
         <span class="sr-only">{{ t('verb.close') }} panel</span>

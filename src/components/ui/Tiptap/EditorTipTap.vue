@@ -151,22 +151,21 @@ onBeforeUnmount(() => {
 <template>
   <div
     v-if="editor"
-    class="grid EditorCK w-full pl-3 pr-1 md:px-2"
+    class="grid EditorCK w-full pl-0 pr-1 pt-0 md:px-2"
   >
     <div
       v-if="toolbar"
       class="sticky top-0 z-30 pt-0.5 bg-background"
     >
+      <slot />
       <div class="relative grid w-full max-w-full gap-1 mx-auto control-group">
-        <slot />
         <EditorToolbar />
       </div>
     </div>
 
     <ScrollAreaRoot
-      class="w-full border-0 pt-0.5 group "
+      class="w-full border-0 pt-0.5 group h-screen"
       :class="[
-        toolbar ? ' h-[calc(100vh-13rem)] md:h-[calc(100vh-5rem)]' : 'h-[calc(100vh)] border-transparent',
         editable ? 'bg-secondary/30' : 'bg-background',
       ]"
       style="--scrollbar-size: 10px"
@@ -177,16 +176,15 @@ onBeforeUnmount(() => {
           toolbar ? 'h-[calc(100vh-13rem)] md:h-[calc(100vh-6rem)]' : 'h-[calc(100vh)]',
         ]"
       >
+        <template
+          v-if="!toolbar"
+        >
+          <slot />
+        </template>
         <div
-          class="max-w-full mx-auto prose  dark:prose-invert"
+          class="max-w-full  mx-auto prose  dark:prose-invert"
           spellcheck="false"
         >
-          <div
-            v-if="!toolbar"
-            class="flex items-center justify-start px-4 pt-[1.1135rem]"
-          >
-            <slot />
-          </div>
           <editor-content :editor="editor" />
         </div>
       </ScrollAreaViewport>
@@ -204,7 +202,7 @@ onBeforeUnmount(() => {
 
 <style>
 .tiptap {
-  @apply p-4 outline-none placeholder:text-primary min-h-64 font-serif;
+  @apply p-1 md:p-4 outline-none placeholder:text-primary min-h-64 font-serif;
 }
 
 .tiptap h1:first-of-type,

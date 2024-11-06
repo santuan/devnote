@@ -96,7 +96,7 @@ function setVideo() {
 
 
 <template>
-  <div class="flex justify-start select-none mt-0.5 mb-2 button-group md:w-auto">
+  <div class="flex justify-start select-none mb-2 button-group md:w-auto">
     <DropdownMenuRoot>
       <DropdownMenuTrigger class="headingSelector">
         <template v-if="editor.isActive('heading', { level: 1 })">
@@ -587,7 +587,7 @@ function setVideo() {
 }
 
 .button-group button {
-  @apply border border-secondary focus-within:border-primary outline-none h-8 min-w-8 max-w-8 xl:max-w-8 2xl:max-w-full 2xl:flex-1 2xl:min-w-7 text-sm focus-visible:border-primary hover:!border-primary flex justify-center items-center duration-100;
+  @apply border border-secondary focus-within:border-primary outline-none h-8 min-w-8 flex-1 xl:max-w-8 2xl:max-w-full 2xl:flex-1 2xl:min-w-7 text-sm focus-visible:border-primary hover:!border-primary flex justify-center items-center duration-100;
   /* flex: 1; */
 }
 

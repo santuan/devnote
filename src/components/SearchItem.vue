@@ -3,7 +3,7 @@
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
-import { ArrowRight, Circle, Pin, X } from "lucide-vue-next";
+import { Circle, Pin, X } from "lucide-vue-next";
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
 import Tooltip from "./ui/Tooltip.vue";
@@ -146,7 +146,7 @@ function focusEditor() {
     </AlertDialogRoot>
 
     <Tooltip
-      side="right"
+      side="top"
       :align="'end'"
       :name="t('sidebar.markAsDone')"
     >

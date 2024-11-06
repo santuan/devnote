@@ -77,10 +77,9 @@ const results = computed(() => {
     <ButtonCreateDocument />
     <div class="relative grid grid-cols-3 w-full gap-1 pl-1.5 pr-1 p-0.5 text-xs">
       <div
-        class="relative flex items-center justify-between w-full col-span-2"
+        class="relative flex items-center justify-between w-full col-span-2 border border-secondary"
         v-auto-animate="{ duration: 300 }"
       >
-        <Search class="absolute top-0 left-0 ml-2 h-8 size-3 text-foreground/40" />
         <label
           class=" w-full overflow-hidden relative ring-1  ring-secondary hover:ring-primary focus-within:ring-primary"
         >
@@ -88,19 +87,19 @@ const results = computed(() => {
             ref="focusSearch"
             v-model="searchTerm"
             :placeholder="`${t('sidebar.search')}`"
-            class="pr-1 text-xs outline-none pl-7 h-8 bg-transparent placeholder:text-xs  placeholder:text-foreground/40 "
+            class="text-xs outline-none pl-1 pr-12 h-8 bg-transparent placeholder:text-xs  placeholder:text-foreground/40 "
           >
           <span class="sr-only">{{ t('sidebar.search') }}</span>
         </label>
         <span
           v-if="!searchTerm"
-          class="absolute top-0 right-[0.015rem] flex items-center bg-primary/5 text-foreground justify-center h-8 text-xs min-w-10"
+          class=" top-0 right-[0.015rem] flex items-center bg-primary/5 text-foreground justify-center h-8 text-xs min-w-12"
         >
           {{ allItemsTodo?.length }}
         </span>
         <button
           v-else
-          class="absolute top-0 right-[0.015rem] flex items-center justify-center gap-1 px-1 text-xs font-medium min-w-12 h-8 bg-primary/10 hover:outline-none hover:bg-primary text-foreground focus-visible:ring-2 focus:outline focus:ring-primary/50 border-primary focus-visible:bg-primary/5 hover:text-foreground"
+          class="absolute top-0 right-[0.015rem] flex items-center justify-center gap-1 px-1 text-xs font-medium min-w-12 h-8 bg-primary/10 hover:outline-none hover:bg-primary/20 text-foreground focus-visible:ring-2 focus:outline focus:ring-primary/50 border-primary focus-visible:bg-primary/5 hover:text-foreground"
           @click="searchTerm = ''"
         >
           <span class="min-w-3">{{ results.length }}</span>
@@ -112,14 +111,14 @@ const results = computed(() => {
         <SelectSort />
       </div>
     </div>
-    <div class="overflow-y-auto pl-1 SidebarProjects overflow-x-hidden h-[calc(100vh-13rem)]">
+    <div class="overflow-y-auto pl-1 SidebarProjects overflow-x-hidden h-[calc(100dvh-13rem)]">
       <ScrollAreaRoot
-        class="w-full h-[calc(100vh-13rem)] rounded overflow-hidden"
+        class="w-full h-full rounded overflow-hidden"
         style="--scrollbar-size: 10px"
       >
         <ScrollAreaViewport class="w-full h-full rounded">
           <div
-            class="py-1 px-0.5 flex flex-col justify-start items-start relative gap-1 w-full min-h-96"
+            class="py-1 px-0.5 flex flex-col justify-start items-start relative gap-1 w-full min-h-24"
           >
             <SearchItem
               v-for="item in results"
