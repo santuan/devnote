@@ -154,11 +154,13 @@ onBeforeUnmount(() => {
     class="grid EditorCK w-full pl-0 pr-1 pt-0 md:px-2"
   >
     <div
-      v-if="toolbar"
       class="sticky top-0 z-30 pt-0.5 bg-background"
     >
       <slot />
-      <div class="relative grid w-full max-w-full gap-1 mx-auto control-group">
+      <div
+        v-if="toolbar"
+        class="relative grid w-full max-w-full gap-1 mx-auto control-group"
+      >
         <EditorToolbar />
       </div>
     </div>
@@ -176,11 +178,6 @@ onBeforeUnmount(() => {
           toolbar ? 'h-[calc(100vh-13rem)] md:h-[calc(100vh-6rem)]' : 'h-[calc(100vh)]',
         ]"
       >
-        <template
-          v-if="!toolbar"
-        >
-          <slot />
-        </template>
         <div
           class="max-w-full  mx-auto prose  dark:prose-invert"
           spellcheck="false"
