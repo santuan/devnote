@@ -19,6 +19,13 @@ function new_document() {
   if (!largerThanLg.value) {
     counter.showProjects = false;
   }
+  focusOnTitle()
+}
+
+function focusOnTitle() {
+  setTimeout(() => {
+    counter.SetFocusTitle()
+  }, 100);
 }
 
 </script>
