@@ -25,7 +25,7 @@ const { t } = useI18n();
       editable
     >
       <div
-        class="flex items-start justify-between w-full gap-1 "
+        class="flex items-start justify-between w-full gap-1 relative"
       >
         <Tooltip
           name="HTML options" 
@@ -34,10 +34,10 @@ const { t } = useI18n();
           shortcut="ctrl shift alt &uarr; "
         >
           <button
-            class="fixed md:relative left-12 md:left-0 bottom-0 size-8 md:size-9 flex justify-center items-center z-10 shrink-0 ring-1 ring-secondary ring-inset"
+            class="absolute top-0.5 md:top-0 right-0.5 md:right-0 size-8 md:size-9 flex justify-center items-center z-10 shrink-0 ring-1 ring-secondary ring-inset"
             :class="[
               counter.loaded_id ? '' : 'hidden md:flex',
-              counter.showEditorToolbar ? ' bg-primary text-primary-foreground ' : '',
+              counter.showEditorToolbar ? ' bg-primary text-primary-foreground ' : 'bg-secondary text-foreground',
             ]"
             @click="showEditorToolbar = !showEditorToolbar"
           >
@@ -64,7 +64,7 @@ const { t } = useI18n();
       v-model="counter.project_body"
     >
       <h2
-        class="py-3 px-1 md:px-3 mb-0 font-serif text-3xl md:text-5xl text-foreground font-black text-balance"
+        class="py-3 px-1 mb-0 font-serif text-3xl md:text-5xl text-foreground font-black text-balance"
       >
         {{ counter.project_name }}
       </h2>

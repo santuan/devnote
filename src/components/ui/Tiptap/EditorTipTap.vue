@@ -177,7 +177,7 @@ onBeforeUnmount(() => {
       >
         <div
           v-if="!toolbar"
-          class="px-3 pt-2"
+          class="md:p-4"
         >
           <slot />
         </div>
