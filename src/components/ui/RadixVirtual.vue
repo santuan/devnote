@@ -13,10 +13,14 @@ import {
   ListboxVirtualizer,
 } from "radix-vue";
 
+import { useStorage } from "@vueuse/core";
+
+
 import { computed, shallowRef } from "vue";
 import { Check, ChevronDown, RotateCcw, X } from "lucide-vue-next";
 import { useI18n } from 'vue-i18n';
 
+const appFontSize = useStorage("appFontSize");
 const emit = defineEmits(["update:modelValue"]);
 const { t } = useI18n();
 
@@ -41,6 +45,26 @@ const selected = computed({
   set(value) {
     emit("update:modelValue", value);
   },
+});
+
+const appSizeResult = computed(() => {
+  if (!appFontSize.value) return;
+  if (appFontSize.value === 'app-font-size-xs') {
+    return 23
+  }
+  if (appFontSize.value === 'app-font-size-sm') {
+    return 28
+  }
+  if (appFontSize.value === 'app-font-size-md') {
+    return 32
+  }
+  if (appFontSize.value === 'app-font-size-lg') {
+    return 35
+  }
+  if (appFontSize.value === 'app-font-size-xl') {
+    return 40
+  }
+  return 32 
 });
 
 const searchTerm = shallowRef("");
@@ -121,7 +145,7 @@ const filteredOptions = computed(() =>
                 <ListboxVirtualizer
                   v-slot="{ option }"
                   :options="filteredOptions"
-                  :estimate-size="30"
+                  :estimate-size="appSizeResult"
                 >
                   <ListboxItem
                     :value="option"

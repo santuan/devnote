@@ -16,7 +16,7 @@ const { t } = useI18n();
 <template>
   <div
     :key="counter.loaded_id"
-    class="relative h-full mx-auto ring-1 lg:w-full ring-secondary grid grid-rows-[1fr,auto]"
+    class="relative h-full mx-auto ring-1 lg:w-full ring-secondary p-0.5 grid grid-rows-[1fr,auto]"
   >
     <Editor
       v-if="counter.content_editable"
@@ -25,7 +25,7 @@ const { t } = useI18n();
       editable
     >
       <div
-        class="flex items-start justify-between w-full  gap-1 my-0.5"
+        class="flex items-start justify-between w-full gap-1 "
       >
         <Tooltip
           name="HTML options" 
@@ -34,8 +34,11 @@ const { t } = useI18n();
           shortcut="ctrl shift alt &uarr; "
         >
           <button
-            class="fixed md:relative left-12 md:left-0 bottom-0 text-primary-foreground size-8 md:size-9 mt-[0.05rem] flex justify-center items-center bg-primary z-[999] shrink-0 ring-1 ring-primary"
-            :class="counter.loaded_id ? '' : 'hidden md:flex'"
+            class="fixed md:relative left-12 md:left-0 bottom-0 size-8 md:size-9 flex justify-center items-center z-10 shrink-0 ring-1 ring-secondary ring-inset"
+            :class="[
+              counter.loaded_id ? '' : 'hidden md:flex',
+              counter.showEditorToolbar ? ' bg-primary text-primary-foreground ' : '',
+            ]"
             @click="showEditorToolbar = !showEditorToolbar"
           >
             <Type
@@ -51,7 +54,7 @@ const { t } = useI18n();
           ref="focusTitleTextarea"
           v-model="counter.project_name"
           style="field-sizing: content"
-          class="w-full px-2 py-0.5 overflow-visible border outline-none resize-none leading-8 min-h-8 create_project bg-secondary/30 text-foreground border-secondary focus-within:border-primary placeholder:text-foreground/50 hover:border-primary"
+          class="w-full px-2 py-0.5 overflow-visible ring-1 outline-none resize-none leading-8 min-h-8 create_project bg-secondary/30 text-foreground ring-secondary focus-within:ring-primary placeholder:text-foreground/50 hover:ring-primary ring-inset"
         />
       </div>
     </Editor>
@@ -72,7 +75,7 @@ const { t } = useI18n();
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="absolute inset-0 opacity-[0.02]"
+            class="absolute inset-0 opacity-[0.05]"
             id="a"
             viewBox="0 0 384 311.02"
           ><path

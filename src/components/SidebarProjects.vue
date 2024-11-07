@@ -93,17 +93,17 @@ const results = computed(() => {
         </label>
         <span
           v-if="!searchTerm"
-          class=" top-0 right-[0.015rem] flex items-center bg-primary/5 text-foreground justify-center h-8 text-xs min-w-12"
+          class=" top-0 right-[0.015rem] flex items-center bg-primary/20 text-foreground justify-center h-8 text-xs min-w-12"
         >
           {{ allItemsTodo?.length }}
         </span>
         <button
           v-else
-          class="absolute top-0 right-[0.015rem] flex items-center justify-center gap-1 px-1 text-xs font-medium min-w-12 h-8 bg-primary/10 hover:outline-none hover:bg-primary/20 text-foreground focus-visible:ring-2 focus:outline focus:ring-primary/50 border-primary focus-visible:bg-primary/5 hover:text-foreground"
+          class="absolute top-0 right-[0.015rem] flex items-center justify-center gap-1 px-1 text-sm font-medium min-w-12 h-8 bg-primary/10 hover:outline-none hover:bg-primary/20 text-foreground focus-visible:ring-2 focus:outline focus:ring-primary/50 border-primary focus-visible:bg-primary/5 hover:text-foreground"
           @click="searchTerm = ''"
         >
           <span class="min-w-3">{{ results.length }}</span>
-          <CircleX class="size-4" />
+          <CircleX class="size-3" />
         </button>
       </div>
 

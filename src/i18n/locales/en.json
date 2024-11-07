@@ -107,7 +107,7 @@
     "databaseCleared": "Database deleted",
     "databaseImported": "Database imported",
     "completed": "completed",
-    "unmarked": "unmarked",
+    "unmarked": "doing",
     "offlineReady": "Application is ready for offline use",
     "newVersionAvailable": "New version available",
     "updateButton": "Update",

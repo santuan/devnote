@@ -1,7 +1,5 @@
 <script setup>
 
-
-
 import EditorToolbar from "@/components/ui/Tiptap/EditorToolbar.vue";
 import EditorCodeBlock from "@/components/ui/Tiptap/EditorCodeBlock.vue";
 import Video from "./addVideo";
@@ -151,23 +149,21 @@ onBeforeUnmount(() => {
 <template>
   <div
     v-if="editor"
-    class="grid EditorCK w-full pl-0 pr-1 pt-0 md:px-2"
+    class="grid EditorCK w-full pl-0 pr-1 md:px-2"
   >
     <div
       v-if="toolbar"
-      class="sticky top-0 z-30 pt-0.5 bg-background"
+      class="sticky top-0 z-30   bg-background"
     >
       <slot />
       <div
-        
-        class="relative grid w-full max-w-full gap-1 mx-auto control-group"
+        class="relative grid w-full max-w-full mt-0.5 gap-1 mx-auto control-group"
       >
         <EditorToolbar />
       </div>
     </div>
-
     <ScrollAreaRoot
-      class="w-full border-0 pt-0.5 group h-screen"
+      class="w-full border-0 group h-screen"
       :class="[
         editable ? 'bg-secondary/30' : 'bg-background',
       ]"
@@ -181,6 +177,7 @@ onBeforeUnmount(() => {
       >
         <div
           v-if="!toolbar"
+          class="px-3 pt-2"
         >
           <slot />
         </div>
