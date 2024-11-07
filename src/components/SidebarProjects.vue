@@ -5,7 +5,7 @@ import SelectSort from "./ui/SelectSort.vue";
 import ButtonCreateDocument from "./ui/ButtonCreateDocument.vue";
 import EditDatabaseTitle from "./ui/EditDatabaseTitle.vue";
 
-import { computed, watch, shallowRef } from "vue";
+import { computed, watch, shallowRef, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useCounterStore } from "@/stores/counter";
 
@@ -25,6 +25,7 @@ const {
 } = storeToRefs(counter);
 const { t } = useI18n();
 
+const focusSearch = ref(null)
 const debounced = refDebounced(searchTerm, 300);
 const input = shallowRef(file_name);
 const sortOption = useStorage("sortItemsBy", "name");
@@ -32,6 +33,11 @@ const sortOption = useStorage("sortItemsBy", "name");
 onClickOutside(target, () => {
   editing.value = false;
 });
+
+function clearTerm() {
+  searchTerm.value = ''
+  focusSearch.value.focus()
+}
 
 watch(input, (v) => {
   if (v) counter.update_database(input.value);
@@ -100,7 +106,7 @@ const results = computed(() => {
         <button
           v-else
           class="absolute top-0 right-[0.015rem] flex items-center justify-center gap-1 px-1 text-sm font-medium min-w-12 h-8 bg-primary/10 hover:outline-none hover:bg-primary/20 text-foreground focus-visible:ring-2 focus:outline focus:ring-primary/50 border-primary focus-visible:bg-primary/5 hover:text-foreground"
-          @click="searchTerm = ''"
+          @click="clearTerm()"
         >
           <span class="min-w-3">{{ results.length }}</span>
           <CircleX class="size-3" />
@@ -119,6 +125,7 @@ const results = computed(() => {
         <ScrollAreaViewport class="w-full h-full rounded">
           <div
             class="py-1 px-0.5 flex flex-col justify-start items-start relative gap-1 w-full min-h-24"
+            v-if="results?.length + allItemsChecked?.length >= 1"
           >
             <SearchItem
               v-for="item in results"
@@ -133,7 +140,7 @@ const results = computed(() => {
           </div>
           <div
             v-if="results?.length + allItemsChecked?.length === 0"
-            class=" w-full h-[calc(100vh-20rem)] text-center flex items-center justify-center"
+            class="w-full h-[calc(100vh-20rem)] text-center flex items-center justify-center"
           >
             <p class="w-40 text-xs text-muted-foreground text-pretty">
               {{ t('sidebar.noResultsDescription') }}

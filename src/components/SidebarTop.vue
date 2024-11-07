@@ -104,7 +104,7 @@ whenever(magicPreview, () => {
       name="Abrir menú"
       :align="'end'"
       side="right"
-      :align-offset="12"
+      :align-offset="18"
     >
       <button
         @click="counter.showProjects = !counter.showProjects"

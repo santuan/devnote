@@ -1,6 +1,4 @@
 <script setup>
-
-import EditorToolbar from "@/components/ui/Tiptap/EditorToolbar.vue";
 import EditorCodeBlock from "@/components/ui/Tiptap/EditorCodeBlock.vue";
 import Video from "./addVideo";
 
@@ -149,42 +147,21 @@ onBeforeUnmount(() => {
 <template>
   <div
     v-if="editor"
-    class="grid EditorCK w-full pl-0 pr-1 md:px-2"
+    class="grid  EditorCK w-full"
   >
-    <div
-      v-if="toolbar"
-      class="sticky top-0 z-30   bg-background"
-    >
-      <slot />
-      <div
-        class="relative grid w-full max-w-full mt-0.5 gap-1 mx-auto control-group"
-      >
-        <EditorToolbar />
-      </div>
-    </div>
     <ScrollAreaRoot
-      class="w-full border-0 group h-screen"
-      :class="[
-        editable ? 'bg-secondary/30' : 'bg-background',
-      ]"
+      class="w-full border-0 group max-h-screen"
+      :class="[editable ? 'bg-secondary/30' : 'bg-background']"
       style="--scrollbar-size: 10px"
     >
       <ScrollAreaViewport
         class="w-full h-full group-focus-within:ring-primary/70 group-focus-within:ring-1 focus:!ring-primary focus:!ring-2 outline-none"
-        :class="[
-          toolbar ? 'h-[calc(100vh-13rem)] md:h-[calc(100vh-6rem)]' : 'h-[calc(100vh)]',
-        ]"
       >
         <div
-          v-if="!toolbar"
-          class="md:p-4"
-        >
-          <slot />
-        </div>
-        <div
-          class="max-w-full  mx-auto prose  dark:prose-invert"
+          class="max-w-full px-2  mx-auto prose dark:prose-invert"
           spellcheck="false"
         >
+          <slot />
           <editor-content :editor="editor" />
         </div>
       </ScrollAreaViewport>
@@ -202,8 +179,10 @@ onBeforeUnmount(() => {
 
 <style>
 .tiptap {
-  @apply p-1 md:p-4 outline-none placeholder:text-primary min-h-64 font-serif;
+  @apply p-1 md:p-4 md:pt-0 outline-none placeholder:text-primary min-h-64 font-serif;
 }
+
+
 
 .tiptap h1:first-of-type,
 .tiptap h2:first-of-type,
