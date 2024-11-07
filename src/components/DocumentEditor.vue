@@ -27,6 +27,16 @@ const { t } = useI18n();
       <div
         class="flex items-start justify-between w-full gap-1 relative"
       >
+        <span class="sr-only">{{ t('editor.untitled') }}</span>
+        <textarea
+          :placeholder="t('editor.untitled')"
+          autocomplete="off"
+          spellcheck="false"
+          ref="focusTitleTextarea"
+          v-model="counter.project_name"
+          style="field-sizing: content"
+          class="w-full px-2 py-0.5 overflow-visible ring-1 outline-none resize-none leading-8 min-h-8 create_project bg-secondary/30 text-foreground ring-secondary focus-within:ring-primary placeholder:text-foreground/50 hover:ring-primary ring-inset"
+        />
         <Tooltip
           name="HTML options" 
           :side="'left'"
@@ -46,16 +56,6 @@ const { t } = useI18n();
             />
           </button>
         </Tooltip>
-        <span class="sr-only">{{ t('editor.untitled') }}</span>
-        <textarea
-          :placeholder="t('editor.untitled')"
-          autocomplete="off"
-          spellcheck="false"
-          ref="focusTitleTextarea"
-          v-model="counter.project_name"
-          style="field-sizing: content"
-          class="w-full px-2 py-0.5 overflow-visible ring-1 outline-none resize-none leading-8 min-h-8 create_project bg-secondary/30 text-foreground ring-secondary focus-within:ring-primary placeholder:text-foreground/50 hover:ring-primary ring-inset"
-        />
       </div>
     </Editor>
     <Editor
