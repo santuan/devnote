@@ -1,27 +1,27 @@
 <script setup>
+
+import EditorTitle from "./ui/Tiptap/EditorTitle.vue";
+import EditorToolbar from "./ui/Tiptap/EditorToolbar.vue";
 import Editor from "@/components/ui/Tiptap/EditorTipTap.vue";
+import SplashScreen from "./ui/SplashScreen.vue";
 
 import { useCounterStore } from "@/stores/counter";
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from "pinia";
-import { Type } from "lucide-vue-next";
-import Tooltip from "./ui/Tooltip.vue";
-import SplashScreen from "./ui/SplashScreen.vue";
-import EditorTitle from "./ui/Tiptap/EditorTitle.vue";
-import EditorToolbar from "./ui/Tiptap/EditorToolbar.vue";
 
 const counter = useCounterStore();
-const { focusTitleTextarea, showEditorToolbar } = storeToRefs(counter);
+const { showEditorToolbar } = storeToRefs(counter);
 const { t } = useI18n();
 
 </script>
 
 <template>
   <div :key="counter.loaded_id">
-    <main class="editor relative h-dvh mx-auto lg:w-full grid px-1">
+    <main class="editor">
       <div
+        class="editor-top"
         v-if="counter.content_editable"
-        v-auto-animate
+        :class="showEditorToolbar && 'with-toolbar'"
       >
         <EditorTitle />
         <EditorToolbar v-if="showEditorToolbar" />
@@ -60,11 +60,15 @@ const { t } = useI18n();
 </template>
 
 <style scoped>
-
 .editor {
+  @apply relative mx-auto lg:w-full px-1 gap-y-0.5;
   display: grid;
   min-height: 100vh;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr;
 }
 
+.editor-top {
+  @apply bg-background z-50;
+
+}
 </style>

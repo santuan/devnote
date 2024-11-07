@@ -21,7 +21,7 @@ const { t } = useI18n();
       ref="focusTitleTextarea"
       v-model="counter.project_name"
       style="field-sizing: content"
-      class="w-full px-2 py-0.5 overflow-visible ring-1 outline-none resize-none leading-8 min-h-8 create_project bg-secondary/30 text-foreground ring-secondary focus-within:ring-primary placeholder:text-foreground/50 hover:ring-primary ring-inset"
+      class="w-full pr-8 px-2 py-0.5 overflow-visible ring-1 outline-none resize-none leading-8 min-h-8 create_project bg-secondary/30 text-foreground ring-secondary focus-within:ring-primary placeholder:text-foreground/50 hover:ring-primary ring-inset"
     />
     <Tooltip
       name="HTML options"

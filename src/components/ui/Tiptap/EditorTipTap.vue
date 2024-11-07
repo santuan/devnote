@@ -147,15 +147,20 @@ onBeforeUnmount(() => {
 <template>
   <div
     v-if="editor"
-    class="grid  EditorCK w-full"
+    class="EditorCK"
   >
     <ScrollAreaRoot
-      class="w-full border-0 group max-h-screen"
-      :class="[editable ? 'bg-secondary/30' : 'bg-background']"
+      class="ScrollAreaRoot group "
+      :class="[
+        toolbar ? 'with-toolbar' : '',
+        counter.content_editable ? 'is-editable' : ' is-preview '
+      ]
+      "
       style="--scrollbar-size: 10px"
     >
       <ScrollAreaViewport
-        class="w-full h-full group-focus-within:ring-primary/70 group-focus-within:ring-1 focus:!ring-primary focus:!ring-2 outline-none"
+        class="w-full h-full  outline-none"
+        :class="counter.content_editable ? 'group-focus-within:ring-primary/70 group-focus-within:ring-1 border border-secondary focus:!ring-primary focus:!ring-2' : '  '"
       >
         <div
           class="max-w-full px-2  mx-auto prose dark:prose-invert"
@@ -178,11 +183,30 @@ onBeforeUnmount(() => {
 </template>
 
 <style>
-.tiptap {
-  @apply p-1 md:p-4 md:pt-0 outline-none placeholder:text-primary min-h-64 font-serif;
+.EditorCK {
+  @apply grid w-full min-h-full
 }
 
+.ScrollAreaRoot {
+  @apply w-full border-0 bg-background;
 
+  &.is-editable {
+    @apply max-h-[calc(100dvh-2.5rem)]
+  }
+
+  &.with-toolbar {
+    @apply bg-secondary/30;
+    @apply max-h-[calc(100dvh-10rem)] md:max-h-[calc(100dvh-8rem)];
+  }
+
+  &.is-preview {
+    @apply max-h-screen
+  }
+}
+
+.tiptap {
+  @apply p-1 md:p-4 md:pt-0 outline-none placeholder:text-primary min-h-[80dvh] font-serif;
+}
 
 .tiptap h1:first-of-type,
 .tiptap h2:first-of-type,
@@ -262,7 +286,7 @@ html.dark .shiki span {
   float: left;
   height: 0;
   pointer-events: none;
-  @apply text-foreground/30;
+  @apply text-foreground/50;
 }
 
 /* Bubble menu */

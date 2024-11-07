@@ -5,7 +5,7 @@
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="absolute inset-0 opacity-[0.02]"
+        class="absolute inset-0 opacity-[0.04]"
         id="a"
         viewBox="0 0 384 311.02"
       ><path
