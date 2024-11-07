@@ -96,7 +96,7 @@ onMounted(() => {
         </DropdownMenuItem>
         <DropdownMenuItem
           @click="toggleFontSize('app-font-size-xl')"
-          class="p-2 flex justify-between w-full hover:bg-secondary-foreground/10"
+          class="p-2 sm:flex justify-between w-full hover:bg-secondary-foreground/10 hidden"
           :class="appFontSize === 'app-font-size-xl' ? 'text-primary' : ''"
         >
           <span>Extra grande</span>

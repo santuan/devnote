@@ -61,7 +61,7 @@ const { t } = useI18n();
 
 <style scoped>
 .editor {
-  @apply relative mx-auto lg:w-full px-1 gap-y-0.5;
+  @apply relative mx-auto lg:w-full px-1 gap-y-0.5 pt-1;
   display: grid;
   min-height: 100vh;
   grid-template-rows: auto 1fr;

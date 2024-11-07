@@ -188,19 +188,18 @@ onBeforeUnmount(() => {
 }
 
 .ScrollAreaRoot {
-  @apply w-full border-0 bg-background;
+  @apply w-full border-0 ;
 
   &.is-editable {
-    @apply max-h-[calc(100dvh-2.5rem)]
+    @apply max-h-[calc(100dvh-2.5rem)] bg-secondary/30;
   }
 
   &.with-toolbar {
-    @apply bg-secondary/30;
-    @apply max-h-[calc(100dvh-10rem)] md:max-h-[calc(100dvh-8rem)];
+    @apply max-h-[calc(100dvh-7rem)] md:max-h-[calc(100dvh-5rem)];
   }
 
   &.is-preview {
-    @apply max-h-screen
+    @apply max-h-screen bg-background
   }
 }
 
