@@ -75,6 +75,20 @@ function toggleFixed(item, isFixed) {
 function focusEditor() {
   showAlertDialog.value = false
   editor?.value.commands.focus()
+  if (largerThanLg.value === false) {
+    counter.showProjects = false;
+  }
+}
+
+function focusOnTitle() {
+  showAlertDialog.value = false
+  counter.content_editable = true;
+  if (largerThanLg.value === false) {
+    counter.showProjects = false;
+  }
+  setTimeout(() => {
+    counter.SetFocusTitle()
+  }, 100);
 }
 
 </script>
@@ -130,7 +144,7 @@ function focusEditor() {
               </button>
             </AlertDialogAction>
             <button
-              @click="focusEditor()"
+              @click="focusOnTitle()"
               class="bg-secondary ring-1 !ring-secondary text-foreground hover:bg-background hover:ring-2 hover:ring-foreground inline-flex h-[35px] items-center justify-center rounded-[4px] px-3 text-xs font-semibold leading-none focus-visible:ring-2 focus:outline-foreground"
             >
               {{ t('message.continueEditing') }}
@@ -165,11 +179,11 @@ function focusEditor() {
             @change="toggleCheck(props.data, $event.target.checked)"
           >
           <!-- <div class="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600" /> -->
-          <div class="peer-focus:outline-none items-center size-7 md:size-6 flex justify-center rounded-full relative z-[50] mr-0.5 peer-focus:ring-1 peer-focus:ring-blue-300 dark:peer-focus:ring-primary">
+          <div
+            class="peer-focus:outline-none items-center size-7 md:size-6 flex justify-center rounded-full relative z-[50] mr-0.5 peer-focus:ring-1 peer-focus:ring-blue-300 dark:peer-focus:ring-primary"
+          >
 
-            <Circle
-              class="size-5 md:size-4 "
-            />
+            <Circle class="size-5 md:size-4 " />
           </div>
           <span class="sr-only">{{ t('sidebar.markAsDone') }}</span>
         </label>

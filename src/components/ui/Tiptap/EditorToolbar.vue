@@ -97,7 +97,7 @@ function setVideo() {
 
 <template>
   <div
-    class="pt-1 z-30 bg-background"
+    class="pt-1 z-10 relative bg-background"
     v-if="editor"
   >
     <div

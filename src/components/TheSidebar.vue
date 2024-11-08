@@ -63,7 +63,7 @@ watch(isOverDropZone, (v) => {
     <button
       v-show="counter.showProjects"
       @click="counter.showProjects = !counter.showProjects"
-      class="fixed inset-0 !z-50 bg-background/90 !border-0 !ring-0 !outline-none lg:hidden"
+      class="fixed inset-0 !z-[51] bg-background/90 !border-0 !ring-0 !outline-none lg:hidden"
     >
       <span class="sr-only">{{ t('verb.close') }} panel</span>
     </button>

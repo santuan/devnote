@@ -7,8 +7,21 @@ const counter = useCounterStore();
 
 <template>
   <div
-    class="absolute inset-0 overflow-hidden flex justify-center items-end z-20 w-full"
+    class="absolute inset-0 overflow-hidden flex-col flex justify-between items-center z-20 w-full"
   >
+    <Tooltip
+      v-if="counter.loaded_id === '' || counter.project_body !== '<p></p>'"
+      name="click to edit"
+      :side="'bottom'"
+    >
+      <button
+        @click="counter.toggleEditable"
+        class="p-2 h-8 relative z-10 text-xs text-primary"
+      >
+        This document is not saved.
+        <span v-if="counter.project_name === ''">:* missing title</span>
+      </button>
+    </Tooltip>
     <Tooltip
       v-if="counter.loaded_id === '' || counter.project_body !== '<p></p>'"
       name="click to edit"

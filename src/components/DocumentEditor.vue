@@ -17,7 +17,10 @@ const { t } = useI18n();
 
 <template>
   <div :key="counter.loaded_id">
-    <main class="editor">
+    <main
+      class="editor"
+      v-auto-animate
+    >
       <div
         class="editor-top"
         v-if="counter.content_editable"

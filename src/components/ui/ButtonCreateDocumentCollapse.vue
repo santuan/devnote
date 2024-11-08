@@ -14,10 +14,14 @@ const largerThanLg = breakpoints.greater("lg");
 const { t } = useI18n();
 
 function new_document() {
-  counter.clear_editor();
-  counter.content_editable = true;
-  if (!largerThanLg.value) {
+  console.log("asd")
+  if (largerThanLg.value === true) {
+    counter.clear_editor();
+    counter.content_editable = true;
+  } else {
+    counter.clear_editor();
     counter.showProjects = false;
+    counter.content_editable = true;
   }
   focusOnTitle()
 }
@@ -32,7 +36,7 @@ function focusOnTitle() {
 
 <template>
   <button
-    @click="loaded_id === '' ? null : new_document()"
+    @click="new_document()"
     class="CreateNewButton flex items-center justify-center gap-2 text-xs size-8 w-full text-left bg-primary focus-within:ring-1 ring-primary text-primary-foreground"
     :class="{
       '!bg-secondary !ring-secondary !text-primary-foreground': loaded_id === null,
