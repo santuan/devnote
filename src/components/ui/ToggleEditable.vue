@@ -11,8 +11,8 @@ const { t } = useI18n();
 
 <template>
   <Tooltip
-    :name="`${counter.content_editable ? t('sidebar.contentPreview') : t('sidebar.contentEditable')}`"
     shortcut="ctrl + alt + p"
+    :name="`${counter.content_editable ? t('sidebar.contentPreview') : t('sidebar.contentEditable')}`"
     :side="counter.showProjects ? 'bottom' : 'right'"
     :align="counter.showProjects ? 'end' : 'center'"
   >
