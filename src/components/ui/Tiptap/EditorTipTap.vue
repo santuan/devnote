@@ -61,6 +61,7 @@ onMounted(() => {
     extensions: [
       StarterKit.configure({
         codeBlock: false,
+        autocapitalize: "off",
       }),
       Color.configure({ types: [TextStyle.name, ListItem.name] }),
       TextStyle.configure({ types: [ListItem.name] }),
@@ -110,6 +111,7 @@ onMounted(() => {
       }).configure({
         HTMLAttributes: {
           spellcheck: "false",
+          autocapitalize: "off",
         },
         defaultTheme: "houston",
       }),
@@ -167,7 +169,7 @@ onBeforeUnmount(() => {
           spellcheck="false"
         >
           <slot />
-          <editor-content :editor="editor" autocapitalize="off" />
+          <editor-content :editor="editor" />
         </div>
       </ScrollAreaViewport>
       <ScrollAreaScrollbar
