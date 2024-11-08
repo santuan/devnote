@@ -5,6 +5,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "radix-vue";
 import Tooltip from "@/components/ui/Tooltip.vue";
 
@@ -16,6 +17,7 @@ import { storeToRefs } from "pinia";
 
 import {
   Italic, ImagePlus, Bold, Strikethrough, Code, RemoveFormatting, Eraser, List, ListOrdered, Quote, Minus, Undo2, Redo2, AlignLeft, AlignCenter, AlignRight, AlignJustify, Link2, Unlink2, Video, ChevronDown, ImageDown, Youtube, SquareMinus,
+  Table,
 } from "lucide-vue-next";
 import { useI18n } from 'vue-i18n';
 
@@ -552,6 +554,151 @@ function setVideo() {
               <span class="sr-only">{{ t('toolbar.unlink') }}</span>
             </button>
           </Tooltip>
+
+          <DropdownMenuRoot>
+            <DropdownMenuTrigger class="data-[state=open]:!bg-primary data-[state=open]:text-primary-foreground relative">
+              <Tooltip
+                name="table"
+                :side="'bottom'"
+                :align="'end'"
+              >
+                <span
+                  class="flex items-center justify-center outline-none interactive size-8 focus-visible:border-primary border-secondary"
+                >
+                  <Table class="size-4 shrink-0" />
+                </span>
+                <span class="sr-only">table</span>
+              </Tooltip>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              :align="'end'"
+              :side="'bottom'"
+              class="z-10 grid text-xs border w-44 bg-background border-secondary"
+            >
+              <DropdownMenuItem
+                @click="editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()"
+                class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+              >
+                Insert table
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                @click="editor.chain().focus().addColumnBefore().run()"
+                class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+                :disabled="!editor.can().addColumnBefore()"
+              >
+                Add column before
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                @click="editor.chain().focus().addColumnAfter().run()"
+                class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+                :disabled="!editor.can().addColumnAfter()"
+              >
+                Add column after
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                @click="editor.chain().focus().deleteColumn().run()"
+                class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+                :disabled="!editor.can().deleteColumn()"
+              >
+                Delete column
+              </DropdownMenuItem>
+              <DropdownMenuSeparator class="h-[0.0125rem] bg-primary my-2" />
+              <DropdownMenuItem
+                @click="editor.chain().focus().addRowBefore().run()"
+                class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+                :disabled="!editor.can().addRowBefore()"
+              >
+                Add row before
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                @click="editor.chain().focus().addRowAfter().run()"
+                class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+                :disabled="!editor.can().addRowAfter()"
+              >
+                Add row after
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                @click="editor.chain().focus().deleteRow().run()"
+                class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+                :disabled="!editor.can().deleteRow()"
+              >
+                Delete row
+              </DropdownMenuItem>
+              <DropdownMenuSeparator class="h-[0.0125rem] bg-primary my-2" />
+              <DropdownMenuItem
+                @click="editor.chain().focus().deleteTable().run()"
+                class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+                :disabled="!editor.can().deleteTable()"
+              >
+                Delete table
+              </DropdownMenuItem>
+              <DropdownMenuSeparator class="h-[0.0125rem] bg-primary my-2" />
+              <DropdownMenuItem
+                @click="editor.chain().focus().mergeCells().run()"
+                class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+                :disabled="!editor.can().mergeCells()"
+              >
+                Merge cells
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                @click="editor.chain().focus().splitCell().run()"
+                class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+                :disabled="!editor.can().splitCell()"
+              >
+                Split cell
+              </DropdownMenuItem>
+              <!--
+
+            <DropdownMenuItem
+              @click="editor.chain().focus().toggleHeaderColumn().run()"
+              :disabled="!editor.can().toggleHeaderColumn()"
+            >
+              Toggle header column
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              @click="editor.chain().focus().toggleHeaderRow().run()"
+              :disabled="!editor.can().toggleHeaderRow()"
+            >
+              Toggle header row
+            </DropdownMenuItem>
+             <DropdownMenuItem
+              @click="editor.chain().focus().toggleHeaderCell().run()"
+              :disabled="!editor.can().toggleHeaderCell()"
+            >
+              Toggle header cell
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              @click="editor.chain().focus().mergeOrSplit().run()"
+              :disabled="!editor.can().mergeOrSplit()"
+            >
+              Merge or split
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              @click="editor.chain().focus().setCellAttribute('backgroundColor', '#FAF594').run()"
+              :disabled="!editor.can().setCellAttribute('backgroundColor', '#FAF594')"
+            >
+              Set cell attribute
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              @click="editor.chain().focus().fixTables().run()"
+              :disabled="!editor.can().fixTables()"
+            >
+              Fix tables
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              @click="editor.chain().focus().goToNextCell().run()"
+              :disabled="!editor.can().goToNextCell()"
+            >
+              Go to next cell
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              @click="editor.chain().focus().goToPreviousCell().run()"
+              :disabled="!editor.can().goToPreviousCell()"
+            >
+              Go to previous cell
+            </DropdownMenuItem> -->
+            </DropdownMenuContent>
+          </DropdownMenuRoot>
           <Tooltip
             :name="t('toolbar.unsetAllMarks')"
             side="bottom"
@@ -595,8 +742,13 @@ function setVideo() {
   @apply !min-w-40 !max-w-40 w-full hover:z-10;
 }
 
+.headingSelectorTable {
+  @apply flex items-center !text-xs !justify-between bg-background px-2;
+  @apply !min-w-24 !max-w-24 w-full hover:z-10;
+}
+
 .button-group button {
-  @apply border border-secondary focus-within:border-primary outline-none h-8 min-w-8  max-w-8 xl:max-w-full xl:flex-1 text-sm focus-visible:border-primary hover:!border-primary flex justify-center items-center duration-100;
+  @apply border border-secondary focus-within:border-primary outline-none h-8 min-w-8 max-w-8 xl:max-w-full xl:flex-1 text-sm focus-visible:border-primary hover:!border-primary flex justify-center items-center duration-100;
   /* flex: 1; */
 }
 

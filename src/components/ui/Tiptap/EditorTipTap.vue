@@ -28,7 +28,7 @@ import CodeBlockShiki from "tiptap-extension-code-block-shiki";
 import mediumZoom from "medium-zoom/dist/pure";
 import "medium-zoom/dist/style.css";
 
-import { onMounted, onBeforeUnmount, ref } from "vue";
+import { onMounted, onBeforeUnmount } from "vue";
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
 
@@ -87,7 +87,7 @@ onMounted(() => {
         },
       }),
       Table.configure({
-        resizable: true,
+        resizable: false,
       }),
       TableRow,
       TableHeader,
