@@ -2,6 +2,7 @@
   <node-view-wrapper
     class="code-block group"
     spellcheck="false"
+    autocapitalize="off"
   >
     <ScrollAreaRoot
       class="w-full h-full"
@@ -15,7 +16,7 @@
           ref="codeHeight"
           spellcheck="false"
         >
-          <pre><code class="text-xs leading-6 break-all"><node-view-content /></code></pre>
+          <pre><code class="text-xs leading-6 break-all" autocapitalize="off"><node-view-content /></code></pre>
         </div>
         <div
           v-show="!showFullCode && height > 600"
