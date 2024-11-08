@@ -167,7 +167,7 @@ onBeforeUnmount(() => {
           spellcheck="false"
         >
           <slot />
-          <editor-content :editor="editor" />
+          <editor-content :editor="editor" autocapitalize="off" />
         </div>
       </ScrollAreaViewport>
       <ScrollAreaScrollbar
