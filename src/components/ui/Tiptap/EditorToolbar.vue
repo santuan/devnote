@@ -98,6 +98,7 @@ function setVideo() {
 <template>
   <div
     class="pt-1 z-30 bg-background"
+    v-if="editor"
   >
     <div
       class="relative grid w-full max-w-full  gap-1 mx-auto control-group"

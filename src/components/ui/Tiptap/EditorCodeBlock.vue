@@ -173,15 +173,29 @@ export default {
 .tiptap .code-block {
   position: relative;
   margin: 1rem 0;
-  @apply ring-1 ring-secondary/50 rounded
+}
+
+.tiptap .code-block [data-radix-scroll-area-viewport] {
+  @apply duration-100 border border-primary/5 outline-none
+}
+
+.tiptap .code-block [data-radix-scroll-area-viewport]:hover {
+  @apply border border-primary/50 ;
+}
+
+.tiptap .code-block [data-radix-scroll-area-viewport]:focus,
+.tiptap .code-block [data-radix-scroll-area-viewport]:focus-within {
+  @apply ring-2 ring-primary;
 }
 
 .tiptap .code-block pre {
-  @apply rounded-none
+  @apply rounded-none;
+ 
 }
 
 .tiptap .code-block pre code div {
-  @apply pt-4 p-3
+  @apply pt-4 p-3;  
+  
 }
 
 .tiptap .code-block pre code * {

@@ -124,6 +124,7 @@ function focusOnSidebar() {
         <ComboboxRoot :open="true">
           <ComboboxInput
             :placeholder="`${t('verb.search')}&hellip;`"
+            auto-focus
             class="sticky top-0 right-0 font-mono bg-background border-b border-secondary w-full px-4 py-3 text-foreground outline-none placeholder-muted-foreground !select-all"
             @keydown.enter.prevent
           />
@@ -134,8 +135,21 @@ function focusOnSidebar() {
             <ComboboxEmpty class="text-center text-muted-foreground p-4">
               {{ t('sidebar.noResults') }}
             </ComboboxEmpty>
-            
             <ComboboxGroup>
+              <ComboboxLabel class="px-4 text-muted-foreground font-semibold mt-3 mb-3 font-mono">
+                {{ t('commandBar.documents') }}
+              </ComboboxLabel>
+              <ComboboxItem
+                v-for="item in allItemsTodo"
+                :key="item.id"
+                @select="handleSelect(item.id)"
+                :value="item.project_data.name"
+                class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
+              >
+                <span>{{ item.project_data.name }}</span>
+              </ComboboxItem>
+            </ComboboxGroup>
+            <ComboboxGroup class="mt-6">
               <ComboboxLabel class="px-4 text-muted-foreground font-semibold mt-3 mb-3 font-mono">
                 {{ t('commandBar.actions') }}
               </ComboboxLabel>
@@ -176,40 +190,26 @@ function focusOnSidebar() {
             </ComboboxGroup>
             <ComboboxGroup>
               <ComboboxLabel class="px-4 text-muted-foreground font-semibold mt-3 mb-3 font-mono">
-                {{ t('commandBar.documents') }}
-              </ComboboxLabel>
-              <ComboboxItem
-                v-for="item in allItemsTodo"
-                :key="item.id"
-                @select="handleSelect(item.id)"
-                :value="item.project_data.name"
-                class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
-              >
-                <span>{{ item.project_data.name }}</span>
-              </ComboboxItem>
-            </ComboboxGroup>
-            <ComboboxGroup>
-              <ComboboxLabel class="px-4 text-muted-foreground font-semibold mt-3 mb-3 font-mono">
                 Focus
               </ComboboxLabel>
               <ComboboxItem
-                value="Jump to sidebar"
+                :value="t('commandBar.focusSidebar')"
                 v-if="!isMobile"
                 @select="focusOnSidebar()"
                 class="cursor-default justify-between font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
-                <span>Jump to sidebar</span>
+                <span>{{ t('commandBar.focusSidebar') }}</span>
                 <span class="inline-flex bg-primary/50 px-1 rounded p-0.5 !text-xs">
                   <kbd>ctrl shift alt &larr;</kbd>
                 </span>
               </ComboboxItem>
               <ComboboxItem
-                value="Jump to title"
+                :value="t('commandBar.focusTitle')"
                 v-if="!isMobile"
                 @select="focusOnTitle()"
                 class="cursor-default justify-between font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
-                <span>Jump to title</span>
+                <span>{{ t('commandBar.focusTitle') }}</span>
                 <span class="inline-flex bg-primary/50 px-1 rounded p-0.5 !text-xs">
                   <kbd>ctrl  shift  alt  &rarr;</kbd>
                 </span>

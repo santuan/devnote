@@ -6,7 +6,7 @@
   "editor": {
     "placeholder": "Escribir algo...",
     "untitled": "Item sin título",
-    "save": "Guardar documento",
+    "save": "Crear documento",
     "delete": "Eliminar documento",
     "deleteConfirm": "Esta acción no tiene vuelta atrás",
     "copyToClipboard": "Copiar código"
@@ -72,6 +72,11 @@
     "languageDescription": "Selecciona el lenguaje de la aplicación",
     "fontsize": "Escala de la aplicación",
     "fontsizeDescription": "Ajusta la escala de en base a la tipografía",
+    "fontsizexs": "Extra pequeño",
+    "fontsizesm": "Pequeño",
+    "fontsizemd": "Normal",
+    "fontsizelg": "Grande",
+    "fontsizexl": "Extra grande",
     "cursor": "Cursor del mouse",
     "cursorDescription": "Activa o desactiva la manito en el cursor del mouse.",
     "tour": "Tutorial",
@@ -100,7 +105,9 @@
     "description": "Buscar un comando",
     "documents": "Documentos",
     "actions": "Acciones",
-    "focusEditor": "Saltar al editor"
+    "focusEditor": "Saltar al editor",
+    "focusSidebar": "Saltar al lateral",
+    "focusTitle": "Saltar al título"
   },
   "message": {
     "databaseClearedWithExample": "Base de datos eliminada y se creó un documento de ejemplo",
@@ -150,6 +157,7 @@
     "delete": "Eliminar",
     "add": "Agregar",
     "fixed": "Fijar",
-    "unfixed": "Desfijar"
+    "unfixed": "Desfijar",
+    "jump": "Saltar al"
   }
 }

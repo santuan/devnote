@@ -150,7 +150,7 @@ onBeforeUnmount(() => {
     class="EditorCK"
   >
     <ScrollAreaRoot
-      class="ScrollAreaRoot group "
+      class="ScrollAreaEditor group "
       :class="[
         toolbar ? 'with-toolbar' : '',
         counter.content_editable ? 'is-editable' : ' is-preview '
@@ -163,7 +163,7 @@ onBeforeUnmount(() => {
         :class="counter.content_editable ? 'group-focus-within:ring-primary/70 group-focus-within:ring-1 border border-secondary focus:!ring-primary focus:!ring-2' : '  '"
       >
         <div
-          class="max-w-full px-2  mx-auto prose dark:prose-invert"
+          class="max-w-full px-2 mx-auto prose dark:prose-invert"
           spellcheck="false"
         >
           <slot />
@@ -187,7 +187,7 @@ onBeforeUnmount(() => {
   @apply grid w-full min-h-full
 }
 
-.ScrollAreaRoot {
+.ScrollAreaEditor {
   @apply w-full border-0 ;
 
   &.is-editable {
@@ -204,7 +204,9 @@ onBeforeUnmount(() => {
 }
 
 .tiptap {
-  @apply p-1 md:p-4 md:pt-0 outline-none placeholder:text-primary min-h-[80dvh] font-serif;
+  @apply p-1 md:p-4 md:pt-0 outline-none placeholder:text-primary min-h-[80dvh];
+  /* @apply font-mono font-normal; */
+  @apply font-serif;
 }
 
 .tiptap h1:first-of-type,

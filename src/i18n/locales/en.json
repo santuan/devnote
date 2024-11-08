@@ -6,7 +6,7 @@
   "editor": {
     "placeholder": "Start writing...",
     "untitled": "Untitled item",
-    "save": "Save document",
+    "save": "Create document",
     "delete": "Delete document",
     "deleteConfirm": "This action cannot be undone",
     "copyToClipboard": "Copy code to clipboard"
@@ -72,6 +72,11 @@
     "languageDescription": "Select the language of the aplication.",
     "fontsize": "App scale",
     "fontsizeDescription": "Adjust the scale of the application",
+    "fontsizexs": "Extra Small",
+    "fontsizesm": "Small",
+    "fontsizemd": "Normal",
+    "fontsizelg": "Large",
+    "fontsizexl": "Extra large",
     "cursor": "Mouse cursor",
     "cursorDescription": "Change the mouse cursor to pointer or arrow.",
     "tour": "Tutorial",
@@ -100,7 +105,9 @@
     "description": "Search for command",
     "documents": "Documents",
     "actions": "Actions",
-    "focusEditor": "Jump to editor"
+    "focusEditor": "Jump to editor",
+    "focusSidebar": "Jump to sidebar",
+    "focusTitle": "Jump to title"
   },
   "message": {
     "databaseClearedWithExample": "Database deleted and a sample document was created.",
@@ -150,6 +157,7 @@
     "delete": "Delete",
     "add": "Add",
     "fixed": "Fixed",
-    "unfixed": "Unfixed"
+    "unfixed": "Unfixed",
+    "jump": "Jump to"
   }
 }

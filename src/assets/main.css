@@ -474,7 +474,7 @@
 }
 
 [data-sonner-toast] [data-button] {
-    @apply !bg-primary !text-primary-foreground
+  @apply !bg-primary !text-primary-foreground
 }
 
 [data-sonner-toast][data-styled=true] {
@@ -507,13 +507,25 @@ html {
   background-color: #020817;
 }
 
-@media (width >= 550px) {
+@media (width >=550px) {
+
+  /*
   body p,
   body label,
-  body input,
+  body input, 
   body div,
-  body button  {  user-select: none; user-drag: none; app-region: no-drag; }
+  */
+  body label,
+  body input,
+  body textarea,
+  body .sr-only,
+  button {
+    user-select: none !important;
+    user-drag: none !important;
+    app-region: no-drag !important;
+  }
 }
+
 
 html:has(.app-font-size-xs) {
   @apply text-xs;
@@ -522,12 +534,15 @@ html:has(.app-font-size-xs) {
 html:has(.app-font-size-sm) {
   @apply text-sm;
 }
+
 html:has(.app-font-size-md) {
   @apply text-base;
 }
+
 html:has(.app-font-size-lg) {
   @apply text-lg;
 }
+
 html:has(.app-font-size-xl) {
   @apply text-xl;
 }

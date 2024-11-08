@@ -59,50 +59,40 @@ onMounted(() => {
           class="p-2 flex justify-between w-full hover:bg-secondary-foreground/10"
           :class="appFontSize === 'app-font-size-xs' ? 'text-primary' : ''"
         >
-          <span>Extra pequeño</span>
-          <span
-            class="opacity-50 scale-90"
-          >.75rem</span>
+          <span>{{ t('settings.fontsizexs') }} </span>
+          <span class="opacity-50 scale-90">.75rem</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           @click="toggleFontSize('app-font-size-sm')"
           class="p-2 flex justify-between w-full hover:bg-secondary-foreground/10"
           :class="appFontSize === 'app-font-size-sm' ? 'text-primary' : ''"
         >
-          <span>Pequeño</span>
-          <span
-            class="opacity-50 scale-90"
-          >.875rem</span>
+          <span>{{ t('settings.fontsizesm') }} </span>
+          <span class="opacity-50 scale-90">.875rem</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           @click="toggleFontSize('app-font-size-md')"
           class="p-2 flex justify-between w-full hover:bg-secondary-foreground/10"
           :class="appFontSize === 'app-font-size-md' ? 'text-primary' : ''"
         >
-          <span>Normal</span>
-          <span
-            class="opacity-50 scale-90"
-          > 1rem</span>
+          <span>{{ t('settings.fontsizemd') }} </span>
+          <span class="opacity-50 scale-90"> 1rem</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           @click="toggleFontSize('app-font-size-lg')"
           class="p-2 flex justify-between w-full hover:bg-secondary-foreground/10"
           :class="appFontSize === 'app-font-size-lg' ? 'text-primary' : ''"
         >
-          <span>Grande</span>
-          <span
-            class="opacity-50 scale-90"
-          >1.125rem</span>
+          <span>{{ t('settings.fontsizelg') }} </span>
+          <span class="opacity-50 scale-90">1.125rem</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           @click="toggleFontSize('app-font-size-xl')"
-          class="p-2 sm:flex justify-between w-full hover:bg-secondary-foreground/10 hidden"
+          class="p-2 flex justify-between w-full hover:bg-secondary-foreground/10"
           :class="appFontSize === 'app-font-size-xl' ? 'text-primary' : ''"
         >
-          <span>Extra grande</span>
-          <span
-            class="opacity-50 scale-90"
-          >1.25rem</span>
+          <span>{{ t('settings.fontsizexl') }} </span>
+          <span class="opacity-50 scale-90">1.25rem</span>
         </DropdownMenuItem>
       </DropdownMenuGroup>
     </DropdownMenuContent>
@@ -110,24 +100,23 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
 .interactive[data-state="open"] {
   @apply text-primary
 }
 
-.interactive[data-state="open"] .AArrowDown{
+.interactive[data-state="open"] .AArrowDown {
   @apply !flex
 }
 
-.interactive[data-state="closed"] .AArrowDown{
+.interactive[data-state="closed"] .AArrowDown {
   @apply !hidden
 }
 
-.interactive[data-state="open"] .AArrowUp{
+.interactive[data-state="open"] .AArrowUp {
   @apply !hidden
 }
 
-.interactive[data-state="closed"] .AArrowUp{
+.interactive[data-state="closed"] .AArrowUp {
   @apply !flex
 }
 </style>

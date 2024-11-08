@@ -47,7 +47,7 @@ function expandAllScreen() {
       <slot />
     </SplitterPanel>
     <SplitterResizeHandle
-      class="hidden lg:flex group justify-center items-center w-8 border-l-2 border-secondary/10 data-[state=hover]:border-primary/90  data-[state=drag]:border-primary/90 data-[state=hover]:delay-700 data-[state=hover]:border-l-4 duration-100 focus:ring-primary focus:ring-1 outline-none"
+      class="hidden !select-none  lg:flex group justify-center items-center w-8 border-l-2 border-secondary/10 data-[state=hover]:border-primary/90  data-[state=drag]:border-primary/90 data-[state=hover]:delay-700 data-[state=hover]:border-l-4 duration-100 focus:ring-primary focus:ring-1 outline-none"
     >
       <Tooltip
         :name="panelRef?.isCollapsed ? 'Collapse' : 'Expand'"
@@ -55,7 +55,7 @@ function expandAllScreen() {
         shortcut="ctrl shift alt ."
       >
         <button
-          class="z-20 flex items-center justify-center bg-background size-6 "
+          class="z-20 flex items-center !select-none justify-center bg-background size-6 "
           @click="expandAllScreen"
           @keyup.enter="panelRef?.isCollapsed ? panelRef?.expand() : panelRef?.collapse()"
           :class="panelRef?.isCollapsed ? 'rotate-180' : ''"

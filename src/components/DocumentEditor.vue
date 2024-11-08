@@ -52,7 +52,7 @@ const { t } = useI18n();
         ? 'bg-primary text-primary-foreground hover:bg-primary/80'
         : 'disabled bg-secondary  pointer-events-none'
       "
-      class="fixed bottom-0 right-0 z-20 h-12 px-3 text-xs text-right  left-0  GuardarDocumento disabled:text-foreground/50 focus:bg-primary/50"
+      class="fixed !select-none bottom-0 right-0 z-20 h-12 px-3 text-xs text-right  left-0  GuardarDocumento disabled:text-foreground/50 focus:bg-primary/50"
     >
       {{ t('editor.save') }}
     </button>
@@ -61,7 +61,7 @@ const { t } = useI18n();
 
 <style scoped>
 .editor {
-  @apply relative mx-auto lg:w-full px-1 gap-y-0.5 pt-1;
+  @apply relative mx-auto lg:w-full px-2 gap-y-0.5 pt-1;
   display: grid;
   min-height: 100vh;
   grid-template-rows: auto 1fr;

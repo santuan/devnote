@@ -27,7 +27,7 @@ export const useCounterStore = defineStore("counter", () => {
   const content_editable = shallowRef(true);
   const editor = shallowRef(null);
   const showSettings = shallowRef(false);
-  const showEditorToolbar = shallowRef(false);
+  const showEditorToolbar = shallowRef(true);
   const focusTitleTextarea = shallowRef(null)
   const focusSidebar = shallowRef(null)
 
@@ -241,24 +241,6 @@ export const useCounterStore = defineStore("counter", () => {
         if (settings.init_db_with_example_doc === false) {
           content_editable.value = true;
         }
-      }
-      if (count === 1) {
-        const selectedState = await db.file.get(1);
-        if (selectedState) file_name.value = selectedState.name;
-
-        // Get first project from db.projects
-        const last_created_project = await db.projects.toCollection().last();
-        if (last_created_project) {
-          // Set content in editor
-          project_body.value = last_created_project.project_data.body;
-          project_name.value = last_created_project.project_data.name;
-          project_fixed.value = last_created_project.project_data.fixed;
-          project_checked.value = last_created_project.project_data.checked;
-          loaded_id.value = last_created_project.id;
-          // Set content_editable to false
-          content_editable.value = false;
-        }
-        return
       }
     } catch (error) {
       handleError("Error al configurar la base de datos", error);

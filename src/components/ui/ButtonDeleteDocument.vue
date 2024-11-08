@@ -35,16 +35,16 @@ whenever(magicDeleteDocument, (n) => {
   <AlertDialogRoot v-model:open="showAlertDialog">
     <Tooltip
       :name="t('editor.delete')"
-      side="top"
+      side="left"
       :align="'end'"
       shortcut="shift + delete"
     >
       <AlertDialogTrigger
-        class="fixed bottom-1 md:bottom-0 right-1 md:right-0 flex items-center justify-center ml-auto text-xs ButtonDeleteDocument size-8 z-50  bg-primary"
-        :class="counter.loaded_id ? 'text-primary-foreground' : 'hidden'"
+        class="fixed bottom-1 md:bottom-0 right-1 md:right-0 flex items-center justify-center ml-auto text-xs ButtonDeleteDocument h-10 w-8 z-50  text-primary hover:bg-primary/20"
+        :class="counter.loaded_id ? '' : 'hidden'"
       >
         <Trash2 class="size-4" />
-        <span class="sr-only">{{ t('editor.delete') }}</span>
+        <span class="!select-none sr-only">{{ t('editor.delete') }}</span>
       </AlertDialogTrigger>
     </Tooltip>
     <AlertDialogPortal>
