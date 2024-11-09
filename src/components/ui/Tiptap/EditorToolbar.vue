@@ -14,6 +14,11 @@ import "medium-zoom/dist/style.css";
 import { useStorage } from "@vueuse/core";
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
+import { useAddImage } from '@/composables/useAddImage';
+import { useAddImageBase64 } from '@/composables/useAddImageBase64';
+import { useAddVideo } from '@/composables/useAddVideo';
+import { useSetLink } from '@/composables/useSetLink';
+import { useSetVideo } from '@/composables/useSetVideo';
 
 import {
   Italic, ImagePlus, Bold, Strikethrough, Code, RemoveFormatting, Eraser, List, ListOrdered, Quote, Minus, Undo2, Redo2, AlignLeft, AlignCenter, AlignRight, AlignJustify, Link2, Unlink2, Video, ChevronDown, ImageDown, Youtube, SquareMinus,
@@ -26,73 +31,11 @@ const showEditorToolbar = useStorage("editorToolbar", true);
 const { editor } = storeToRefs(counter);
 const { t } = useI18n();
 
-function addImage() {
-  const url = window.prompt("Ingresar URL de la imagen");
-  if (url) {
-    editor.value.chain().focus().setImage({ src: url }).run();
-  }
-}
-
-function addImageBase64(event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const dataURL = e.target.result;
-      editor.value.chain().focus().setImage({ src: dataURL }).run();
-    };
-    reader.readAsDataURL(file);
-  }
-}
-
-function addVideo() {
-  const url = prompt("Ingresar URL del video de Youtube");
-  editor.value.commands.setYoutubeVideo({
-    src: url,
-    width: Math.max(320, parseInt(640, 10)) || 640,
-    height: Math.max(180, parseInt(480, 10)) || 480,
-  });
-}
-
-function setLink() {
-  const previousUrl = editor.value.getAttributes("link").href;
-  const url = window.prompt("URL", previousUrl);
-  if (url === null) {
-    return;
-  }
-  if (url === "") {
-    editor.value.chain().focus().extendMarkRange("link").unsetLink().run();
-    return;
-  }
-  editor.value
-    .chain()
-    .focus()
-    .extendMarkRange("link")
-    .setLink({ href: url })
-    .run();
-}
-
-
-function setVideo() {
-  const videoSrc = "";
-  const video = window.prompt('Video URL', videoSrc)
-
-  // cancelled
-  if (video === null) {
-    return;
-  }
-
-  // empty
-  if (video === '') {
-    editor.isActive('video') ? editor.commands.deleteSelection() : false;
-    return;
-  }
-
-  let srcCheck = video.match(/src="(?<src>.+?)"/); // get the src value from embed code if all pasted in
-  let src = srcCheck ? srcCheck.groups.src : video; // use src or if just url in input use that
-
-  editor.value.chain().focus().insertContent(`<video src="${src}"></video>`).run(); // add a new video element
-};
+const { addImage } = useAddImage(editor);
+const { addImageBase64 } = useAddImageBase64(editor);
+const { addVideo } = useAddVideo(editor);
+const { setLink } = useSetLink(editor);
+const { setVideo } = useSetVideo(editor);
 
 </script>
 
@@ -558,20 +501,18 @@ function setVideo() {
           <DropdownMenuRoot>
             <DropdownMenuTrigger class="data-[state=open]:!bg-primary data-[state=open]:text-primary-foreground relative">
               <Tooltip
-                name="table"
+                :name="t('toolbar.table')"
                 :side="'bottom'"
                 :align="'end'"
+                shortcut="Right click on editor"
               >
-                <span
-                  class="flex items-center justify-center outline-none interactive size-8 focus-visible:border-primary border-secondary"
-                >
+                <span class="flex items-center justify-center outline-none interactive size-8 focus-visible:border-primary border-secondary">
                   <Table class="size-4 shrink-0" />
                 </span>
-                <span class="sr-only">table</span>
+                <span class="sr-only">{{ t('toolbar.table') }}</span>
               </Tooltip>
             </DropdownMenuTrigger>
             <DropdownMenuContent
-              :align="'end'"
               :side="'bottom'"
               class="z-10 grid text-xs border w-44 bg-background border-secondary"
             >
@@ -579,28 +520,28 @@ function setVideo() {
                 @click="editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()"
                 class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
               >
-                Insert table
+                {{ t('toolbar.insertTable') }}
               </DropdownMenuItem>
               <DropdownMenuItem
                 @click="editor.chain().focus().addColumnBefore().run()"
                 class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
                 :disabled="!editor.can().addColumnBefore()"
               >
-                Add column before
+                {{ t('toolbar.addColumnBefore') }}
               </DropdownMenuItem>
               <DropdownMenuItem
                 @click="editor.chain().focus().addColumnAfter().run()"
                 class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
                 :disabled="!editor.can().addColumnAfter()"
               >
-                Add column after
+                {{ t('toolbar.addColumnAfter') }}
               </DropdownMenuItem>
               <DropdownMenuItem
                 @click="editor.chain().focus().deleteColumn().run()"
                 class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
                 :disabled="!editor.can().deleteColumn()"
               >
-                Delete column
+                {{ t('toolbar.deleteColumn') }}
               </DropdownMenuItem>
               <DropdownMenuSeparator class="h-[0.0125rem] bg-primary my-2" />
               <DropdownMenuItem
@@ -608,21 +549,21 @@ function setVideo() {
                 class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
                 :disabled="!editor.can().addRowBefore()"
               >
-                Add row before
+                {{ t('toolbar.addRowBefore') }}
               </DropdownMenuItem>
               <DropdownMenuItem
                 @click="editor.chain().focus().addRowAfter().run()"
                 class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
                 :disabled="!editor.can().addRowAfter()"
               >
-                Add row after
+                {{ t('toolbar.addRowAfter') }}
               </DropdownMenuItem>
               <DropdownMenuItem
                 @click="editor.chain().focus().deleteRow().run()"
                 class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
                 :disabled="!editor.can().deleteRow()"
               >
-                Delete row
+                {{ t('toolbar.deleteRow') }}
               </DropdownMenuItem>
               <DropdownMenuSeparator class="h-[0.0125rem] bg-primary my-2" />
               <DropdownMenuItem
@@ -630,7 +571,7 @@ function setVideo() {
                 class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
                 :disabled="!editor.can().deleteTable()"
               >
-                Delete table
+                {{ t('toolbar.deleteTable') }}
               </DropdownMenuItem>
               <DropdownMenuSeparator class="h-[0.0125rem] bg-primary my-2" />
               <DropdownMenuItem
@@ -638,65 +579,15 @@ function setVideo() {
                 class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
                 :disabled="!editor.can().mergeCells()"
               >
-                Merge cells
+                {{ t('toolbar.mergeCells') }}
               </DropdownMenuItem>
               <DropdownMenuItem
                 @click="editor.chain().focus().splitCell().run()"
                 class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
                 :disabled="!editor.can().splitCell()"
               >
-                Split cell
+                {{ t('toolbar.splitCell') }}
               </DropdownMenuItem>
-              <!--
-
-            <DropdownMenuItem
-              @click="editor.chain().focus().toggleHeaderColumn().run()"
-              :disabled="!editor.can().toggleHeaderColumn()"
-            >
-              Toggle header column
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              @click="editor.chain().focus().toggleHeaderRow().run()"
-              :disabled="!editor.can().toggleHeaderRow()"
-            >
-              Toggle header row
-            </DropdownMenuItem>
-             <DropdownMenuItem
-              @click="editor.chain().focus().toggleHeaderCell().run()"
-              :disabled="!editor.can().toggleHeaderCell()"
-            >
-              Toggle header cell
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              @click="editor.chain().focus().mergeOrSplit().run()"
-              :disabled="!editor.can().mergeOrSplit()"
-            >
-              Merge or split
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              @click="editor.chain().focus().setCellAttribute('backgroundColor', '#FAF594').run()"
-              :disabled="!editor.can().setCellAttribute('backgroundColor', '#FAF594')"
-            >
-              Set cell attribute
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              @click="editor.chain().focus().fixTables().run()"
-              :disabled="!editor.can().fixTables()"
-            >
-              Fix tables
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              @click="editor.chain().focus().goToNextCell().run()"
-              :disabled="!editor.can().goToNextCell()"
-            >
-              Go to next cell
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              @click="editor.chain().focus().goToPreviousCell().run()"
-              :disabled="!editor.can().goToPreviousCell()"
-            >
-              Go to previous cell
-            </DropdownMenuItem> -->
             </DropdownMenuContent>
           </DropdownMenuRoot>
           <Tooltip

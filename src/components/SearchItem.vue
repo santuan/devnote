@@ -116,6 +116,7 @@ function focusOnTitle() {
       class="flex interactive hover:!text-primary px-2 py-0.5 w-full items-center outline-none justify-start gap-2 text-sm text-left focus-within:ring-1 ring-primary"
       :class="loaded_id === props.data.id ? 'text-primary' : ''"
       @click="confirmSetDocument(props.data.id)"
+      @dblclick="counter.toggleEditable()"
     >
       <p class="@sm:max-w-full max-w-80 ">
         {{ props.data.project_data?.name.length > 25 ? props.data.project_data?.name.substring(0, 25) + '&hellip;' :

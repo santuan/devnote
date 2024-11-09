@@ -1,7 +1,22 @@
 <script setup>
 import EditorCodeBlock from "@/components/ui/Tiptap/EditorCodeBlock.vue";
 import Video from "./addVideo";
-
+import {
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuItemIndicator,
+  ContextMenuLabel,
+  ContextMenuPortal,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuRoot,
+  ContextMenuSeparator,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from 'radix-vue'
 import {
   ScrollAreaRoot,
   ScrollAreaScrollbar,
@@ -23,21 +38,41 @@ import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
 import Youtube from "@tiptap/extension-youtube";
+import Gapcursor from '@tiptap/extension-gapcursor'
 import CodeBlockShiki from "tiptap-extension-code-block-shiki";
-
 import mediumZoom from "medium-zoom/dist/pure";
 import "medium-zoom/dist/style.css";
 
-import { onMounted, onBeforeUnmount } from "vue";
+import { onMounted, onBeforeUnmount, shallowRef } from "vue";
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
-
 import { Editor, EditorContent, VueNodeViewRenderer } from "@tiptap/vue-3";
 import { useI18n } from 'vue-i18n';
+import { useAddImage } from '@/composables/useAddImage';
+import { useAddImageBase64 } from '@/composables/useAddImageBase64';
+import { useAddVideo } from '@/composables/useAddVideo';
+import EditorContextMenu from "./EditorContextMenu.vue";
+
 
 const counter = useCounterStore();
 const { editor } = storeToRefs(counter);
+const { addImage } = useAddImage(editor);
+const { addImageBase64 } = useAddImageBase64(editor);
+const { addVideo } = useAddVideo(editor);
 const { t } = useI18n();
+
+const emit = defineEmits(["update:modelValue"]);
+
+const fileInput = shallowRef(null);
+
+const triggerFileUpload = () => {
+  fileInput.value?.click();
+};
+
+const handleFileChange = (event) => {
+  const file = (event.target).files?.[0];
+  if (file) addImageBase64(file);
+};
 
 const props = defineProps({
   modelValue: {
@@ -54,13 +89,12 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["update:modelValue"]);
-
 onMounted(() => {
   editor.value = new Editor({
     extensions: [
       StarterKit.configure({
         codeBlock: false,
+        gapcursor: false,
       }),
       Color.configure({ types: [TextStyle.name, ListItem.name] }),
       TextStyle.configure({ types: [ListItem.name] }),
@@ -68,10 +102,12 @@ onMounted(() => {
         allowBase64: true,
         inline: true,
         HTMLAttributes: {
-          class: "max-w-5xl w-full mx-auto my-6",
+          class: "max-w-7xl w-full my-6",
+          // Custom attribute for zooming with that library
           "data-zoomable": "",
         },
       }),
+      Gapcursor,
       Video,
       Typography,
       Link.configure({
@@ -88,12 +124,13 @@ onMounted(() => {
       }),
       Table.configure({
         resizable: false,
+        allowTableNodeSelection: true,
       }),
       TableRow,
       TableHeader,
       TableCell,
       TextAlign.configure({
-        types: ["heading", "paragraph"],
+        types: ["heading", "paragraph", "image"],
       }),
       Placeholder.configure({
         placeholder: t('editor.placeholder'),
@@ -138,6 +175,8 @@ onMounted(() => {
   });
 });
 
+
+
 onBeforeUnmount(() => {
   editor.value.destroy();
 });
@@ -149,18 +188,47 @@ onBeforeUnmount(() => {
     v-if="editor"
     class="EditorCK"
   >
+    <EditorContextMenu v-if="editable">
+      <ScrollAreaRoot
+        class="ScrollAreaEditor group is-editable"
+        :class="[
+          toolbar ? 'with-toolbar' : '',
+        ]
+        "
+        style="--scrollbar-size: 10px"
+      >
+        <ScrollAreaViewport
+          class="w-full h-full  outline-none group-focus-within:ring-primary/70 group-focus-within:ring-1 border border-secondary focus:!ring-primary focus:!ring-2"
+        >
+          <div
+            class="max-w-full px-2 mx-auto prose dark:prose-invert"
+            spellcheck="false"
+          >
+            <slot />
+            <editor-content :editor="editor" />
+          </div>
+        </ScrollAreaViewport>
+        <ScrollAreaScrollbar
+          class="flex select-none touch-none p-0.5 bg-secondary transition-colors duration-[160ms] ease-out hover:bg-background data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+          orientation="vertical"
+        >
+          <ScrollAreaThumb
+            class="flex-1 bg-primary rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]"
+          />
+        </ScrollAreaScrollbar>
+      </ScrollAreaRoot>
+    </EditorContextMenu>
     <ScrollAreaRoot
-      class="ScrollAreaEditor group "
+      v-else
+      class="ScrollAreaEditor group is-preview"
       :class="[
         toolbar ? 'with-toolbar' : '',
-        counter.content_editable ? 'is-editable' : ' is-preview '
       ]
       "
       style="--scrollbar-size: 10px"
     >
       <ScrollAreaViewport
-        class="w-full h-full  outline-none"
-        :class="counter.content_editable ? 'group-focus-within:ring-primary/70 group-focus-within:ring-1 border border-secondary focus:!ring-primary focus:!ring-2' : '  '"
+        class="w-full h-full outline-none"
       >
         <div
           class="max-w-full px-2 mx-auto prose dark:prose-invert"
@@ -188,7 +256,7 @@ onBeforeUnmount(() => {
 }
 
 .ScrollAreaEditor {
-  @apply w-full border-0 ;
+  @apply w-full border-0;
 
   &.is-editable {
     @apply max-h-[calc(100dvh-2.5rem)] bg-secondary/30;
@@ -199,7 +267,17 @@ onBeforeUnmount(() => {
   }
 
   &.is-preview {
-    @apply max-h-screen bg-background
+    @apply max-h-screen bg-background;
+
+    .tiptap td,
+    .tiptap th {
+      @apply !border-background border-4 p-0
+    }
+
+    .ProseMirror-trailingBreak,
+    .ProseMirror-separator {
+      @apply !hidden
+    }
   }
 }
 
@@ -209,6 +287,7 @@ onBeforeUnmount(() => {
   @apply font-serif;
 }
 
+.tiptap table:first-of-type,
 .tiptap h1:first-of-type,
 .tiptap h2:first-of-type,
 .tiptap h3:first-of-type,
@@ -332,7 +411,7 @@ html.dark .shiki span {
 
 .tiptap td,
 .tiptap th {
-  @apply border border-muted;
+  @apply border border-muted focus-visible:bg-red-600;
   box-sizing: border-box;
   min-width: 1em;
   padding: 6px 8px;
@@ -347,7 +426,7 @@ html.dark .shiki span {
 }
 
 .tiptap .selectedCell:after {
-  background: var(--gray-2);
+  @apply bg-primary/20 ring-1 ring-primary/50;
   content: "";
   left: 0;
   right: 0;
@@ -371,6 +450,10 @@ html.dark .shiki span {
 .tiptap .tableWrapper {
   margin: 1.5rem 0;
   overflow-x: auto;
+}
+
+.tiptap table iframe {
+  @apply w-full max-w-full
 }
 
 .tiptap.resize-cursor {

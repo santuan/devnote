@@ -3,6 +3,13 @@ import { useCounterStore } from "@/stores/counter";
 import Tooltip from "./Tooltip.vue";
 const counter = useCounterStore();
 
+function focusOnTitle() {
+  counter.toggleEditable()
+  setTimeout(() => {
+    counter.SetFocusTitle()
+  }, 100);
+}
+
 </script>
 
 <template>
@@ -15,10 +22,10 @@ const counter = useCounterStore();
       :side="'bottom'"
     >
       <button
-        @click="counter.toggleEditable"
-        class="p-2 h-8 relative z-10 text-xs text-primary"
+        @click="focusOnTitle()"
+        class="p-2 h-8 relative z-10 text-xs text-primary-foreground bg-primary"
       >
-        This document is not saved.
+        Current document not saved.
         <span v-if="counter.project_name === ''">:* missing title</span>
       </button>
     </Tooltip>
@@ -28,8 +35,8 @@ const counter = useCounterStore();
       :side="'bottom'"
     >
       <button
-        @click="counter.toggleEditable"
-        class="p-2 h-8 relative z-10 text-xs text-primary"
+        @click="focusOnTitle()"
+        class="p-2 h-8 relative z-10 text-xs text-primary-foreground bg-primary"
       >
         This document is not saved.
         <span v-if="counter.project_name === ''">:* missing title</span>

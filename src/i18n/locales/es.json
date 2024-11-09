@@ -40,7 +40,18 @@
     "link": "Agregar enlace",
     "unlink": "Quitar enlace",
     "clearNodes": "Limpiar formato",
-    "unsetAllMarks": "Quitar estilos de linea"
+    "unsetAllMarks": "Quitar estilos de linea",
+    "table": "Tabla",
+    "insertTable": "Insertar tabla",
+    "addColumnBefore": "Agregar columna antes",
+    "addColumnAfter": "Agregar columna después",
+    "deleteColumn": "Eliminar columna",
+    "addRowBefore": "Agregar fila antes",
+    "addRowAfter": "Agregar fila después",
+    "deleteRow": "Eliminar fila",
+    "deleteTable": "Eliminar tabla",
+    "mergeCells": "Combinar celdas",
+    "splitCell": "Dividir celda"
   },
   "sidebar": {
     "newDocument": "Crear nuevo documento",

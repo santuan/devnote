@@ -19,7 +19,6 @@ const { t } = useI18n();
   <div :key="counter.loaded_id">
     <main
       class="editor"
-      v-auto-animate
     >
       <div
         class="editor-top"
