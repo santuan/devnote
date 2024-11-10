@@ -2,22 +2,6 @@
 import EditorCodeBlock from "@/components/ui/Tiptap/EditorCodeBlock.vue";
 import Video from "./addVideo";
 import {
-  ContextMenuCheckboxItem,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuItemIndicator,
-  ContextMenuLabel,
-  ContextMenuPortal,
-  ContextMenuRadioGroup,
-  ContextMenuRadioItem,
-  ContextMenuRoot,
-  ContextMenuSeparator,
-  ContextMenuSub,
-  ContextMenuSubContent,
-  ContextMenuSubTrigger,
-  ContextMenuTrigger,
-} from 'radix-vue'
-import {
   ScrollAreaRoot,
   ScrollAreaScrollbar,
   ScrollAreaThumb,
@@ -43,7 +27,7 @@ import CodeBlockShiki from "tiptap-extension-code-block-shiki";
 import mediumZoom from "medium-zoom/dist/pure";
 import "medium-zoom/dist/style.css";
 
-import { onMounted, onBeforeUnmount, shallowRef } from "vue";
+import { onMounted, onBeforeUnmount } from "vue";
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
 import { Editor, EditorContent, VueNodeViewRenderer } from "@tiptap/vue-3";
@@ -53,12 +37,8 @@ import { useAddImageBase64 } from '@/composables/useAddImageBase64';
 import { useAddVideo } from '@/composables/useAddVideo';
 import EditorContextMenu from "./EditorContextMenu.vue";
 
-
 const counter = useCounterStore();
 const { editor } = storeToRefs(counter);
-const { addImage } = useAddImage(editor);
-const { addImageBase64 } = useAddImageBase64(editor);
-const { addVideo } = useAddVideo(editor);
 const { t } = useI18n();
 
 const emit = defineEmits(["update:modelValue"]);
@@ -164,8 +144,6 @@ onMounted(() => {
   });
 });
 
-
-
 onBeforeUnmount(() => {
   editor.value.destroy();
 });
@@ -187,7 +165,7 @@ onBeforeUnmount(() => {
         style="--scrollbar-size: 10px"
       >
         <ScrollAreaViewport
-          class="w-full h-full  outline-none group-focus-within:ring-primary/70 group-focus-within:ring-1 border border-secondary focus:!ring-primary focus:!ring-2"
+          class="w-full h-full outline-none group-focus-within:ring-primary/70 group-focus-within:ring-1 ring-1  ring-secondary focus:!ring-primary focus:!ring-2"
         >
           <div
             class="max-w-full px-2 mx-auto prose dark:prose-invert"
@@ -245,7 +223,7 @@ onBeforeUnmount(() => {
 }
 
 .ScrollAreaEditor {
-  @apply w-full border-0;
+  @apply w-full border-0 pt-0.5;
 
   &.is-editable {
     @apply max-h-[calc(100dvh-2.5rem)] bg-secondary/30;
