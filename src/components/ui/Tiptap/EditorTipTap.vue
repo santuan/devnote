@@ -63,17 +63,6 @@ const { t } = useI18n();
 
 const emit = defineEmits(["update:modelValue"]);
 
-const fileInput = shallowRef(null);
-
-const triggerFileUpload = () => {
-  fileInput.value?.click();
-};
-
-const handleFileChange = (event) => {
-  const file = (event.target).files?.[0];
-  if (file) addImageBase64(file);
-};
-
 const props = defineProps({
   modelValue: {
     type: String,
@@ -393,6 +382,10 @@ html.dark .shiki span {
 
 .tiptap iframe {
   @apply max-w-3xl mx-auto bg-primary/20 relative w-full h-96 aspect-video z-20;
+}
+
+.tiptap .ProseMirror-gapcursor {
+  @apply w-0.5 h-6 bg-primary -translate-x-3
 }
 
 /* 

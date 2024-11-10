@@ -21,11 +21,9 @@ import { useI18n } from 'vue-i18n';
 const counter = useCounterStore();
 const { focusSidebar } = storeToRefs(counter);
 
+const keys = useMagicKeys();
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const largerThanLg = breakpoints.greater("lg");
-const keys = useMagicKeys();
-const CtrlM = keys["ctrl+m"];
-const magicPreview = keys["ctrl+alt+p"];
 const { t } = useI18n();
 
 
@@ -35,10 +33,12 @@ onMounted(() => {
   }
 });
 
+const CtrlM = keys["ctrl+m"];
 whenever(CtrlM, () => {
   counter.showProjects = !counter.showProjects;
 });
 
+const magicPreview = keys["ctrl+alt+p"];
 whenever(magicPreview, () => {
   counter.content_editable = !counter.content_editable;
 });
@@ -55,7 +55,6 @@ whenever(magicPreview, () => {
       class="flex items-center justify-start gap-2 p-1 focus-visible:ring-1 focus-visible:ring-primary"
       ref="focusSidebar"
     >
-      <!-- Logo -->
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="size-7"
@@ -68,7 +67,6 @@ whenever(magicPreview, () => {
       <h1 class="sr-only">
         DevNote logo
       </h1>
-      <!-- End logo -->
     </button>
     <div
       class="grid "

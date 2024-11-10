@@ -54,10 +54,6 @@ const toggleTour = () => {
   }, 300);
 };
 
-// Understand difference between
-// const toggleCursor = () => {
-// function toggleCursor() { 
-
 const toggleCursor = () => {
   cursorPointer.value = !cursorPointer.value;
 };

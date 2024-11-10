@@ -14,7 +14,7 @@ function focusOnTitle() {
 
 <template>
   <div
-    class="absolute inset-0 overflow-hidden flex-col flex justify-between items-center z-20 w-full"
+    class="absolute inset-0 overflow-hidden flex-col flex justify-start items-center z-20 w-full"
   >
     <Tooltip
       v-if="counter.loaded_id === '' || counter.project_body !== '<p></p>'"
@@ -23,22 +23,9 @@ function focusOnTitle() {
     >
       <button
         @click="focusOnTitle()"
-        class="p-2 h-8 relative z-10 text-xs text-primary-foreground bg-primary"
+        class="p-2 h-8 relative z-10 text-xs text-primary-foreground  bg-primary"
       >
         Current document not saved.
-        <span v-if="counter.project_name === ''">:* missing title</span>
-      </button>
-    </Tooltip>
-    <Tooltip
-      v-if="counter.loaded_id === '' || counter.project_body !== '<p></p>'"
-      name="click to edit"
-      :side="'bottom'"
-    >
-      <button
-        @click="focusOnTitle()"
-        class="p-2 h-8 relative z-10 text-xs text-primary-foreground bg-primary"
-      >
-        This document is not saved.
         <span v-if="counter.project_name === ''">:* missing title</span>
       </button>
     </Tooltip>

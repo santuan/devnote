@@ -495,7 +495,7 @@ button.interactive {
 }
 
 body:has(.cursorInitial) button {
-  cursor: auto !important;
+  cursor: default !important;
 }
 
 

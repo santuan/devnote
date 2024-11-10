@@ -2,28 +2,19 @@
 import {
   ContextMenuContent,
   ContextMenuItem,
-
   ContextMenuPortal,
-
   ContextMenuRoot,
   ContextMenuSeparator,
-
   ContextMenuTrigger,
-  ScrollAreaRoot,
-  ScrollAreaScrollbar,
-  ScrollAreaThumb,
-  ScrollAreaViewport,
 } from 'radix-vue'
 
-
-import { shallowRef } from "vue";
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
-import { EditorContent } from "@tiptap/vue-3";
 import { useI18n } from 'vue-i18n';
 import { useAddImage } from '@/composables/useAddImage';
 import { useAddImageBase64 } from '@/composables/useAddImageBase64';
 import { useAddVideo } from '@/composables/useAddVideo';
+import { useSetVideo } from '@/composables/useSetVideo';
 
 
 const counter = useCounterStore();
@@ -31,19 +22,9 @@ const { editor } = storeToRefs(counter);
 const { addImage } = useAddImage(editor);
 const { addImageBase64 } = useAddImageBase64(editor);
 const { addVideo } = useAddVideo(editor);
+const { setVideo } = useSetVideo(editor);
 const { t } = useI18n();
 
-
-const fileInput = shallowRef(null);
-
-const triggerFileUpload = () => {
-  fileInput.value?.click();
-};
-
-const handleFileChange = (event) => {
-  const file = (event.target).files?.[0];
-  if (file) addImageBase64(file);
-};
 
 </script>
 
@@ -54,12 +35,34 @@ const handleFileChange = (event) => {
     </ContextMenuTrigger>
     <ContextMenuPortal>
       <ContextMenuContent
-        class="min-w-[220px] z-30 bg-secondary text-foreground outline-none rounded-md p-[5px] shadow data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
+        class="min-w-[220px] z-10 font-mono bg-background/90 ring-1 ring-primary text-foreground outline-none rounded p-[5px] shadow"
         :side-offset="5"
       >
         <ContextMenuItem
+          @click="addVideo"
+          class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
+          :value="t('verb.add')"
+        >
+          <span>{{ t('verb.add') }} Youtube video</span>
+        </ContextMenuItem>
+        <ContextMenuItem
+          @click="setVideo"
+          class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
+          :value="t('verb.add')"
+        >
+          <span>{{ t('verb.add') }} video by url</span>
+        </ContextMenuItem>
+        <ContextMenuItem
+          @click="addImage"
+          class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
+          :value="t('toolbar.image')"
+        >
+          <span>{{ t('verb.add') }} {{ t('toolbar.image') }} url</span>
+        </ContextMenuItem>
+        <ContextMenuSeparator class="h-[0.0125rem] bg-secondary my-1" />
+        <ContextMenuItem
           @click="editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()"
-          class="text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none"
+          class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
           :value="t('toolbar.insertTable')"
         >
           {{ t('toolbar.insertTable') }}
@@ -67,7 +70,7 @@ const handleFileChange = (event) => {
         <ContextMenuItem
           @click="editor.chain().focus().addColumnBefore().run()"
           :disabled="!editor.can().addColumnBefore()"
-          class="text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400"
+          class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
           :value="t('toolbar.addColumnBefore')"
         >
           {{ t('toolbar.addColumnBefore') }}
@@ -75,7 +78,7 @@ const handleFileChange = (event) => {
         <ContextMenuItem
           @click="editor.chain().focus().addColumnAfter().run()"
           :disabled="!editor.can().addColumnAfter()"
-          class="text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400"
+          class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
           :value="t('toolbar.addColumnAfter')"
         >
           {{ t('toolbar.addColumnAfter') }}
@@ -83,7 +86,7 @@ const handleFileChange = (event) => {
         <ContextMenuItem
           @click="editor.chain().focus().addRowBefore().run()"
           :disabled="!editor.can().addRowBefore()"
-          class="text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400"
+          class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
           :value="t('toolbar.addRowBefore')"
         >
           {{ t('toolbar.addRowBefore') }}
@@ -91,17 +94,17 @@ const handleFileChange = (event) => {
         <ContextMenuItem
           @click="editor.chain().focus().addRowAfter().run()"
           :disabled="!editor.can().addRowAfter()"
-          class="text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400"
+          class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
           :value="t('toolbar.addRowAfter')"
         >
           {{ t('toolbar.addRowAfter') }}
         </ContextMenuItem>
-        <ContextMenuSeparator class="h-0.5 border-t border-muted-foreground my-1" />
+        <ContextMenuSeparator class="h-[0.0125rem] bg-secondary my-1" />
        
         <ContextMenuItem
           @click="editor.chain().focus().deleteRow().run()"
           :disabled="!editor.can().deleteRow()"
-          class="text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400"
+          class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
           :value="t('toolbar.deleteRow')"
         >
           {{ t('toolbar.deleteRow') }}
@@ -109,7 +112,7 @@ const handleFileChange = (event) => {
         <ContextMenuItem
           @click="editor.chain().focus().deleteColumn().run()"
           :disabled="!editor.can().deleteColumn()"
-          class="text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400"
+          class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
           :value="t('toolbar.deleteColumn')"
         >
           {{ t('toolbar.deleteColumn') }}
@@ -117,15 +120,15 @@ const handleFileChange = (event) => {
         <ContextMenuItem
           @click="editor.chain().focus().deleteTable().run()"
           :disabled="!editor.can().deleteTable()"
-          class="text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400"
+          class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
           :value="t('toolbar.deleteTable')"
         >
           {{ t('toolbar.deleteTable') }}
         </ContextMenuItem>
-        <ContextMenuSeparator class="h-0.5 border-t border-muted-foreground my-1" />
+        <ContextMenuSeparator class="h-[0.0125rem] bg-secondary my-1" />
         <ContextMenuItem
           @click="editor.chain().focus().mergeCells().run()"
-          class="text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400"
+          class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
           :disabled="!editor.can().mergeCells()"
           :value="t('toolbar.mergeCells')"
         >
@@ -133,42 +136,19 @@ const handleFileChange = (event) => {
         </ContextMenuItem>
         <ContextMenuItem
           @click="editor.chain().focus().splitCell().run()"
-          class="text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400"
+          class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
           :disabled="!editor.can().splitCell()"
           :value="t('toolbar.splitCell')"
         >
           {{ t('toolbar.splitCell') }}
         </ContextMenuItem>
-        <ContextMenuSeparator class="h-0.5 border-t border-muted-foreground my-1" />
-
-        <ContextMenuItem
-          @click="addVideo"
-          class="text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400"
-        >
-          <span>{{ t('verb.add') }} Youtube video</span>
-        </ContextMenuItem>
-        <ContextMenuItem
-          @click="triggerFileUpload"
-          class="text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400"
-        >
-          <span>{{ t('verb.add') }} Base64 {{ t('toolbar.image') }}</span>
-        </ContextMenuItem>
-        <ContextMenuItem
-          @click="addImage"
-          class="text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400"
-        >
-          <span>{{ t('verb.add') }} {{ t('toolbar.image') }} url</span>
-        </ContextMenuItem>
-        <input
-          ref="fileInput"
-          type="file"
-          accept="image/jpeg"
-          class="hidden"
-          @change="handleFileChange"
-        >
       </ContextMenuContent>
     </ContextMenuPortal>
   </ContextMenuRoot>
 </template>
 
-<style></style>
+<style scoped>
+
+[data-disabled]{
+  @apply opacity-60 pointer-events-none
+}</style>

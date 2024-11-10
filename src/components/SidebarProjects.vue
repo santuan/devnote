@@ -11,24 +11,19 @@ import { useCounterStore } from "@/stores/counter";
 
 import { onClickOutside, refDebounced, useStorage } from "@vueuse/core";
 import { ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaViewport } from "radix-vue";
-import { Search, CircleX } from "lucide-vue-next";
+import { CircleX } from "lucide-vue-next";
 import { useI18n } from 'vue-i18n';
 
 const target = shallowRef(null);
 const editing = shallowRef(false);
 const counter = useCounterStore();
-const {
-  allItemsTodo,
-  allItemsChecked,
-  searchTerm,
-  file_name
-} = storeToRefs(counter);
-const { t } = useI18n();
+const { allItemsTodo, allItemsChecked, searchTerm, file_name } = storeToRefs(counter);
+const sortOption = useStorage("sortItemsBy", "name");
 
 const focusSearch = ref(null)
 const debounced = refDebounced(searchTerm, 300);
 const input = shallowRef(file_name);
-const sortOption = useStorage("sortItemsBy", "name");
+const { t } = useI18n();
 
 onClickOutside(target, () => {
   editing.value = false;
@@ -99,13 +94,13 @@ const results = computed(() => {
         </label>
         <span
           v-if="!searchTerm"
-          class=" top-0 right-[0.015rem] flex items-center bg-primary/20 text-foreground justify-center h-8 text-xs min-w-12"
+          class=" top-0 right-[0.015rem] flex items-center bg-primary/10 text-foreground justify-center h-8 text-xs min-w-12"
         >
           {{ allItemsTodo?.length }}
         </span>
         <button
           v-else
-          class="absolute top-0 right-[0.015rem] flex items-center justify-center gap-1 px-1 text-sm font-medium min-w-12 h-8 bg-primary/10 hover:outline-none hover:bg-primary/20 text-foreground focus-visible:ring-2 focus:outline focus:ring-primary/50 border-primary focus-visible:bg-primary/5 hover:text-foreground"
+          class="absolute top-0 right-[0.015rem] flex items-center justify-center gap-1 px-1 text-xs min-w-12 h-8 bg-primary/10 hover:outline-none hover:bg-primary/20 text-foreground focus-visible:ring-2 focus:outline focus:ring-primary/50 border-primary focus-visible:bg-primary/5 hover:text-foreground"
           @click="clearTerm()"
         >
           <span class="min-w-3">{{ results.length }}</span>

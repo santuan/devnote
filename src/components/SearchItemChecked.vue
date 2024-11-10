@@ -1,17 +1,16 @@
 <script setup>
 
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
-import {
-  CircleOff,
-} from "lucide-vue-next";
-import { useCounterStore } from "@/stores/counter";
-import { storeToRefs } from "pinia";
 import Tooltip from "./ui/Tooltip.vue";
 
+import { useCounterStore } from "@/stores/counter";
+import { storeToRefs } from "pinia";
+
+import { CircleOff } from "lucide-vue-next";
+import { useI18n } from 'vue-i18n';
+
 const counter = useCounterStore();
-const { loaded_id } =   storeToRefs(counter);
+const { loaded_id } = storeToRefs(counter);
+const { t } = useI18n();
 
 const props = defineProps({
   data: {

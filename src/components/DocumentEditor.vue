@@ -1,9 +1,9 @@
 <script setup>
 
-import EditorTitle from "./ui/Tiptap/EditorTitle.vue";
-import EditorToolbar from "./ui/Tiptap/EditorToolbar.vue";
 import Editor from "@/components/ui/Tiptap/EditorTipTap.vue";
-import SplashScreen from "./ui/SplashScreen.vue";
+import EditorToolbar from "@/components/ui/Tiptap/EditorToolbar.vue";
+import EditorTitle from "@/components/ui/Tiptap/EditorTitle.vue";
+import SplashScreen from "@/components/ui/SplashScreen.vue";
 
 import { useCounterStore } from "@/stores/counter";
 import { useI18n } from 'vue-i18n';
@@ -71,6 +71,5 @@ const { t } = useI18n();
 
 .editor-top {
   @apply bg-background z-50;
-
 }
 </style>

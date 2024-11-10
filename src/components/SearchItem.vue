@@ -1,14 +1,4 @@
 <script setup>
-
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
-import { Circle, Pin, X } from "lucide-vue-next";
-import { useCounterStore } from "@/stores/counter";
-import { storeToRefs } from "pinia";
-import Tooltip from "./ui/Tooltip.vue";
-import { breakpointsTailwind, useBreakpoints } from "@vueuse/core";
-import { ref } from "vue";
 import {
   AlertDialogRoot,
   AlertDialogPortal,
@@ -19,14 +9,24 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "radix-vue";
+import Tooltip from "./ui/Tooltip.vue";
+
+import { ref } from "vue";
+import { useCounterStore } from "@/stores/counter";
+import { storeToRefs } from "pinia";
+import { breakpointsTailwind, useBreakpoints } from "@vueuse/core";
+
+import { Circle, Pin, X } from "lucide-vue-next";
+import { useI18n } from 'vue-i18n';
 
 const counter = useCounterStore();
 const { loaded_id, editor } = storeToRefs(counter);
+
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const largerThanLg = breakpoints.greater("lg");
-
 const showAlertDialog = ref(false);
 const selectedId = ref(null);
+const { t } = useI18n();
 
 const props = defineProps({
   data: {

@@ -11,32 +11,31 @@ import { useDropZone, useMagicKeys, whenever, } from "@vueuse/core";
 import { useI18n } from 'vue-i18n';
 
 const counter = useCounterStore();
-const { editor } = storeToRefs(counter);
 const dropZoneRef = shallowRef();
-const { isOverDropZone } = useDropZone(dropZoneRef);
 const keys = useMagicKeys();
-const magicFocusSidebar = keys["ctrl+shift+alt+ArrowLeft"];
-const magicFocusTitle = keys["ctrl+shift+alt+ArrowRight"];
-const magicFocusEditor = keys["ctrl+shift+alt+ArrowDown"];
-const magicEditorToolbar = keys["ctrl+shift+alt+ArrowUp"];
+const { editor } = storeToRefs(counter);
+const { isOverDropZone } = useDropZone(dropZoneRef);
 const { t } = useI18n();
 
-
+const magicFocusSidebar = keys["ctrl+shift+alt+ArrowLeft"];
 whenever(magicFocusSidebar, (n) => {
   if (n)
     counter.setFocusSidebar()
 })
 
+const magicFocusTitle = keys["ctrl+shift+alt+ArrowRight"];
 whenever(magicFocusTitle, (n) => {
   if (n)  
     counter.SetFocusTitle()
 })
 
+const magicFocusEditor = keys["ctrl+shift+alt+ArrowDown"];
 whenever(magicFocusEditor, (n) => {
   if (n)  
     editor.value.commands.focus()
 })
 
+const magicEditorToolbar = keys["ctrl+shift+alt+ArrowUp"];
 whenever(magicEditorToolbar, (n) => {
   if (n)  
     console.log("working")
