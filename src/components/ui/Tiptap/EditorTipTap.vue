@@ -158,7 +158,7 @@ onBeforeUnmount(() => {
         style="--scrollbar-size: 10px"
       >
         <ScrollAreaViewport
-          class="w-full h-full outline-none group-focus-within:ring-primary/70 group-focus-within:ring-1 ring-1  ring-secondary focus:!ring-primary focus:!ring-2"
+          class="w-full h-full border-secondary border outline-none group-focus-within:ring-primary/70 group-focus-within:ring-1 focus:ring-inset focus:!ring-primary focus:!ring-1  group-focus-within:ring-inset"
         >
           <div
             class="max-w-full px-2 mx-auto prose dark:prose-invert"
@@ -188,7 +188,7 @@ onBeforeUnmount(() => {
       style="--scrollbar-size: 10px"
     >
       <ScrollAreaViewport
-        class="w-full h-full outline-none"
+        class="w-full h-full border-transparent border outline-none"
       >
         <div
           class="max-w-full px-2 mx-auto prose dark:prose-invert"
@@ -216,7 +216,7 @@ onBeforeUnmount(() => {
 }
 
 .ScrollAreaEditor {
-  @apply w-full border-0 pt-0.5;
+  @apply w-full border-0;
 
   &.is-editable {
     @apply max-h-[calc(100dvh-2.5rem)] bg-secondary/30;
@@ -434,10 +434,12 @@ html.dark .shiki span {
 } */
 
 .tiptap .ProseMirror-selectednode {
-  /* outline: 3px solid #68cef8; */
   @apply ring-2 ring-primary;
 }
 
+.is-editable .tiptap .media-node-view.ProseMirror-selectednode {
+  @apply !ring-0 !ring-transparent bg-primary/[0.02];
+}
 
 .tiptap li p {
   @apply m-0;

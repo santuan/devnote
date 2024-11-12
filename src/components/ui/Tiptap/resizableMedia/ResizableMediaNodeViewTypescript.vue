@@ -237,13 +237,13 @@ const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
 <template>
   <node-view-wrapper
     as="article"
-    class="media-node-view flex relative not-prose my-6 "
+    class="media-node-view flex relative not-prose my-6 group"
     :class="[`${isFloat && `f-${props.node.attrs.dataFloat}` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
   >
     <div class="flex relative">
       <PopoverRoot v-if="counter.content_editable">
-        <PopoverTrigger aria-label="Update dimensions">
-          <div class="w-fit flex relative ">
+        <PopoverTrigger aria-label="Update dimensions" class="focus:!ring-primary focus:!ring-4">
+          <div class="w-fit flex relative  ">
             <div
               v-if="mediaType === 'img'"
             >
@@ -295,23 +295,23 @@ const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
         <PopoverPortal>
           <PopoverContent
             side="bottom"
-            :side-offset="15"
-            class="px-1 h-10 w-80 justify-center items-center gap-0.5 flex font-mono text-xs text-foreground duration-300 focus-visible:ring-4 hover:ring-2 bg-background ring-1 ring-primary"
+            :side-offset="-40"
+            class="px-1 h-10 min-w-64 justify-center items-center gap-0.5 flex font-mono text-xs text-foreground duration-300 focus-visible:ring-4 hover:ring-2 bg-background ring-1 ring-primary"
           >
             <button
-              class="px-3 py-1"
+              class="size-9"
               @click="setWitdhByThird()"
             >
               33%
             </button>
             <button
-              class="px-3 py-1"
+              class="size-9"
               @click="setWitdhByHalf()"
             >
               50%
             </button>
             <button
-              class="px-3 py-1"
+              class="size-9"
               @click="setWitdhByFull()"
             >
               100%
@@ -320,7 +320,7 @@ const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
               v-for="(mediaAction, i) in resizableMediaActions"
               :key="i"
               :content="mediaAction.tooltip"
-              class="px-3 py-1 flex gap-1"
+              class="size-9 flex justify-center items-center gap-1"
               @click="mediaAction.tooltip === 'Delete'
                 ? mediaAction.delete?.(deleteNode)
                 : mediaAction.action?.(updateAttributes)
