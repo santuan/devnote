@@ -38,7 +38,6 @@ whenever(magicFocusEditor, (n) => {
 const magicEditorToolbar = keys["ctrl+shift+alt+ArrowUp"];
 whenever(magicEditorToolbar, (n) => {
   if (n)  
-    console.log("working")
     counter.showEditorToolbar = !counter.showEditorToolbar
 })
 

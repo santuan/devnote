@@ -1,6 +1,7 @@
 <script setup>
 import EditorCodeBlock from "@/components/ui/Tiptap/EditorCodeBlock.vue";
 import Video from "./addVideo";
+
 import {
   ScrollAreaRoot,
   ScrollAreaScrollbar,
@@ -12,7 +13,6 @@ import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
 import StarterKit from "@tiptap/starter-kit";
-import Image from "@tiptap/extension-image";
 import Typography from "@tiptap/extension-typography";
 import Placeholder from "@tiptap/extension-placeholder";
 import TextAlign from "@tiptap/extension-text-align";
@@ -25,6 +25,9 @@ import Youtube from "@tiptap/extension-youtube";
 import Gapcursor from '@tiptap/extension-gapcursor'
 import CodeBlockShiki from "tiptap-extension-code-block-shiki";
 import mediumZoom from "medium-zoom/dist/pure";
+// import Image from "@tiptap/extension-image";
+import { ResizableMedia } from './resizableMedia'
+
 import "medium-zoom/dist/style.css";
 
 import { onMounted, onBeforeUnmount } from "vue";
@@ -32,9 +35,6 @@ import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
 import { Editor, EditorContent, VueNodeViewRenderer } from "@tiptap/vue-3";
 import { useI18n } from 'vue-i18n';
-import { useAddImage } from '@/composables/useAddImage';
-import { useAddImageBase64 } from '@/composables/useAddImageBase64';
-import { useAddVideo } from '@/composables/useAddVideo';
 import EditorContextMenu from "./EditorContextMenu.vue";
 
 const counter = useCounterStore();
@@ -67,15 +67,15 @@ onMounted(() => {
       }),
       Color.configure({ types: [TextStyle.name, ListItem.name] }),
       TextStyle.configure({ types: [ListItem.name] }),
-      Image.configure({
-        allowBase64: true,
-        inline: true,
-        HTMLAttributes: {
-          class: "max-w-7xl w-full my-6",
-          // Custom attribute for zooming with that library
-          "data-zoomable": "",
-        },
-      }),
+      ResizableMedia,
+      // Image.configure({
+      //   allowBase64: true,
+      //   inline: true,
+      //   HTMLAttributes: {
+      //     class: "w-full my-6",
+      //     "data-zoomable": "",
+      //   },
+      // }),
       Gapcursor,
       Video,
       Typography,
@@ -99,7 +99,7 @@ onMounted(() => {
       TableHeader,
       TableCell,
       TextAlign.configure({
-        types: ["heading", "paragraph", "image"],
+        types: ["heading", "paragraph"],
       }),
       Placeholder.configure({
         placeholder: t('editor.placeholder'),
@@ -132,13 +132,6 @@ onMounted(() => {
       }
     },
     onUpdate: () => {
-      if (!props.editable) {
-        mediumZoom("[data-zoomable]", {
-          margin: 12,
-          background: "hsl(var(--background))",
-          scrollOffset: 0,
-        });
-      }
       emit("update:modelValue", editor.value.getHTML());
     },
   });

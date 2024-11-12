@@ -1,0 +1,441 @@
+<script setup lang="ts">
+/*
+Disclaimer. All this folder is based upon work of sereneinserenade tiptap-media-resize
+Tiptap Extension for having resizable, alignable, floatable, movable media.
+
+https://github.com/sereneinserenade/tiptap-media-resize
+
+Note: This is VUE 3 version. React version is in progress
+*/
+
+import { Editor, Node, NodeViewWrapper } from '@tiptap/vue-3'
+import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from "radix-vue";
+import { Node as ProseMirrorNode } from 'prosemirror-model'
+import { Decoration } from 'prosemirror-view'
+import { resizableMediaActions } from './resizableMediaMenuUtil'
+
+import { ref, onMounted, computed, watch } from 'vue'
+import { useCounterStore } from "@/stores/counter";
+
+import { Video } from 'lucide-vue-next';
+
+const counter = useCounterStore();
+
+interface Props {
+  editor: Editor
+  node: ProseMirrorNode
+  decorations: Decoration
+  selected: boolean
+  extension: Node<any, any>
+  getPos: () => number
+  updateAttributes: (attributes: Record<string, any>) => void
+  deleteNode: () => void
+}
+
+const props = defineProps<Props>()
+const mediaType = computed<'img' | 'video'>(() => props.node.attrs['media-type'])
+const resizableImg = ref<HTMLImageElement | HTMLVideoElement | null>(null) // template ref
+const aspectRatio = ref(0)
+const proseMirrorContainerWidth = ref(0)
+const mediaActionActiveState = ref<Record<string, boolean>>({})
+
+const setMediaActionActiveStates = () => {
+  const activeStates: Record<string, boolean> = {}
+  for (const { tooltip, isActive } of resizableMediaActions) activeStates[tooltip] = !!isActive?.(props.node.attrs)
+  mediaActionActiveState.value = activeStates
+}
+
+watch(
+  () => props.node.attrs,
+  () => setMediaActionActiveStates(),
+  { deep: true }
+)
+
+const mediaSetupOnLoad = () => {
+  // ! TODO: move this to extension storage
+  const proseMirrorContainerDiv = document.querySelector('.ProseMirror')
+  if (proseMirrorContainerDiv) proseMirrorContainerWidth.value = proseMirrorContainerDiv?.clientWidth
+  // When the media has loaded
+  if (!resizableImg.value) return
+  if (mediaType.value === 'video') {
+    // Aspect Ratio from its original size
+    setTimeout(() => {
+      aspectRatio.value = (resizableImg.value as HTMLVideoElement).videoWidth / (resizableImg.value as HTMLVideoElement).videoHeight
+      // for the first time when video is added with custom width and height
+      // and we have to adjust the video height according to it's width
+      onHorizontalResize('left', 0)
+    }, 200)
+  } else {
+    resizableImg.value.onload = () => {
+      // Aspect Ratio from its original size
+      aspectRatio.value = (resizableImg.value as HTMLImageElement).naturalWidth
+        / (resizableImg.value as HTMLImageElement).naturalHeight
+
+      onHorizontalResize('left', 0)
+    }
+  }
+  setTimeout(() => setMediaActionActiveStates(), 200)
+}
+
+onMounted(() => mediaSetupOnLoad())
+
+const isHorizontalResizeActive = ref(false)
+const lastCursorX = ref(-1)
+
+interface WidthAndHeight {
+  width: number
+  height: number
+}
+
+const limitWidthOrHeightToFiftyPixels = ({ width, height }: WidthAndHeight) => width < 100 || height < 100
+
+const startHorizontalResize = (e: MouseEvent) => {
+  isHorizontalResizeActive.value = true
+  lastCursorX.value = e.clientX
+
+  document.addEventListener('mousemove', onHorizontalMouseMove)
+  document.addEventListener('mouseup', stopHorizontalResize)
+}
+
+const stopHorizontalResize = () => {
+  isHorizontalResizeActive.value = false
+  lastCursorX.value = -1
+
+  document.removeEventListener('mousemove', onHorizontalMouseMove)
+  document.removeEventListener('mouseup', stopHorizontalResize)
+}
+
+const onHorizontalResize = (directionOfMouseMove: 'right' | 'left', diff: number) => {
+  if (!resizableImg.value) {
+    console.error('Media ref is undefined|null', { resizableImg: resizableImg.value })
+    return
+  }
+
+  const currentMediaDimensions = {
+    width: resizableImg.value?.width,
+    height: resizableImg.value?.height,
+  }
+
+  const newMediaDimensions = {
+    width: -1,
+    height: -1,
+  }
+
+  if (directionOfMouseMove === 'left') {
+    newMediaDimensions.width = currentMediaDimensions.width - Math.abs(diff)
+  } else {
+    newMediaDimensions.width = currentMediaDimensions.width + Math.abs(diff)
+  }
+  if (newMediaDimensions.width > proseMirrorContainerWidth.value) newMediaDimensions.width = proseMirrorContainerWidth.value
+  newMediaDimensions.height = newMediaDimensions.width
+  if (limitWidthOrHeightToFiftyPixels(newMediaDimensions)) return
+  props.updateAttributes(newMediaDimensions)
+}
+
+const onHorizontalMouseMove = (e: MouseEvent) => {
+  if (!isHorizontalResizeActive.value) return
+  const { clientX } = e
+  const diff = lastCursorX.value - clientX
+  lastCursorX.value = clientX
+  if (diff === 0) return
+  const directionOfMouseMove: 'left' | 'right' = diff > 0 ? 'left' : 'right'
+  onHorizontalResize(directionOfMouseMove, Math.abs(diff))
+}
+
+const isVerticalResizeActive = ref(false)
+
+const lastCursorY = ref(-1)
+
+const startVerticalResize = (e: MouseEvent) => {
+  isVerticalResizeActive.value = true
+  lastCursorY.value = e.clientY
+  document.addEventListener('mousemove', onVerticalMouseMove)
+  document.addEventListener('mouseup', stopVerticalResize)
+}
+
+const stopVerticalResize = () => {
+  isVerticalResizeActive.value = false
+  lastCursorY.value = -1
+  document.removeEventListener('mousemove', onVerticalMouseMove)
+  document.removeEventListener('mouseup', stopVerticalResize)
+}
+
+const onVerticalMouseMove = (e: MouseEvent) => {
+  if (!isVerticalResizeActive.value) return
+  const { clientY } = e
+  const diff = lastCursorY.value - clientY
+  lastCursorY.value = clientY
+  if (diff === 0) return
+  const directionOfMouseMove: 'up' | 'down' = diff > 0 ? 'up' : 'down'
+  if (!resizableImg.value) {
+    console.error('Media ref is undefined|null', { resizableImg: resizableImg.value })
+    return
+  }
+
+  const currentMediaDimensions = {
+    width: resizableImg.value?.width,
+    height: resizableImg.value?.height,
+  }
+
+  const newMediaDimensions = {
+    width: -1,
+    height: -1,
+  }
+
+  if (directionOfMouseMove === 'up') {
+    newMediaDimensions.height = currentMediaDimensions.height - Math.abs(diff)
+  } else {
+    newMediaDimensions.height = currentMediaDimensions.height + Math.abs(diff)
+  }
+  newMediaDimensions.width = newMediaDimensions.height * aspectRatio.value
+  if (newMediaDimensions.width > proseMirrorContainerWidth.value) {
+    newMediaDimensions.width = proseMirrorContainerWidth.value
+    newMediaDimensions.height = newMediaDimensions.width / aspectRatio.value
+  }
+
+  if (limitWidthOrHeightToFiftyPixels(newMediaDimensions)) return
+  props.updateAttributes(newMediaDimensions)
+}
+
+const setWitdhByHalf = () => {
+  const newMediaDimensions = {
+    width: -1,
+    height: -1,
+  }
+  newMediaDimensions.width = proseMirrorContainerWidth.value / 2
+  newMediaDimensions.height = newMediaDimensions.width / aspectRatio.value
+  if (limitWidthOrHeightToFiftyPixels(newMediaDimensions)) return
+  props.updateAttributes(newMediaDimensions)
+}
+
+const setWitdhByThird = () => {
+  const newMediaDimensions = {
+    width: -1,
+    height: -1,
+  }
+  newMediaDimensions.width = proseMirrorContainerWidth.value / 3
+  newMediaDimensions.height = newMediaDimensions.width / aspectRatio.value
+  if (limitWidthOrHeightToFiftyPixels(newMediaDimensions)) return
+  props.updateAttributes(newMediaDimensions)
+}
+
+const setWitdhByFull = () => {
+  const newMediaDimensions = {
+    width: -1,
+    height: -1,
+  }
+  newMediaDimensions.width = proseMirrorContainerWidth.value
+  newMediaDimensions.height = newMediaDimensions.width / aspectRatio.value
+  if (limitWidthOrHeightToFiftyPixels(newMediaDimensions)) return
+  props.updateAttributes(newMediaDimensions)
+}
+
+const isFloat = computed<boolean>(() => !!props.node.attrs.dataFloat)
+const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
+</script>
+
+<template>
+  <node-view-wrapper
+    as="article"
+    class="media-node-view flex relative not-prose my-6 "
+    :class="[`${isFloat && `f-${props.node.attrs.dataFloat}` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
+  >
+    <div class="flex relative">
+      <PopoverRoot v-if="counter.content_editable">
+        <PopoverTrigger aria-label="Update dimensions">
+          <div class="w-fit flex relative ">
+            <div
+              v-if="mediaType === 'img'"
+            >
+
+              <img
+                v-bind="node.attrs"
+                ref="resizableImg"
+                class=""
+                :class="[`${isFloat && `float-${props.node.attrs.dataFloat}` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
+                draggable="true"
+              >
+            </div>
+
+            <div
+              class="relative"
+              v-else-if="mediaType === 'video'"
+            >
+              <span class="absolute flex justify-center items-center inset-0">
+                <Video class="size-12" />
+              </span>
+              <video
+                v-bind="node.attrs"
+                ref="resizableImg"
+                class="opacity-80"
+                :class="[`${isFloat && `float-${props.node.attrs.dataFloat}` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
+                draggable="true"
+              >
+                <source :src="node.attrs.src">
+              </video>
+            </div>
+
+            <div
+              class="horizontal-resize-handle"
+              :class="{ 'horizontal-resize-active': isHorizontalResizeActive }"
+              title="Resize"
+              @mousedown="startHorizontalResize"
+              @mouseup="stopHorizontalResize"
+            />
+
+            <div
+              class="vertical-resize-handle"
+              :class="{ 'vertical-resize-active': isVerticalResizeActive }"
+              title="Resize"
+              @mousedown="startVerticalResize"
+              @mouseup="stopVerticalResize"
+            />
+          </div>
+        </PopoverTrigger>
+        <PopoverPortal>
+          <PopoverContent
+            side="bottom"
+            :side-offset="15"
+            class="px-1 h-10 w-80 justify-center items-center gap-0.5 flex font-mono text-xs text-foreground duration-300 focus-visible:ring-4 hover:ring-2 bg-background ring-1 ring-primary"
+          >
+            <button
+              class="px-3 py-1"
+              @click="setWitdhByThird()"
+            >
+              33%
+            </button>
+            <button
+              class="px-3 py-1"
+              @click="setWitdhByHalf()"
+            >
+              50%
+            </button>
+            <button
+              class="px-3 py-1"
+              @click="setWitdhByFull()"
+            >
+              100%
+            </button>
+            <button
+              v-for="(mediaAction, i) in resizableMediaActions"
+              :key="i"
+              :content="mediaAction.tooltip"
+              class="px-3 py-1 flex gap-1"
+              @click="mediaAction.tooltip === 'Delete'
+                ? mediaAction.delete?.(deleteNode)
+                : mediaAction.action?.(updateAttributes)
+                "
+            >
+              <component
+                class="shrink-0 size-4"
+                :is="mediaAction.icon"
+              />
+              <span class="sr-only">{{ mediaAction.tooltip }}</span>
+            </button>
+          </PopoverContent>
+        </PopoverPortal>
+      </PopoverRoot>
+      <div
+        v-else
+        class="w-fit flex relative"
+      >
+        <img
+          v-if="mediaType === 'img'"
+          v-bind="node.attrs"
+          data-zoomable
+          class=""
+          :class="[`${isFloat && `float-${props.node.attrs.dataFloat}` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
+          draggable="true"
+        >
+
+        <video
+          v-else-if="mediaType === 'video'"
+          v-bind="node.attrs"
+          ref="resizableImg"
+          class=""
+          :class="[`${isFloat && `float-${props.node.attrs.dataFloat}` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
+          draggable="true"
+          controls="true"
+        >
+          <source :src="node.attrs.src">
+        </video>
+
+        <div
+          class="horizontal-resize-handle"
+          :class="{ 'horizontal-resize-active': isHorizontalResizeActive }"
+          title="Resize"
+          @mousedown="startHorizontalResize"
+          @mouseup="stopHorizontalResize"
+        />
+
+        <div
+          class="vertical-resize-handle"
+          :class="{ 'vertical-resize-active': isVerticalResizeActive }"
+          title="Resize"
+          @mousedown="startVerticalResize"
+          @mouseup="stopVerticalResize"
+        />
+      </div>
+    </div>
+  </node-view-wrapper>
+</template>
+
+<style>
+.media-node-view {
+  position: relative;
+}
+
+.media-node-view.f-left {
+  @apply float-left
+}
+
+.media-node-view.f-right {
+  @apply float-right
+}
+
+.media-node-view.align-left {
+  @apply justify-start
+}
+
+.media-node-view.align-center {
+  @apply justify-center
+}
+
+.media-node-view.align-right {
+  @apply justify-end
+}
+
+.horizontal-resize-handle,
+.vertical-resize-handle {
+  @apply absolute hover:bg-primary z-50 opacity-90
+}
+
+.horizontal-resize-handle {
+  @apply h-full w-2 top-0 right-0 cursor-col-resize
+}
+
+.vertical-resize-handle {
+  @apply w-full h-2 bottom-0 left-0 cursor-row-resize
+}
+
+.image-actions-container {
+  @apply flex gap-1
+}
+
+.media-actions-container {
+  padding: 4px !important;
+  width: fit-content !important;
+
+  .ep-button+.ep-button {
+    margin-left: 0px;
+  }
+}
+
+.is-editable video {
+  pointer-events: none;
+}
+
+.is-preview .tiptap .ProseMirror-selectednode {
+  @apply ring-0
+}
+</style>

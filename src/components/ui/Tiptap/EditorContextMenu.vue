@@ -12,20 +12,18 @@ import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
 import { useI18n } from 'vue-i18n';
 import { useAddImage } from '@/composables/useAddImage';
-import { useAddImageBase64 } from '@/composables/useAddImageBase64';
 import { useAddVideo } from '@/composables/useAddVideo';
 import { useSetVideo } from '@/composables/useSetVideo';
+import { useAddImageBase64 } from '@/composables/useAddImageBase64';
 
 
 const counter = useCounterStore();
 const { editor } = storeToRefs(counter);
 const { addImage } = useAddImage(editor);
-const { addImageBase64 } = useAddImageBase64(editor);
 const { addVideo } = useAddVideo(editor);
 const { setVideo } = useSetVideo(editor);
+const { addImageBase64 } = useAddImageBase64(editor);
 const { t } = useI18n();
-
-
 </script>
 
 <template>
@@ -59,9 +57,25 @@ const { t } = useI18n();
         >
           <span>{{ t('verb.add') }} {{ t('toolbar.image') }} url</span>
         </ContextMenuItem>
+        <ContextMenuItem
+          as="label"
+          for="img-uploader"
+            id="uploader"
+            class="cursor-defaul relative text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
+        >
+            <span>Base64</span>
+            <input
+              id="img-uploader"
+              type="file"
+              accept="image/jpeg"
+              class="absolute inset-0 opacity-0"
+              :aria-label="`${t('verb.add')} Base64 ${t('toolbar.image')}`"
+              @change="addImageBase64"
+            >
+        </ContextMenuItem>
         <ContextMenuSeparator class="h-[0.0125rem] bg-secondary my-1" />
         <ContextMenuItem
-          @click="editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()"
+          @click="editor.chain().focus().insertTable({ rows: 2, cols: 2, withHeaderRow: true }).run()"
           class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
           :value="t('toolbar.insertTable')"
         >
@@ -100,14 +114,13 @@ const { t } = useI18n();
           {{ t('toolbar.addRowAfter') }}
         </ContextMenuItem>
         <ContextMenuSeparator class="h-[0.0125rem] bg-secondary my-1" />
-       
         <ContextMenuItem
-          @click="editor.chain().focus().deleteRow().run()"
-          :disabled="!editor.can().deleteRow()"
+          @click="editor.chain().focus().deleteTable().run()"
+          :disabled="!editor.can().deleteTable()"
           class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
-          :value="t('toolbar.deleteRow')"
+          :value="t('toolbar.deleteTable')"
         >
-          {{ t('toolbar.deleteRow') }}
+          {{ t('toolbar.deleteTable') }}
         </ContextMenuItem>
         <ContextMenuItem
           @click="editor.chain().focus().deleteColumn().run()"
@@ -118,12 +131,12 @@ const { t } = useI18n();
           {{ t('toolbar.deleteColumn') }}
         </ContextMenuItem>
         <ContextMenuItem
-          @click="editor.chain().focus().deleteTable().run()"
-          :disabled="!editor.can().deleteTable()"
+          @click="editor.chain().focus().deleteRow().run()"
+          :disabled="!editor.can().deleteRow()"
           class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
-          :value="t('toolbar.deleteTable')"
+          :value="t('toolbar.deleteRow')"
         >
-          {{ t('toolbar.deleteTable') }}
+          {{ t('toolbar.deleteRow') }}
         </ContextMenuItem>
         <ContextMenuSeparator class="h-[0.0125rem] bg-secondary my-1" />
         <ContextMenuItem

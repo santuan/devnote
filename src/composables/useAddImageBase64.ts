@@ -1,5 +1,3 @@
-import { ref } from 'vue';
-
 export function useAddImageBase64(editor: any) {
   const addImageBase64 = (event: Event) => {
     const file = (event.target as HTMLInputElement).files?.[0];
@@ -7,7 +5,18 @@ export function useAddImageBase64(editor: any) {
       const reader = new FileReader();
       reader.onload = (e) => {
         const dataURL = e.target?.result;
-        editor.value.chain().focus().setImage({ src: dataURL }).run();
+        // editor.value.chain().focus().setImage({ src: dataURL }).run();
+        if (dataURL) {
+          editor.value?.commands.setMedia({   
+              src: dataURL,
+              'media-type': 'img',
+              alt: 'Something else',
+              title: 'Something',
+              width: '800',
+              height: '400',
+            }, 
+          );
+        }
       };
       reader.readAsDataURL(file);
     }

@@ -1,10 +1,16 @@
-import { ref } from 'vue';
-
 export function useAddImage(editor: any) {
   const addImage = () => {
     const url = window.prompt("Ingresar URL de la imagen");
     if (url) {
-      editor.value.chain().focus().setImage({ src: url }).run();
+      editor.value?.commands.setMedia({ 
+          src: url,
+          'media-type': 'img',
+          alt: 'Something else',
+          title: 'Something',
+          width: '800',
+          height: '400',
+        }, 
+      );
     }
   };
 

@@ -14,7 +14,6 @@ const largerThanLg = breakpoints.greater("lg");
 const { t } = useI18n();
 
 function new_document() {
-  console.log("asd")
   if (largerThanLg.value === true) {
     counter.clear_editor();
     counter.content_editable = true;

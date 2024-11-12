@@ -291,40 +291,6 @@ const { setVideo } = useSetVideo(editor);
               <span class="sr-only">{{ t('toolbar.strike') }}</span>
             </ToolbarButton>
           </Tooltip>
-          <Tooltip
-            :name="t('toolbar.code')"
-            side="bottom"
-            shortcut="Ctrl E"
-          >
-            <ToolbarButton
-              @click="editor.chain().focus().toggleCode().run()"
-              :disabled="!editor.can().chain().focus().toggleCode().run()"
-              :class="{ 'is-active': editor.isActive('code') }"
-              class="font-mono interactive !text-base"
-              :value="t('toolbar.code')"
-            >
-              <span class="flex items-center justify-center text-xs rounded size-5 bg-secondary/30 text-inherit">
-                A
-              </span>
-              <span class="sr-only">{{ t('toolbar.code') }}</span>
-            </ToolbarButton>
-          </Tooltip>
-          <Tooltip
-            :name="t('toolbar.codeBlock')"
-            side="bottom"
-            shortcut="Ctrl Alt C"
-          >
-            <ToolbarButton
-              @click="editor.chain().focus().toggleCodeBlock().run()"
-              :class="{ 'is-active': editor.isActive('codeBlock') }"
-              class="interactive"
-              :value="t('toolbar.codeBlock')"
-            >
-              <Code />
-              <span class="sr-only">{{ t('toolbar.codeBlock') }}</span>
-            </ToolbarButton>
-          </Tooltip>
-
           <DropdownMenuRoot>
             <ToolbarButton as-child>
               <DropdownMenuTrigger>
@@ -489,6 +455,39 @@ const { setVideo } = useSetVideo(editor);
             >
               <Minus />
               <span class="sr-only">{{ t('toolbar.separator') }}</span>
+            </ToolbarButton>
+          </Tooltip>
+          <Tooltip
+            :name="t('toolbar.code')"
+            side="bottom"
+            shortcut="Ctrl E"
+          >
+            <ToolbarButton
+              @click="editor.chain().focus().toggleCode().run()"
+              :disabled="!editor.can().chain().focus().toggleCode().run()"
+              :class="{ 'is-active': editor.isActive('code') }"
+              class="font-mono interactive !text-base"
+              :value="t('toolbar.code')"
+            >
+              <span class="flex items-center justify-center text-xs rounded size-5 bg-secondary/30 text-inherit">
+                A
+              </span>
+              <span class="sr-only">{{ t('toolbar.code') }}</span>
+            </ToolbarButton>
+          </Tooltip>
+          <Tooltip
+            :name="t('toolbar.codeBlock')"
+            side="bottom"
+            shortcut="Ctrl Alt C"
+          >
+            <ToolbarButton
+              @click="editor.chain().focus().toggleCodeBlock().run()"
+              :class="{ 'is-active': editor.isActive('codeBlock') }"
+              class="interactive"
+              :value="t('toolbar.codeBlock')"
+            >
+              <Code />
+              <span class="sr-only">{{ t('toolbar.codeBlock') }}</span>
             </ToolbarButton>
           </Tooltip>
           <Tooltip
