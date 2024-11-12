@@ -6,9 +6,11 @@ import EditorTitle from "@/components/ui/Tiptap/EditorTitle.vue";
 import SplashScreen from "@/components/ui/SplashScreen.vue";
 
 import { useCounterStore } from "@/stores/counter";
+import { useSettingsStore } from '@/stores/settings';
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from "pinia";
 
+const settings = useSettingsStore();
 const counter = useCounterStore();
 const { showEditorToolbar } = storeToRefs(counter);
 const { t } = useI18n();
@@ -33,7 +35,8 @@ const { t } = useI18n();
         v-model="counter.project_body"
         class="preview-editor'"
       >
-        <h2 class="px-0 md:p-4 mb-0 font-serif text-4xl md:text-5xl text-foreground font-black text-balance">
+        <h2 class="px-0 md:p-4 mb-0 font-serif text-4xl md:text-5xl text-foreground font-black text-balance"
+        :class="settings.show_heading_one_preview ? '' : 'sr-only'">
           {{ counter.project_name }}
         </h2>
       </Editor>

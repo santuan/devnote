@@ -220,6 +220,11 @@ onBeforeUnmount(() => {
 
   &.is-editable {
     @apply max-h-[calc(100dvh-2.5rem)] bg-secondary/30;
+
+    .tiptap td,
+    .tiptap th {
+      @apply !border-secondary/50 border-4 p-0
+    }
   }
 
   &.with-toolbar {

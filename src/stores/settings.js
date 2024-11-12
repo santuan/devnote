@@ -5,6 +5,7 @@ export const useSettingsStore = defineStore("settings", {
     return {
       save_on_load: false,
       init_db_with_example_doc: true,
+      show_heading_one_preview: false,
     };
   },
   persist: true,
@@ -14,6 +15,9 @@ export const useSettingsStore = defineStore("settings", {
     },
     toggle_init_db_with_example_doc() {
       this.init_db_with_example_doc = !this.init_db_with_example_doc;
+    },
+    toggle_heading_one_preview() {
+      this.show_heading_one_preview = !this.show_heading_one_preview;
     }
   },
 });

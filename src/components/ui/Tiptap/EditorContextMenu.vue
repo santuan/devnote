@@ -33,7 +33,7 @@ const { t } = useI18n();
     </ContextMenuTrigger>
     <ContextMenuPortal>
       <ContextMenuContent
-        class="min-w-[220px] z-10 font-mono bg-background/90 ring-1 ring-primary text-foreground outline-none rounded p-[5px] shadow"
+        class="min-w-[220px] z-10 font-mono bg-background/90 ring-1 ring-primary text-foreground outline-none rounded p-1.5 shadow"
         :side-offset="5"
       >
         <ContextMenuItem
@@ -60,18 +60,18 @@ const { t } = useI18n();
         <ContextMenuItem
           as="label"
           for="img-uploader"
-            id="uploader"
-            class="cursor-defaul relative text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
+          id="uploader"
+          class="cursor-defaul relative text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
         >
-            <span>Base64</span>
-            <input
-              id="img-uploader"
-              type="file"
-              accept="image/jpeg"
-              class="absolute inset-0 opacity-0"
-              :aria-label="`${t('verb.add')} Base64 ${t('toolbar.image')}`"
-              @change="addImageBase64"
-            >
+          <span>{{ t('verb.add') }} {{ t('toolbar.image') }} Base64</span>
+          <input
+            id="img-uploader"
+            type="file"
+            accept="image/jpeg"
+            class="absolute inset-0 opacity-0"
+            :aria-label="`${t('verb.add')} Base64 ${t('toolbar.image')}`"
+            @change="addImageBase64"
+          >
         </ContextMenuItem>
         <ContextMenuSeparator class="h-[0.0125rem] bg-secondary my-1" />
         <ContextMenuItem
@@ -161,7 +161,7 @@ const { t } = useI18n();
 </template>
 
 <style scoped>
-
-[data-disabled]{
+[data-disabled] {
   @apply opacity-60 pointer-events-none
-}</style>
+}
+</style>

@@ -237,7 +237,7 @@ const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
 <template>
   <node-view-wrapper
     as="article"
-    class="media-node-view flex relative not-prose my-6 group"
+    class="media-node-view flex relative not-prose my-0 group"
     :class="[`${isFloat && `f-${props.node.attrs.dataFloat}` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
   >
     <div class="flex relative">
@@ -363,6 +363,7 @@ const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
         <div
           class="horizontal-resize-handle"
           :class="{ 'horizontal-resize-active': isHorizontalResizeActive }"
+          v-if="counter.content_editable"
           title="Resize"
           @mousedown="startHorizontalResize"
           @mouseup="stopHorizontalResize"
@@ -371,6 +372,7 @@ const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
         <div
           class="vertical-resize-handle"
           :class="{ 'vertical-resize-active': isVerticalResizeActive }"
+          v-if="counter.content_editable"
           title="Resize"
           @mousedown="startVerticalResize"
           @mouseup="stopVerticalResize"

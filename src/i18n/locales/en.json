@@ -81,6 +81,8 @@
     "system": "System",
     "language": "Language",
     "languageDescription": "Select the language of the aplication.",
+    "showHeading": "Preview with H1",
+    "showHeadingDescription": "Enable or disable the main title of the document when previewing",
     "fontsize": "App scale",
     "fontsizeDescription": "Adjust the scale of the application",
     "fontsizexs": "Extra Small",

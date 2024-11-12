@@ -84,49 +84,49 @@ const { setVideo } = useSetVideo(editor);
             <DropdownMenuItem
               @click="editor.chain().focus().toggleHeading({ level: 6 }).run()"
               :class="{ 'is-active': editor.isActive('paragraph') }"
-              class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+              class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-primary/20"
             >
               {{ t('toolbar.paragraph') }}
             </DropdownMenuItem>
             <DropdownMenuItem
               @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
               :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }"
-              class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+              class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-primary/20"
             >
               {{ t('toolbar.heading1') }}
             </DropdownMenuItem>
             <DropdownMenuItem
               @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
               :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }"
-              class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+              class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-primary/20"
             >
               {{ t('toolbar.heading2') }}
             </DropdownMenuItem>
             <DropdownMenuItem
               @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
               :class="{ 'is-active': editor.isActive('heading', { level: 3 }) }"
-              class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+              class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-primary/20"
             >
               {{ t('toolbar.heading3') }}
             </DropdownMenuItem>
             <DropdownMenuItem
               @click="editor.chain().focus().toggleHeading({ level: 4 }).run()"
               :class="{ 'is-active': editor.isActive('heading', { level: 4 }) }"
-              class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+              class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-primary/20"
             >
               {{ t('toolbar.heading4') }}
             </DropdownMenuItem>
             <DropdownMenuItem
               @click="editor.chain().focus().toggleHeading({ level: 5 }).run()"
               :class="{ 'is-active': editor.isActive('heading', { level: 5 }) }"
-              class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+              class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-primary/20"
             >
               {{ t('toolbar.heading5') }}
             </DropdownMenuItem>
             <DropdownMenuItem
               @click="editor.chain().focus().toggleHeading({ level: 6 }).run()"
               :class="{ 'is-active': editor.isActive('heading', { level: 6 }) }"
-              class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-secondary-foreground/10"
+              class="flex items-center justify-between gap-2 p-2 pr-3 cursor-pointer hover:bg-primary/20"
             >
               {{ t('toolbar.heading6') }}
             </DropdownMenuItem>
@@ -185,7 +185,7 @@ const { setVideo } = useSetVideo(editor);
           >
             <DropdownMenuItem
               as-child
-              class="relative flex items-center justify-start  gap-2 p-2 pr-3 bg-background outline-none focus-visible:bg-primary/30 hover:bg-secondary-foreground/10"
+              class="relative flex items-center justify-start  gap-2 p-2 pr-3 bg-background outline-none focus-visible:bg-primary/30 hover:bg-primary/20"
             >
               <label
                 class="flex justify-start gap-2 p-2 hover:bg-primary"
@@ -206,7 +206,7 @@ const { setVideo } = useSetVideo(editor);
             </DropdownMenuItem>
             <DropdownMenuItem
               @click="addImage"
-              class="flex items-center justify-start  gap-2 p-2 bg-background outline-none focus-visible:bg-primary/20 hover:bg-secondary-foreground/10"
+              class="flex items-center justify-start  gap-2 p-2 bg-background outline-none focus-visible:bg-primary/20 hover:bg-primary/20"
             >
               <ImageDown class="size-4" />
               Url
@@ -323,7 +323,7 @@ const { setVideo } = useSetVideo(editor);
             >
               <DropdownMenuItem
                 @click="editor.chain().focus().setTextAlign('left').run()"
-                class="flex items-center justify-between gap-2 p-2 pr-3 bg-background outline-none focus-visible:bg-primary/30  hover:bg-secondary-foreground/10"
+                class="flex items-center justify-between gap-2 p-2 pr-3 bg-background outline-none focus-visible:bg-primary/30  hover:bg-primary/20"
                 :class="{ 'is-active': editor.isActive({ textAlign: 'left' }) }"
               >
                 <div class="flex items-center justify-start gap-3 p-1">
@@ -338,7 +338,7 @@ const { setVideo } = useSetVideo(editor);
               </DropdownMenuItem>
               <DropdownMenuItem
                 @click="editor.chain().focus().setTextAlign('center').run()"
-                class="flex items-center justify-between gap-2 p-2 pr-3 bg-background outline-none focus-visible:bg-primary/30  hover:bg-secondary-foreground/10"
+                class="flex items-center justify-between gap-2 p-2 pr-3 bg-background outline-none focus-visible:bg-primary/30  hover:bg-primary/20"
                 :class="{ 'is-active': editor.isActive({ textAlign: 'center' }) }"
               >
                 <div class="flex items-center justify-start gap-3 p-1">
@@ -353,7 +353,7 @@ const { setVideo } = useSetVideo(editor);
               </DropdownMenuItem>
               <DropdownMenuItem
                 @click="editor.chain().focus().setTextAlign('right').run()"
-                class="flex items-center justify-between gap-2 p-2 pr-3 bg-background outline-none focus-visible:bg-primary/30  hover:bg-secondary-foreground/10"
+                class="flex items-center justify-between gap-2 p-2 pr-3 bg-background outline-none focus-visible:bg-primary/30  hover:bg-primary/20"
                 :class="{ 'is-active': editor.isActive({ textAlign: 'right' }) }"
               >
                 <div class="flex items-center justify-start gap-3 p-1">
@@ -368,7 +368,7 @@ const { setVideo } = useSetVideo(editor);
               </DropdownMenuItem>
               <DropdownMenuItem
                 @click="editor.chain().focus().setTextAlign('justify').run()"
-                class="flex items-center justify-between gap-2 p-2 pr-3 bg-background outline-none focus-visible:bg-primary/30  hover:bg-secondary-foreground/10"
+                class="flex items-center justify-between gap-2 p-2 pr-3 bg-background outline-none focus-visible:bg-primary/30  hover:bg-primary/20"
                 :class="{ 'is-active': editor.isActive({ textAlign: 'justify' }) }"
               >
                 <div class="flex items-center justify-start gap-3 p-1">
@@ -383,7 +383,7 @@ const { setVideo } = useSetVideo(editor);
               </DropdownMenuItem>
               <DropdownMenuItem
                 @click="editor.chain().focus().unsetTextAlign().run()"
-                class="flex items-center justify-between p-2 pr-3 bg-background outline-none focus-visible:bg-primary/30  hover:bg-secondary-foreground/10"
+                class="flex items-center justify-between p-2 pr-3 bg-background outline-none focus-visible:bg-primary/30  hover:bg-primary/20"
               >
                 <div class="flex items-center justify-start gap-3 p-1">
                   <Square class="size-4" />
@@ -538,76 +538,76 @@ const { setVideo } = useSetVideo(editor);
             <DropdownMenuPortal>
               <DropdownMenuContent
                 :side="'bottom'"
-                class="z-10 text-foreground font-mono grid text-xs border w-60 bg-background border-secondary"
+                class="z-10 text-foreground font-mono grid p-1.5 text-xs border w-60 bg-background border-secondary"
               >
                 <DropdownMenuItem
                   @click="editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()"
-                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-secondary-foreground/10"
+                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-primary/20"
                 >
                   {{ t('toolbar.insertTable') }}
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   @click="editor.chain().focus().addColumnBefore().run()"
-                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-secondary-foreground/10"
+                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-primary/20"
                   :disabled="!editor.can().addColumnBefore()"
                 >
                   {{ t('toolbar.addColumnBefore') }}
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   @click="editor.chain().focus().addColumnAfter().run()"
-                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-secondary-foreground/10"
+                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-primary/20"
                   :disabled="!editor.can().addColumnAfter()"
                 >
                   {{ t('toolbar.addColumnAfter') }}
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   @click="editor.chain().focus().deleteColumn().run()"
-                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-secondary-foreground/10"
+                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-primary/20"
                   :disabled="!editor.can().deleteColumn()"
                 >
                   {{ t('toolbar.deleteColumn') }}
                 </DropdownMenuItem>
-                <DropdownMenuSeparator class="h-[0.0125rem] bg-primary my-2" />
+                <DropdownMenuSeparator class="h-[0.0125rem] bg-secondary my-1" />
                 <DropdownMenuItem
                   @click="editor.chain().focus().addRowBefore().run()"
-                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-secondary-foreground/10"
+                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-primary/20"
                   :disabled="!editor.can().addRowBefore()"
                 >
                   {{ t('toolbar.addRowBefore') }}
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   @click="editor.chain().focus().addRowAfter().run()"
-                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-secondary-foreground/10"
+                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-primary/20"
                   :disabled="!editor.can().addRowAfter()"
                 >
                   {{ t('toolbar.addRowAfter') }}
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   @click="editor.chain().focus().deleteRow().run()"
-                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-secondary-foreground/10"
+                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-primary/20"
                   :disabled="!editor.can().deleteRow()"
                 >
                   {{ t('toolbar.deleteRow') }}
                 </DropdownMenuItem>
-                <DropdownMenuSeparator class="h-[0.0125rem] bg-primary my-2" />
+                <DropdownMenuSeparator class="h-[0.0125rem] bg-secondary my-1" />
                 <DropdownMenuItem
                   @click="editor.chain().focus().deleteTable().run()"
-                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-secondary-foreground/10"
+                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-primary/20"
                   :disabled="!editor.can().deleteTable()"
                 >
                   {{ t('toolbar.deleteTable') }}
                 </DropdownMenuItem>
-                <DropdownMenuSeparator class="h-[0.0125rem] bg-primary my-2" />
+                <DropdownMenuSeparator class="h-[0.0125rem] bg-secondary my-1" />
                 <DropdownMenuItem
                   @click="editor.chain().focus().mergeCells().run()"
-                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-secondary-foreground/10"
+                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-primary/20"
                   :disabled="!editor.can().mergeCells()"
                 >
                   {{ t('toolbar.mergeCells') }}
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   @click="editor.chain().focus().splitCell().run()"
-                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-secondary-foreground/10"
+                  class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-primary/20"
                   :disabled="!editor.can().splitCell()"
                 >
                   {{ t('toolbar.splitCell') }}
@@ -670,7 +670,7 @@ const { setVideo } = useSetVideo(editor);
 }
 
 .button-group button {
-  @apply border border-secondary focus-within:border-primary outline-none h-8 min-w-8 max-w-8 xl:max-w-full xl:flex-1 text-sm focus-visible:border-primary hover:!border-primary flex justify-center items-center duration-100;
+  @apply border border-secondary focus-within:border-primary outline-none h-8 min-w-7 max-w-7 xl:max-w-full xl:flex-1 text-sm focus-visible:border-primary hover:!border-primary flex justify-center items-center duration-100;
   /* flex: 1; */
 }
 
