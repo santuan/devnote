@@ -16,10 +16,33 @@ import { resizableMediaActions } from './resizableMediaMenuUtil'
 
 import { ref, onMounted, computed, watch } from 'vue'
 import { useCounterStore } from "@/stores/counter";
+import { useStorage } from "@vueuse/core";
 
-import { Video } from 'lucide-vue-next';
+import { AlignCenterVertical, AlignEndVertical, AlignStartVertical, Video } from 'lucide-vue-next';
+
 
 const counter = useCounterStore();
+const appFontSize = useStorage("appFontSize", '');
+
+const appSizeResult = computed(() => {
+  if (!appFontSize.value) return;
+  if (appFontSize.value === 'app-font-size-xs') {
+    return -27
+  }
+  if (appFontSize.value === 'app-font-size-sm') {
+    return -32
+  }
+  if (appFontSize.value === 'app-font-size-md') {
+    return -36
+  }
+  if (appFontSize.value === 'app-font-size-lg') {
+    return -40
+  }
+  if (appFontSize.value === 'app-font-size-xl') {
+    return -45
+  }
+  return 36 
+});
 
 interface Props {
   editor: Editor
@@ -38,8 +61,10 @@ const resizableImg = ref<HTMLImageElement | HTMLVideoElement | null>(null) // te
 const aspectRatio = ref(0)
 const proseMirrorContainerWidth = ref(0)
 const mediaActionActiveState = ref<Record<string, boolean>>({})
+const fullWidth = ref(false)
 
 const setMediaActionActiveStates = () => {
+  if (!counter.content_editable) return
   const activeStates: Record<string, boolean> = {}
   for (const { tooltip, isActive } of resizableMediaActions) activeStates[tooltip] = !!isActive?.(props.node.attrs)
   mediaActionActiveState.value = activeStates
@@ -133,6 +158,7 @@ const onHorizontalResize = (directionOfMouseMove: 'right' | 'left', diff: number
 }
 
 const onHorizontalMouseMove = (e: MouseEvent) => {
+  fullWidth.value = false
   if (!isHorizontalResizeActive.value) return
   const { clientX } = e
   const diff = lastCursorX.value - clientX
@@ -161,6 +187,7 @@ const stopVerticalResize = () => {
 }
 
 const onVerticalMouseMove = (e: MouseEvent) => {
+  fullWidth.value = false
   if (!isVerticalResizeActive.value) return
   const { clientY } = e
   const diff = lastCursorY.value - clientY
@@ -197,39 +224,6 @@ const onVerticalMouseMove = (e: MouseEvent) => {
   props.updateAttributes(newMediaDimensions)
 }
 
-const setWitdhByHalf = () => {
-  const newMediaDimensions = {
-    width: -1,
-    height: -1,
-  }
-  newMediaDimensions.width = proseMirrorContainerWidth.value / 2
-  newMediaDimensions.height = newMediaDimensions.width / aspectRatio.value
-  if (limitWidthOrHeightToFiftyPixels(newMediaDimensions)) return
-  props.updateAttributes(newMediaDimensions)
-}
-
-const setWitdhByThird = () => {
-  const newMediaDimensions = {
-    width: -1,
-    height: -1,
-  }
-  newMediaDimensions.width = proseMirrorContainerWidth.value / 3
-  newMediaDimensions.height = newMediaDimensions.width / aspectRatio.value
-  if (limitWidthOrHeightToFiftyPixels(newMediaDimensions)) return
-  props.updateAttributes(newMediaDimensions)
-}
-
-const setWitdhByFull = () => {
-  const newMediaDimensions = {
-    width: -1,
-    height: -1,
-  }
-  newMediaDimensions.width = proseMirrorContainerWidth.value
-  newMediaDimensions.height = newMediaDimensions.width / aspectRatio.value
-  if (limitWidthOrHeightToFiftyPixels(newMediaDimensions)) return
-  props.updateAttributes(newMediaDimensions)
-}
-
 const isFloat = computed<boolean>(() => !!props.node.attrs.dataFloat)
 const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
 </script>
@@ -240,101 +234,103 @@ const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
     class="media-node-view flex relative not-prose my-0 group"
     :class="[`${isFloat && `f-${props.node.attrs.dataFloat}` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
   >
-    <div class="flex relative">
-      <PopoverRoot v-if="counter.content_editable">
-        <PopoverTrigger aria-label="Update dimensions" class="focus:!ring-primary focus:!ring-4">
-          <div class="w-fit flex relative  ">
-            <div
-              v-if="mediaType === 'img'"
-            >
-
-              <img
-                v-bind="node.attrs"
-                ref="resizableImg"
-                class=""
-                :class="[`${isFloat && `float-${props.node.attrs.dataFloat}` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
-                draggable="true"
-              >
-            </div>
-
-            <div
-              class="relative"
-              v-else-if="mediaType === 'video'"
-            >
-              <span class="absolute flex justify-center items-center inset-0">
-                <Video class="size-12" />
-              </span>
-              <video
-                v-bind="node.attrs"
-                ref="resizableImg"
-                class="opacity-80"
-                :class="[`${isFloat && `float-${props.node.attrs.dataFloat}` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
-                draggable="true"
-              >
-                <source :src="node.attrs.src">
-              </video>
-            </div>
-
-            <div
-              class="horizontal-resize-handle"
-              :class="{ 'horizontal-resize-active': isHorizontalResizeActive }"
-              title="Resize"
-              @mousedown="startHorizontalResize"
-              @mouseup="stopHorizontalResize"
-            />
-
-            <div
-              class="vertical-resize-handle"
-              :class="{ 'vertical-resize-active': isVerticalResizeActive }"
-              title="Resize"
-              @mousedown="startVerticalResize"
-              @mouseup="stopVerticalResize"
-            />
-          </div>
-        </PopoverTrigger>
-        <PopoverPortal>
-          <PopoverContent
-            side="bottom"
-            :side-offset="-40"
-            class="px-1 h-10 min-w-64 justify-center items-center gap-0.5 flex font-mono text-xs text-foreground duration-300 focus-visible:ring-4 hover:ring-2 bg-background ring-1 ring-primary"
+    <PopoverRoot v-if="counter.content_editable">
+      <PopoverTrigger
+        aria-label="Update dimensions"
+        class="focus:!ring-primary z-50 focus:!ring-2 absolute left-0 top-0 text-primary size-9 bg-secondary border border-primary flex justify-center items-center"
+      >
+        <span class="size-9 flex justify-center items-center gap-1">
+          <AlignStartVertical
+            v-if="props.node.attrs.dataAlign === 'left'"
+            class="size-4"
+          />
+          <AlignCenterVertical
+            v-if="props.node.attrs.dataAlign === 'center'"
+            class="size-4"
+          />
+          <AlignEndVertical
+            v-if="props.node.attrs.dataAlign === 'right'"
+            class="size-4"
+          />
+        </span>
+      </PopoverTrigger>
+      <PopoverPortal>
+        <PopoverContent
+          :side="'right'"
+          :side-offset="appSizeResult"
+          :align="'start'"
+          class="px-0.5 h-9 min-w-32 justify-center items-center gap-0.5 flex font-mono text-xs text-foreground duration-300 focus-visible:ring-4 hover:ring-2 bg-background ring-1 ring-primary"
+        >
+          <button
+            v-for="(mediaAction, i) in resizableMediaActions"
+            :key="i"
+            :content="mediaAction.tooltip"
+            class="size-8 flex justify-center items-center gap-1"
+            @click="mediaAction.tooltip === 'Delete'
+              ? mediaAction.delete?.(deleteNode)
+              : mediaAction.action?.(updateAttributes)
+              "
           >
-            <button
-              class="size-9"
-              @click="setWitdhByThird()"
-            >
-              33%
-            </button>
-            <button
-              class="size-9"
-              @click="setWitdhByHalf()"
-            >
-              50%
-            </button>
-            <button
-              class="size-9"
-              @click="setWitdhByFull()"
-            >
-              100%
-            </button>
-            <button
-              v-for="(mediaAction, i) in resizableMediaActions"
-              :key="i"
-              :content="mediaAction.tooltip"
-              class="size-9 flex justify-center items-center gap-1"
-              @click="mediaAction.tooltip === 'Delete'
-                ? mediaAction.delete?.(deleteNode)
-                : mediaAction.action?.(updateAttributes)
-                "
-            >
-              <component
-                class="shrink-0 size-4"
-                :is="mediaAction.icon"
-              />
-              <span class="sr-only">{{ mediaAction.tooltip }}</span>
-            </button>
-          </PopoverContent>
-        </PopoverPortal>
-      </PopoverRoot>
+            <component
+              class="shrink-0 size-4"
+              :is="mediaAction.icon"
+            />
+            <span class="sr-only">{{ mediaAction.tooltip }}</span>
+          </button>
+        </PopoverContent>
+      </PopoverPortal>
+    </PopoverRoot>
+    <div class="flex relative">
+      <div
+        v-if="counter.content_editable"
+        class="w-fit flex relative"
+      >
+
+        <div v-if="mediaType === 'img'">
+          <img
+            v-bind="node.attrs"
+            ref="resizableImg"
+            class=""
+            :class="[`${fullWidth && `!w-full !max-w-full` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
+            draggable="true"
+          >
+        </div>
+
+        <div
+          class="relative"
+          v-else-if="mediaType === 'video'"
+        >
+          <span class="absolute flex justify-center items-center inset-0">
+            <Video class="size-12" />
+          </span>
+          <video
+            v-bind="node.attrs"
+            ref="resizableImg"
+            class="opacity-80"
+            :class="[`${fullWidth && `!w-full !max-w-full` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
+            draggable="true"
+          >
+            <source :src="node.attrs.src">
+          </video>
+        </div>
+
+        <div
+          class="horizontal-resize-handle"
+          :class="{ 'horizontal-resize-active': isHorizontalResizeActive }"
+          title="Resize"
+          @mousedown="startHorizontalResize"
+          @mouseup="stopHorizontalResize"
+        />
+
+        <div
+          class="vertical-resize-handle"
+          :class="{ 'vertical-resize-active': isVerticalResizeActive }"
+          title="Resize"
+          @mousedown="startVerticalResize"
+          @mouseup="stopVerticalResize"
+        />
+      </div>
+
       <div
         v-else
         class="w-fit flex relative"
@@ -359,24 +355,6 @@ const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
         >
           <source :src="node.attrs.src">
         </video>
-
-        <div
-          class="horizontal-resize-handle"
-          :class="{ 'horizontal-resize-active': isHorizontalResizeActive }"
-          v-if="counter.content_editable"
-          title="Resize"
-          @mousedown="startHorizontalResize"
-          @mouseup="stopHorizontalResize"
-        />
-
-        <div
-          class="vertical-resize-handle"
-          :class="{ 'vertical-resize-active': isVerticalResizeActive }"
-          v-if="counter.content_editable"
-          title="Resize"
-          @mousedown="startVerticalResize"
-          @mouseup="stopVerticalResize"
-        />
       </div>
     </div>
   </node-view-wrapper>

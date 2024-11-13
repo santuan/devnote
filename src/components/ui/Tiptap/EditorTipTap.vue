@@ -442,8 +442,12 @@ html.dark .shiki span {
   @apply ring-2 ring-primary;
 }
 
+.is-editable .tiptap .media-node-view {
+  @apply border-primary/5 border-2 bg-primary/[0.0005]
+}
+
 .is-editable .tiptap .media-node-view.ProseMirror-selectednode {
-  @apply !ring-0 !ring-transparent bg-primary/[0.02];
+  @apply !ring-0 !ring-transparent bg-primary/[0.02] border-2 border-primary border-dashed;
 }
 
 .tiptap li p {

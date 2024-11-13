@@ -1,6 +1,6 @@
 /* @unocss-include */
 
-import { AlignCenter, AlignLeft, AlignRight, Trash } from "lucide-vue-next"
+import { AlignCenterVertical, AlignEndVertical, AlignStartVertical, Trash } from "lucide-vue-next"
 
 interface ResizableMediaAction {
   tooltip: string,
@@ -18,7 +18,7 @@ export const resizableMediaActions: ResizableMediaAction[] = [
       dataAlign: 'left',
       dataFloat: null,
     }),
-    icon: AlignLeft,
+    icon: AlignStartVertical,
     isActive: (attrs) => attrs.dataAlign === 'left'
   },
   {
@@ -27,7 +27,7 @@ export const resizableMediaActions: ResizableMediaAction[] = [
       dataAlign: 'center',
       dataFloat: null,
     }),
-    icon: AlignCenter,
+    icon: AlignCenterVertical,
     isActive: (attrs) => attrs.dataAlign === 'center'
   },
   {
@@ -36,7 +36,7 @@ export const resizableMediaActions: ResizableMediaAction[] = [
       dataAlign: 'right',
       dataFloat: null,
     }),
-    icon: AlignRight,
+    icon: AlignEndVertical,
     isActive: (attrs) => attrs.dataAlign === 'right'
   },
   {
