@@ -71,7 +71,7 @@ export const ResizableMedia = Node.create<MediaOptions>({
       dataAlign: {
         default: 'left' // 'left' | 'center' | 'right'
       },
-      dataFloat: {
+      dataFullWidth: {
         default: null // 'left' | 'right'
       },
     }

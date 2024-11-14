@@ -1,11 +1,13 @@
-/* @unocss-include */
-
+import { Shrink } from "lucide-vue-next"
+import { Minimize2 } from "lucide-vue-next"
+import { Maximize2 } from "lucide-vue-next"
+import { MoveDiagonal } from "lucide-vue-next"
+import { Expand } from "lucide-vue-next"
 import { AlignCenterVertical, AlignEndVertical, AlignStartVertical, Trash } from "lucide-vue-next"
 
 interface ResizableMediaAction {
   tooltip: string,
-  icon: string
-
+  icon: any,
   action?: (updateAttributes: (o: Record<string, any>) => any) => void
   isActive?: (attrs: Record<string, any>) => boolean
   delete?: (d: () => void) => void
@@ -16,7 +18,7 @@ export const resizableMediaActions: ResizableMediaAction[] = [
     tooltip: 'left',
     action: (updateAttributes) => updateAttributes({
       dataAlign: 'left',
-      dataFloat: null,
+      dataFullWidth: null,
     }),
     icon: AlignStartVertical,
     isActive: (attrs) => attrs.dataAlign === 'left'
@@ -25,7 +27,7 @@ export const resizableMediaActions: ResizableMediaAction[] = [
     tooltip: 'center',
     action: (updateAttributes) => updateAttributes({
       dataAlign: 'center',
-      dataFloat: null,
+      dataFullWidth: null,
     }),
     icon: AlignCenterVertical,
     isActive: (attrs) => attrs.dataAlign === 'center'
@@ -34,14 +36,34 @@ export const resizableMediaActions: ResizableMediaAction[] = [
     tooltip: 'right',
     action: (updateAttributes) => updateAttributes({
       dataAlign: 'right',
-      dataFloat: null,
+      dataFullWidth: null,
     }),
     icon: AlignEndVertical,
     isActive: (attrs) => attrs.dataAlign === 'right'
   },
+  // {
+  //   tooltip: 'Delete',
+  //   icon: Trash,
+  //   delete: (deleteNode) => deleteNode()
+  // }
+]
+
+export const fullwidthMediaActions: ResizableMediaAction[] = [
   {
-    tooltip: 'Delete',
-    icon: Trash,
-    delete: (deleteNode) => deleteNode()
+    tooltip: 'fullwidth',
+    action: (updateAttributes) => updateAttributes({
+      dataAlign: 'left',
+      dataFullWidth: true,
+    }),
+    icon: Maximize2,
+  },
+  {
+    tooltip: 'fullwidthcancel',
+    action: (updateAttributes) => updateAttributes({
+      dataAlign: 'left',
+      dataFullWidth: false,
+    }),
+    icon: Minimize2,
   }
+
 ]

@@ -439,7 +439,7 @@ html.dark .shiki span {
 } */
 
 .tiptap .ProseMirror-selectednode {
-  @apply ring-2 ring-primary;
+  @apply ring-2 ring-primary border-secondary/5 border-2;
 }
 
 .is-editable .tiptap .media-node-view {

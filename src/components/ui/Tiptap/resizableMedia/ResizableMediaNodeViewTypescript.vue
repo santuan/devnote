@@ -12,13 +12,16 @@ import { Editor, Node, NodeViewWrapper } from '@tiptap/vue-3'
 import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from "radix-vue";
 import { Node as ProseMirrorNode } from 'prosemirror-model'
 import { Decoration } from 'prosemirror-view'
-import { resizableMediaActions } from './resizableMediaMenuUtil'
+import { resizableMediaActions, fullwidthMediaActions } from './resizableMediaMenuUtil'
 
 import { ref, onMounted, computed, watch } from 'vue'
 import { useCounterStore } from "@/stores/counter";
 import { useStorage } from "@vueuse/core";
 
 import { AlignCenterVertical, AlignEndVertical, AlignStartVertical, Video } from 'lucide-vue-next';
+import { Expand } from 'lucide-vue-next';
+import { Shrink } from 'lucide-vue-next';
+import { Trash } from 'lucide-vue-next';
 
 
 const counter = useCounterStore();
@@ -41,7 +44,7 @@ const appSizeResult = computed(() => {
   if (appFontSize.value === 'app-font-size-xl') {
     return -45
   }
-  return 36 
+  return 36
 });
 
 interface Props {
@@ -61,12 +64,18 @@ const resizableImg = ref<HTMLImageElement | HTMLVideoElement | null>(null) // te
 const aspectRatio = ref(0)
 const proseMirrorContainerWidth = ref(0)
 const mediaActionActiveState = ref<Record<string, boolean>>({})
-const fullWidth = ref(false)
 
 const setMediaActionActiveStates = () => {
   if (!counter.content_editable) return
   const activeStates: Record<string, boolean> = {}
   for (const { tooltip, isActive } of resizableMediaActions) activeStates[tooltip] = !!isActive?.(props.node.attrs)
+  mediaActionActiveState.value = activeStates
+}
+
+const setfullwidthMediaActionActiveStates = () => {
+  if (!counter.content_editable) return
+  const activeStates: Record<string, boolean> = {}
+  for (const { tooltip, isActive } of fullwidthMediaActions) activeStates[tooltip] = !!isActive?.(props.node.attrs)
   mediaActionActiveState.value = activeStates
 }
 
@@ -76,9 +85,15 @@ watch(
   { deep: true }
 )
 
+watch(
+  () => props.node.attrs,
+  () => setfullwidthMediaActionActiveStates(),
+  { deep: true }
+)
+
 const mediaSetupOnLoad = () => {
   // ! TODO: move this to extension storage
-  const proseMirrorContainerDiv = document.querySelector('.ProseMirror')
+  const proseMirrorContainerDiv = document.querySelector('.AppContainer')
   if (proseMirrorContainerDiv) proseMirrorContainerWidth.value = proseMirrorContainerDiv?.clientWidth
   // When the media has loaded
   if (!resizableImg.value) return
@@ -100,6 +115,7 @@ const mediaSetupOnLoad = () => {
     }
   }
   setTimeout(() => setMediaActionActiveStates(), 200)
+  setTimeout(() => setfullwidthMediaActionActiveStates(), 200)
 }
 
 onMounted(() => mediaSetupOnLoad())
@@ -158,8 +174,8 @@ const onHorizontalResize = (directionOfMouseMove: 'right' | 'left', diff: number
 }
 
 const onHorizontalMouseMove = (e: MouseEvent) => {
-  fullWidth.value = false
   if (!isHorizontalResizeActive.value) return
+  props.updateAttributes({ dataFullWidth: null })
   const { clientX } = e
   const diff = lastCursorX.value - clientX
   lastCursorX.value = clientX
@@ -187,8 +203,8 @@ const stopVerticalResize = () => {
 }
 
 const onVerticalMouseMove = (e: MouseEvent) => {
-  fullWidth.value = false
   if (!isVerticalResizeActive.value) return
+  props.updateAttributes({ dataFullWidth: null })
   const { clientY } = e
   const diff = lastCursorY.value - clientY
   lastCursorY.value = clientY
@@ -224,22 +240,22 @@ const onVerticalMouseMove = (e: MouseEvent) => {
   props.updateAttributes(newMediaDimensions)
 }
 
-const isFloat = computed<boolean>(() => !!props.node.attrs.dataFloat)
 const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
+const isFullWidth = computed<boolean>(() => !!props.node.attrs.dataFullWidth)
 </script>
 
 <template>
   <node-view-wrapper
     as="article"
     class="media-node-view flex relative not-prose my-0 group"
-    :class="[`${isFloat && `f-${props.node.attrs.dataFloat}` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
+    :class="[`${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
   >
     <PopoverRoot v-if="counter.content_editable">
       <PopoverTrigger
         aria-label="Update dimensions"
-        class="focus:!ring-primary z-50 focus:!ring-2 absolute left-0 top-0 text-primary size-9 bg-secondary border border-primary flex justify-center items-center"
+        class="z-50  absolute left-0 top-0 flex justify-center items-center"
       >
-        <span class="size-9 flex justify-center items-center gap-1">
+        <span class="size-9 bg-secondary/90 text-primary flex justify-center items-center">
           <AlignStartVertical
             v-if="props.node.attrs.dataAlign === 'left'"
             class="size-4"
@@ -256,10 +272,9 @@ const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
       </PopoverTrigger>
       <PopoverPortal>
         <PopoverContent
-          :side="'right'"
-          :side-offset="appSizeResult"
+          :side="'bottom'"
           :align="'start'"
-          class="px-0.5 h-9 min-w-32 justify-center items-center gap-0.5 flex font-mono text-xs text-foreground duration-300 focus-visible:ring-4 hover:ring-2 bg-background ring-1 ring-primary"
+          class="px-0.5 h-9 justify-center items-center gap-0.5 flex font-mono text-xs text-foreground duration-300 focus-visible:ring-4 hover:ring-2 bg-background/90 ring-1 ring-primary"
         >
           <button
             v-for="(mediaAction, i) in resizableMediaActions"
@@ -280,6 +295,47 @@ const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
         </PopoverContent>
       </PopoverPortal>
     </PopoverRoot>
+    <div
+      v-if="counter.content_editable"
+      aria-label="Update dimensions"
+      class="z-50 absolute left-9 top-0 flex justify-center items-center"
+    >
+      <button
+        v-if="!props.node.attrs.dataFullWidth"
+        class="size-9 bg-secondary/90 text-primary flex justify-center items-center"
+        @click="props.updateAttributes({
+          dataAlign: 'left',
+          dataFullWidth: true,
+        })"
+      >
+        <Expand class="size-4" />
+        <span class="sr-only">Maximize</span>
+      </button>
+      <button
+        v-if="props.node.attrs.dataFullWidth"
+        class="size-9 bg-secondary/90 text-primary flex justify-center items-center"
+        @click="props.updateAttributes({
+          dataAlign: 'left',
+          dataFullWidth: false,
+        })"
+      >
+        <Shrink class="size-4" />
+        <span class="sr-only">Minimize</span>
+      </button>
+    </div>
+    <div
+      v-if="counter.content_editable"
+      aria-label="Update dimensions"
+      class="focus:!ring-primary z-50 focus:!ring-2 absolute right-0 top-0 text-primary size-9 bg-secondary border border-primary flex justify-center items-center"
+    >
+      <button
+        class="size-8 flex justify-center items-center gap-1"
+        @click="deleteNode()"
+      >
+        <Trash class="size-4" />
+        <span class="sr-only">Delete</span>
+      </button>
+    </div>
     <div class="flex relative">
       <div
         v-if="counter.content_editable"
@@ -291,7 +347,7 @@ const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
             v-bind="node.attrs"
             ref="resizableImg"
             class=""
-            :class="[`${fullWidth && `!w-full !max-w-full` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
+            :class="[`${isFullWidth && `w-full` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
             draggable="true"
           >
         </div>
@@ -307,7 +363,7 @@ const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
             v-bind="node.attrs"
             ref="resizableImg"
             class="opacity-80"
-            :class="[`${fullWidth && `!w-full !max-w-full` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
+            :class="[`${isFullWidth && `w-full` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
             draggable="true"
           >
             <source :src="node.attrs.src">
@@ -340,7 +396,7 @@ const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
           v-bind="node.attrs"
           data-zoomable
           class=""
-          :class="[`${isFloat && `float-${props.node.attrs.dataFloat}` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
+          :class="[`${isFullWidth && `w-full` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
           draggable="true"
         >
 
@@ -349,7 +405,7 @@ const isAlign = computed<boolean>(() => !!props.node.attrs.dataAlign)
           v-bind="node.attrs"
           ref="resizableImg"
           class=""
-          :class="[`${isFloat && `float-${props.node.attrs.dataFloat}` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
+          :class="[`${isFullWidth && `w-full` || ''}`, `${isAlign && `align-${props.node.attrs.dataAlign}` || ''}`]"
           draggable="true"
           controls="true"
         >
