@@ -227,7 +227,7 @@ const isFullWidth = computed<boolean>(() => !!props.node.attrs.dataFullWidth)
     <PopoverRoot v-if="counter.content_editable">
       <PopoverTrigger
         aria-label="Update dimensions"
-        class="z-50  absolute left-0 top-0 flex justify-center items-center"
+        class="z-50 group-hover:opacity-100 group-focus-within:!opacity-100 duration-1000 opacity-0 hover:opacity-100 absolute left-0 top-0 flex justify-center items-center"
       >
         <span class="size-9 bg-secondary/90 text-primary flex justify-center items-center">
           <Maximize2
@@ -260,10 +260,7 @@ const isFullWidth = computed<boolean>(() => !!props.node.attrs.dataFullWidth)
             :key="i"
             :content="mediaAction.tooltip"
             class="size-8 flex justify-center items-center gap-1"
-            @click="mediaAction.tooltip === 'Delete'
-              ? mediaAction.delete?.(deleteNode)
-              : mediaAction.action?.(updateAttributes)
-              "
+            @click="mediaAction.action?.(updateAttributes)"
           >
             <component
               class="shrink-0 size-4"
@@ -278,7 +275,7 @@ const isFullWidth = computed<boolean>(() => !!props.node.attrs.dataFullWidth)
     <div
       v-if="counter.content_editable"
       aria-label="Update dimensions"
-      class="focus:!ring-primary z-50 focus:!ring-2 absolute right-0 top-0 text-primary size-9 bg-secondary border border-primary flex justify-center items-center"
+      class="group-hover:opacity-100 group-focus-within:!opacity-100 duration-100 opacity-0 hover:opacity-100 focus:!ring-primary z-50 focus:!ring-2 absolute right-0 top-0 text-primary size-9 bg-secondary border border-primary flex justify-center items-center"
     >
       <button
         class="size-8 flex justify-center items-center gap-1"
