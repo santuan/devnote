@@ -16,36 +16,13 @@ import { resizableMediaActions, fullwidthMediaActions } from './resizableMediaMe
 
 import { ref, onMounted, computed, watch } from 'vue'
 import { useCounterStore } from "@/stores/counter";
-import { useStorage } from "@vueuse/core";
 
 import { AlignCenterVertical, AlignEndVertical, AlignStartVertical, Video } from 'lucide-vue-next';
 import { Expand } from 'lucide-vue-next';
 import { Shrink } from 'lucide-vue-next';
 import { Trash } from 'lucide-vue-next';
 
-
 const counter = useCounterStore();
-const appFontSize = useStorage("appFontSize", '');
-
-const appSizeResult = computed(() => {
-  if (!appFontSize.value) return;
-  if (appFontSize.value === 'app-font-size-xs') {
-    return -27
-  }
-  if (appFontSize.value === 'app-font-size-sm') {
-    return -32
-  }
-  if (appFontSize.value === 'app-font-size-md') {
-    return -36
-  }
-  if (appFontSize.value === 'app-font-size-lg') {
-    return -40
-  }
-  if (appFontSize.value === 'app-font-size-xl') {
-    return -45
-  }
-  return 36
-});
 
 interface Props {
   editor: Editor
