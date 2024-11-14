@@ -10,7 +10,6 @@ import { i18n } from './i18n'
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
-
 const app = createApp(App);
 app.use(pinia);
 app.use(autoAnimatePlugin);
