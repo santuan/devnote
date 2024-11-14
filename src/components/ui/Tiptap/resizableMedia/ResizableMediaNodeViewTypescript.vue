@@ -2,10 +2,9 @@
 /*
 Disclaimer. All this folder is based upon work of sereneinserenade tiptap-media-resize
 Tiptap Extension for having resizable, alignable, floatable, movable media.
-
 https://github.com/sereneinserenade/tiptap-media-resize
 
-Note: This is VUE 3 version. React version is in progress
+** I have made some changes to the original code.
 */
 
 import { Editor, Node, NodeViewWrapper } from '@tiptap/vue-3'
@@ -17,9 +16,7 @@ import { resizableMediaActions, fullwidthMediaActions } from './resizableMediaMe
 import { ref, onMounted, computed, watch } from 'vue'
 import { useCounterStore } from "@/stores/counter";
 
-import { AlignCenterVertical, AlignEndVertical, AlignStartVertical, Video } from 'lucide-vue-next';
-import { Expand } from 'lucide-vue-next';
-import { Shrink } from 'lucide-vue-next';
+import { AlignCenterVertical, AlignEndVertical, AlignStartVertical, Maximize2, Video } from 'lucide-vue-next';
 import { Trash } from 'lucide-vue-next';
 
 const counter = useCounterStore();
@@ -233,18 +230,23 @@ const isFullWidth = computed<boolean>(() => !!props.node.attrs.dataFullWidth)
         class="z-50  absolute left-0 top-0 flex justify-center items-center"
       >
         <span class="size-9 bg-secondary/90 text-primary flex justify-center items-center">
+          <Maximize2
+            v-if="props.node.attrs.dataFullWidth"
+            class="size-4"
+          />
           <AlignStartVertical
-            v-if="props.node.attrs.dataAlign === 'left'"
+            v-else-if="props.node.attrs.dataAlign === 'left'"
             class="size-4"
           />
           <AlignCenterVertical
-            v-if="props.node.attrs.dataAlign === 'center'"
+            v-else-if="props.node.attrs.dataAlign === 'center'"
             class="size-4"
           />
           <AlignEndVertical
-            v-if="props.node.attrs.dataAlign === 'right'"
+            v-else-if="props.node.attrs.dataAlign === 'right'"
             class="size-4"
           />
+          
         </span>
       </PopoverTrigger>
       <PopoverPortal>
@@ -272,34 +274,7 @@ const isFullWidth = computed<boolean>(() => !!props.node.attrs.dataFullWidth)
         </PopoverContent>
       </PopoverPortal>
     </PopoverRoot>
-    <div
-      v-if="counter.content_editable"
-      aria-label="Update dimensions"
-      class="z-50 absolute left-9 top-0 flex justify-center items-center"
-    >
-      <button
-        v-if="!props.node.attrs.dataFullWidth"
-        class="size-9 bg-secondary/90 text-primary flex justify-center items-center"
-        @click="props.updateAttributes({
-          dataAlign: 'left',
-          dataFullWidth: true,
-        })"
-      >
-        <Expand class="size-4" />
-        <span class="sr-only">Maximize</span>
-      </button>
-      <button
-        v-if="props.node.attrs.dataFullWidth"
-        class="size-9 bg-secondary/90 text-primary flex justify-center items-center"
-        @click="props.updateAttributes({
-          dataAlign: 'left',
-          dataFullWidth: false,
-        })"
-      >
-        <Shrink class="size-4" />
-        <span class="sr-only">Minimize</span>
-      </button>
-    </div>
+   
     <div
       v-if="counter.content_editable"
       aria-label="Update dimensions"
