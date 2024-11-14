@@ -227,7 +227,7 @@ const isFullWidth = computed<boolean>(() => !!props.node.attrs.dataFullWidth)
     <PopoverRoot v-if="counter.content_editable">
       <PopoverTrigger
         aria-label="Update dimensions"
-        class="z-50 absolute left-0 top-0 flex justify-center items-center"
+        class="z-50 absolute left-0 top-0 flex justify-center print:hidden items-center"
       >
         <span class="size-9 bg-secondary/90 text-primary flex justify-center items-center">
           <Maximize2
@@ -275,7 +275,7 @@ const isFullWidth = computed<boolean>(() => !!props.node.attrs.dataFullWidth)
     <div
       v-if="counter.content_editable"
       aria-label="Update dimensions"
-      class=" focus:!ring-primary z-50 focus:!ring-2 absolute right-0 top-0 text-primary size-9 bg-secondary border border-primary flex justify-center items-center"
+      class=" focus:!ring-primary z-50 focus:!ring-2 print:hidden absolute right-0 top-0 text-primary size-9 bg-secondary border border-primary flex justify-center items-center"
     >
       <button
         class="size-8 flex justify-center items-center gap-1"

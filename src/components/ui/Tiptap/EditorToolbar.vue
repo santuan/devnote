@@ -42,7 +42,7 @@ const { setVideo } = useSetVideo(editor);
 
 <template>
   <div
-    class="pt-1 z-10 relative bg-background"
+    class="pt-1 z-10 relative bg-background print:hidden"
     v-if="editor"
   >
     <div

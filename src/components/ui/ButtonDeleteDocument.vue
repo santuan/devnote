@@ -40,7 +40,7 @@ whenever(magicDeleteDocument, (n) => {
       shortcut="shift + delete"
     >
       <AlertDialogTrigger
-        class="fixed bottom-1 md:bottom-0 right-1 md:right-0 flex items-center justify-center ml-auto text-xs ButtonDeleteDocument h-10 w-8 z-50  text-primary hover:bg-primary/20"
+        class="fixed bottom-1 print:hidden md:bottom-0 right-1 md:right-0 flex items-center justify-center ml-auto text-xs ButtonDeleteDocument h-10 w-8 z-50  text-primary hover:bg-primary/20"
         :class="counter.loaded_id ? '' : 'hidden'"
       >
         <Trash2 class="size-4" />

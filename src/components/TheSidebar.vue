@@ -51,7 +51,7 @@ watch(isOverDropZone, (v) => {
   <div>
     <header
       ref="dropZoneRef"
-      class="fixed top-0 z-[60] !select-none flex flex-col justify-start h-screen border-r lg:sticky bg-background border-secondary focus-within:ring-1 focus-within:ring-primary/50"
+      class="fixed top-0 print:hidden z-[60] !select-none flex flex-col justify-start h-screen border-r lg:sticky bg-background border-secondary focus-within:ring-1 focus-within:ring-primary/50"
       :class="counter.showProjects ? 'min-w-80 max-w-80' : ' '"
     >
       <SidebarTop />
@@ -61,7 +61,7 @@ watch(isOverDropZone, (v) => {
     <button
       v-show="counter.showProjects"
       @click="counter.showProjects = !counter.showProjects"
-      class="fixed inset-0 !z-[51] bg-background/90 !border-0 !ring-0 !outline-none lg:hidden"
+      class="fixed inset-0 print:hidden !z-[51] bg-background/90 !border-0 !ring-0 !outline-none lg:hidden"
     >
       <span class="sr-only">{{ t('verb.close') }} panel</span>
     </button>
