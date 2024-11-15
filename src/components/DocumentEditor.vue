@@ -66,7 +66,7 @@ const { t } = useI18n();
 
 <style scoped>
 .editor {
-  @apply relative mx-auto lg:w-full px-2;
+  @apply relative mx-auto lg:w-full px-2 print:grid-rows-none;
   display: grid;
   min-height: 100vh;
   grid-template-rows: auto 1fr;

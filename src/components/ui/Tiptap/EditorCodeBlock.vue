@@ -39,7 +39,7 @@
         :items="languages"
       />
       <button
-        class="flex items-center justify-center size-6 bg-secondary shrink-0"
+        class="print:hidden flex items-center justify-center size-6 bg-secondary shrink-0"
         :class="copyText === 'Copied' ? '!bg-primary' : ''"
         @click="copyToClipboard()"
       >
@@ -190,12 +190,10 @@ export default {
 
 .tiptap .code-block pre {
   @apply rounded-none;
- 
 }
 
 .tiptap .code-block pre code div {
   @apply pt-4 p-3;  
-  
 }
 
 .tiptap .code-block pre code * {
@@ -204,6 +202,24 @@ export default {
 
 .preview-editor  * {
   @apply !select-text
+}
+
+
+@media print {
+  .tiptap .code-block {
+    @apply !ml-[0.125rem]
+  }
+
+  .tiptap .code-block pre code div {
+    @apply p-0;  
+  }
+
+  .tiptap .code-block [data-radix-scroll-area-viewport] {
+    @apply !border !ring-0 !border-foreground/20 !outline-none;
+  }
+  .tiptap .code-block span {
+    filter: brightness(0.3);
+  }
 }
 
 

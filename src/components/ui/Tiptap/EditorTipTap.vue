@@ -169,7 +169,7 @@ onBeforeUnmount(() => {
           </div>
         </ScrollAreaViewport>
         <ScrollAreaScrollbar
-          class="flex select-none touch-none p-0.5 bg-secondary transition-colors duration-[160ms] ease-out hover:bg-background data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+          class="print:!hidden flex select-none touch-none p-0.5 bg-secondary transition-colors duration-[160ms] ease-out hover:bg-background data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
           orientation="vertical"
         >
           <ScrollAreaThumb
@@ -199,7 +199,7 @@ onBeforeUnmount(() => {
         </div>
       </ScrollAreaViewport>
       <ScrollAreaScrollbar
-        class="flex select-none touch-none p-0.5 bg-secondary transition-colors duration-[160ms] ease-out hover:bg-background data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+        class="print:!hidden flex select-none touch-none p-0.5 bg-secondary transition-colors duration-[160ms] ease-out hover:bg-background data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
         orientation="vertical"
       >
         <ScrollAreaThumb
@@ -215,8 +215,13 @@ onBeforeUnmount(() => {
   @apply grid w-full min-h-full
 }
 
+[data-radix-scroll-area-viewport] {
+  @apply print:!overflow-y-visible
+}
+
+
 .ScrollAreaEditor {
-  @apply w-full border-0;
+  @apply w-full border-0 print:!h-full print:!max-h-none overflow-x-hidden print:!overflow-y-auto;
 
   &.is-editable {
     @apply max-h-[calc(100dvh-2.5rem)] bg-secondary/30;
@@ -284,7 +289,7 @@ onBeforeUnmount(() => {
 }
 
 .tiptap p a {
-  @apply break-all underline-offset-4 decoration-dotted underline;
+  @apply break-all underline-offset-4 decoration-dotted print:decoration-solid underline;
 }
 
 .tiptap pre {

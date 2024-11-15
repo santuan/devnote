@@ -30,7 +30,7 @@ watch(project_body, (v) => {
 </script>
 
 <template>
-  <div class="flex w-full h-screen overflow-y-hidden">
+  <div class="flex w-full print:!h-auto print:!overflow-y-auto h-screen overflow-y-hidden">
     <Sidebar />
     <Document />
   </div>

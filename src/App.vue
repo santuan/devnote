@@ -14,8 +14,7 @@ const cursorPointer = useStorage("cursor", true);
   <div :class="cursorPointer ? 'cursorPointer' : 'cursorInitial'">
     <span
       alt=""
-      class="hidden print:flex fixed left-0 top-0"
-      ref="focusSidebar"
+      class="hidden print:flex fixed left-0 bottom-0"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -44,8 +43,9 @@ const cursorPointer = useStorage("cursor", true);
 <style scoped>
 
 .AppContainer {
- @apply w-full min-h-screen font-mono bg-background text-foreground 
+ @apply w-full min-h-screen font-mono bg-background text-foreground;
 }
+
 
 nav a.router-link-exact-active {
   @apply text-primary;
