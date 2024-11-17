@@ -207,7 +207,7 @@ export default {
 
 @media print {
   .tiptap .code-block {
-    @apply !ml-[0.125rem]
+    @apply !ml-[0.1125rem]
   }
 
   .tiptap .code-block pre code div {
@@ -218,7 +218,7 @@ export default {
     @apply !border !ring-0 !border-foreground/20 !outline-none;
   }
   .tiptap .code-block span {
-    filter: brightness(0.3);
+    filter: brightness(0.5);
   }
 }
 

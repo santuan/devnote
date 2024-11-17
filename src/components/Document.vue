@@ -1,7 +1,7 @@
 <script setup>
 import DocumentEditor from "./DocumentEditor.vue";
-import DeleteDocument from "./ui/ButtonDeleteDocument.vue";
-import SplitterGroup from "./ui/SplitterGroup.vue";
+import DeleteDocument from "@/components/ui/ButtonDeleteDocument.vue";
+import SplitterGroup from "@/components/ui/SplitterGroup.vue";
 </script>
 
 <template>
@@ -16,6 +16,6 @@ import SplitterGroup from "./ui/SplitterGroup.vue";
 
 <style scoped>
 .Document {
-  @apply w-full min-h-screen pl-12 md:pl-10 lg:pl-0 bg-background 
+  @apply w-full min-h-screen pl-12 md:pl-10 lg:pl-0 bg-background print:pl-0
 }
 </style>

@@ -1,14 +1,14 @@
 <script setup>
 
+import ButtonCreateDocumentCollapse from "@/components/ui/ButtonCreateDocumentCollapse.vue";
+import DialogCommandMenu from "@/components/ui/DialogCommandMenu.vue";
+import DialogInfo from "@/components/ui/DialogInfo.vue";
+import DialogSettings from "@/components/ui/DialogSettings.vue";
+import DriverJsInit from "@/stores/Tour.ts";
+import ToggleEditable from "@/components/ui/ToggleEditable.vue";
+import ToggleFontSize from "@/components/ui/ToggleFontSize.vue";
 import ToggleTheme from "@/components/ui/ToggleTheme.vue";
-import ToggleFontSize from "./ui/ToggleFontSize.vue";
 import Tooltip from "@/components/ui/Tooltip.vue";
-import DialogInfo from "@/components/DialogInfo.vue";
-import ToggleEditable from "./ui/ToggleEditable.vue";
-import DriverJsInit from "./Tour.ts";
-import DialogSettings from "./DialogSettings.vue";
-import DialogCommandMenu from "./ui/DialogCommandMenu.vue";
-import ButtonCreateDocumentCollapse from "./ui/ButtonCreateDocumentCollapse.vue";
 
 import { onMounted } from "vue";
 import { useCounterStore } from "@/stores/counter";

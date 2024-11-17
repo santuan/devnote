@@ -216,9 +216,45 @@ onBeforeUnmount(() => {
 }
 
 [data-radix-scroll-area-viewport] {
-  @apply print:!overflow-y-visible
+  @apply print:!overflow-y-visible print:!border-0
 }
 
+@media print {
+  html {
+    @apply !text-xs;
+  }
+
+  @page {
+    @bottom-right {
+      font-family: "JetBrains Mono Variable";
+      margin: 0 0 10pt 0;
+      font-size: 8pt;
+      color: #333;
+      content: counter(page) "-" counter(pages);
+    }
+  }
+
+  h1+p, h2+p, h3+p {
+    page-break-before: avoid;
+  }
+
+  [data-radix-scroll-area-viewport] {
+    --secondary: 240 4.8% 90.9%;
+    @apply !overflow-y-visible !border
+  }
+
+  .tiptap td,
+  .tiptap th {
+    @apply !border !border-muted/20;
+  }
+
+  h2, h3, h4 {
+    page-break-after: avoid;
+  }
+  pre, blockquote {
+    page-break-inside: avoid;
+  }
+}
 
 .ScrollAreaEditor {
   @apply w-full border-0 print:!h-full print:!max-h-none overflow-x-hidden print:!overflow-y-auto;
@@ -298,6 +334,7 @@ onBeforeUnmount(() => {
 
 .tiptap p code {
   @apply bg-primary/20 break-all px-1 mx-0.5 rounded py-0.5 text-foreground ring-1 ring-primary/30 font-light text-sm;
+  @apply print:!bg-primary/20 print:rounded-none print:ring-0;
 }
 
 

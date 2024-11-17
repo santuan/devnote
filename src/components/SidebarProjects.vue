@@ -1,9 +1,9 @@
 <script setup>
 import SearchItem from "./SearchItem.vue";
 import SearchItemChecked from "./SearchItemChecked.vue";
-import SelectSort from "./ui/SelectSort.vue";
-import ButtonCreateDocument from "./ui/ButtonCreateDocument.vue";
-import EditDatabaseTitle from "./ui/EditDatabaseTitle.vue";
+import SelectSort from "@/components/ui/SelectSort.vue";
+import ButtonCreateDocument from "@/components/ui/ButtonCreateDocument.vue";
+import EditDatabaseTitle from "@/components/ui/EditDatabaseTitle.vue";
 
 import { computed, watch, shallowRef, ref } from "vue";
 import { storeToRefs } from "pinia";

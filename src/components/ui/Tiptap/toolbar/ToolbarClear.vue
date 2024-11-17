@@ -1,0 +1,45 @@
+<script setup>
+import { ToolbarButton } from "radix-vue";
+
+import { useCounterStore } from "@/stores/counter";
+import { storeToRefs } from "pinia";
+
+import { useI18n } from 'vue-i18n';
+import Tooltip from "@/components/ui/Tooltip.vue";
+import { Eraser, RemoveFormatting } from "lucide-vue-next";
+
+const counter = useCounterStore();
+const { editor } = storeToRefs(counter);
+const { t } = useI18n();
+
+</script>
+
+
+<template>
+  <Tooltip
+    :name="t('toolbar.unsetAllMarks')"
+    side="bottom"
+  >
+    <ToolbarButton
+      @click="editor.chain().focus().unsetAllMarks().run()"
+      class="interactive"
+      :value="t('toolbar.unsetAllMarks')"
+    >
+      <RemoveFormatting />
+      <span class="sr-only">{{ t('toolbar.unsetAllMarks') }}</span>
+    </ToolbarButton>
+  </Tooltip>
+  <Tooltip
+    :name="t('toolbar.clearNodes')"
+    side="bottom"
+  >
+    <ToolbarButton
+      @click="editor.chain().focus().clearNodes().run()"
+      class="interactive"
+      :value="t('toolbar.clearNodes')"
+    >
+      <Eraser />
+      <span class="sr-only">{{ t('toolbar.clearNodes') }}</span>
+    </ToolbarButton>
+  </Tooltip>
+</template>

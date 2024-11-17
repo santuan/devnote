@@ -1,6 +1,6 @@
 <script setup>
 
-import Tooltip from "./ui/Tooltip.vue";
+import Tooltip from "@/components/ui/Tooltip.vue";
 
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";

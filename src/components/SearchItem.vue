@@ -9,7 +9,7 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "radix-vue";
-import Tooltip from "./ui/Tooltip.vue";
+import Tooltip from "@/components/ui/Tooltip.vue";
 
 import { ref } from "vue";
 import { useCounterStore } from "@/stores/counter";

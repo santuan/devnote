@@ -92,17 +92,17 @@ const filteredOptions = computed(() =>
         >
           <div
             v-if="selected"
-            class="flex items-center justify-between w-full gap-2 text-xs"
+            class="flex items-center opacity-70 print:scale-75 print:translate-x-1 print:-translate-y-1 justify-between w-full gap-2 text-xs"
           >
             <span class="shrink-0 text-foreground">{{ selected }}</span>
-            <ChevronDown class="size-4 shrink-0" />
+            <ChevronDown class="print:hidden size-4 shrink-0" />
           </div>
           <div
             v-else
-            class="flex items-center justify-between w-full gap-2 text-xs"
+            class="flex items-center opacity-70 print:scale-75 print:translate-x-1 print:-translate-y-1 justify-between w-full gap-2 text-xs"
           >
             <span>Auto</span>
-            <ChevronDown class="size-4 shrink-0" />
+            <ChevronDown class="print:hidden size-4 shrink-0" />
           </div>
         </PopoverTrigger>
       </div>

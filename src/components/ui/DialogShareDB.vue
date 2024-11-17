@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "radix-vue";
-import Tooltip from "./ui/Tooltip.vue";
+import Tooltip from "@/components/ui/Tooltip.vue";
 
 import { onMounted, shallowRef, watch } from "vue";
 import { storeToRefs } from "pinia";

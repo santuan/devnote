@@ -1,6 +1,6 @@
 <script setup>
-import DialogShareDB from "./DialogShareDB.vue";
-import DialogImportDB from "./DialogImportDB.vue";
+import DialogShareDB from "@/components/ui/DialogShareDB.vue";
+import DialogImportDB from "@/components/ui/DialogImportDB.vue";
 </script>
 
 <template>

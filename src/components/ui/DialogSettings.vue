@@ -1,10 +1,10 @@
 <script setup>
 
-import ToggleTheme from './ui/ToggleTheme.vue';
-import ToggleFontSize from './ui/ToggleFontSize.vue';
-import LanguageSelector from './ui/LanguageSelector.vue';
+import ToggleTheme from '@/components/ui/ToggleTheme.vue';
+import ToggleFontSize from '@/components/ui/ToggleFontSize.vue';
+import LanguageSelector from '@/components/ui/LanguageSelector.vue';
 import DialogDeleteDB from './DialogDeleteDB.vue';
-import DriverJsInit from './Tour.ts';
+import DriverJsInit from '@/stores/Tour.ts';
 
 import {
   DialogClose,
@@ -21,7 +21,7 @@ import {
   ScrollAreaViewport,
 } from 'radix-vue';
 
-import Tooltip from './ui/Tooltip.vue';
+import Tooltip from '@/components/ui/Tooltip.vue';
 
 import { useCounterStore } from '@/stores/counter';
 import { storeToRefs } from 'pinia';

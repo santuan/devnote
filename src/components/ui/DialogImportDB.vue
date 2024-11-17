@@ -9,7 +9,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "radix-vue";
-import Tooltip from "./ui/Tooltip.vue";
+import Tooltip from "@/components/ui/Tooltip.vue";
 
 import { shallowRef } from "vue";
 import { useCounterStore } from "@/stores/counter";

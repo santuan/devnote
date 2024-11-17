@@ -2,7 +2,7 @@
 import { useCounterStore } from "@/stores/counter";
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from "pinia";
-import Tooltip from "../../ui/Tooltip.vue";
+import Tooltip from "@/components/ui/Tooltip.vue";
 
 const counter = useCounterStore();
 const { focusTitleTextarea, showEditorToolbar } = storeToRefs(counter);
