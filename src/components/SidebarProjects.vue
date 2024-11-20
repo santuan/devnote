@@ -11,16 +11,22 @@ import { useCounterStore } from "@/stores/counter";
 
 import { onClickOutside, refDebounced, useStorage } from "@vueuse/core";
 import { ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaViewport } from "radix-vue";
+import NumberFlow from "@number-flow/vue";
 import { CircleX } from "lucide-vue-next";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 
 const target = shallowRef(null);
 const editing = shallowRef(false);
 const counter = useCounterStore();
-const { allItemsTodo, allItemsChecked, searchTerm, file_name } = storeToRefs(counter);
+const {
+  allItemsTodo,
+  allItemsChecked,
+  searchTerm,
+  file_name,
+} = storeToRefs(counter);
 const sortOption = useStorage("sortItemsBy", "name");
 
-const focusSearch = ref(null)
+const focusSearch = ref(null);
 const debounced = refDebounced(searchTerm, 300);
 const input = shallowRef(file_name);
 const { t } = useI18n();
@@ -30,8 +36,8 @@ onClickOutside(target, () => {
 });
 
 function clearTerm() {
-  searchTerm.value = ''
-  focusSearch.value.focus()
+  searchTerm.value = "";
+  focusSearch.value.focus();
 }
 
 watch(input, (v) => {
@@ -63,40 +69,40 @@ const results = computed(() => {
   return debounced.value === ""
     ? sortedItems
     : sortedItems.filter((item) => {
-      return item.project_data?.name
-        .toLowerCase()
-        .includes(debounced.value.toLowerCase());
-    });
+        return item.project_data?.name
+          .toLowerCase()
+          .includes(debounced.value.toLowerCase());
+      });
 });
-
-
 </script>
 
 <template>
   <div class="h-full @container">
     <EditDatabaseTitle />
     <ButtonCreateDocument />
-    <div class="relative grid grid-cols-3 w-full gap-1 pl-1.5 pr-1 p-0.5 text-xs">
+    <div
+      class="relative grid grid-cols-3 w-full gap-1 pl-1.5 pr-1 p-0.5 text-xs"
+    >
       <div
         class="relative flex items-center justify-between w-full col-span-2 border border-secondary"
         v-auto-animate="{ duration: 300 }"
       >
         <label
-          class=" w-full overflow-hidden relative ring-1  ring-secondary hover:ring-primary focus-within:ring-primary"
+          class="w-full overflow-hidden relative ring-1 ring-secondary hover:ring-primary focus-within:ring-primary"
         >
           <input
             ref="focusSearch"
             v-model="searchTerm"
             :placeholder="`${t('sidebar.search')}`"
-            class="text-xs outline-none pl-1 pr-12 h-8 bg-transparent placeholder:text-xs  placeholder:text-foreground/40 "
-          >
-          <span class="sr-only">{{ t('sidebar.search') }}</span>
+            class="text-xs outline-none pl-1 pr-12 h-8 bg-transparent placeholder:text-xs placeholder:text-foreground/40"
+          />
+          <span class="sr-only">{{ t("sidebar.search") }}</span>
         </label>
         <span
           v-if="!searchTerm"
-          class=" top-0 right-[0.015rem] flex items-center bg-primary/10 text-foreground justify-center h-8 text-xs min-w-12"
+          class="top-0 right-[0.015rem] flex items-center bg-primary/10 text-foreground justify-center h-8 text-xs min-w-12"
         >
-          {{ allItemsTodo?.length }}
+          <NumberFlow :value="`${allItemsTodo ? allItemsTodo?.length : 0}`" />
         </span>
         <button
           v-else
@@ -112,7 +118,9 @@ const results = computed(() => {
         <SelectSort />
       </div>
     </div>
-    <div class="overflow-y-auto pl-1 SidebarProjects overflow-x-hidden h-[calc(100dvh-13rem)]">
+    <div
+      class="overflow-y-auto pl-1 SidebarProjects overflow-x-hidden h-[calc(100dvh-13rem)]"
+    >
       <ScrollAreaRoot
         class="w-full h-full rounded overflow-hidden"
         style="--scrollbar-size: 10px"
@@ -122,11 +130,7 @@ const results = computed(() => {
             class="py-1 px-0.5 flex flex-col justify-start items-start relative gap-1 w-full min-h-24"
             v-if="results?.length + allItemsChecked?.length >= 1"
           >
-            <SearchItem
-              v-for="item in results"
-              :key="item.id"
-              :data="item"
-            />
+            <SearchItem v-for="item in results" :key="item.id" :data="item" />
             <SearchItemChecked
               v-for="item in allItemsChecked"
               :key="item.id"
@@ -138,7 +142,7 @@ const results = computed(() => {
             class="w-full h-[calc(100vh-20rem)] text-center flex items-center justify-center"
           >
             <p class="w-40 text-xs text-muted-foreground text-pretty">
-              {{ t('sidebar.noResultsDescription') }}
+              {{ t("sidebar.noResultsDescription") }}
             </p>
           </div>
         </ScrollAreaViewport>
