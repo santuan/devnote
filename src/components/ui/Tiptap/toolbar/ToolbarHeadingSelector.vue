@@ -52,7 +52,8 @@ const { t } = useI18n();
     <DropdownMenuContent
       :align="'start'"
       side="bottom"
-      class="z-10 grid text-xs border w-44 bg-background border-secondary"
+      :side-offset="7"
+      class="z-10 grid text-xs border w-44 bg-background border-primary"
     >
       <DropdownMenuItem
         @click="editor.chain().focus().toggleHeading({ level: 6 }).run()"

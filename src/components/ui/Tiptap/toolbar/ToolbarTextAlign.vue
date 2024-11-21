@@ -1,12 +1,10 @@
 <script setup>
 import {
-  DropdownMenuArrow,
   DropdownMenuRoot,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
   ToolbarButton,
-  ToolbarRoot,
 } from "radix-vue";
 
 import { useCounterStore } from "@/stores/counter";
@@ -19,7 +17,6 @@ import Tooltip from "@/components/ui/Tooltip.vue";
 const counter = useCounterStore();
 const { editor } = storeToRefs(counter);
 const { t } = useI18n();
-
 
 </script>
 
@@ -53,7 +50,8 @@ const { t } = useI18n();
     <DropdownMenuContent
       align="start"
       side="bottom"
-      class="z-50 grid w-32 text-xs bg-secondary"
+      :side-offset="6"
+      class="z-50 grid w-32 text-xs bg-secondary border border-primary"
     >
       <DropdownMenuItem
         @click="editor.chain().focus().setTextAlign('left').run()"

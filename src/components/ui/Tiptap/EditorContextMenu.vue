@@ -2,6 +2,7 @@
 import {
   ContextMenuContent,
   ContextMenuItem,
+  ContextMenuLabel,
   ContextMenuPortal,
   ContextMenuRoot,
   ContextMenuSeparator,
@@ -60,6 +61,7 @@ const { t } = useI18n();
         <ContextMenuItem
           as="label"
           for="img-uploader"
+          disabled
           id="uploader"
           class="cursor-defaul relative text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
         >
@@ -74,6 +76,9 @@ const { t } = useI18n();
           >
         </ContextMenuItem>
         <ContextMenuSeparator class="h-[0.0125rem] bg-secondary my-1" />
+        <ContextMenuLabel class="text-xs px-2 text-primary uppercase py-2 ">
+          {{t('toolbar.table')}} <span class="bg-primary text-primary-foreground lowercase px-1 py-0.5 scale-50 relative origin-center ">experimental</span>
+        </ContextMenuLabel>
         <ContextMenuItem
           @click="editor.chain().focus().insertTable({ rows: 2, cols: 2, withHeaderRow: true }).run()"
           class="cursor-default text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"

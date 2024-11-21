@@ -27,7 +27,6 @@ const { addImageBase64 } = useAddImageBase64(editor);
 const { addVideo } = useAddVideo(editor);
 const { setVideo } = useSetVideo(editor);
 
-
 </script>
 
 
@@ -51,14 +50,16 @@ const { setVideo } = useSetVideo(editor);
       <DropdownMenuContent
         :side="'bottom'"
         :align="'start'"
-        class="z-50 grid w-32 text-xs gap-1 bg-background border-2 border-primary"
+        :side-offset="2"
+        class="z-50 grid w-32 text-xs gap-1 bg-background border border-primary"
       >
         <DropdownMenuItem
           as-child
+          disabled
           class="relative flex items-center justify-start  gap-2 p-2 pr-3 bg-background outline-none focus-visible:bg-primary/30 hover:bg-primary/20"
         >
           <label
-            class="flex justify-start gap-2 p-2 hover:bg-primary"
+            class="flex justify-start !pointer-events-none gap-2 p-2 hover:bg-primary"
             for="img-uploader"
             id="uploader"
           >

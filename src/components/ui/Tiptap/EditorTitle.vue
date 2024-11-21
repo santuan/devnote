@@ -11,7 +11,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <div class="flex items-start justify-between w-full gap-1 group relative md:!select-none">
+  <div class="flex pt-1 items-start justify-between w-full gap-1 group relative md:!select-none">
     <span class="sr-only">{{ t('editor.untitled') }}</span>
     <textarea
       :placeholder="t('editor.untitled')"
@@ -30,7 +30,7 @@ const { t } = useI18n();
       shortcut="ctrl shift alt &uarr; "
     >
       <button
-        class="absolute  font-serif top-0.5 md:top-0 right-0.5 md:right-0 size-8 md:size-9 flex justify-center items-center z-10 shrink-0 ring-1 ring-secondary ring-inset group-focus-within:ring-1 group-hover:ring-1 group-hover:ring-primary group-focus-within:ring-primary"
+        class="absolute font-serif top-0.5 md:top-1 right-0.5 md:right-0 size-8 md:size-9 flex justify-center items-center z-10 shrink-0 ring-1 ring-secondary ring-inset group-focus-within:ring-1 group-hover:ring-1 group-hover:ring-primary group-focus-within:ring-primary"
         :class="[
           counter.loaded_id ? '' : 'flex',
           counter.showEditorToolbar ? ' bg-primary text-primary-foreground ' : 'bg-secondary text-foreground',

@@ -7,6 +7,7 @@ import {
   ToolbarButton,
   DropdownMenuPortal,
   DropdownMenuSeparator,
+  DropdownMenuLabel,
 } from "radix-vue";
 
 import { useCounterStore } from "@/stores/counter";
@@ -19,8 +20,6 @@ import Tooltip from "@/components/ui/Tooltip.vue";
 const counter = useCounterStore();
 const { editor } = storeToRefs(counter);
 const { t } = useI18n();
-
-
 </script>
 
 
@@ -29,7 +28,7 @@ const { t } = useI18n();
     <ToolbarButton as-child>
       <DropdownMenuTrigger class="data-[state=open]:!bg-primary data-[state=open]:text-primary-foreground relative">
         <Tooltip
-          :name="t('toolbar.table')"
+          :name="`${t('toolbar.table')} (experimental)`"
           :side="'bottom'"
           :align="'end'"
           shortcut="Right click on editor"
@@ -46,8 +45,12 @@ const { t } = useI18n();
     <DropdownMenuPortal>
       <DropdownMenuContent
         :side="'bottom'"
-        class="z-10 text-foreground font-mono grid p-1.5 text-xs border w-60 bg-background border-secondary"
+        :side-offset="6"
+        class="z-10 text-foreground font-mono grid p-1.5 text-xs border w-60 bg-background border-primary"
       >
+        <DropdownMenuLabel class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-primary/20 text-primary">
+          {{t('toolbar.table')}} (experimental)
+        </DropdownMenuLabel>
         <DropdownMenuItem
           @click="editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()"
           class="cursor-default flex items-center justify-between gap-2 p-2 pr-3 outline-none focus-visible:bg-primary/30 text-xs hover:bg-primary/20"

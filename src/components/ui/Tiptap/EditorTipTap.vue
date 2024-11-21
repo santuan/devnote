@@ -191,7 +191,7 @@ onBeforeUnmount(() => {
         class="w-full h-full border-transparent border outline-none"
       >
         <div
-          class="max-w-full px-2 mx-auto prose dark:prose-invert"
+          class="max-w-full px-2 pt-1 mx-auto prose dark:prose-invert"
           spellcheck="false"
         >
           <slot />
