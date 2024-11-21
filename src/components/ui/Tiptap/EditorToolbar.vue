@@ -31,7 +31,7 @@ const { editor } = storeToRefs(counter);
     v-if="editor"
   >
     <div class="relative grid w-full max-w-full gap-1 mx-auto control-group">
-      <ToolbarRoot class="flex @container justify-start select-none mb-2 button-group md:w-auto">
+      <ToolbarRoot class="flex justify-start select-none mb-2 button-group md:w-auto">
         <ToolbarHeadingSelector />
         <ToolbarUndo />
         <ToolbarRedo />
