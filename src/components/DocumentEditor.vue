@@ -9,9 +9,11 @@ import { useCounterStore } from "@/stores/counter";
 import { useSettingsStore } from '@/stores/settings';
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from "pinia";
+import { useIsMobile } from '@/composables/useIsMobile';
 
 const settings = useSettingsStore();
 const counter = useCounterStore();
+const { isMobile } = useIsMobile();
 const { showEditorToolbar } = storeToRefs(counter);
 const { t } = useI18n();
 
@@ -19,9 +21,7 @@ const { t } = useI18n();
 
 <template>
   <div :key="counter.loaded_id">
-    <main
-      class="editor"
-    >
+    <main class="editor">
       <div
         class="editor-top"
         v-if="counter.content_editable"
@@ -35,8 +35,10 @@ const { t } = useI18n();
         v-model="counter.project_body"
         class="preview-editor'"
       >
-        <h2 class="px-0 md:pl-5 md:p-4 mb-0 font-serif text-4xl md:text-5xl text-foreground font-black text-balance"
-        :class="settings.show_heading_one_preview ? '' : 'sr-only'">
+        <h2
+          class="px-0 md:pl-5 md:p-4 mb-0 font-serif text-4xl md:text-5xl text-foreground font-black text-balance"
+          :class="settings.show_heading_one_preview ? '' : 'sr-only'"
+        >
           {{ counter.project_name }}
         </h2>
       </Editor>
@@ -56,9 +58,15 @@ const { t } = useI18n();
       :class="counter.project_name
         ? 'bg-primary text-primary-foreground hover:bg-primary/80'
         : 'disabled bg-secondary  pointer-events-none'
-      "
+        "
       class="fixed !select-none bottom-0 right-0 z-20 h-12 px-3 text-xs text-right  left-0  GuardarDocumento disabled:text-foreground/50 focus:bg-primary/50"
     >
+      <kbd
+        v-show="!isMobile"
+        class="pointer-events-none uppercase inline-flex h-6 mr-3 [:disabled_&]:!text-foreground/70 scale-75 origin-right select-none items-center gap-1 rounded bg-primary/20 px-1.5 font-mono text-xs text-primary-foreground font-extrabold opacity-100"
+      >
+        ctrl enter
+      </kbd>
       {{ t('editor.save') }}
     </button>
   </div>
