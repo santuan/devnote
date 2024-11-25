@@ -27,7 +27,9 @@ const { t } = useI18n();
 
 whenever(magicDeleteDocument, (n) => {
   if (n)
-  showAlertDialog.value = true
+    if (counter.loaded_id) {
+      showAlertDialog.value = true
+    }
 })
 </script>
 
@@ -49,7 +51,9 @@ whenever(magicDeleteDocument, (n) => {
     </Tooltip>
     <AlertDialogPortal>
       <AlertDialogOverlay class="fixed inset-0 z-[80] bg-black/50" />
-      <AlertDialogContent class="md:data-[state=open]:animate-contentShow fixed z-[80] w-[95vw] max-w-xs rounded-lg p-4 md:w-full top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-background text-foreground border border-secondary font-mono">
+      <AlertDialogContent
+        class="md:data-[state=open]:animate-contentShow fixed z-[80] w-[95vw] max-w-xs rounded-lg p-4 md:w-full top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-background text-foreground border border-secondary font-mono"
+      >
         <AlertDialogTitle class="text-sm font-medium">
           {{ t('editor.delete') }}
         </AlertDialogTitle>
@@ -58,7 +62,9 @@ whenever(magicDeleteDocument, (n) => {
         </AlertDialogDescription>
         <div class="flex justify-between gap-x-2">
           <AlertDialogCancel as-child>
-            <button class="bg-secondary ring-1 !ring-secondary text-foreground hover:bg-background hover:ring-2 hover:ring-foreground inline-flex h-[35px] items-center justify-center rounded-[4px] px-3 text-xs font-semibold leading-none focus-visible:ring-2 focus:outline-foreground">
+            <button
+              class="bg-secondary ring-1 !ring-secondary text-foreground hover:bg-background hover:ring-2 hover:ring-foreground inline-flex h-[35px] items-center justify-center rounded-[4px] px-3 text-xs font-semibold leading-none focus-visible:ring-2 focus:outline-foreground"
+            >
               {{ t('verb.cancel') }}
             </button>
           </AlertDialogCancel>
@@ -71,7 +77,9 @@ whenever(magicDeleteDocument, (n) => {
             </button>
           </AlertDialogAction>
         </div>
-        <AlertDialogCancel class="absolute top-0 size-6 flex justify-center items-center m-3 right-0 z-[999] text-foreground">
+        <AlertDialogCancel
+          class="absolute top-0 size-6 flex justify-center items-center m-3 right-0 z-[999] text-foreground"
+        >
           <X class="size-4" />
         </AlertDialogCancel>
       </AlertDialogContent>
