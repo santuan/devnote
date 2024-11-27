@@ -6,6 +6,7 @@ export const useSettingsStore = defineStore("settings", {
       save_on_load: false,
       init_db_with_example_doc: true,
       show_heading_one_preview: false,
+      media_base64: false,
     };
   },
   persist: true,
@@ -18,6 +19,9 @@ export const useSettingsStore = defineStore("settings", {
     },
     toggle_heading_one_preview() {
       this.show_heading_one_preview = !this.show_heading_one_preview;
+    },
+    toggle_media_base64() {
+      this.media_base64 = !this.media_base64;
     }
   },
 });

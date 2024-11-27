@@ -9,6 +9,7 @@ import {
   ContextMenuTrigger,
 } from 'radix-vue'
 
+import { useSettingsStore } from '@/stores/settings';
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
 import { useI18n } from 'vue-i18n';
@@ -17,7 +18,7 @@ import { useAddVideo } from '@/composables/useAddVideo';
 import { useSetVideo } from '@/composables/useSetVideo';
 import { useAddImageBase64 } from '@/composables/useAddImageBase64';
 
-
+const settings = useSettingsStore();
 const counter = useCounterStore();
 const { editor } = storeToRefs(counter);
 const { addImage } = useAddImage(editor);
@@ -61,7 +62,7 @@ const { t } = useI18n();
         <ContextMenuItem
           as="label"
           for="img-uploader"
-          disabled
+          :disabled="!settings.media_base64"
           id="uploader"
           class="cursor-defaul relative text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
         >

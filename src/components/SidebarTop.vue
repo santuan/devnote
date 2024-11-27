@@ -3,7 +3,7 @@
 import ButtonCreateDocumentCollapse from "@/components/ui/ButtonCreateDocumentCollapse.vue";
 import DialogCommandMenu from "@/components/ui/DialogCommandMenu.vue";
 import DialogInfo from "@/components/ui/DialogInfo.vue";
-import DialogSettings from "@/components/ui/DialogSettings.vue";
+import DialogSettings from "@/components/ui/Settings/DialogSettings.vue";
 import DriverJsInit from "@/stores/Tour.ts";
 import ToggleEditable from "@/components/ui/ToggleEditable.vue";
 import ToggleFontSize from "@/components/ui/ToggleFontSize.vue";
@@ -25,7 +25,6 @@ const keys = useMagicKeys();
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const largerThanLg = breakpoints.greater("lg");
 const { t } = useI18n();
-
 
 onMounted(() => {
   if (largerThanLg.value) {
