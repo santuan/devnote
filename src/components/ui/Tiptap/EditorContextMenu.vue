@@ -35,7 +35,7 @@ const { t } = useI18n();
     </ContextMenuTrigger>
     <ContextMenuPortal>
       <ContextMenuContent
-        class="min-w-[220px] z-10 font-mono bg-background/90 ring-1 ring-primary text-foreground outline-none rounded p-1.5 shadow"
+        class="min-w-[220px] z-10 font-mono bg-background ring-1 ring-primary text-foreground outline-none rounded p-1.5 shadow"
         :side-offset="5"
       >
         <ContextMenuItem
@@ -60,9 +60,19 @@ const { t } = useI18n();
           <span>{{ t('verb.add') }} {{ t('toolbar.image') }} url</span>
         </ContextMenuItem>
         <ContextMenuItem
+          v-show="settings.media_base64"
+          @click="settings.toggle_media_base64"
+          @select.prevent
+          class="relative flex items-center justify-between text-primary hover:text-primary h-6 gap-2 p-2 pr-3 bg-primary/10 outline-none focus-visible:bg-primary/30 text-xs hover:bg-primary/20"
+        >
+        {{ t('verb.add') }} {{ t('toolbar.image') }} Base64 
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20"><path fill="#888888" d="M6 12a2 2 0 1 1 0-4a2 2 0 0 1 0 4m12-2a4 4 0 0 0-4-4H6a4 4 0 1 0 0 8h8a4 4 0 0 0 4-4m-4-3a3 3 0 1 1 0 6H6a3 3 0 1 1 0-6z"/></svg>
+        </ContextMenuItem>
+        <ContextMenuItem
           as="label"
           for="img-uploader"
-          :disabled="!settings.media_base64"
+          v-show="!settings.media_base64"
           id="uploader"
           class="cursor-defaul relative text-xs flex items-center h-6 px-2 hover:bg-primary/20 outline-none disabled:cursor-not-allowed disabled:text-gray-400 data-[highlighted]:bg-primary/20"
         >
@@ -78,7 +88,9 @@ const { t } = useI18n();
         </ContextMenuItem>
         <ContextMenuSeparator class="h-[0.0125rem] bg-secondary my-1" />
         <ContextMenuLabel class="text-xs px-2 text-primary uppercase py-2 ">
-          {{t('toolbar.table')}} <span class="bg-primary text-primary-foreground lowercase px-1 py-0.5 scale-50 relative origin-center ">experimental</span>
+          {{ t('toolbar.table') }} <span
+            class="bg-primary text-primary-foreground lowercase px-1 py-0.5 scale-50 relative origin-center "
+          >experimental</span>
         </ContextMenuLabel>
         <ContextMenuItem
           @click="editor.chain().focus().insertTable({ rows: 2, cols: 2, withHeaderRow: true }).run()"

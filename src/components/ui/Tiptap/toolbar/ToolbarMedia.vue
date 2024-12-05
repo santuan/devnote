@@ -77,7 +77,6 @@ const { setVideo } = useSetVideo(editor);
             @change="addImageBase64"
           >
         </label>
-
       </DropdownMenuItem>
       <DropdownMenuItem
         v-show="settings.media_base64"
@@ -95,7 +94,6 @@ const { setVideo } = useSetVideo(editor);
         Url
         <span class="sr-only">{{ t('verb.add') }} {{ t('toolbar.image') }} url</span>
       </DropdownMenuItem>
-      <DropdownMenuArrow />
     </DropdownMenuContent>
   </DropdownMenuRoot>
 

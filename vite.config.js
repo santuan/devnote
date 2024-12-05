@@ -1,13 +1,10 @@
 import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import tailwind from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
 import { VitePWA } from 'vite-plugin-pwa'
 import vueDevTools from 'vite-plugin-vue-devtools'
-
-const host = process.env.TAURI_DEV_HOST;
 
 export default defineConfig({
   css: {
@@ -36,6 +33,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  // server: {
+  //   port: 4173,
+  // },
   build: {
     chunkSizeWarningLimit: 2000,
   },

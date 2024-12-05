@@ -9,10 +9,18 @@ import {
   ScrollAreaViewport,
 } from "radix-vue";
 
+import Document from '@tiptap/extension-document'
+import Blockquote from '@tiptap/extension-blockquote'
+import Paragraph from '@tiptap/extension-paragraph'
+import Text from '@tiptap/extension-text'
+import Italic from '@tiptap/extension-italic'
+import Strike from '@tiptap/extension-strike'
+import Bold from '@tiptap/extension-bold'
+import BulletList from '@tiptap/extension-bullet-list'
+import Underline from '@tiptap/extension-underline'
 import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
-import StarterKit from "@tiptap/starter-kit";
 import Typography from "@tiptap/extension-typography";
 import Placeholder from "@tiptap/extension-placeholder";
 import TextAlign from "@tiptap/extension-text-align";
@@ -21,22 +29,23 @@ import Table from "@tiptap/extension-table";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
+import HorizontalRule from '@tiptap/extension-horizontal-rule'
 import Youtube from "@tiptap/extension-youtube";
 import Gapcursor from '@tiptap/extension-gapcursor'
+import Heading from '@tiptap/extension-heading'
+import HardBreak from '@tiptap/extension-hard-break'
+import Code from '@tiptap/extension-code'
 import CodeBlockShiki from "tiptap-extension-code-block-shiki";
-import mediumZoom from "medium-zoom/dist/pure";
-// import Image from "@tiptap/extension-image";
 import { ResizableMedia } from './resizableMedia'
-
+import mediumZoom from "medium-zoom/dist/pure";
 import "medium-zoom/dist/style.css";
-
+import History from '@tiptap/extension-history'
 import { onMounted, onBeforeUnmount } from "vue";
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
 import { Editor, EditorContent, VueNodeViewRenderer } from "@tiptap/vue-3";
 import { useI18n } from 'vue-i18n';
 import EditorContextMenu from "./EditorContextMenu.vue";
-
 const counter = useCounterStore();
 const { editor } = storeToRefs(counter);
 const { t } = useI18n();
@@ -61,10 +70,21 @@ const props = defineProps({
 onMounted(() => {
   editor.value = new Editor({
     extensions: [
-      StarterKit.configure({
-        codeBlock: false,
-        gapcursor: false,
-      }),
+      Document,
+      Blockquote,
+      BulletList,
+      ListItem,
+      Heading,
+      HardBreak,
+      Paragraph,
+      HorizontalRule,
+      Strike,
+      Bold,
+      Italic,
+      Underline,
+      Text,
+      Code,
+      History,
       Color.configure({ types: [TextStyle.name, ListItem.name] }),
       TextStyle.configure({ types: [ListItem.name] }),
       ResizableMedia,
@@ -187,9 +207,7 @@ onBeforeUnmount(() => {
       "
       style="--scrollbar-size: 10px"
     >
-      <ScrollAreaViewport
-        class="w-full h-full border-transparent border outline-none"
-      >
+      <ScrollAreaViewport class="w-full h-full border-transparent border outline-none">
         <div
           class="max-w-full px-2 pt-1 mx-auto prose dark:prose-invert"
           spellcheck="false"
@@ -234,7 +252,9 @@ onBeforeUnmount(() => {
     }
   }
 
-  h1+p, h2+p, h3+p {
+  h1+p,
+  h2+p,
+  h3+p {
     page-break-before: avoid;
   }
 
@@ -248,10 +268,14 @@ onBeforeUnmount(() => {
     @apply !border !border-muted/20;
   }
 
-  h2, h3, h4 {
+  h2,
+  h3,
+  h4 {
     page-break-after: avoid;
   }
-  pre, blockquote {
+
+  pre,
+  blockquote {
     page-break-inside: avoid;
   }
 }

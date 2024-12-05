@@ -27,6 +27,9 @@ export interface MediaOptions {
   HTMLAttributes: Record<string, any>,
 }
 
+// export const IMAGE_INPUT_REGEX = new RegExp(`/(?:^|\s)(!\[(.+|:?)]\((\S+)(?:(?:\s+)["'](\S+)["'])?\))$/`, "g");
+// export const VIDEO_INPUT_REGEX = new RegExp(`/!\[(.+|:?)]\((\S+)(?:(?:\s+)["'](\S+)["'])?\)/`, "g");
+
 export const IMAGE_INPUT_REGEX = /(?:^|\s)(!\[(.+|:?)]\((\S+)(?:(?:\s+)["'](\S+)["'])?\))$/
 
 export const VIDEO_INPUT_REGEX = /!\[(.+|:?)]\((\S+)(?:(?:\s+)["'](\S+)["'])?\)/
