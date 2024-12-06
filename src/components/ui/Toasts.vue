@@ -3,9 +3,12 @@ import { useRegisterSW } from "virtual:pwa-register/vue";
 import { toast } from 'vue-sonner'
 import { watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useColorMode } from "@vueuse/core";
+import { Toaster } from 'vue-sonner'
 
 const { t } = useI18n();
 const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
+const mode = useColorMode();
 
 watch(offlineReady, (value) => {
   if (value) {
@@ -32,5 +35,9 @@ watch(needRefresh, (value) => {
 
 <template>
   <div />
+  <Toaster
+      :theme="mode === 'light' ? 'light' : 'dark'"
+      position="bottom-right"
+    />
   <!-- TODO, fix this convert to proper file-->
 </template>

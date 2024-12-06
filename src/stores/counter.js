@@ -30,7 +30,7 @@ export const useCounterStore = defineStore("counter", () => {
   const showEditorToolbar = shallowRef(true);
   const focusTitleTextarea = shallowRef(null)
   const focusSidebar = shallowRef(null)
-
+  const showCommandBar = shallowRef(false);
   const { t } = useI18n();
   
   function toggleEditable() {
@@ -313,6 +313,7 @@ export const useCounterStore = defineStore("counter", () => {
     share_database,
     set_project,
     create_project,
+    showCommandBar,
     update_project,
     delete_project,
     auto_save,

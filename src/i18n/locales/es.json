@@ -114,7 +114,7 @@
     "description": "Nombre del archivo"
   },
   "commandBar": {
-    "title": "Barra de comandos bar",
+    "title": "Barra de comandos",
     "description": "Buscar un comando",
     "documents": "Documentos",
     "actions": "Acciones",

@@ -1,35 +1,16 @@
 <script setup>
-import ToastOffline from "@/components/ui/ToastOffline.vue";
-
-import { useColorMode, useStorage } from "@vueuse/core";
-import { Toaster } from 'vue-sonner'
 import Home from "@/views/Home.vue";
-
-const mode = useColorMode();
+import Toasts from "@/components/ui/Toasts.vue";
+import { useStorage } from "@vueuse/core";
 const cursorPointer = useStorage("cursor", true);
-
 </script>
 
 <template>
-  <div :class="cursorPointer ? 'cursorPointer' : 'cursorInitial'">
-    <main class="AppContainer ">
-      <Home />
-    </main>
-    <ToastOffline />
-    <Toaster
-      :theme="mode === 'light' ? 'light' : 'dark'"
-      position="bottom-right"
-    />
-  </div>
+  <main
+    class="w-full min-h-screen font-mono bg-background text-foreground "
+    :class="cursorPointer ? 'cursorPointer' : 'cursorInitial'"
+  >
+    <Home />
+  </main>
+  <Toasts />
 </template>
-
-<style scoped>
-.AppContainer {
-  @apply w-full min-h-screen font-mono bg-background text-foreground;
-}
-
-
-nav a.router-link-exact-active {
-  @apply text-primary;
-}
-</style>

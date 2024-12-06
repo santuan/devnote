@@ -2,10 +2,12 @@
 import Sidebar from "@/components/TheSidebar.vue";
 import Document from "@/components/Document.vue";
 
+
 import { onMounted, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useCounterStore } from "@/stores/counter";
 import { useSettingsStore } from "@/stores/settings";
+import PullToRefresh from "@/components/ui/PullToRefresh.vue";
 
 const counter = useCounterStore();
 const settings = useSettingsStore();
@@ -30,10 +32,10 @@ watch(project_body, (v) => {
 </script>
 
 <template>
+<PullToRefresh>
   <div class="flex w-full print:!h-auto print:!overflow-y-auto h-screen overflow-y-hidden">
     <Sidebar />
     <Document />
   </div>
+</PullToRefresh>
 </template>
-
-

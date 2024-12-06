@@ -6,6 +6,15 @@
   outline: none;
 } */
 
+html, body {
+  overscroll-behavior-y: none;
+}
+
+
+nav a.router-link-exact-active {
+  @apply text-primary;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

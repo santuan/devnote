@@ -28,35 +28,34 @@ import { Search, X } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
 
 const counter = useCounterStore();
-const open = ref(false)
 const keys = useMagicKeys();
 const magicCommandMenu = keys["ctrl+alt+o"];
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const largerThanLg = breakpoints.greater("lg");
 
-const { allItemsTodo, editor } = storeToRefs(counter);
+const { allItemsTodo, editor, showCommandBar } = storeToRefs(counter);
 const { isMobile } = useIsMobile();
 const { t } = useI18n();
 
 
 whenever(magicCommandMenu, (n) => {
   if (n)
-    open.value = true
+    showCommandBar.value = true
 })
 
 function handleSelect(id) {
-  open.value = false
+  showCommandBar.value = false
   counter.set_project(id);
 }
 
 function close() {
-  open.value = false
+  showCommandBar.value = false
 }
 
 function new_document() {
   counter.clear_editor();
   counter.content_editable = true;
-  open.value = false
+  showCommandBar.value = false
   focusOnTitle()
 }
 
@@ -97,7 +96,7 @@ function focusOnSidebar() {
 </script>
 
 <template>
-  <DialogRoot v-model:open="open">
+  <DialogRoot v-model:open="showCommandBar">
     <Tooltip
       :name="t('commandBar.title')"
       :side="counter.showProjects ? 'bottom' : 'right'"
@@ -114,7 +113,7 @@ function focusOnSidebar() {
     <DialogPortal>
       <DialogOverlay class="bg-background/80 fixed inset-0 z-[90]" />
       <DialogContent
-        class="fixed top-[1%] md:top-[15%] left-[50%] max-h-[64rem] w-[90vw] max-w-2xl translate-x-[-50%] text-sm overflow-hidden border bg-background border-muted-foreground/30 focus:outline-none z-[100]"
+        class="fixed top-4 md:top-[15%] left-[50%] max-h-[64rem] w-[90vw] max-w-2xl translate-x-[-50%] text-sm overflow-hidden border bg-background border-muted-foreground/30 focus:outline-none z-[100]"
       >
         <VisuallyHidden>
           <DialogTitle>{{ t('commandBar.title') }}</DialogTitle>
@@ -130,7 +129,7 @@ function focusOnSidebar() {
           />
           <ComboboxContent
             class="border-t border-muted-foreground/30 p-2 overflow-y-auto h-96"
-            @escape-key-down="open = false"
+            @escape-key-down="showCommandBar = false"
           >
             <ComboboxEmpty class="text-center text-muted-foreground p-4">
               {{ t('sidebar.noResults') }}
@@ -163,29 +162,29 @@ function focusOnSidebar() {
               <ComboboxItem
                 value="importar db"
                 @select="counter.showImportModal = true"
-                class="cursor-default justify-between font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
+                class="cursor-default justify-between font-mono text-xs px-4 py-2 rounded-md  data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
-                <span>{{ t('settings.import') }}</span>
-                <span class="inline-flex bg-primary/50 px-1 rounded p-0.5 !text-xs">
+                <span class="text-foreground">{{ t('settings.import') }}</span>
+                <span class="inline-flex bg-primary text-primary-foreground px-1 rounded p-0.5 !text-xs">
                   <kbd>ctrl alt I</kbd>
                 </span>
               </ComboboxItem>
               <ComboboxItem
                 value="exportar db"
                 @select="counter.showShareModal = true"
-                class="cursor-default justify-between font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
+                class="cursor-default justify-between font-mono text-xs px-4 py-2 rounded-md  data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
-                <span>{{ t('settings.export') }}</span>
-                <span class="inline-flex bg-primary/50 px-1 rounded p-0.5 !text-xs">
+                <span class="text-foreground">{{ t('settings.export') }}</span>
+                <span class="inline-flex bg-primary text-primary-foreground px-1 rounded p-0.5 !text-xs">
                   <kbd>ctrl alt E</kbd>
                 </span>
               </ComboboxItem>
               <ComboboxItem
                 :value="`${t('verb.open')} ${t('settings.title')}`"
                 @select="showSettings()"
-                class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
+                class="cursor-default font-mono text-xs px-4 py-2 rounded-md  data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
-                <span> {{ t('verb.open') }} {{ t('settings.title') }}</span>
+                <span class="text-foreground"> {{ t('verb.open') }} {{ t('settings.title') }}</span>
               </ComboboxItem>
             </ComboboxGroup>
             <ComboboxGroup>
@@ -196,10 +195,10 @@ function focusOnSidebar() {
                 :value="t('commandBar.focusSidebar')"
                 v-if="!isMobile"
                 @select="focusOnSidebar()"
-                class="cursor-default justify-between font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
+                class="cursor-default justify-between font-mono text-xs px-4 py-2 rounded-md  data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
-                <span>{{ t('commandBar.focusSidebar') }}</span>
-                <span class="inline-flex bg-primary/50 px-1 rounded p-0.5 !text-xs">
+                <span class="text-foreground">{{ t('commandBar.focusSidebar') }}</span>
+                <span class="inline-flex bg-primary text-primary-foreground px-1 rounded p-0.5 !text-xs">
                   <kbd>ctrl shift alt &larr;</kbd>
                 </span>
               </ComboboxItem>
@@ -207,10 +206,10 @@ function focusOnSidebar() {
                 :value="t('commandBar.focusTitle')"
                 v-if="!isMobile"
                 @select="focusOnTitle()"
-                class="cursor-default justify-between font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
+                class="cursor-default justify-between font-mono text-xs px-4 py-2 rounded-md data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
-                <span>{{ t('commandBar.focusTitle') }}</span>
-                <span class="inline-flex bg-primary/50 px-1 rounded p-0.5 !text-xs">
+                <span class="text-foreground">{{ t('commandBar.focusTitle') }}</span>
+                <span class="inline-flex bg-primary text-primary-foreground px-1 rounded p-0.5 !text-xs">
                   <kbd>ctrl  shift  alt  &rarr;</kbd>
                 </span>
               </ComboboxItem>
@@ -221,7 +220,7 @@ function focusOnSidebar() {
                 class="cursor-default justify-between font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
                 <span>{{ t('commandBar.focusEditor') }}</span>
-                <span class="inline-flex bg-primary/50 px-1 rounded p-0.5 !text-xs">
+                <span class="inline-flex bg-primary text-primary-foreground px-1 rounded p-0.5 !text-xs">
                   <kbd>ctrl  shift  alt  &darr;</kbd>
                 </span>
               </ComboboxItem>
