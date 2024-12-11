@@ -236,7 +236,7 @@ const props = defineProps({
         <div class="flex justify-end mt-2 md:mt-3">
           <DialogClose as-child>
             <button
-              class="bg-secondary text-foreground !select-text hover:bg-background hover:ring-2 hover:ring-foreground text-sm focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
+              class="bg-secondary text-foreground !select-text hover:bg-background hover:ring-2 hover:ring-foreground text-sm focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none focus:outline-2 focus:outline-foreground focus:outline-dashed focus:outline-offset-2"
             >
               Cerrar ventana
             </button>

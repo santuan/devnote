@@ -2,7 +2,7 @@
 import Tooltip from "@/components/ui/Tooltip.vue";
 
 import { useCounterStore } from "@/stores/counter";
-import { BookText, PencilLine } from "lucide-vue-next";
+import { BookText, Eye, PencilLine } from "lucide-vue-next";
 import { useI18n } from 'vue-i18n';
 
 const counter = useCounterStore();
@@ -20,7 +20,7 @@ const { t } = useI18n();
       @click="counter.toggleEditable"
       class="flex items-center justify-center border interactive border-secondary ToggleEditable bg-background hover:bg-secondary/80 size-8"
     >
-      <BookText
+      <Eye
         class="size-4"
         v-show="counter.content_editable"
       />

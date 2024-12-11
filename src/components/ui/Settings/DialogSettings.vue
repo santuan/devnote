@@ -24,6 +24,7 @@ import { useMagicKeys, whenever } from '@vueuse/core';
 import { X, Settings2 } from 'lucide-vue-next';
 import { useIsMobile } from '@/composables/useIsMobile';
 import { useI18n } from 'vue-i18n';
+import SettingExportDB from './SettingExportDB.vue';
 
 
 const counter = useCounterStore();
@@ -69,7 +70,7 @@ whenever(magicSettings, (n) => {
           <span>{{ isMobile ? 'touch' : t('settings.mouseKeyboard') }}.</span>
         </DialogDescription>
         <ScrollAreaRoot
-          class="w-full border h-[78vh] mt-6 md:h-[70vh] group border-secondary"
+          class="w-full border h-[85vh] sm:h-[78vh] mt-6 md:h-[70vh] group border-secondary"
           style="--scrollbar-size: 10px"
         >
           <ScrollAreaViewport
@@ -89,6 +90,7 @@ whenever(magicSettings, (n) => {
                 <h4 class="mt-2 mb-0 text-xs text-primary">
                   {{ t('settings.database') }}
                 </h4>
+                <SettingExportDB />
                 <SettingBase64 />
                 <SettingExportOnLoad />
                 <SettingInitWithData />

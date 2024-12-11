@@ -67,7 +67,7 @@ watch(
 
 const mediaSetupOnLoad = () => {
   // ! TODO: move this to extension storage
-  const proseMirrorContainerDiv = document.querySelector('.AppContainer')
+  const proseMirrorContainerDiv = document.querySelector('.Document')
   if (proseMirrorContainerDiv) proseMirrorContainerWidth.value = proseMirrorContainerDiv?.clientWidth
   // When the media has loaded
   if (!resizableImg.value) return
@@ -287,7 +287,7 @@ const isFullWidth = computed<boolean>(() => !!props.node.attrs.dataFullWidth)
     </div>
     <div class="flex relative">
       <div
-        v-if="counter.content_editable"
+        v-show="counter.content_editable"
         class="w-fit flex relative"
       >
 
@@ -337,7 +337,7 @@ const isFullWidth = computed<boolean>(() => !!props.node.attrs.dataFullWidth)
       </div>
 
       <div
-        v-else
+        v-show="!counter.content_editable"
         class="w-fit flex relative"
       >
         <img

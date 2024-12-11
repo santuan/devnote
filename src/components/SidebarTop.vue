@@ -39,7 +39,7 @@ whenever(CtrlM, () => {
 
 const magicPreview = keys["ctrl+alt+p"];
 whenever(magicPreview, () => {
-  counter.content_editable = !counter.content_editable;
+  counter.toggleEditable()
 });
 
 </script>

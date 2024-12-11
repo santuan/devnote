@@ -12,8 +12,10 @@ import {
   ListboxRoot,
   ListboxVirtualizer,
 } from "radix-vue";
+import { useCounterStore } from "@/stores/counter";
 
 import { useStorage } from "@vueuse/core";
+const counter = useCounterStore();
 
 
 import { computed, shallowRef } from "vue";
@@ -88,6 +90,7 @@ const filteredOptions = computed(() =>
       <div class="btn">
         <PopoverTrigger
           class="relative flex items-center justify-start w-full gap-2 !outline-none"
+          :class="counter.content_editable ? '' : '!pointer-events-none'"
           aria-label="Update dimensions"
         >
           <div
@@ -95,14 +98,14 @@ const filteredOptions = computed(() =>
             class="flex items-center opacity-70 print:scale-75 print:translate-x-1 print:-translate-y-1 justify-between w-full gap-2 text-xs"
           >
             <span class="shrink-0 text-foreground">{{ selected }}</span>
-            <ChevronDown class="print:hidden size-4 shrink-0" />
+            <ChevronDown v-if="counter.content_editable" class="print:hidden size-4 shrink-0" />
           </div>
           <div
             v-else
             class="flex items-center opacity-70 print:scale-75 print:translate-x-1 print:-translate-y-1 justify-between w-full gap-2 text-xs"
           >
             <span>Auto</span>
-            <ChevronDown class="print:hidden size-4 shrink-0" />
+            <ChevronDown v-if="counter.content_editable" class="print:hidden size-4 shrink-0" />
           </div>
         </PopoverTrigger>
       </div>

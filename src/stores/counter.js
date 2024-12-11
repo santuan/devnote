@@ -1,4 +1,4 @@
-import { shallowRef } from "vue";
+import { shallowRef, ref } from "vue";
 import { defineStore } from "pinia";
 import { db } from "@/db";
 import { liveQuery } from "dexie";
@@ -12,29 +12,33 @@ import { useI18n } from 'vue-i18n';
 
 
 export const useCounterStore = defineStore("counter", () => {
-  const status = shallowRef("LOADING");
-  const loaded_id = shallowRef("");
-  const file_name = shallowRef("My IndexedDB");
-  const project_name = shallowRef("");
-  const project_body = shallowRef("");
-  const project_checked = shallowRef(null);
-  const project_fixed = shallowRef(null);
-  const searchTerm = shallowRef("");
-  const showProjects = shallowRef(true);
-  const showImportModal = shallowRef(false);
-  const showShareModal = shallowRef(false);
-  const shareOptions = shallowRef([]);
-  const content_editable = shallowRef(true);
-  const editor = shallowRef(null);
-  const showSettings = shallowRef(false);
-  const showEditorToolbar = shallowRef(true);
-  const focusTitleTextarea = shallowRef(null)
-  const focusSidebar = shallowRef(null)
-  const showCommandBar = shallowRef(false);
-  const { t } = useI18n();
+  const status = ref("LOADING");
+  const loaded_id = ref("");
+  const file_name = ref("My IndexedDB");
+  const project_name = ref("");
+  const project_body = ref("");
+  const project_checked = ref(null);
+  const project_fixed = ref(null);
+  const searchTerm = ref("");
+  const showProjects = ref(true);
+  const showImportModal = ref(false);
+  const showShareModal = ref(false);
+  const shareOptions = ref([]);
+  const content_editable = ref(true);
+  const editor = ref(null);
+  const showSettings = ref(false);
+  const showEditorToolbar = ref(true);
+  const focusTitleTextarea = ref(null)
+  const focusSidebar = ref(null)
+  const showCommandBar = ref(false);
+  const showAlertDialog = ref(false);
+  const selectedId = ref(0);
   
+  const { t } = useI18n();
+
   function toggleEditable() {
-    content_editable.value = !content_editable.value;
+    editor.value.setEditable(!editor.value.options.editable)
+    content_editable.value = editor.value.options.editable
   }
 
   function clear_editor() {
@@ -64,7 +68,9 @@ export const useCounterStore = defineStore("counter", () => {
   }
 
   async function update_project() {
+    if (!loaded_id.value || status.value !== "READY") return;
     try {
+      
       await db.projects.update(loaded_id.value, {
         date: new Date().toISOString(),
         project_data: {
@@ -173,22 +179,6 @@ export const useCounterStore = defineStore("counter", () => {
     }
   }
 
-  async function share_database() {
-    try {
-      await db.open();
-      const blob = await exportDB(db);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const text = reader.result;
-        const json = JSON.parse(text);
-        shareOptions.value = JSON.stringify(json, null, 2);
-      };
-      reader.readAsText(blob);
-    } catch (error) {
-      handleError("Error al exportar la base de datos", error);
-    }
-  }
-
   async function import_database(file) {
     const replace_file_name = file.name.replace(".json", "");
     try {
@@ -245,6 +235,7 @@ export const useCounterStore = defineStore("counter", () => {
     } catch (error) {
       handleError("Error al configurar la base de datos", error);
     }
+    status.value = "READY";
   }
 
   async function update_database(name) {
@@ -310,7 +301,6 @@ export const useCounterStore = defineStore("counter", () => {
     update_database,
     import_database,
     export_database,
-    share_database,
     set_project,
     create_project,
     showCommandBar,
@@ -329,8 +319,10 @@ export const useCounterStore = defineStore("counter", () => {
     clearDatabase,
     focusTitleTextarea,
     focusSidebar,
+    showAlertDialog,
     SetFocusTitle,
     setFocusSidebar,
-    showEditorToolbar
+    showEditorToolbar,
+    selectedId
   };
 });

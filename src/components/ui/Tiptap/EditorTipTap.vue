@@ -40,14 +40,14 @@ import { ResizableMedia } from './resizableMedia'
 import mediumZoom from "medium-zoom/dist/pure";
 import "medium-zoom/dist/style.css";
 import History from '@tiptap/extension-history'
-import { onMounted, onBeforeUnmount } from "vue";
+import { onMounted, onBeforeUnmount, watch, computed } from "vue";
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
 import { Editor, EditorContent, VueNodeViewRenderer } from "@tiptap/vue-3";
 import { useI18n } from 'vue-i18n';
 import EditorContextMenu from "./EditorContextMenu.vue";
 const counter = useCounterStore();
-const { editor } = storeToRefs(counter);
+const { editor, content_editable } = storeToRefs(counter);
 const { t } = useI18n();
 
 const emit = defineEmits(["update:modelValue"]);
@@ -141,17 +141,20 @@ onMounted(() => {
       }),
     ],
     content: props.modelValue,
-    editable: props.editable,
+    editable: !props.editable,
     onCreate: () => {
-      if (!props.editable) {
-        mediumZoom("[data-zoomable]", {
-          margin: 12,
-          background: "hsl(var(--background))",
-          scrollOffset: 0,
-        });
-      }
+      mediumZoom("[data-zoomable]", {
+        margin: 12,
+        background: "hsl(var(--background))",
+        scrollOffset: 0,
+      });
     },
     onUpdate: () => {
+      // mediumZoom("[data-zoomable]", {
+      //   margin: 12,
+      //   background: "hsl(var(--background))",
+      //   scrollOffset: 0,
+      // });
       emit("update:modelValue", editor.value.getHTML());
     },
   });
@@ -166,15 +169,17 @@ onBeforeUnmount(() => {
 <template>
   <div
     v-if="editor"
-    class="EditorCK"
+    class="EditorTiptap"
   >
-    <EditorContextMenu v-if="editable">
+    <EditorContextMenu>
       <ScrollAreaRoot
-        class="ScrollAreaEditor group is-editable"
+        class="ScrollAreaEditor group "
         :class="[
           toolbar ? 'with-toolbar' : '',
+          content_editable ? 'is-editable' : 'is-preview',
+          counter.loaded_id === '' || counter.editor.isEmpty ? 'is-empty' : '',
         ]
-        "
+          "
         style="--scrollbar-size: 10px"
       >
         <ScrollAreaViewport
@@ -198,39 +203,16 @@ onBeforeUnmount(() => {
         </ScrollAreaScrollbar>
       </ScrollAreaRoot>
     </EditorContextMenu>
-    <ScrollAreaRoot
-      v-else
-      class="ScrollAreaEditor group is-preview"
-      :class="[
-        toolbar ? 'with-toolbar' : '',
-      ]
-      "
-      style="--scrollbar-size: 10px"
-    >
-      <ScrollAreaViewport class="w-full h-full border-transparent border outline-none">
-        <div
-          class="max-w-full px-2 pt-1 mx-auto prose dark:prose-invert"
-          spellcheck="false"
-        >
-          <slot />
-          <editor-content :editor="editor" />
-        </div>
-      </ScrollAreaViewport>
-      <ScrollAreaScrollbar
-        class="print:!hidden flex select-none touch-none p-0.5 bg-secondary transition-colors duration-[160ms] ease-out hover:bg-background data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
-        orientation="vertical"
-      >
-        <ScrollAreaThumb
-          class="flex-1 bg-primary rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]"
-        />
-      </ScrollAreaScrollbar>
-    </ScrollAreaRoot>
   </div>
 </template>
 
 <style>
-.EditorCK {
+.EditorTiptap {
   @apply grid w-full min-h-full
+}
+
+.EditorTiptap:has(.is-empty) [data-radix-scroll-area-viewport] {
+  @apply !border-0
 }
 
 [data-radix-scroll-area-viewport] {
@@ -344,10 +326,6 @@ onBeforeUnmount(() => {
   margin: 0;
 }
 
-.tiptap img {
-  @apply mr-auto;
-}
-
 .tiptap p a {
   @apply break-all underline-offset-4 decoration-dotted print:decoration-solid underline;
 }
@@ -360,8 +338,6 @@ onBeforeUnmount(() => {
   @apply bg-primary/20 break-all px-1 mx-0.5 rounded py-0.5 text-foreground ring-1 ring-primary/30 font-light text-sm;
   @apply print:!bg-primary/20 print:rounded-none print:ring-0;
 }
-
-
 
 
 .medium-zoom--opened .medium-zoom-overlay {

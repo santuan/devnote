@@ -30,7 +30,7 @@
     "alignRight": "Right",
     "alignJustify": "Justify",
     "noAlignment": "No alignment",
-    "code": "Code",
+    "code": "Monospace",
     "codeBlock": "Code block",
     "quote": "Quote",
     "bulletList": "Bullet list",

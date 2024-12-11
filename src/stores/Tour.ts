@@ -35,7 +35,7 @@ function DriverJsInit() {
         },
       },
       {
-        element: '.EditorCK',
+        element: '.EditorTiptap',
         popover: {
           title: 'Text Editor',
           description: 'Here you can add rich text, images, and videos from a URL, as well as YouTube videos.',

@@ -15,7 +15,7 @@ import { onMounted, shallowRef, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useCounterStore } from "@/stores/counter";
 
-import { refDebounced, useMagicKeys, whenever } from "@vueuse/core";
+import { useMagicKeys, whenever } from "@vueuse/core";
 import { Upload, X } from "lucide-vue-next";
 import { useI18n } from 'vue-i18n';
 
@@ -23,24 +23,16 @@ const counter = useCounterStore();
 const { file_name, showShareModal } = storeToRefs(counter);
 const input = shallowRef(file_name);
 
-const debounced = refDebounced(input, 100);
+// const debounced = refDebounced(input, 100);
 const keys = useMagicKeys();
 const magicShareDB = keys["ctrl+alt+e"];
 const { t } = useI18n();
-
-watch(debounced, (v) => {
-  if (v) counter.share_database();
-});
 
 whenever(magicShareDB, (n) => {
   if (n)
     counter.showShareModal = true
 })
 
-
-onMounted(() => {
-  counter.share_database();
-});
 </script>
 
 <template>
@@ -62,7 +54,7 @@ onMounted(() => {
         class="bg-secondary/90 data-[state=open]:animate-overlayShow fixed inset-0 z-[200]"
       />
       <DialogContent
-        class="data-[state=open]:animate-contentShow font-mono fixed top-24 md:top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-background p-3 md:p-6 md:pt-4 shadow focus:outline-none z-[9000]"
+        class="data-[state=open]:animate-contentShow font-mono fixed top-24 md:top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-background p-3 md:p-6 md:pt-4 shadow focus:outline-none z-[99999]"
       >
         <DialogTitle class="text-foreground flex items-center justify-start gap-3 m-0 text-[17px] font-semibold">
           <Upload class="size-5" />
@@ -74,11 +66,11 @@ onMounted(() => {
         <div class="flex gap-2 mb-2">
           <input
             type="text"
-            class="w-full h-8 px-2 border bg-background text-foreground border-border outline-none focus:ring-1 focus:ring-primary"
+            class="w-full h-9 px-2 border bg-background text-foreground border-border outline-none focus:ring-1 focus:ring-primary"
             v-model="input"
           >
           <button
-            class="ml-auto text-xs font-medium border bg-primary h-8 border-secondary shrink-0 text-primary-foreground hover:bg-primary/80 focus:outline-none px-[15px] focus-visible:ring-2 focus-visible:ring-white"
+            class="bg-primary shrink-0 border-secondary border text-primary-foreground hover:bg-backgorund/80 text-xs inline-flex h-9 items-center justify-center rounded px-[15px] font-semibold focus:outline-2 focus:outline-foreground focus:outline-dashed gap-3 focus:outline-offset-2"
             @click="counter.export_database(input.value)"
           >
             {{ t('settings.export') }}

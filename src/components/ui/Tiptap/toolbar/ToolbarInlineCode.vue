@@ -29,7 +29,7 @@ const { t } = useI18n();
       :value="t('toolbar.code')"
     >
       <span class="flex items-center justify-center text-xs rounded size-5 bg-secondary/30 text-inherit">
-        A
+        M
       </span>
       <span class="sr-only">{{ t('toolbar.code') }}</span>
     </ToolbarButton>

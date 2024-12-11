@@ -32,10 +32,10 @@ watch(project_body, (v) => {
 </script>
 
 <template>
-<PullToRefresh>
-  <div class="flex w-full print:!h-auto print:!overflow-y-auto h-screen overflow-y-hidden">
-    <Sidebar />
-    <Document />
-  </div>
-</PullToRefresh>
+  <PullToRefresh>
+    <div class="flex w-full print:!h-auto print:!overflow-y-auto h-screen overflow-y-hidden">
+      <Sidebar />
+      <Document />
+    </div>
+  </PullToRefresh>
 </template>

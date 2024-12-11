@@ -17,7 +17,7 @@ function focusOnTitle() {
     class="absolute inset-0 overflow-hidden flex-col flex justify-start items-center z-20 w-full"
   >
     <Tooltip
-      v-if="counter.loaded_id === '' || counter.project_body !== '<p></p>'"
+      v-if="counter.loaded_id === '' || counter.editor.isEmpty"
       name="click to edit"
       :side="'bottom'"
     >
@@ -26,12 +26,12 @@ function focusOnTitle() {
         class="p-2 h-8 relative z-10 text-xs text-primary-foreground  bg-primary"
       >
         Current document not saved.
-        <span v-if="counter.project_name === ''">:* missing title</span>
+        <span v-show="counter.project_name === ''">:* missing title</span>
       </button>
     </Tooltip>
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="absolute inset-0 opacity-[0.04]"
+      class="absolute inset-0 opacity-[0.01]"
       id="a"
       viewBox="0 0 384 311.02"
     ><path

@@ -113,7 +113,7 @@ function onDrop(files) {
                 {{ t('importDB.action') }}
               </button>
               <AlertDialogCancel
-                class="bg-secondary text-foreground hover:bg-backgorund/80 text-xs inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
+                class="bg-secondary text-foreground hover:bg-backgorund/80 text-xs inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none focus:outline-2 focus:outline-foreground focus:outline-dashed focus:outline-offset-4"
               >
                 {{ t('verb.cancel') }}
               </AlertDialogCancel>

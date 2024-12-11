@@ -14,9 +14,8 @@ import { useIsMobile } from '@/composables/useIsMobile';
 const settings = useSettingsStore();
 const counter = useCounterStore();
 const { isMobile } = useIsMobile();
-const { showEditorToolbar } = storeToRefs(counter);
+const { showEditorToolbar, content_editable } = storeToRefs(counter);
 const { t } = useI18n();
-
 </script>
 
 <template>
@@ -24,31 +23,26 @@ const { t } = useI18n();
     <main class="editor">
       <div
         class="editor-top"
-        v-if="counter.content_editable"
+        v-if="content_editable"
         :class="showEditorToolbar && 'with-toolbar'"
       >
         <EditorTitle />
         <EditorToolbar v-if="showEditorToolbar" />
       </div>
       <Editor
-        v-if="!counter.content_editable"
         v-model="counter.project_body"
-        class="preview-editor'"
+        :editable="!counter.content_editable"
+        :toolbar="showEditorToolbar"
       >
         <h2
+          v-show="!content_editable"
           class="px-0 md:pl-5 md:p-4 mb-0 font-serif text-4xl md:text-5xl text-foreground font-black text-balance"
           :class="settings.show_heading_one_preview ? '' : 'sr-only'"
         >
           {{ counter.project_name }}
         </h2>
       </Editor>
-      <Editor
-        v-if="counter.content_editable"
-        v-model="counter.project_body"
-        :toolbar="showEditorToolbar"
-        editable
-      />
-      <SplashScreen v-if="counter.loaded_id === '' && counter.content_editable === false" />
+      <SplashScreen v-if="counter.loaded_id === '' && content_editable === false" />
     </main>
     <button
       v-show="!counter.loaded_id"

@@ -2,6 +2,7 @@
 import DocumentEditor from "./DocumentEditor.vue";
 import DeleteDocument from "@/components/ui/ButtonDeleteDocument.vue";
 import SplitterGroup from "@/components/ui/SplitterGroup.vue";
+import AlertUnsavedChanges from "./ui/AlertUnsavedChanges.vue";
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import SplitterGroup from "@/components/ui/SplitterGroup.vue";
       <DocumentEditor />
     </SplitterGroup>
     <DeleteDocument />
+    <AlertUnsavedChanges />
   </div>
 </template>
 

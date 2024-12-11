@@ -17,8 +17,8 @@ import {
   VisuallyHidden
 } from 'radix-vue'
 import Tooltip from "./Tooltip.vue";
-
-import { ref, nextTick, } from 'vue'
+import { useUnsavedChanges } from "@/composables/useUnsavedChanges";
+import { nextTick, } from 'vue'
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
 
@@ -28,12 +28,13 @@ import { Search, X } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
 
 const counter = useCounterStore();
+const { hasUnsavedChanges } = useUnsavedChanges();
 const keys = useMagicKeys();
 const magicCommandMenu = keys["ctrl+alt+o"];
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const largerThanLg = breakpoints.greater("lg");
 
-const { allItemsTodo, editor, showCommandBar } = storeToRefs(counter);
+const { allItemsTodo, editor, showCommandBar,  } = storeToRefs(counter);
 const { isMobile } = useIsMobile();
 const { t } = useI18n();
 
@@ -43,9 +44,20 @@ whenever(magicCommandMenu, (n) => {
     showCommandBar.value = true
 })
 
+// function handleSelect(id) {
+//   showCommandBar.value = false
+//   counter.set_project(id);
+// }
+
 function handleSelect(id) {
-  showCommandBar.value = false
+  if (hasUnsavedChanges()) {
+    counter.selectedId = id;
+    counter.showAlertDialog = true;
+    counter.showCommandBar = false;
+    return;
+  }
   counter.set_project(id);
+  showCommandBar.value = false;
 }
 
 function close() {
@@ -142,10 +154,10 @@ function focusOnSidebar() {
                 v-for="item in allItemsTodo"
                 :key="item.id"
                 @select="handleSelect(item.id)"
-                :value="item.project_data.name"
+                :value="item.project_data.name || item.id"
                 class="cursor-default font-mono text-xs px-4 py-2 rounded-md text-foreground data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
-                <span>{{ item.project_data.name }}</span>
+                <span>{{ item.project_data.name || item.id }}</span>
               </ComboboxItem>
             </ComboboxGroup>
             <ComboboxGroup class="mt-6">

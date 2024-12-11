@@ -73,7 +73,7 @@
 
 <script>
 import { NodeViewContent, nodeViewProps, NodeViewWrapper } from "@tiptap/vue-3";
-import { bundledLanguages } from "shiki";
+import { bundledLanguages } from "shiki/bundle/web";
 import RadixVirtual from "@/components/ui/RadixVirtual.vue";
 import { Clipboard, ClipboardCheck, FoldVertical, UnfoldVertical } from "lucide-vue-next";
 
@@ -200,7 +200,7 @@ export default {
   @apply !select-text
 }
 
-.preview-editor  * {
+.is-preview  * {
   @apply !select-text
 }
 
