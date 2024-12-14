@@ -171,7 +171,7 @@ onBeforeUnmount(() => {
     v-if="editor"
     class="EditorTiptap"
   >
-    <EditorContextMenu>
+    
       <ScrollAreaRoot
         class="ScrollAreaEditor group "
         :class="[
@@ -185,6 +185,7 @@ onBeforeUnmount(() => {
         <ScrollAreaViewport
           class="w-full h-full border-secondary border outline-none group-focus-within:ring-primary/70 group-focus-within:ring-1 focus:ring-inset focus:!ring-primary focus:!ring-1  group-focus-within:ring-inset"
         >
+        <EditorContextMenu>
           <div
             class="max-w-full px-2 mx-auto prose dark:prose-invert"
             spellcheck="false"
@@ -192,6 +193,7 @@ onBeforeUnmount(() => {
             <slot />
             <editor-content :editor="editor" />
           </div>
+        </EditorContextMenu>
         </ScrollAreaViewport>
         <ScrollAreaScrollbar
           class="print:!hidden flex select-none touch-none p-0.5 bg-secondary transition-colors duration-[160ms] ease-out hover:bg-background data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
@@ -202,7 +204,7 @@ onBeforeUnmount(() => {
           />
         </ScrollAreaScrollbar>
       </ScrollAreaRoot>
-    </EditorContextMenu>
+    
   </div>
 </template>
 
