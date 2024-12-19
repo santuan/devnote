@@ -81,11 +81,11 @@ whenever(magicSettings, (n) => {
                 <h4 class="mt-2 mb-0 text-xs text-primary">
                   {{ t('settings.perspective') }}
                 </h4>
+                <SettingLanguage />
                 <SettingTour v-if="!isMobile" />
                 <SettingCursor v-if="!isMobile" />
                 <SettingTheme />
                 <SettingAppSize />
-                <SettingLanguage />
                 <SettingMainTitle />
                 <h4 class="mt-2 mb-0 text-xs text-primary">
                   {{ t('settings.database') }}

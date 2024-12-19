@@ -20,7 +20,7 @@ const { t } = useI18n();
 
 <template>
   <div :key="counter.loaded_id">
-    <main class="editor">
+    <article class="editor">
       <div
         class="editor-top"
         v-if="content_editable"
@@ -28,6 +28,19 @@ const { t } = useI18n();
       >
         <EditorTitle />
         <EditorToolbar v-if="showEditorToolbar" />
+        <button
+          @click="counter.create_project()"
+          v-show="!counter.loaded_id"
+          v-if="counter.content_editable"
+          :disabled="counter.project_name === ''"
+          :class="counter.project_name
+            ? 'bg-primary text-primary-foreground hover:bg-primary/80'
+            : 'disabled bg-secondary pointer-events-none'
+            "
+          class="md:hidden !select-none z-20 h-12 px-3 text-xs text-center  w-full GuardarDocumento disabled:text-foreground/50 focus:bg-primary/50"
+        >
+          {{ t('editor.save') }}
+        </button>
       </div>
       <Editor
         v-model="counter.project_body"
@@ -43,17 +56,17 @@ const { t } = useI18n();
         </h2>
       </Editor>
       <SplashScreen v-if="counter.loaded_id === '' && content_editable === false" />
-    </main>
+    </article>
     <button
+      @click="counter.create_project()"
       v-show="!counter.loaded_id"
       v-if="counter.content_editable"
-      @click="counter.create_project()"
       :disabled="counter.project_name === ''"
       :class="counter.project_name
         ? 'bg-primary text-primary-foreground hover:bg-primary/80'
-        : 'disabled bg-secondary  pointer-events-none'
+        : 'disabled bg-secondary pointer-events-none'
         "
-      class="fixed !select-none bottom-0 right-0 z-20 h-12 px-3 text-xs text-right  left-0  GuardarDocumento disabled:text-foreground/50 focus:bg-primary/50"
+      class="hidden md:block fixed !select-none bottom-0 right-0 z-20 h-12 px-3 text-xs text-right  left-0  GuardarDocumento disabled:text-foreground/50 focus:bg-primary/50"
     >
       <kbd
         v-show="!isMobile"

@@ -5,7 +5,7 @@
   },
   "editor": {
     "placeholder": "Escribir algo...",
-    "untitled": "Item sin título",
+    "untitled": "Documento sin título",
     "save": "Crear documento",
     "delete": "Eliminar documento",
     "deleteConfirm": "Esta acción no tiene vuelta atrás",

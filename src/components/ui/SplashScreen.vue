@@ -14,6 +14,7 @@ function focusOnTitle() {
 
 <template>
   <div
+    role="alert"
     class="absolute bg-background inset-0 overflow-hidden flex-col flex justify-start items-center z-20 w-full"
   >
     <Tooltip
@@ -25,8 +26,7 @@ function focusOnTitle() {
         @click="focusOnTitle()"
         class="p-2 h-8 relative z-10 text-xs text-primary-foreground  bg-primary"
       >
-        Current document not saved.
-        <span v-show="counter.project_name === ''">:* missing title</span>
+        Current document not saved <span v-show="counter.project_name === ''">: Also title is required. Click to edit</span>
       </button>
     </Tooltip>
     <svg

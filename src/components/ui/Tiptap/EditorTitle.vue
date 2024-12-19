@@ -3,6 +3,7 @@ import { useCounterStore } from "@/stores/counter";
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from "pinia";
 import Tooltip from "@/components/ui/Tooltip.vue";
+import { Heading } from "lucide-vue-next";
 
 const counter = useCounterStore();
 const { focusTitleTextarea, showEditorToolbar } = storeToRefs(counter);
@@ -12,9 +13,10 @@ const { t } = useI18n();
 
 <template>
   <div class="flex pt-1 items-start justify-between w-full gap-1 group relative md:!select-none">
-    <span v-if="counter.project_name" class="sr-only">{{ t('editor.untitled') }}</span>
+    <!-- <span v-if="counter.project_name === ''" class="sr-only">{{ t('editor.untitled') }}</span>
+    <span v-else class="sr-only">Document title: {{counter.project_name}}</span> -->
     <textarea
-      :placeholder="counter.project_name === '' ? t('editor.untitled') : counter.project_name"
+      :placeholder="counter.project_name === '' ? t('editor.untitled') : 'Document title'"
       autocomplete="off"
       spellcheck="false"
       ref="focusTitleTextarea"
@@ -24,7 +26,7 @@ const { t } = useI18n();
       class="w-full pr-8 px-2 py-0.5 overflow-hidden ring-1 outline-none resize-none leading-8 max-h-9 md:max-h-auto min-h-8 create_project bg-secondary/30 text-foreground ring-secondary focus-within:ring-primary placeholder:text-primary/50 hover:ring-primary ring-inset focus:max-h-full line-clamp-1 focus:overflow-visible  focus:line-clamp-none"
     />
     <Tooltip
-      name="HTML options"
+      name="Toggle Toolbar"
       :side="'bottom'"
       :align="'end'"
       shortcut="ctrl shift alt &uarr; "
@@ -37,7 +39,7 @@ const { t } = useI18n();
         ]"
         @click="showEditorToolbar = !showEditorToolbar"
       >
-        <span>H</span>
+        <span><Heading class="h-3"/></span>
       </button>
     </Tooltip>
   </div>

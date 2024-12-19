@@ -119,6 +119,7 @@ function onDrop(files) {
               </AlertDialogCancel>
               <AlertDialogCancel class="absolute top-0 size-6 flex justify-center items-center m-3 right-0 z-[999] text-foreground">
                 <X class="size-4" />
+                <span class="sr-only">{{ t('verb.close') }}</span>
               </AlertDialogCancel>
             </div>
           </div>

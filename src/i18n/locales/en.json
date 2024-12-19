@@ -5,7 +5,7 @@
   },
   "editor": {
     "placeholder": "Start writing...",
-    "untitled": "Untitled item",
+    "untitled": "Untitled document",
     "save": "Create document",
     "delete": "Delete document",
     "deleteConfirm": "This action cannot be undone",

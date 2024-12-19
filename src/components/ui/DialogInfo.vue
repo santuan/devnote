@@ -117,7 +117,7 @@ whenever(magicAbout, (n) => {
                 <DialogDescription
                   class="inline-block p-3 mt-3 mb-3 text-sm leading-normal rounded text-foreground bg-primary/20"
                 >
-                  This is an alpha version; use it only for testing purposes. Currently adapting to work well with <a href="https://nvda.es/">NVDA</a>
+                  This is an alpha version; use it only for testing purposes. Currently adapting to work well with <a href="https://nvda.es/">NVDA</a>.
                 </DialogDescription>
                 <p class="mt-3 mb-5 text-sm leading-normal text-foreground !select-text">
                   This application uses
@@ -194,9 +194,9 @@ whenever(magicAbout, (n) => {
         </div>
         <DialogClose
           class="absolute inline-flex items-center justify-center appearance-none top-4 text-foreground hover:bg-secondary/80 right-3 size-7 focus:shadow focus:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:text-primary"
-          aria-label="Close"
         >
           <X />
+          <span class="sr-only">{{ t('verb.close') }}</span>
         </DialogClose>
       </DialogContent>
     </DialogPortal>
