@@ -7,7 +7,7 @@ import {
   ContextMenuRoot,
   ContextMenuSeparator,
   ContextMenuTrigger,
-} from 'radix-vue'
+} from 'reka-ui'
 
 import { useSettingsStore } from '@/stores/settings';
 import { useCounterStore } from "@/stores/counter";

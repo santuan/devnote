@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
   SelectViewport,
-} from "radix-vue";
+} from "reka-ui";
 
 import { useStorage } from "@vueuse/core";
 import { Check, ChevronDown } from "lucide-vue-next";
@@ -27,7 +27,7 @@ const { t } = useI18n();
   <SelectRoot v-model="sortOption">
     <SelectTrigger
       class="flex items-center justify-between w-full h-[2.125rem] px-1 text-xs border min-w-24 border-secondary shrink-0 bg-background text-secondary-foreground"
-      aria-label="Customise options"
+      :aria-label="t('sidebar.sort.sort') + ' documents list'"
     >
       <SelectValue placeholder="Seleccionar" />
       <ChevronDown class="h-3.5 w-3.5" />

@@ -56,6 +56,7 @@
   "sidebar": {
     "newDocument": "Crear nuevo documento",
     "search": "Filtrar por título",
+    "navigation": "Navegación principal",
     "noResults": "Sin resultados",
     "noResultsDescription": "Aqui se mostrarán tus documentos",
     "sort": {
@@ -97,6 +98,8 @@
     "export": "Exportar DB",
     "import": "Importar DB",
     "editDBname": "Editar nombre DB",
+    "useBase64": "Imágenes en Base64",
+    "useBase64Description": "No recomendado por performance. Insertar imágenes como codigo en la base",
     "exportOnLoad": "Exportar al iniciar",
     "exportOnLoadDescription": "Cuando la opción está activada opción aparecerá la posibilidad de exportar la DB al iniciar la aplicación.",
     "initWithData": "Iniciar DB con info",
@@ -120,6 +123,7 @@
     "actions": "Acciones",
     "focusEditor": "Saltar al editor",
     "focusSidebar": "Saltar al lateral",
+    "focusProjects": "Saltar al listado de documentos",
     "focusTitle": "Saltar al título"
   },
   "message": {

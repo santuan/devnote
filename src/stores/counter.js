@@ -23,6 +23,7 @@ export const useCounterStore = defineStore("counter", () => {
   const showProjects = ref(true);
   const showImportModal = ref(false);
   const showShareModal = ref(false);
+  const showInfoModal = ref(false);
   const shareOptions = ref([]);
   const content_editable = ref(true);
   const editor = ref(null);
@@ -30,6 +31,7 @@ export const useCounterStore = defineStore("counter", () => {
   const showEditorToolbar = ref(true);
   const focusTitleTextarea = ref(null)
   const focusSidebar = ref(null)
+  const focusDocuments = ref(null)
   const showCommandBar = ref(false);
   const showAlertDialog = ref(false);
   const selectedId = ref(0);
@@ -62,6 +64,7 @@ export const useCounterStore = defineStore("counter", () => {
       });
       loaded_id.value = new_project_id;
       status.value = "READY";
+      toast.success('Project created with title: ' + project_name.value);
     } catch (error) {
       handleError("Error al crear el proyecto", error);
     }
@@ -284,6 +287,10 @@ export const useCounterStore = defineStore("counter", () => {
     focusSidebar?.value.focus()
   }
 
+  function setFocusDocuments() {
+    focusDocuments?.value.focus()
+  }
+
   return {
     loaded_id,
     file_name,
@@ -312,6 +319,7 @@ export const useCounterStore = defineStore("counter", () => {
     change_project_checked,
     change_project_fixed,
     showImportModal,
+    showInfoModal,
     showShareModal,
     content_editable,
     toggleEditable,
@@ -322,6 +330,8 @@ export const useCounterStore = defineStore("counter", () => {
     showAlertDialog,
     SetFocusTitle,
     setFocusSidebar,
+    focusDocuments,
+    setFocusDocuments,
     showEditorToolbar,
     selectedId
   };

@@ -8,7 +8,7 @@ https://github.com/sereneinserenade/tiptap-media-resize
 */
 
 import { Editor, Node, NodeViewWrapper } from '@tiptap/vue-3'
-import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from "radix-vue";
+import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from "reka-ui";
 import { Node as ProseMirrorNode } from 'prosemirror-model'
 import { Decoration } from 'prosemirror-view'
 import { resizableMediaActions, fullwidthMediaActions } from './resizableMediaMenuUtil'

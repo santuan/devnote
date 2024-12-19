@@ -5,7 +5,7 @@ import { shallowRef } from "vue";
 import { useCounterStore } from "@/stores/counter";
 
 import { useKeyModifier, useMagicKeys, whenever } from '@vueuse/core'
-import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from "radix-vue";
+import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from "reka-ui";
 import { ArrowRightToLine } from "lucide-vue-next";
 
 const counter = useCounterStore();

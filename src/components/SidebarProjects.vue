@@ -10,7 +10,7 @@ import { storeToRefs } from "pinia";
 import { useCounterStore } from "@/stores/counter";
 
 import { onClickOutside, refDebounced, useStorage } from "@vueuse/core";
-import { ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaViewport } from "radix-vue";
+import { ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaViewport } from "reka-ui";
 import NumberFlow from "@number-flow/vue";
 import { CircleX } from "lucide-vue-next";
 import { useI18n } from "vue-i18n";
@@ -23,9 +23,10 @@ const {
   allItemsChecked,
   searchTerm,
   file_name,
+  focusDocuments
 } = storeToRefs(counter);
-const sortOption = useStorage("sortItemsBy", "name");
 
+const sortOption = useStorage("sortItemsBy", "name");
 const focusSearch = ref(null);
 const debounced = refDebounced(searchTerm, 300);
 const input = shallowRef(file_name);
@@ -80,6 +81,7 @@ const results = computed(() => {
   <div class="h-full @container">
     <EditDatabaseTitle />
     <ButtonCreateDocument />
+    <h2 ref="focusDocuments" tabindex="-1" class="sr-only">Documents lists</h2>
     <div
       class="relative grid grid-cols-3 w-full gap-1 pl-1.5 pr-1 p-0.5 text-xs"
     >
@@ -96,7 +98,6 @@ const results = computed(() => {
             :placeholder="`${t('sidebar.search')}`"
             class="text-xs outline-none pl-1 pr-12 h-8 bg-transparent placeholder:text-xs placeholder:text-foreground/40"
           />
-          <span class="sr-only">{{ t("sidebar.search") }}</span>
         </label>
         <span
           v-if="!searchTerm"
@@ -110,8 +111,13 @@ const results = computed(() => {
           @click="clearTerm()"
         >
           <span class="min-w-3">{{ results.length }}</span>
+          <span class="sr-only">Results. Click to clear filter</span>
           <CircleX class="size-3" />
         </button>
+        <div v-if="searchTerm" class="sr-only" role="alert">
+          <span class="min-w-3">{{ results.length }}</span>
+          <span class="sr-only">Results</span>
+        </div>
       </div>
 
       <div class="shrink-0">
@@ -120,7 +126,9 @@ const results = computed(() => {
     </div>
     <div
       class="overflow-y-auto pl-1 SidebarProjects overflow-x-hidden h-[calc(100dvh-13rem)]"
+      
     >
+      
       <ScrollAreaRoot
         class="w-full h-full rounded overflow-hidden"
         style="--scrollbar-size: 10px"

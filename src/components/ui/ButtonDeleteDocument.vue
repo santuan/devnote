@@ -9,7 +9,7 @@ import {
   AlertDialogDescription,
   AlertDialogCancel,
   AlertDialogAction,
-} from "radix-vue";
+} from "reka-ui";
 import Tooltip from "./Tooltip.vue";
 
 import { ref } from "vue";

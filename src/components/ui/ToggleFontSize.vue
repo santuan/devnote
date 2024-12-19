@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuGroup,
-} from "radix-vue";
+} from "reka-ui";
 import Tooltip from "@/components/ui/Tooltip.vue";
 
 import { onMounted } from "vue";
@@ -44,7 +44,7 @@ onMounted(() => {
         >
           <AArrowDown class="AArrowDown size-5" />
           <AArrowUp class="AArrowUp size-5" />
-          <span class="sr-only">Font size</span>
+          <span class="sr-only">  {{ t('settings.fontsizeDescription') }}</span>
         </span>
       </Tooltip>
     </DropdownMenuTrigger>

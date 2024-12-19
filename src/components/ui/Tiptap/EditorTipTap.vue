@@ -7,7 +7,7 @@ import {
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaViewport,
-} from "radix-vue";
+} from "reka-ui";
 
 import Document from '@tiptap/extension-document'
 import Blockquote from '@tiptap/extension-blockquote'
@@ -213,11 +213,11 @@ onBeforeUnmount(() => {
   @apply grid w-full min-h-full
 }
 
-.EditorTiptap:has(.is-empty) [data-radix-scroll-area-viewport] {
+.EditorTiptap:has(.is-empty) [data-reka-scroll-area-viewport] {
   @apply !border-0
 }
 
-[data-radix-scroll-area-viewport] {
+[data-reka-scroll-area-viewport] {
   @apply print:!overflow-y-visible print:!border-0
 }
 
@@ -242,7 +242,7 @@ onBeforeUnmount(() => {
     page-break-before: avoid;
   }
 
-  [data-radix-scroll-area-viewport] {
+  [data-reka-scroll-area-viewport] {
     --secondary: 240 4.8% 90.9%;
     @apply !overflow-y-visible !border
   }

@@ -15,7 +15,8 @@ import {
   DialogTitle,
   DialogTrigger,
   VisuallyHidden
-} from 'radix-vue'
+} from 'reka-ui'
+
 import Tooltip from "./Tooltip.vue";
 import { useUnsavedChanges } from "@/composables/useUnsavedChanges";
 import { nextTick, } from 'vue'
@@ -199,13 +200,12 @@ function focusOnSidebar() {
                 <span class="text-foreground"> {{ t('verb.open') }} {{ t('settings.title') }}</span>
               </ComboboxItem>
             </ComboboxGroup>
-            <ComboboxGroup>
+            <ComboboxGroup v-if="!isMobile">
               <ComboboxLabel class="px-4 text-muted-foreground font-semibold mt-3 mb-3 font-mono">
                 Focus
               </ComboboxLabel>
               <ComboboxItem
                 :value="t('commandBar.focusSidebar')"
-                v-if="!isMobile"
                 @select="focusOnSidebar()"
                 class="cursor-default justify-between font-mono text-xs px-4 py-2 rounded-md  data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >
@@ -216,7 +216,6 @@ function focusOnSidebar() {
               </ComboboxItem>
               <ComboboxItem
                 :value="t('commandBar.focusTitle')"
-                v-if="!isMobile"
                 @select="focusOnTitle()"
                 class="cursor-default justify-between font-mono text-xs px-4 py-2 rounded-md data-[highlighted]:bg-muted inline-flex w-full items-center gap-4"
               >

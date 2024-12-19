@@ -1,5 +1,5 @@
 <script setup>
-import { TooltipContent, TooltipPortal, TooltipProvider, TooltipRoot, TooltipTrigger } from "radix-vue";
+import { TooltipContent, TooltipPortal, TooltipProvider, TooltipRoot, TooltipTrigger } from "reka-ui";
 
 const props = defineProps({
   name: {

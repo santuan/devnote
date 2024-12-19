@@ -1,5 +1,5 @@
 <script setup>
-import { ToolbarRoot } from "radix-vue";
+import { ToolbarRoot } from "reka-ui";
 
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";

@@ -11,7 +11,7 @@ import {
   ListboxItemIndicator,
   ListboxRoot,
   ListboxVirtualizer,
-} from "radix-vue";
+} from "reka-ui";
 import { useCounterStore } from "@/stores/counter";
 
 import { useStorage } from "@vueuse/core";

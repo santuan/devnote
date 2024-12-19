@@ -1,5 +1,5 @@
 <script setup>
-import { DropdownMenuRoot, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from 'radix-vue';
+import { DropdownMenuRoot, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from 'reka-ui'
 import Tooltip from './Tooltip.vue';
 
 import { useStorage } from '@vueuse/core';
@@ -28,6 +28,7 @@ function setLocale(lang) {
         <span class="size-8 flex justify-center items-center">
           <Languages class="size-4" />
         </span>
+        <span class="sr-only"> {{ t('settings.languageDescription') }}</span>
       </Tooltip>
     </DropdownMenuTrigger>
     <DropdownMenuContent

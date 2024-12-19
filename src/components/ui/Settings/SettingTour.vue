@@ -40,9 +40,10 @@ const toggleTour = () => {
     </div>
     <button
       @click="toggleTour()"
-      class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8"
+      class="flex focus:border-primary ring-foreground focus:outline-2 focus:outline-foreground focus:outline-dashed focus:outline-offset-2 items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8"
     >
       <Plane class="size-5" />
+      <span class="sr-only">{{ t('settings.tourDescription') }}</span>
     </button>
   </div>
 </template>

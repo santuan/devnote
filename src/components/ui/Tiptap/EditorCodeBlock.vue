@@ -82,7 +82,7 @@ import {
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaViewport,
-} from "radix-vue";
+} from "reka-ui";
 import { useElementSize } from "@vueuse/core";
 import { shallowRef } from "vue";
 
@@ -175,16 +175,16 @@ export default {
   margin: 1rem 0;
 }
 
-.tiptap .code-block [data-radix-scroll-area-viewport] {
+.tiptap .code-block [data-reka-scroll-area-viewport] {
   @apply duration-100 border border-primary/5 outline-none
 }
 
-.tiptap .code-block [data-radix-scroll-area-viewport]:hover {
+.tiptap .code-block [data-reka-scroll-area-viewport]:hover {
   @apply border border-primary/50 ;
 }
 
-.tiptap .code-block [data-radix-scroll-area-viewport]:focus,
-.tiptap .code-block [data-radix-scroll-area-viewport]:focus-within {
+.tiptap .code-block [data-reka-scroll-area-viewport]:focus,
+.tiptap .code-block [data-reka-scroll-area-viewport]:focus-within {
   @apply ring-2 ring-primary;
 }
 
@@ -214,7 +214,7 @@ export default {
     @apply p-0;  
   }
 
-  .tiptap .code-block [data-radix-scroll-area-viewport] {
+  .tiptap .code-block [data-reka-scroll-area-viewport] {
     @apply !border !ring-0 !border-foreground/20 !outline-none;
   }
   .tiptap .code-block span {

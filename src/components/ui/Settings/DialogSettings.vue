@@ -13,7 +13,7 @@ import SettingBase64 from './SettingBase64.vue';
 
 import {
   DialogClose, DialogContent, DialogDescription, DialogOverlay, DialogPortal, DialogRoot, DialogTitle, DialogTrigger, ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaViewport
-} from 'radix-vue';
+} from 'reka-ui'
 
 import Tooltip from '@/components/ui/Tooltip.vue';
 
@@ -52,7 +52,7 @@ whenever(magicSettings, (n) => {
         class="flex items-center justify-center border interactive border-secondary hover:bg-secondary/80 bg-background size-8"
       >
         <Settings2 class="size-4" />
-        <span class="sr-only">{{ t('settings.title') }}</span>
+        <span class="sr-only">{{ t('settings.titleDescription') }}</span>
       </DialogTrigger>
     </Tooltip>
     <DialogPortal>

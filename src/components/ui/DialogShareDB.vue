@@ -8,7 +8,7 @@ import {
   DialogRoot,
   DialogTitle,
   DialogTrigger,
-} from "radix-vue";
+} from "reka-ui";
 import Tooltip from "@/components/ui/Tooltip.vue";
 
 import { onMounted, shallowRef, watch } from "vue";

@@ -12,7 +12,7 @@ import {
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaViewport,
-} from "radix-vue";
+} from "reka-ui";
 import { X } from "lucide-vue-next";
 
 const lastVersion = "0.1.4"

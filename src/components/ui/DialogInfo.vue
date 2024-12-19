@@ -13,7 +13,7 @@ import {
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaViewport,
-} from "radix-vue";
+} from "reka-ui";
 import Tooltip from "@/components/ui/Tooltip.vue";
 
 import { ref } from "vue";
@@ -36,10 +36,9 @@ whenever(magicAbout, (n) => {
 </script>
 
 <template>
-  <DialogRoot v-model:open="open">
-    <Tooltip
+  <DialogRoot v-model:open="counter.showInfoModal">
+    <!-- <Tooltip
       :name="t('sidebar.about')"
-      :side="counter.showProjects ? 'bottom' : 'right'"
     >
       <DialogTrigger
         class="flex items-center justify-center border interactive border-secondary hover:bg-secondary/80 bg-background size-8"
@@ -47,7 +46,7 @@ whenever(magicAbout, (n) => {
         <CircleHelp class="size-4" />
         <span class="sr-only">{{ t('sidebar.about') }}</span>
       </DialogTrigger>
-    </Tooltip>
+    </Tooltip> -->
     <DialogPortal>
       <DialogOverlay
         class="bg-background/95 backdrop-blur-sm data-[state=open]:animate-overlayShow fixed inset-0 z-[60]"
@@ -118,7 +117,7 @@ whenever(magicAbout, (n) => {
                 <DialogDescription
                   class="inline-block p-3 mt-3 mb-3 text-sm leading-normal rounded text-foreground bg-primary/20"
                 >
-                  This is an alpha version; use it only for testing purposes.
+                  This is an alpha version; use it only for testing purposes. Currently adapting to work well with <a href="https://nvda.es/">NVDA</a>
                 </DialogDescription>
                 <p class="mt-3 mb-5 text-sm leading-normal text-foreground !select-text">
                   This application uses

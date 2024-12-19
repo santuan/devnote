@@ -8,7 +8,7 @@ import {
   AlertDialogRoot,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "radix-vue";
+} from "reka-ui";
 import Tooltip from "@/components/ui/Tooltip.vue";
 
 import { shallowRef } from "vue";

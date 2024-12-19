@@ -8,7 +8,7 @@ import {
   DropdownMenuPortal,
   DropdownMenuSeparator,
   DropdownMenuLabel,
-} from "radix-vue";
+} from "reka-ui";
 
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";

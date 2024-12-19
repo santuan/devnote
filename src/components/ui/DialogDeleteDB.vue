@@ -8,7 +8,7 @@ import {
   DialogRoot,
   DialogTitle,
   DialogTrigger,
-} from "radix-vue";
+} from "reka-ui";
 
 import { onMounted, shallowRef, watch } from "vue";
 import { useCounterStore } from "@/stores/counter";
@@ -54,6 +54,7 @@ function clear() {
       aria-label="Delete DB"
     >
       {{ t('verb.delete') }} DB
+      <span class="sr-only"> {{ t('settings.deleteDB') }}</span>
     </DialogTrigger>
     <DialogPortal>
       <DialogOverlay class="bg-secondary/90 data-[state=open]:animate-overlayShow fixed inset-0 z-[100]" />

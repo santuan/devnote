@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   ToolbarButton,
-} from "radix-vue";
+} from "reka-ui";
 
 import { useCounterStore } from "@/stores/counter";
 import { useSettingsStore } from '@/stores/settings';

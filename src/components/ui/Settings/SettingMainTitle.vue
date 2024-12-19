@@ -10,19 +10,21 @@
     </div>
     <button
       @click="settings.toggle_heading_one_preview()"
-      class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8"
+      class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8 focus:outline-2 focus:outline-foreground focus:outline-dashed focus:outline-offset-2"
       :class="settings.show_heading_one_preview
         ? 'hover:!bg-primary bg-primary hover:text-primary-foreground text-primary-foreground'
         : 'text-muted-foreground'
         "
     >
-      H1
+      <Heading1/>
+      <span class="sr-only">{{ t('settings.showHeadingDescription') }}</span>
     </button>
   </div>
 </template>
 
 <script setup>
 import { useSettingsStore } from '@/stores/settings';
+import { Heading1 } from 'lucide-vue-next';
 const settings = useSettingsStore();
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();

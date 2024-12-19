@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuGroup,
-} from "radix-vue";
+} from "reka-ui";
 import Tooltip from "@/components/ui/Tooltip.vue";
 
 import { computed, onMounted } from "vue";
@@ -45,20 +45,20 @@ onMounted(() => {
 
 <template>
   <DropdownMenuRoot>
-    <DropdownMenuTrigger class="interactive">
+    <DropdownMenuTrigger class="interactive ">
       <Tooltip
         :name="t('settings.theme')"
         :side="counter.showProjects ? 'bottom' : 'right'"
         :align="'end'"
       >
         <span
-          class="flex items-center justify-center border hover:bg-secondary/80 border-secondary bg-background size-8"
+          class="flex items-center justify-center border hover:bg-secondary/80 border-secondary bg-background size-8 "
         >
           <Moon class="transition-all duration-300 scale-100 rotate-0 size-4 dark:-rotate-90 dark:scale-0" />
           <SunMedium
             class="absolute transition-all duration-300 scale-0 rotate-90 size-4 dark:rotate-0 dark:scale-100"
           />
-          <span class="sr-only">{{ t('settings.theme') }}</span>
+          <span class="sr-only">{{ t('settings.themeDescription') }}</span>
         </span>
       </Tooltip>
     </DropdownMenuTrigger>
@@ -92,27 +92,27 @@ onMounted(() => {
           @click="toggleColorTheme('theme-rose')"
           class="rounded-full outline-none size-4 bg-rose-600 hover:ring-2 focus-visible:ring-2 ring-rose-500/50 ring-offset-1 "
           :class="colorTheme === 'theme-rose' ? ' !ring-primary/50 ring-4 !ring-offset-1' : ''"
-        />
+        ><span class="sr-only">{{ t('settings.theme') }} rose</span></DropdownMenuItem>
         <DropdownMenuItem
           @click="toggleColorTheme('theme-blue')"
           class="bg-blue-600 rounded-full outline-none size-4 hover:ring-2 focus-visible:ring-2 ring-blue-500/50 ring-offset-1 "
           :class="colorTheme === 'theme-blue' ? ' !ring-primary/50 ring-4 !ring-offset-1' : ''"
-        />
+        ><span class="sr-only">{{ t('settings.theme') }} blue</span></DropdownMenuItem>
         <DropdownMenuItem
           @click="toggleColorTheme('theme-green')"
           class="bg-green-600 rounded-full outline-none size-4 hover:ring-2 focus-visible:ring-2 ring-green-500/50 ring-offset-1 "
           :class="colorTheme === 'theme-green' ? ' !ring-primary/50 ring-4 !ring-offset-1' : ''"
-        />
+        ><span class="sr-only">{{ t('settings.theme') }} green</span></DropdownMenuItem>
         <DropdownMenuItem
           @click="toggleColorTheme('theme-yellow')"
           class="bg-yellow-600 rounded-full outline-none size-4 hover:ring-2 focus-visible:ring-2 ring-yellow-500/50 ring-offset-1 "
           :class="colorTheme === 'theme-yellow' ? ' !ring-primary/50 ring-4 !ring-offset-1' : ''"
-        />
+        ><span class="sr-only">{{ t('settings.theme') }} yellow</span></DropdownMenuItem>
         <DropdownMenuItem
           @click="toggleColorTheme('theme-violet')"
           class="rounded-full outline-none size-4 bg-violet-600 hover:ring-2 focus-visible:ring-2 ring-violet-500/50 ring-offset-1 "
           :class="colorTheme === 'theme-violet' ? ' !ring-primary/50 ring-4 !ring-offset-1' : ''"
-        />
+        ><span class="sr-only">{{ t('settings.theme') }} violet</span></DropdownMenuItem>
       </DropdownMenuGroup>
     </DropdownMenuContent>
   </DropdownMenuRoot>

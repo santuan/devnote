@@ -33,7 +33,7 @@ watch(project_body, (v) => {
 
 <template>
   <PullToRefresh>
-    <div class="flex w-full print:!h-auto print:!overflow-y-auto h-screen overflow-y-hidden">
+    <div class="flex w-full print:!h-auto print:!overflow-y-auto h-svh overflow-y-hidden">
       <Sidebar />
       <Document />
     </div>

@@ -25,7 +25,7 @@ const toggleCursor = () => {
     </div>
     <button
       @click="toggleCursor()"
-      class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8"
+      class="flex focus:border-primary ring-foreground items-center justify-center border border-secondary bg-background shrink-0 hover:bg-secondary/80 size-8 focus:outline-2 focus:outline-foreground focus:outline-dashed focus:outline-offset-2"
     >
       <Pointer
         v-if="cursorPointer"
@@ -35,6 +35,7 @@ const toggleCursor = () => {
         v-else
         class="size-4"
       />
+      <span class="sr-only">{{ t('settings.cursorDescription') }}</span>
     </button>
   </div>
 </template>

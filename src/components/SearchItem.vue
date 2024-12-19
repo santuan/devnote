@@ -10,7 +10,7 @@ import { useI18n } from 'vue-i18n';
 
 const { hasUnsavedChanges } = useUnsavedChanges();
 const counter = useCounterStore();
-const { loaded_id } = storeToRefs(counter);
+const { loaded_id, editor } = storeToRefs(counter);
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const largerThanLg = breakpoints.greater("lg");
 const { t } = useI18n();
@@ -35,10 +35,13 @@ function confirmSetDocument(id) {
   if (largerThanLg.value === true) {
      counter.set_project(id);
   } else {
-     counter.set_project(id);
+    counter.set_project(id);
     counter.showProjects = false;
   }
   counter.showAlertDialog = false;
+  setTimeout(() => {
+    editor.value.commands.focus()
+  }, 100);
 }
 
 function toggleCheck(item, isChecked) {
@@ -78,11 +81,12 @@ function toggleFixed(item, isFixed) {
     >
       <span class="@sm:max-w-full max-w-80 ">
         <template v-if="props.data.project_data?.name">
+          <span class="sr-only">{{ t('verb.open') }}</span>
           {{ props.data.project_data?.name.length > 25 ? 
             props.data.project_data?.name.substring(0, 25) + '&hellip;' 
           :
             props.data.project_data?.name
-        }}
+        }} <span class="sr-only">document in editor</span>
         </template>
         <template v-else>
           <span class="opacity-50">{{ t('editor.untitled') }}</span>

@@ -9,10 +9,11 @@
       </p>
     </div>
     <button
-      class="bg-primary shrink-0 border-secondary border text-primary-foreground hover:bg-backgorund/80 text-xs inline-flex h-[35px] items-center justify-center  rounded-[4px] px-[15px] font-semibold  focus:outline-2 focus:outline-foreground focus:outline-dashed gap-3 focus:outline-offset-2"
+      class="bg-primary shrink-0 border-secondary border text-primary-foreground hover:bg-backgorund/80 text-xs inline-flex h-[35px] items-center justify-center  rounded-[4px] px-[15px] font-semibold  gap-3  focus:outline-2 focus:outline-foreground focus:outline-dashed focus:outline-offset-2"
       @click="counter.export_database(counter.file_name)"
     >
       <span>{{ t('settings.export') }}</span>
+      <span class="sr-only">{{ t('tour.importExportDescription') }}</span>
       <Upload class="size-4" />
     </button>
   </div>

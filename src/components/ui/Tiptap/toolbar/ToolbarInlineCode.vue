@@ -1,5 +1,5 @@
 <script setup>
-import { ToolbarButton } from "radix-vue";
+import { ToolbarButton } from "reka-ui";
 
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";

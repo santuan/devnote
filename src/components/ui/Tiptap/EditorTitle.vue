@@ -12,9 +12,9 @@ const { t } = useI18n();
 
 <template>
   <div class="flex pt-1 items-start justify-between w-full gap-1 group relative md:!select-none">
-    <span class="sr-only">{{ t('editor.untitled') }}</span>
+    <span v-if="counter.project_name" class="sr-only">{{ t('editor.untitled') }}</span>
     <textarea
-      :placeholder="t('editor.untitled')"
+      :placeholder="counter.project_name === '' ? t('editor.untitled') : counter.project_name"
       autocomplete="off"
       spellcheck="false"
       ref="focusTitleTextarea"

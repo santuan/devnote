@@ -8,7 +8,7 @@ import {
   AlertDialogDescription,
   AlertDialogCancel,
   AlertDialogAction,
-} from "radix-vue";
+} from "reka-ui";
 
 import { useCounterStore } from "@/stores/counter";
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core";

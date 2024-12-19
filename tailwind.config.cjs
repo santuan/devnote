@@ -59,18 +59,18 @@ export default {
       keyframes: {
         'accordion-down': {
           from: { height: 0 },
-          to: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: 'var(--reka-accordion-content-height)' },
         },
         'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
+          from: { height: 'var(--reka-accordion-content-height)' },
           to: { height: 0 },
         },
         'collapsible-down': {
           from: { height: 0 },
-          to: { height: 'var(--radix-collapsible-content-height)' },
+          to: { height: 'var(--reka-collapsible-content-height)' },
         },
         'collapsible-up': {
-          from: { height: 'var(--radix-collapsible-content-height)' },
+          from: { height: 'var(--reka-collapsible-content-height)' },
           to: { height: 0 },
         },
         slideDownAndFade: {
@@ -106,7 +106,7 @@ export default {
           to: { transform: 'translateX(0)' },
         },
         swipeOut: {
-          from: { transform: 'translateX(var(--radix-toast-swipe-end-x))' },
+          from: { transform: 'translateX(var(--reka-toast-swipe-end-x))' },
           to: { transform: 'translateX(calc(100% + var(--viewport-padding)))' },
         },
       },
